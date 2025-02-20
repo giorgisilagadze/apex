@@ -2,20 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(3, 44, 95, 1);
+  }
+
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .bounce {
+    animation: bounce 1.2s infinite ease-in-out;
+  }
+
+  .mySwiper {
+    display: flex;
+  }
+  
+  .mySwiper .swiper-pagination-horizontal {
+    z-index: 100 !important;
+  }
+  
+  .mySwiper .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 1;
+    background-color: rgba(3, 44, 95, 1);
+    border: 1px solid white;
+    position: relative;
+}
+
+/* Active bullet with outer border */
+.mySwiper .swiper-pagination-bullet-active::after {
+    content: "";
+    position: absolute;
+    top: -5px;  /* Half of the extra border width */
+    left: -5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(3, 44, 95, 1);
+}
+
