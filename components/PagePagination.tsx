@@ -82,7 +82,7 @@ export default function PagePagination({
 
       <div className="w-full">{children}</div>
 
-      <div className="flex items-center gap-[60px] mt-4">
+      <div className="flex items-center md500:gap-[60px] gap-[40px] mt-4">
         {dataLength !== 0 && (
           <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300">
             <BsArrowDown className="mr-[-20px] text-[26px] rotate-90" />

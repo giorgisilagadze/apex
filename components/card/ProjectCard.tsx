@@ -1,9 +1,12 @@
+import { useLocale } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProjectCard() {
+  const locale = useLocale();
   return (
     <div className="w-full flex flex-col gap-4">
-      <div className="w-full h-[350px] relative">
+      <div className="w-full xl:h-[350px] lg1250:h-[300px] lg:h-[350px] md600:h-[300px] h-[350px]  relative">
         <Image
           src={"/images/card.png"}
           alt="card-image"
@@ -20,10 +23,12 @@ export default function ProjectCard() {
         <p className="text-[20px] font-bold">
           საშემოდგომო შეთავაზებები დაიწყო!
         </p>
-        <div className="flex items-center gap-3 cursor-pointer hover:opacity-50 duration-300">
-          <div className="w-[30px] h-[1px] bg-black mt-[3px]"></div>
-          <p className="text-[14px] font-light">მეტის ნახვა</p>
-        </div>
+        <Link href={`/${locale}/news/10`}>
+          <div className="flex items-center gap-3 cursor-pointer hover:opacity-50 duration-300">
+            <div className="w-[30px] h-[1px] bg-black mt-[3px]"></div>
+            <p className="text-[14px] font-light">მეტის ნახვა</p>
+          </div>
+        </Link>
       </div>
     </div>
   );

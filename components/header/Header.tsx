@@ -8,41 +8,46 @@ import { IoMdCall } from "react-icons/io";
 import { BsCameraVideo } from "react-icons/bs";
 import Button from "../button/Button";
 import Language from "./Language";
+import { useLocale } from "next-intl";
 
 export default function Header() {
   const [hoveredPageId, sethoveredPageId] = useState(0);
   const [isLangClicked, setIsLangCLicked] = useState(false);
 
+  const locale = useLocale();
+
   const nav = [
     {
       id: 1,
       title: "ჩვენ შესახებ",
-      link: `/about-us`,
+      link: `/${locale}/about-us`,
     },
     {
       id: 2,
       title: "პროექტები",
-      link: "/projects",
+      link: `/${locale}/projects`,
     },
     {
       id: 3,
       title: "სიახლეები",
-      link: "/world",
+      link: `/${locale}/news`,
     },
     {
       id: 4,
       title: "გალერეა",
-      link: "/world",
+      link: `/${locale}/news`,
     },
     {
       id: 5,
       title: "პარტნიორები",
-      link: "/world",
+      link: `/${locale}/partniors`,
     },
   ];
   return (
-    <header className="w-full flex items-center justify-between px-[60px] py-[24px] fixed z-10 bg-transparent">
-      <Image src={"/images/logo.png"} alt="logo" width={50} height={60} />
+    <header className="w-full flex items-center justify-between px-[60px] py-[24px] absolute z-10 bg-transparent">
+      <Link href={`/${locale}`} className="cursor-pointer">
+        <Image src={"/images/logo.png"} alt="logo" width={50} height={60} />
+      </Link>
       <div className="flex items-center gap-7">
         {nav.map((item) => (
           <Link className={`cursor-pointer`} href={item.link} key={item.id}>

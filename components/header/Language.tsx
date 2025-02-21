@@ -18,17 +18,6 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
   const route = useRouter();
   const searchParams = useSearchParams();
 
-  //   useEffect(() => {
-  //     if (typeof window !== "undefined") {
-  //       const language = localStorage.getItem("lang");
-  //       if (language == "Russian") {
-  //         setLanguage("RUS");
-  //       } else if (language == "English") {
-  //         setLanguage("ENG");
-  //       } else setLanguage("GEO");
-  //     }
-  //   }, []);
-
   useClickOutside(LanguageRef, () => setIsLangCLicked(false));
 
   const data = [
@@ -46,18 +35,18 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
     },
   ];
 
-  //   const handleChangeLang = (language: string) => {
-  //     const splited = pathName.split("/");
-  //     splited[1] = language;
-  //     route.push(`${splited.join("/")}?${searchParams}`);
-  //   };
+  const handleChangeLang = (language: string) => {
+    const splited = pathName.split("/");
+    splited[1] = language;
+    route.push(`${splited.join("/")}?${searchParams}`);
+  };
 
-  //   useEffect(() => {
-  //     const splited = pathName.split("/");
-  //     if (splited[1] == "ge") setLanguage("GEO");
-  //     else if (splited[1] == "en") setLanguage("ENG");
-  //     else setLanguage("RUS");
-  //   }, []);
+  useEffect(() => {
+    const splited = pathName.split("/");
+    if (splited[1] == "ge") setLanguage("GE");
+    else if (splited[1] == "en") setLanguage("EN");
+    else setLanguage("RU");
+  }, []);
 
   return (
     <div
@@ -86,7 +75,7 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
           <p
             onClick={() => {
               setLanguage(item.value);
-              // handleChangeLang(item.switch);
+              handleChangeLang(item.switch);
             }}
             className="cursor-pointer text-[14px] hover:opacity-50 duration-300"
             key={item.id}

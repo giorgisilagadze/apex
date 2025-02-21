@@ -6,8 +6,12 @@ interface Props {
 
 export default function PartniorCard({ isreverse }: Props) {
   return (
-    <div className="w-full grid grid-cols-2 gap-[60px]">
-      <div className={`w-full h-[450px] relative ${isreverse && "order-2"}`}>
+    <div className="w-full grid sm:grid-cols-2 sm:gap-[60px] gap-10 lg:items-start items-center">
+      <div
+        className={`w-full lg:h-[450px] h-[350px] relative ${
+          isreverse && "sm:order-2"
+        }`}
+      >
         <Image
           src={"/images/tbc.png"}
           alt="partnior-image"
@@ -21,7 +25,11 @@ export default function PartniorCard({ isreverse }: Props) {
           <p className="text-[22px] text-white font-bold">თიბისი ბანკი</p>
         </div>
       </div>
-      <div className={`w-full flex flex-col gap-6 ${isreverse && "order-1"}`}>
+      <div
+        className={`w-full flex flex-col sm:gap-6 gap-4 ${
+          isreverse && "sm:order-1"
+        }`}
+      >
         <div className="w-[230px] h-[50px] rounded-[30px] border border-[#eee] flex items-center justify-center">
           <p className="text-[14px] font-bold">პარტნიორის შესახებ</p>
         </div>
