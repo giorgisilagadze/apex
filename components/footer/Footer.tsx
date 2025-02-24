@@ -75,11 +75,11 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-blue relative">
-      <div className="w-full px-[330px] flex items-start justify-between pt-[60px] pb-10">
+      <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:flex items-start justify-between pt-[60px] pb-10 grid grid-cols-1 gap-10">
         <div className="w-[130px] h-[150px] relative">
           <Image src={"/images/logo.png"} alt="logo-image" layout="fill" />
         </div>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 w-full sm:w-auto">
           <h1 className="text-white font-medium text-[14px]">ბმულები</h1>
           <div className="flex flex-col gap-3">
             {nav.map((item) => (
@@ -103,7 +103,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 w-full sm:w-auto">
           <h1 className="text-white font-medium text-[14px]">ინფორმაცია</h1>
           <div className="flex flex-col gap-3">
             {nav1.map((item) => (
@@ -127,7 +127,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 w-full sm:w-auto">
           <h1 className="text-white font-medium text-[14px]">გამოგვიწერეთ</h1>
           <div className="flex items-center gap-3">
             {socIcons.map((item) => (

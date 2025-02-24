@@ -8,24 +8,24 @@ import { BsArrowDown } from "react-icons/bs";
 
 export default function Contact() {
   return (
-    <div className="w-full px-[330px] grid grid-cols-2">
-      <div className="w-full h-[550px] relative">
+    <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 grid lg:grid-cols-2">
+      <div className="w-full lg:h-[550px] md500:h-[400px] h-[350px] relative">
         <Image
           src={"/images/contact.jpeg"}
           alt="project-image"
           layout="fill"
           objectFit="cover"
-          className="rounded-tl-[10px] rounded-bl-[10px]"
+          className="rounded-tl-[10px] lg:rounded-bl-[10px] rounded-tr-[10px] lg:rounded-tr-[0px]"
         />
       </div>
-      <div className="w-full h-full bg-blue rounded-tr-[10px] roudned-br-[10px] flex items-center justify-center flex-col gap-5 px-[100px]">
-        <p className="text-[28px] font-bold text-white">
+      <div className="w-full h-full bg-blue lg:rounded-tr-[10px] rounded-bl-[10px] lg:rounded-bl-[0px] rounded-br-[10px] flex items-center justify-center flex-col gap-5 xxl:px-[100px] md500:px-10 px-6 py-10 lg:py-0">
+        <p className="sm:text-[28px] text-[22px] font-bold text-white">
           დაგვიტოვეთ საკონტაქტო
         </p>
-        <p className="text-[14px] text-white font-light">
+        <p className="text-[14px] text-white font-light text-center">
           ჩვენი მენეჯერი დაგიკავშირდებათ 15 წუთის განმავლობაში
         </p>
-        <div className="w-full grid grid-cols-2 gap-5">
+        <div className="w-full grid md500:grid-cols-2 gap-5">
           <Input
             placeholder={"მაგ. დავითი"}
             title="სახელი და გვარი"

@@ -38,12 +38,12 @@ export default function SelectComp({ title, placeholder, color }: Props) {
             isClicked
               ? "opacity-100 pointer-events-auto scale-100"
               : "opacity-0 pointer-events-none scale-95"
-          } duration-300 w-full h-[170px] rounded-[10px] border border-[#eee] absolute top-[50px] left-0 overflow-y-scroll bg-white`}
+          } duration-300 w-full h-[170px] rounded-[10px] border border-[#eee] absolute top-[50px] left-0 z-[1] overflow-y-scroll bg-white`}
         >
           {["ბლოკი 1", "ბლოკი 2", "ბლოკი 3", "ბლოკი 4", "ბლოკი 5"].map(
             (item) => (
               <div
-                className={`w-full py-3 px-4 hover:px-5 hover:bg-blue hover:text-white duration-300 cursor-pointer text-[14px]`}
+                className={`w-full py-3 px-4 hover:px-5 hover:bg-blue bg-white hover:text-white duration-300 cursor-pointer text-[14px]`}
                 key={item}
                 onClick={() => {
                   setSelectedItem(item);

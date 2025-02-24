@@ -6,9 +6,14 @@ import Input from "../input/Input";
 import Button from "../button/Button";
 
 import { CiSearch } from "react-icons/ci";
+import { VscSettings } from "react-icons/vsc";
+import ScreenSize from "@/hooks/ScreenSize";
 
 export default function Filter() {
   const [selectedProjectId, setSelectedProjectId] = useState(1);
+
+  const dimension = ScreenSize();
+
   const projects = [
     {
       id: 1,
@@ -25,9 +30,9 @@ export default function Filter() {
   ];
 
   return (
-    <div className="w-full px-[330px]">
+    <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6">
       <div className="w-full rounded-[16px] shadow-dropDown bg-white">
-        <div className="flex items-center gap-5 px-12 pt-5 pb-3">
+        <div className="flex items-center gap-5 lg:px-12 px-6 pt-5 pb-3">
           {projects.map((item) => (
             <div
               key={item.id}
@@ -51,8 +56,8 @@ export default function Filter() {
             </div>
           ))}
         </div>
-        <div className="w-full px-12 py-7 grid grid-cols-6 gap-4 items-center shadow-dropDown rounded-bl-[16px] rounded-br-[16px]">
-          <SelectComp title="ბლოკი" placeholder="აირჩიეთ ბლოკი" />
+        <div className="w-full lg:px-12 px-6 py-7 grid lg:grid-cols-6 md600:grid-cols-3 md500:grid-cols-2 gap-4 items-center shadow-dropDown rounded-bl-[16px] rounded-br-[16px]">
+          <SelectComp title="ბლოკი" placeholder="აირჩიეთ" />
           <SelectComp title="კატეგორია" placeholder="აირჩიეთ" />
           <SelectComp title="სტატუსი" placeholder="აირჩიეთ" />
           <div className="w-full flex flex-col gap-[6px]">
@@ -71,11 +76,18 @@ export default function Filter() {
               <Input placeholder={"მდე"} />
             </div>
           </div>
-          <div className="w-full flex justify-end">
+          <div className="w-full flex items-center justify-end gap-4 flex-col md500:flex-row">
+            {dimension[0] > 500 ? (
+              <VscSettings className="text-[28px]" />
+            ) : (
+              <div className="w-full rounded-[16px] bg-[#eee] py-[11px] flex items-center justify-center">
+                <VscSettings className="text-[28px]" />
+              </div>
+            )}
             <Button
               title={"ძებნა"}
               onClick={() => {}}
-              width={"w-[110px]"}
+              width={"md500:w-[110px] w-full"}
               height="h-[50px]"
               bgColor="bg-blue"
               color="text-white"

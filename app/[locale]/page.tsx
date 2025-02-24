@@ -8,7 +8,7 @@ import Projects from "@/components/home/Projects";
 
 export default function Home() {
   return (
-    <div className="w-full flex flex-col gap-[100px]">
+    <div className="w-full flex flex-col sm:gap-[100px] gap-[60px]">
       <MainSwiper />
       <Filter />
       <Projects />

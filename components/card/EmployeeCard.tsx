@@ -3,7 +3,7 @@ import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 export default function EmployeeCard() {
   return (
-    <div className="w-full h-[400px] relative">
+    <div className="w-full xl1680:h-[400px] xl:h-[350px] lg:h-[400px] h-[350px] relative">
       <Image
         src={"/images/employee.jpeg"}
         alt="employee"
