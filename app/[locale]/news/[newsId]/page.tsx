@@ -4,11 +4,13 @@ import Image from "next/image";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 
-export default function SingleNews({
+export default async function SingleNews({
   params,
 }: {
-  params: { newsId: number | string };
+  params: Promise<{ newsId: number }>;
 }) {
+  const newsId = (await params).newsId;
+
   const socIcons = [
     {
       id: 1,
