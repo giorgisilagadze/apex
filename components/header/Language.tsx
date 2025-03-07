@@ -54,10 +54,8 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
       className="relative cursor-pointer hover:shadow-product duration-200 rounded-[30px] select-none w-[45px]"
       onClick={() => setIsLangCLicked(!isLangClicked)}
     >
-      <div className="flex items-center gap-1 lg:py-[8px] py-[6px] rounded-[30px] hover:opacity-50 duration-300 text-white">
-        <p className={`cursor-pointer text-[14px] leading-[22px `}>
-          {language}
-        </p>
+      <div className="flex items-center gap-1 lg:py-[8px] py-[6px] rounded-[30px] hover:opacity-50 duration-300 lg1110:text-white text-black">
+        <p className={`cursor-pointer text-[14px] `}>{language}</p>
         <MdKeyboardArrowDown
           className={`${
             isLangClicked && "rotate-180"
