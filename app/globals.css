@@ -9,6 +9,39 @@ body {
  box-sizing: border-box;
 }
 
+@font-face {
+  font-family: light;
+  src: url("../public/fonts/FiraGO-Light.ttf");
+}
+
+@font-face {
+  font-family: fsemibold;
+  src: url("../public/fonts/FiraGO-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: book;
+  src: url("../public/fonts/FiraGO-Book.ad15ecab.ttf");
+}
+
+h1 {
+  font-family: fsemibold !important;
+  font-feature-settings: "case" on;
+
+}
+
+
+p,
+input,
+button {
+  font-family: book;
+  font-feature-settings: "case" on;
+
+}
+
+
+
+
 ::-webkit-scrollbar {
     width: 2px;
   }
