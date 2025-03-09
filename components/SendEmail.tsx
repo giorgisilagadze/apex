@@ -6,19 +6,9 @@ import ScreenSize from "@/hooks/ScreenSize";
 
 export default function SendEmail() {
   const [value, setValue] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const dimension = ScreenSize();
 
-  const handleSend = () => {
-    //   if (!value.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/))
-    //     return errorToast(s("validEmail"));
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setValue("");
-    }, 1000);
-  };
   return (
     <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[80px] py-10 bg-blueOpacityLight flex items-center justify-between flex-col gap-6 lg:flex-row">
       <div className="flex flex-col gap-1 items-center lg:items-start">
