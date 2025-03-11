@@ -94,3 +94,20 @@ button {
     border: 1px solid rgba(3, 44, 95, 1);
 }
 
+
+.filter::-webkit-scrollbar {
+  width: 4px;
+
+}
+
+.filter::-webkit-scrollbar-thumb {
+  background-color: rgba(3, 44, 95, 1);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.filter::-webkit-scrollbar-track {
+  background-color: rgba(217, 217, 217, 1);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

@@ -7,6 +7,20 @@ import Filter from "@/components/filter/Filter";
 import Image from "next/image";
 
 export default function Projects() {
+  const status = [
+    {
+      id: 1,
+      title: "ყველა",
+    },
+    {
+      id: 2,
+      title: "მშენებარე",
+    },
+    {
+      id: 3,
+      title: "დასრულებული",
+    },
+  ];
   return (
     <div className="w-full ">
       <div className="w-full sm:h-[550px] h-[450px] relative">
@@ -26,7 +40,7 @@ export default function Projects() {
           </p>
         </div>
         <div className="absolute left-0 md600:bottom-[-100px] md500:bottom-[-200px] bottom-[-500px]">
-          <Filter />
+          <Filter sort={status} />
         </div>
       </div>
       <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 md600:pt-[200px] md500:pt-[300px] pt-[600px] flex flex-col gap-[40px] items-center">

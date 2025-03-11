@@ -1,10 +1,13 @@
+import { useLocale } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import { BsArrowDown } from "react-icons/bs";
 
 import { IoLocationSharp } from "react-icons/io5";
 import { MdSell } from "react-icons/md";
 
 export default function ProjectCard1() {
+  const locale = useLocale();
   return (
     <div className="w-full lg:h-[500px] h-[450px] relative">
       <Image
@@ -38,12 +41,15 @@ export default function ProjectCard1() {
               </p>
             </div>
           </div>
-          <div className="px-5 py-3 lg:w-auto sm:w-full w-auto flex items-center gap-5 border border-white rounded-[30px] cursor-pointer hover:opacity-50 duration-300 justify-center">
+          <Link
+            href={`/${locale}/projects/11`}
+            className="px-5 py-3 lg:w-auto sm:w-full w-auto flex items-center gap-5 border border-white rounded-[30px] cursor-pointer hover:opacity-50 duration-300 justify-center"
+          >
             <p className="text-[14px] text-white font-light">ვრცლად</p>
             <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white cursor-pointer">
               <BsArrowDown className="text-white ml-[-26px] text-[26px] -rotate-90" />
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
