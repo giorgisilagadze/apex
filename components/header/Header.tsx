@@ -50,7 +50,7 @@ export default function Header() {
   return (
     <>
       {" "}
-      <header className="w-full flex items-center justify-between px-[60px] py-[24px] absolute z-10 bg-transparent">
+      <header className="w-full flex items-center justify-between lg1110:px-[60px] px-6 py-[24px] absolute z-10 bg-transparent">
         <CiMenuFries
           className={`text-[24px] rotate-180 lg1110:hidden text-white`}
           onClick={() => setIsSideMenuVis(true)}
@@ -85,11 +85,11 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-4">
           <div className="lg1350:flex items-center gap-1 hidden">
-            <IoMdCall className="text-[18px] mt-[4px] text-white" />
+            <IoMdCall className="text-[18px] text-white" />
             <p className="text-[14px] text-white">+995 555 045 555</p>
           </div>
           <div className="lg1110:flex items-center gap-1 hidden">
-            <BsCameraVideo className="text-[16px] mt-[4px] text-white" />
+            <BsCameraVideo className="text-[16px] text-white" />
             <p className="text-[14px] text-white font-light">ვიდეო ზარი</p>
           </div>
           <div className="hidden lg1110:block">

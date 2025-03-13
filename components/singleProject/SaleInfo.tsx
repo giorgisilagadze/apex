@@ -14,22 +14,26 @@ interface Props {
 export default function SaleInfo({ title, subtitle, isfloor }: Props) {
   return (
     <div
-      className={`w-full h-full bg-blue flex items-center relative ${
+      className={`w-full h-full bg-blue flex lg1110:items-center items-start relative ${
         !isfloor
-          ? "col-span-2 justify-center flex-col gap-8"
-          : "justify-between pt-[200px] pb-[80px] pr-[100px]"
+          ? "lg1110:col-span-2 justify-center flex-col xl:gap-8 gap-5 lg1110:pt-10 xl:pt-0 py-[100px] lg1110:py-0"
+          : "justify-between flex-col sm:flex-row lg1110:pt-[200px] pt-[100px] pb-[80px] xl:pr-[100px] lg1110:pr-[60px] pr-6"
       }`}
     >
-      <div className="w-full flex flex-col gap-6">
+      <div className="w-full flex flex-col xl:gap-6 gap-4">
         <div className="flex items-center gap-2">
-          <hr className="w-[100px] h-[1px] border-none bg-white" />
+          <hr className="xl:w-[100px] lg1110:w-[60px] w-6 h-[1px] border-none bg-white" />
           <p className="text-[14px] text-white">{subtitle}</p>
         </div>
-        <h1 className="text-[50px] text-white px-[100px]">{title}</h1>
+        <h1 className="xl:text-[50px] text-[42px] text-white xl:px-[100px] lg1110:px-[60px] px-6">
+          {title}
+        </h1>
       </div>
       <div
         className={` flex flex-col gap-6 ${
-          isfloor ? "w-[600px]" : " w-full px-[100px]"
+          isfloor
+            ? "sm:w-[600px] w-full pl-6 sm:pl-0"
+            : " lg1110:w-full sm:w-[70%] w-full xl:px-[100px] lg1110:px-[60px] px-6"
         }`}
       >
         <div className="w-full flex flex-col gap-2">
@@ -48,11 +52,11 @@ export default function SaleInfo({ title, subtitle, isfloor }: Props) {
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-between mt-8">
+        <div className="w-full flex items-center justify-between mt-8 flex-col xl1680:flex-row gap-5">
           <Button
             title={"პრეზენტაციის გადმოწერა"}
             onClick={() => {}}
-            width={"w-[240px]"}
+            width={"xl1680:w-[240px] w-full"}
             bgColor="bg-white"
             color="text-blue"
             height="h-[45px]"
@@ -61,7 +65,7 @@ export default function SaleInfo({ title, subtitle, isfloor }: Props) {
           <Button
             title={"archicad view"}
             onClick={() => {}}
-            width={"w-[200px]"}
+            width={"xl1680:w-[200px] w-full"}
             bgColor="bg-transparent"
             color="text-white"
             height="h-[45px]"
@@ -71,10 +75,12 @@ export default function SaleInfo({ title, subtitle, isfloor }: Props) {
         </div>
       </div>
       {!isfloor && (
-        <div className="absolute left-[50%] translate-x-[-50%] sm:bottom-[40px] bottom-6 z-[3] flex flex-col gap-4 bounce">
-          <p className="text-[14px] text-white font-extralight">Scroll</p>
-          <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white">
-            <BsArrowDown className="text-white mt-[-26px] text-[26px]" />
+        <div className="absolute left-[50%] translate-x-[-50%] xl:bottom-[40px] bottom-6 z-[3] flex flex-col gap-4 bounce">
+          <p className="xl:text-[14px] text-[12px] text-white font-extralight hidden lg1350:block">
+            Scroll
+          </p>
+          <div className="flex items-center justify-center xl:w-[32px] xl:h-[32px] w-5 h-5 rounded-[50%] border border-white">
+            <BsArrowDown className="text-white xl:mt-[-26px] mt-[-20px] xl:text-[26px] text-[20px]" />
           </div>
         </div>
       )}

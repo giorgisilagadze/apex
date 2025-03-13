@@ -18,31 +18,31 @@ export default async function SingleProject({
 
   return (
     <div className="w-full">
-      <div className="w-full sm:h-[900px] h-[300px] grid grid-cols-5">
+      <div className="w-full grid lg1110:grid-cols-5">
         <SaleInfo
           title="აპექს
 დიდი დიღომი"
           subtitle="მიმდინარე"
         />
-        <div className="w-full h-full col-span-3">
+        <div className="w-full lg1110:col-span-3">
           <MapImage />
         </div>
       </div>
       <div className="w-full flex flex-col gap-[60px]">
-        <div className="w-full py-[80px] bg-blueOpacityLight">
+        <div className="w-full sm:py-[80px] py-[60px] bg-blueOpacityLight">
           <Filter />
         </div>
-        <div className="w-full flex items-center">
-          <div className="w-[70%] h-[650px] relative">
+        <div className="w-full flex items-center flex-col md500:flex-row">
+          <div className="md500:w-[70%] w-full md600:h-[650px] h-[550px] relative">
             <Image
               src={"/images/apartment2.jpeg"}
               alt="project-image"
               layout="fill"
               objectFit="cover"
-              className="rounded-tr-[10px] rounded-br-[10px]"
+              className="md500:rounded-tr-[10px] md500rounded-br-[10px]"
             />
           </div>
-          <div className="p-[60px] max-w-[550px] flex flex-col gap-4 bg-[rgba(237,240,244,1)] ml-[-100px] z-[1] rounded-[10px]">
+          <div className="sm:p-[60px] p-10 sm:max-w-[550px] max-w-[450px] flex flex-col gap-4 bg-[rgba(237,240,244,1)] lg:ml-[-100px] md600:ml-[-200px] md500:ml-[-300px] z-[1] md500:rounded-[10px]">
             <div className="flex items-center gap-3">
               <div className="w-[50px] h-[1px] bg-blue"></div>
               <p className="text-[14px] text-blue font-light">

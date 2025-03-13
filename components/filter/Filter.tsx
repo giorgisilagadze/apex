@@ -75,7 +75,7 @@ export default function Filter({ sort, isSingleProject }: Props) {
               </div>
             ))
           ) : (
-            <div className="flex items-center gap-5">
+            <div className="flex sm:items-center gap-5 flex-wrap">
               <div className="flex items-center gap-1">
                 <h1 className={`text-[14px] text-blue`}>თავისუფალია:</h1>
                 <p className="text-[14px] text-blue">105 ბინა</p>
@@ -141,7 +141,7 @@ export default function Filter({ sort, isSingleProject }: Props) {
             </div>
           </div>
           {!sort && (
-            <div className="w-full flex flex-col gap-5 max-h-[390px] overflow-y-scroll filter lg:px-12 px-6 pb-5">
+            <div className="w-full flex flex-col gap-5 md600:max-h-[390px] max-h-[600px] overflow-y-scroll filter lg:px-12 px-6 pb-5">
               {[1, 2, 3, 4, 5, 6, 7].map((item) => (
                 <FilterCard key={item} />
               ))}

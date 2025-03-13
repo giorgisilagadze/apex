@@ -36,18 +36,20 @@ export default function Info() {
     },
   ];
   return (
-    <div className="w-full bg-white rounded-tr-[15px] rounded-br-[15px] py-8 pr-[60px] flex flex-col gap-2">
+    <div className="w-full bg-white sm:rounded-tr-[15px] sm:rounded-br-[15px] py-8 sm:pr-[60px] pr-6 flex flex-col gap-2">
       <div className="w-full flex items-start justify-between">
         <div className="w-full flex flex-col gap-2">
           <div className="flex items-center gap-2">
-            <hr className="w-[100px] h-[1px] border-none bg-black" />
+            <hr className="lg1250:w-[100px] sm:w-10 w-6 h-[1px] border-none bg-black" />
             <p className="text-[14px]">აპექს დიდი დიღომი</p>
           </div>
-          <h1 className="text-[44px] px-[100px]">ბინა #115</h1>
+          <h1 className="sm:text-[44px] text-[32px] lg1250:px-[100px] sm:px-10 px-6">
+            ბინა #115
+          </h1>
         </div>
         <h1 className="text-[16px] whitespace-nowrap">სართული 11</h1>
       </div>
-      <div className="pl-[100px] flex flex-col gap-5">
+      <div className="lg1250:pl-[100px] sm:pl-10 pl-6 flex flex-col gap-5">
         <div className="flex items-center gap-2">
           <h1>
             57.5{" "}
@@ -101,11 +103,11 @@ export default function Info() {
             </div>
           ))}
         </div>
-        <div className="w-full flex items-center justify-between gap-3 mt-8">
+        <div className="w-full flex items-center gap-3 mt-8 flex-col md600:flex-row">
           <Button
             title={"პრეზენტაციის გადმოწერა"}
             onClick={() => {}}
-            width={"w-[240px]"}
+            width={"md600:w-[240px] w-full"}
             bgColor="bg-blue"
             color="text-white"
             height="h-[45px]"
@@ -114,7 +116,7 @@ export default function Info() {
           <Button
             title={"archicad view"}
             onClick={() => {}}
-            width={"w-[200px]"}
+            width={"md600:w-[200px] w-full"}
             bgColor="bg-transparent"
             color="text-black"
             height="h-[45px]"

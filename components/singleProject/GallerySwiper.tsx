@@ -97,7 +97,7 @@ export default function GallerySwiper() {
             {images.map((item: string) => (
               <SwiperSlide
                 key={item}
-                className="w-full !h-[250px] relative cursor-pointer"
+                className="w-full md600:!h-[250px] !h-[200px] relative cursor-pointer"
               >
                 <Image
                   src={item}
