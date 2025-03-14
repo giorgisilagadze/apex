@@ -60,7 +60,7 @@ export default function Info() {
           <div className="w-[2px] h-5 bg-black"></div>
           <div className="flex items-center gap-2">
             <h1>
-              1295$ /{" "}
+              1295${" "}
               <span>
                 მ<sup>2</sup>
               </span>

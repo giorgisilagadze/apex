@@ -60,10 +60,6 @@ export default function Footer() {
       id: 3,
       icon: <FaLinkedinIn className="text-[14px] text-white" />,
     },
-    {
-      id: 4,
-      icon: <FaYoutube className="text-[15px] text-white" />,
-    },
   ];
 
   const handleScroll = () => {
