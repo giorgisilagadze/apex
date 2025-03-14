@@ -11,7 +11,7 @@ export default function MainSwiper() {
   const projects = [
     {
       id: 1,
-      image: "/images/banner1.jpeg",
+      image: "/images/video.mp4",
       title1: "შიდა 0%-იანი განვადება",
       title2: "აპექს ნუცუბიძე",
     },
@@ -44,17 +44,17 @@ export default function MainSwiper() {
     },
   ];
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShownProject((prev) => (prev < projects.length ? prev + 1 : 1));
-    }, 5000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShownProject((prev) => (prev < projects.length ? prev + 1 : 1));
+  //   }, 5000);
 
-    return () => clearTimeout(timer);
-  }, [shownProject]);
+  //   return () => clearTimeout(timer);
+  // }, [shownProject]);
 
   return (
     <div className="w-full lg1250:h-[878px] sm:h-[700px] h-[600px] relative">
-      {projects.map((item) => (
+      {projects.map((item, index) => (
         <div
           className={`absolute w-full h-full top-0 left-0 transition-opacity ease-in-out transform ${
             shownProject == item.id
@@ -63,12 +63,33 @@ export default function MainSwiper() {
           }`}
           key={item.id}
         >
-          <Image
+          {index !== 0 ? (
+            <Image
+              src={item.image}
+              alt="banner"
+              layout="fill"
+              objectFit="cover"
+            />
+          ) : (
+            <video
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+              loop
+              autoPlay
+              muted
+            >
+              <source src={item.image} type="video/mp4" />
+            </video>
+          )}
+          {/* <Image
             src={item.image}
             alt="banner"
             layout="fill"
             objectFit="cover"
-          />
+          /> */}
           <div
             className={`flex flex-col md500:gap-4 gap-3 z-[3] absolute lg1250:top-[300px] sm:top-[200px] md500:top-[150px] top-[100px] lg:max-w-[440px] md500:max-w-[300px] w-[280px] md500:w-auto ${
               shownProject == item.id
@@ -93,10 +114,10 @@ export default function MainSwiper() {
         <p className="text-[14px] text-white font-extralight">/</p>
         <p className="text-[32px] text-white">0{projects.length}</p>
       </div>
-      <div className="absolute sm:bottom-10 bottom-[120px] sm:left-[60px] left-6 z-[3] flex items-center sm:gap-10 gap-6">
+      <div className="absolute sm:bottom-10 bottom-[120px] sm:left-[60px] left-6 z-[3] flex items-start sm:gap-10 gap-6">
         {projects.map((item) => (
           <div
-            className={`flex flex-col gap-3 max-w-[90px] duration-500 cursor-pointer ${
+            className={`flex flex-col gap-3 max-w-[100px] duration-500 cursor-pointer ${
               shownProject == item.id ? "" : "opacity-50"
             }`}
             key={item.id}
