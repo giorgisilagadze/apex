@@ -10,7 +10,7 @@ import { Navigation, FreeMode, Thumbs } from "swiper/modules";
 import "swiper/css";
 import { useTranslations } from "next-intl";
 import ScreenSize from "@/hooks/ScreenSize";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 // interface Props {
 //   images: { id: number; product_id: number; url: string }[];

@@ -22,8 +22,8 @@ export default function SendEmail() {
       <div className="sm:w-[570px] w-full h-[70px] rounded-[120px] bg-[rgba(3,44,95,0.2)] py-3 pl-6 pr-3 flex items-center justify-between">
         <input
           type="text"
-          className="border-none sm:w-[70%] w-[50%] text-[14px] outline-none bg-transparent placeholder:text-black font-light"
-          placeholder={dimension[0] > 500 ? "ელექტრონული ფოსტა" : "ელ. ფოსტა"}
+          className="border-none sm:w-[70%] w-[50%] md500:text-[14px] text-[12px] outline-none bg-transparent placeholder:text-black font-light"
+          placeholder={"ელექტრონული ფოსტა"}
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />

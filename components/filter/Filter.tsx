@@ -12,6 +12,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import useClickOutside from "@/hooks/useClickOutside";
 import SortSelect from "../input/SortSelect";
 import FilterCard from "../card/FIlterCard";
+import Image from "next/legacy/image";
 
 interface Props {
   sort?: { id: number; title: string }[];
@@ -48,9 +49,22 @@ export default function Filter({ sort, isSingleProject }: Props) {
   ];
 
   return (
-    <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6">
-      <div className={`w-full rounded-[16px] shadow-dropDown bg-white`}>
-        <div className="flex items-center gap-5 lg:px-12 px-6 pt-5 pb-3">
+    <div
+      className={`w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 relative ${
+        !sort && "sm:py-[80px] py-[60px]"
+      }`}
+    >
+      {!sort && (
+        <Image
+          src={"/images/pattern_bg.png"}
+          alt="bg"
+          layout="fill"
+          objectFit="cover"
+          className="z-[-1]"
+        />
+      )}
+      <div className={`w-full rounded-[16px] shadow-dropDown bg-white z-[1]`}>
+        <div className="flex items-center gap-5 shadow-topShadow lg:px-12 px-6 pt-5 pb-3">
           {sort ? (
             sort?.map((item) => (
               <div
@@ -95,11 +109,9 @@ export default function Filter({ sort, isSingleProject }: Props) {
             </div>
           )}
         </div>
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col ">
           <div
-            className={`w-full lg:px-12 px-6 py-7 grid lg:grid-cols-6 md600:grid-cols-3 md500:grid-cols-2 gap-4 items-center rounded-bl-[16px] rounded-br-[16px] ${
-              sort ? "shadow-dropDown" : ""
-            }`}
+            className={`w-full lg:px-12 px-6 py-7 grid lg:grid-cols-6 md600:grid-cols-3 md500:grid-cols-2 gap-4 items-center rounded-bl-[16px] rounded-br-[16px] `}
           >
             <SelectComp title="ბლოკი" placeholder="აირჩიეთ" />
             <SelectComp title="კატეგორია" placeholder="აირჩიეთ" />
@@ -124,8 +136,9 @@ export default function Filter({ sort, isSingleProject }: Props) {
               {dimension[0] > 500 ? (
                 <VscSettings className="text-[28px]" />
               ) : (
-                <div className="w-full rounded-[16px] bg-[#eee] py-[11px] flex items-center justify-center">
+                <div className="w-full rounded-[16px] bg-[#eee] py-[11px] flex items-center justify-center gap-2">
                   <VscSettings className="text-[28px]" />
+                  <p className="text-[14px] font-medium">ფილტრი</p>
                 </div>
               )}
               <Button
@@ -141,7 +154,7 @@ export default function Filter({ sort, isSingleProject }: Props) {
             </div>
           </div>
           {!sort && (
-            <div className="w-full flex flex-col gap-5 md600:max-h-[390px] max-h-[600px] overflow-y-scroll filter lg:px-12 px-6 pb-5">
+            <div className="w-full flex flex-col gap-5 md600:max-h-[390px] max-h-[600px] overflow-y-auto filter lg:px-12 px-6 pb-5 relative">
               {[1, 2, 3, 4, 5, 6, 7].map((item) => (
                 <FilterCard key={item} />
               ))}

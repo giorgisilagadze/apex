@@ -1,7 +1,7 @@
 "use client";
 
 import { UseScrollToTop } from "@/hooks/UseScrollToTop";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState } from "react";
 import { BsArrowDown } from "react-icons/bs";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
@@ -9,6 +9,8 @@ import { RiInstagramFill } from "react-icons/ri";
 
 export default function Footer() {
   const [hoveredPageId, sethoveredPageId] = useState(0);
+  const currentYear = new Date().getFullYear();
+
   const nav = [
     {
       id: 1,
@@ -71,11 +73,11 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-blue relative">
-      <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:flex items-start justify-between pt-[60px] pb-10 grid grid-cols-1 gap-10">
-        <div className="w-[130px] h-[150px] relative">
+      <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:flex items-start justify-between pt-[60px] pb-10 grid grid-cols-2 gap-10">
+        <div className="w-[130px] h-[150px] relative col-span-2">
           <Image src={"/images/logo.png"} alt="logo-image" layout="fill" />
         </div>
-        <div className="flex flex-col gap-6 w-full sm:w-auto">
+        <div className="flex flex-col gap-6 w-[1/2] sm:w-auto">
           <h1 className="text-white font-medium text-[14px]">ბმულები</h1>
           <div className="flex flex-col gap-3">
             {nav.map((item) => (
@@ -99,7 +101,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-6 w-full sm:w-auto">
+        <div className="flex flex-col gap-6 w-[1/2] sm:w-auto">
           <h1 className="text-white font-medium text-[14px]">ინფორმაცია</h1>
           <div className="flex flex-col gap-3">
             {nav1.map((item) => (
@@ -139,7 +141,7 @@ export default function Footer() {
       </div>
       <div className="w-full py-4 flex items-center justify-center border-t border-[rgba(97,94,94,1)]">
         <p className="text-grey text-[14px]">
-          © 2025 Apex Development. All rights reserved.
+          © {currentYear} Apex Development. All rights reserved.
         </p>
       </div>
       <div

@@ -1,7 +1,8 @@
 import SendEmail from "@/components/SendEmail";
 import Info from "@/components/apartment/Info";
+import ROICalculator from "@/components/calculator/ROICalculator";
 import Contact from "@/components/home/Contact";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default async function Apartment({
   params,
@@ -25,7 +26,19 @@ export default async function Apartment({
           />
         </div>
       </div>
-      <div className="w-full flex flex-col gap-[200px] pt-[100px]">
+      <div className="w-full flex flex-col gap-[100px]">
+        <div
+          className={`w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 relative sm:py-[80px] py-[60px] bg-blueOpacityLight`}
+        >
+          <Image
+            src={"/images/pattern_bg.png"}
+            alt="bg"
+            layout="fill"
+            objectFit="cover"
+            className="z-[-1]"
+          />
+          <ROICalculator />
+        </div>
         <Contact />
         <SendEmail />
       </div>

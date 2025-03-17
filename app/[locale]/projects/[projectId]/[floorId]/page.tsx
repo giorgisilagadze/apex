@@ -2,7 +2,7 @@ import SendEmail from "@/components/SendEmail";
 import Filter from "@/components/filter/Filter";
 import Contact from "@/components/home/Contact";
 import SaleInfo from "@/components/singleProject/SaleInfo";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default async function SingleFloor({
   params,
@@ -31,7 +31,7 @@ export default async function SingleFloor({
         </div>
       </div>
       <div className="w-full flex flex-col gap-[100px]">
-        <div className="w-full py-[80px] bg-blueOpacityLight">
+        <div className="w-full bg-blueOpacityLight">
           <Filter />
         </div>
         <Contact />

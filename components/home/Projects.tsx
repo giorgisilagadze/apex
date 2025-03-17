@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Navigation, FreeMode, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import ScreenSize from "@/hooks/ScreenSize";
 
 export default function Projects() {

@@ -1,6 +1,6 @@
 import SendEmail from "@/components/SendEmail";
 import OtherNewsCard from "@/components/card/OtherNewsCard";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 
@@ -62,11 +62,11 @@ export default async function SingleNews({
           objectFit="cover"
         />
         <div className="w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.5)]"></div>
-        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 absolute top-[50%] translate-y-[-50%] left-0 flex sm:items-center justify-between sm:flex-row flex-col gap-4">
+        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 absolute top-[50%] translate-y-[-50%] left-0 flex sm:items-center justify-between sm:flex-row flex-col sm:gap-4">
           <h1 className="lg:text-[60px] text-[40px] font-light text-white">
             სიახლეები
           </h1>
-          <p className="text-[14px] text-white self-end sm:self-center">
+          <p className="text-[14px] text-white sm:self-center">
             მთავარი / სიახლეები
           </p>
         </div>

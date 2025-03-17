@@ -1,9 +1,12 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Button from "../button/Button";
+import ScreenSize from "@/hooks/ScreenSize";
 
 export default function AboutUsComp() {
+  const dimension = ScreenSize();
+
   const data = [
     {
       id: 1,
@@ -60,7 +63,7 @@ export default function AboutUsComp() {
           </div>
         </div>
         <div className="w-full h-full relative">
-          <div className="xl1680:w-[530px] xl1680:h-[600px] lg1350:w-[400px] lg1350:h-[500px] md500:w-[300px] h-[400px] w-full relative">
+          <div className="xl1680:w-[530px] xl1680:h-[600px] lg1350:w-[400px] lg1350:h-[500px] md500:w-[350px] h-[350px] w-[90%] relative">
             <Image
               src={"/images/about.jpeg"}
               alt="about"
@@ -70,12 +73,12 @@ export default function AboutUsComp() {
             />
           </div>
 
-          <div className="xl1680:w-[430px] xl1680:h-[530px] lg1350:w-[350px] lg1350:h-[430px] w-[300px] h-[350px] rounded-[10px] border-[5px] border-white bg-blue flex items-center justify-center absolute xl1680:left-[250px] lg1350:left-[200px] md500:left-[150px] right-[0px] md500:bottom-[-100px] bottom-[-50px]">
+          <div className="xl1680:w-[430px] xl1680:h-[530px] lg1350:w-[350px] lg1350:h-[430px] md500:w-[300px] md500:h-[350px]  w-[250px] h-[300px] rounded-[10px] border-[5px] border-white bg-blue flex items-center justify-center absolute xl1680:left-[250px] lg1350:left-[200px] md500:left-[150px] right-[0px] md500:bottom-[-100px] bottom-[-50px]">
             <Image
               src={"/images/logo.png"}
               alt="about"
-              width={200}
-              height={150}
+              width={dimension[0] > 500 ? 210 : 160}
+              height={dimension[0] > 500 ? 230 : 175}
               objectFit="cover"
             />
           </div>

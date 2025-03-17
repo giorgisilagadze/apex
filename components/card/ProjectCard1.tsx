@@ -1,5 +1,5 @@
 import { useLocale } from "next-intl";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { BsArrowDown } from "react-icons/bs";
 

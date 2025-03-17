@@ -25,7 +25,7 @@ export default function SelectComp({ title, placeholder, color }: Props) {
       )}
       <div className="w-full relative" ref={selectRef}>
         <div
-          className="w-full flex items-center justify-between px-3 h-[40px] rounded-[10px] border border-blue cursor-pointer bg-white"
+          className="w-full flex items-center justify-between px-3 h-[44px] rounded-[10px] border border-blue cursor-pointer bg-white"
           onClick={() => setIsClicked(!isClicked)}
         >
           <p className="text-[14px] font-light">{selectedItem}</p>

@@ -7,7 +7,7 @@ import MapImage from "@/components/singleProject/MapImage";
 import OtherProjects from "@/components/singleProject/OtherProjects";
 import SaleInfo from "@/components/singleProject/SaleInfo";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default async function SingleProject({
   params,
@@ -29,7 +29,7 @@ export default async function SingleProject({
         </div>
       </div>
       <div className="w-full flex flex-col gap-[60px]">
-        <div className="w-full sm:py-[80px] py-[60px] bg-blueOpacityLight">
+        <div className="w-full bg-blueOpacityLight">
           <Filter />
         </div>
         <div className="w-full flex items-center flex-col md500:flex-row">

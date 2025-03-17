@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Button from "../button/Button";
 
 import { IoEye } from "react-icons/io5";

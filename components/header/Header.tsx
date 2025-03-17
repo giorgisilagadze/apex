@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -12,6 +12,7 @@ import { useLocale } from "next-intl";
 
 import { CiMenuFries } from "react-icons/ci";
 import SideMenu from "./SideMenu";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [hoveredPageId, sethoveredPageId] = useState(0);
@@ -19,6 +20,7 @@ export default function Header() {
   const [isSideMenuVis, setIsSideMenuVis] = useState(false);
 
   const locale = useLocale();
+  const pathname = usePathname();
 
   const nav = [
     {
@@ -51,14 +53,7 @@ export default function Header() {
     <>
       {" "}
       <header className="w-full flex items-center justify-between lg1110:px-[60px] px-6 py-[24px] absolute z-10 bg-transparent">
-        <CiMenuFries
-          className={`text-[24px] rotate-180 lg1110:hidden text-white`}
-          onClick={() => setIsSideMenuVis(true)}
-        />
-        <Link
-          href={`/${locale}`}
-          className="cursor-pointer hidden lg1110:block"
-        >
+        <Link href={`/${locale}`} className="cursor-pointer">
           <Image src={"/images/logo.png"} alt="logo" width={50} height={60} />
         </Link>
         <div className="items-center gap-7 hidden lg1110:flex">
@@ -76,8 +71,8 @@ export default function Header() {
                 {item.title}
               </p>
               <div
-                className={`${
-                  hoveredPageId == item.id ? "w-full" : "w-0"
+                className={`${hoveredPageId == item.id ? "w-full" : "w-0"} ${
+                  pathname == item.link ? "w-[50%] mx-auto" : "w-0"
                 } h-[1px] mt-[4px] bg-white duration-500`}
               ></div>
             </Link>
@@ -110,9 +105,13 @@ export default function Header() {
               fontWeight="font-semibold"
             />
           </div>
-          <Link href={`/${locale}`} className="cursor-pointer lg1110:hidden">
+          {/* <Link href={`/${locale}`} className="cursor-pointer lg1110:hidden">
             <Image src={"/images/logo.png"} alt="logo" width={50} height={60} />
-          </Link>
+          </Link> */}
+          <CiMenuFries
+            className={`text-[24px] rotate-180 lg1110:hidden text-white`}
+            onClick={() => setIsSideMenuVis(true)}
+          />
         </div>
       </header>
       <SideMenu

@@ -2,14 +2,17 @@ interface Props {
   title?: string;
   placeholder: string;
   color?: string;
+  bgColor?: string;
 }
 
-export default function Input({ title, placeholder, color }: Props) {
+export default function Input({ title, placeholder, color, bgColor }: Props) {
   return (
     <div className="w-full flex flex-col gap-[6px]">
       {title && (
         <p
-          className={`text-[14px] font-medium ${color ? color : "text-black"}`}
+          className={`text-[14px] font-medium whitespace-nowrap ${
+            color ? color : "text-black"
+          }`}
         >
           {title}
         </p>
@@ -18,7 +21,9 @@ export default function Input({ title, placeholder, color }: Props) {
         <input
           type="text"
           placeholder={placeholder}
-          className="w-full h-[40px] rounded-[10px] border border-blue outline-none px-3 font-light text-[14px]"
+          className={`w-full h-[44px] rounded-[10px] outline-none px-3 font-light text-[12px] ${
+            bgColor ? `${bgColor}` : "border border-blue bg-white"
+          }`}
         />
       </div>
     </div>
