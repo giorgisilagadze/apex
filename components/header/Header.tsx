@@ -41,7 +41,7 @@ export default function Header() {
     {
       id: 4,
       title: "გალერეა",
-      link: `/${locale}/news`,
+      link: `/${locale}/gallery`,
     },
     {
       id: 5,
