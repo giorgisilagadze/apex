@@ -9,12 +9,14 @@ export default function MapImage() {
   const imageRef = useRef<HTMLImageElement>(null);
 
   const [hoveredId, setHoveredId] = useState("");
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [dimensions, setDimensions] = useState({
     width: 0,
     height: 0,
     naturalWidth: 0,
     naturalHeight: 0,
   });
+
   const locale = useLocale();
 
   const mapAreas = [
@@ -144,6 +146,7 @@ export default function MapImage() {
   };
 
   useEffect(() => {
+    setIsImageLoaded(true);
     const updateDimensions = () => {
       if (imageRef.current) {
         const { width, height } = imageRef.current.getBoundingClientRect();
@@ -158,6 +161,8 @@ export default function MapImage() {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
+  console.log(isImageLoaded);
+
   return (
     <div className="w-full relative">
       <img
@@ -166,13 +171,14 @@ export default function MapImage() {
         // useMap="#image-map"
         ref={imageRef}
         onLoad={() => {
+          setIsImageLoaded(true);
           if (imageRef.current) {
             const { width, height } = imageRef.current.getBoundingClientRect();
             const { naturalWidth, naturalHeight } = imageRef.current;
             setDimensions({ width, height, naturalWidth, naturalHeight });
           }
         }}
-        className="w-full"
+        className={`w-full ${isImageLoaded ? "h-auto" : "aspect-[40/41]"}`}
       />
       {/* 
       <map name="image-map">
@@ -268,7 +274,8 @@ export default function MapImage() {
           shape="poly"
         />
       </map> */}
-      {dimensions.width &&
+      {isImageLoaded &&
+        dimensions.width &&
         mapAreas.map((item) => {
           const { clipPath, centerX, centerY } = convertCoordsToScaled(
             item.coords
@@ -289,7 +296,7 @@ export default function MapImage() {
                 ></div>
               </Link>
               <div
-                className={`flex items-center flex-col sm:flex-row lg:gap-5 sm:gap-3 gap-1 absolute bg-blue text-white lg:px-6 px-3 lg:py-4 py-2 rounded-[8px] pointer-events-none ${
+                className={`flex items-center flex-col sm:flex-row lg:gap-5 sm:gap-3 gap-1 absolute bg-blue text-white lg1250:px-6 px-3 lg1250:py-4 py-2 rounded-[8px] pointer-events-none ${
                   hoveredId == item.id ? "opacity-100" : "opacity-0"
                 }`}
                 style={{
@@ -299,11 +306,11 @@ export default function MapImage() {
                   transition: "opacity 0.3s ease, visibility 0.3s ease", // Add a smooth transition for opacity and visibility
                 }}
               >
-                <p className="lg:text-[16px] sm:text-[14px] text-[12px]">
+                <p className="lg1250:text-[16px] sm:text-[14px] text-[12px]">
                   {item.title}
                 </p>
                 <div className="w-[1px] h-3 bg-white sm:block hidden"></div>
-                <p className="lg:text-[16px] sm:text-[14px] text-[12px]">
+                <p className="lg1250:text-[16px] sm:text-[14px] text-[12px]">
                   {"თავისუფალი ბინა: 17"}
                 </p>
               </div>
