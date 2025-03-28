@@ -4,8 +4,13 @@ import Image from "next/legacy/image";
 import Button from "../button/Button";
 import ScreenSize from "@/hooks/ScreenSize";
 
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+
 export default function AboutUsComp() {
   const dimension = ScreenSize();
+
+  const { ref, inView } = useInView({ triggerOnce: true });
 
   const data = [
     {
@@ -84,21 +89,39 @@ export default function AboutUsComp() {
           </div>
         </div>
       </div>
-      <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[120px] py-[80px] bg-[rgba(250,250,250,1)] lg:flex items-center justify-between grid md600:grid-cols-2 grid-cols-1">
-        {data.map((item) => (
+      <div
+        ref={ref}
+        className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[120px] py-[80px] bg-[rgba(250,250,250,1)] lg:flex items-center justify-between grid md600:grid-cols-2 grid-cols-1"
+      >
+        {data.map((item, index) => (
           <div
             className="flex items-center lg:justify-start md500:justify-center justify-start gap-4"
             key={item.id}
           >
-            <div className="relative">
+            <div
+              className={`relative ${
+                index == 0 &&
+                "xl:!w-[240px] md600:!w-[180px] md500:!w-[220px] !w-[210px]"
+              } `}
+            >
               <span
-                className="xl:text-[100px] lg1250:text-[75px] md600:text-[60px] text-[80px] font-bold text-transparent stroke-gray-300"
+                className="xl:text-[90px] lg1250:text-[75px] md600:text-[60px] text-[80px] font-bold text-transparent stroke-gray-300"
                 style={{ WebkitTextStroke: "1px #d3cece" }}
               >
-                {item.count}
+                {/* {item.count} */}
+                <CountUp
+                  start={0}
+                  end={inView ? parseInt(item.count) : 0}
+                  duration={2}
+                />
               </span>
               <p className="lg1250:text-[38px] text-[30px] font-bold absolute top-[50%] translate-y-[-50%] right-0">
-                {item.count}
+                {/* {item.count} */}
+                <CountUp
+                  start={0}
+                  end={inView ? parseInt(item.count) : 0}
+                  duration={2}
+                />
               </p>
             </div>
 

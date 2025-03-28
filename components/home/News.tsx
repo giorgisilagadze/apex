@@ -6,7 +6,7 @@ export default function News() {
     <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[120px] py-[60px] flex flex-col gap-8 bg-blueOpacityLight sm:mt-[-100px] mt-[-60px]">
       <div className="w-full flex items-end justify-between">
         <div className="w-full flex flex-col gap-2">
-          <div className="items-center gap-3 hidden sm:flex">
+          <div className="items-center gap-3 flex">
             <div className="w-[50px] h-[1px] bg-blue"></div>
             <p className="text-[14px] text-blue font-light">ბლოგი</p>
           </div>

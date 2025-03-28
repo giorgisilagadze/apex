@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/legacy/image";
 import ScreenSize from "@/hooks/ScreenSize";
+import { BsArrowDown } from "react-icons/bs";
 
 export default function Projects() {
   const dimension = ScreenSize();
@@ -42,14 +43,24 @@ export default function Projects() {
 
   return (
     <div className="w-full flex flex-col gap-8">
-      <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex flex-col gap-2">
-        <div className="flex items-center gap-3">
-          <div className="w-[50px] h-[1px] bg-blue"></div>
-          <p className="text-[14px] text-blue font-light">პროექტები</p>
+      <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex items-center justify-between">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-3">
+            <div className="w-[50px] h-[1px] bg-blue"></div>
+            <p className="text-[14px] text-blue font-light">პროექტები</p>
+          </div>
+          <h1 className="sm:text-[30px] text-[24px] font-semibold">
+            მიმდინარე პროექტები
+          </h1>
         </div>
-        <h1 className="sm:text-[30px] text-[24px] font-semibold">
-          მიმდინარე პროექტები
-        </h1>
+        <div className="md500:flex items-center gap-7 hidden">
+          <div className="prevv flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer">
+            <BsArrowDown className="mr-[-26px] text-[26px] rotate-90" />
+          </div>
+          <div className="nextt flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer">
+            <BsArrowDown className="ml-[-26px] text-[26px] -rotate-90" />
+          </div>
+        </div>
       </div>
       <div className="w-full lg1350:h-[670px] lg:h-[570px] md500:h-[470px] h-[400px] relative ">
         <Swiper

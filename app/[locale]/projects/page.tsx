@@ -25,7 +25,7 @@ export default function Projects() {
     <div className="w-full ">
       <div className="w-full sm:h-[550px] h-[450px] relative">
         <Image
-          src={"/images/projects.png"}
+          src={"/images/projects.jpeg"}
           alt="project-image"
           layout="fill"
           objectFit="cover"
