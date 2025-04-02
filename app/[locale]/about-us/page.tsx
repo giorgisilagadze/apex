@@ -96,7 +96,7 @@ export default function AboutUs() {
                 prevEl: ".prevv",
               }}
               modules={[FreeMode, Navigation, Pagination]}
-              spaceBetween={30} // Negative space to overlap slides
+              spaceBetween={30}
               pagination={{
                 clickable: true,
               }}

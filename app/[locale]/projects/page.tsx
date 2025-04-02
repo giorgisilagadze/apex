@@ -4,23 +4,30 @@ import PagePagination from "@/components/PagePagination";
 import SendEmail from "@/components/SendEmail";
 import ProjectCard1 from "@/components/card/ProjectCard1";
 import Filter from "@/components/filter/Filter";
+import axios from "axios";
 import Image from "next/legacy/image";
+import { useEffect, useState } from "react";
 
 export default function Projects() {
-  const status = [
-    {
-      id: 1,
-      title: "ყველა",
-    },
-    {
-      id: 2,
-      title: "მშენებარე",
-    },
-    {
-      id: 3,
-      title: "დასრულებული",
-    },
-  ];
+  const [projects, setProjects] = useState<Building[]>();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/building`
+        );
+        const data = response.data;
+        setProjects(data);
+      } catch (err) {
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
   return (
     <div className="w-full ">
       <div className="w-full sm:h-[550px] h-[450px] relative">
@@ -39,11 +46,11 @@ export default function Projects() {
             მთავარი / პროექტები
           </p>
         </div>
-        <div className="absolute left-0 md600:bottom-[-100px] md500:bottom-[-200px] bottom-[-500px]">
-          <Filter sort={status} />
-        </div>
       </div>
-      <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 md600:pt-[200px] md500:pt-[300px] pt-[600px] flex flex-col gap-[40px] items-center">
+      <div className="md600:mt-[-100px] md500:mt-[-150px] mt-[-100px]">
+        <Filter page="allProjects" />
+      </div>
+      <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 md600:pt-[100px] pt-[60px] flex flex-col gap-[40px] items-center">
         <PagePagination
           dataLength={50}
           itemsPerPage={6}
@@ -53,8 +60,8 @@ export default function Projects() {
           onClick={() => {}}
         >
           <div className="w-full grid sm:grid-cols-2 gap-x-4 gap-y-6">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <ProjectCard1 key={item} />
+            {projects?.map((item) => (
+              <ProjectCard1 key={item.id} item={item} />
             ))}
           </div>
         </PagePagination>

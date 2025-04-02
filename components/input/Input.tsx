@@ -3,9 +3,24 @@ interface Props {
   placeholder: string;
   color?: string;
   bgColor?: string;
+  inputKey?: string;
+  onChange: (inputKey: string, value: string) => void;
+  value: string;
+  type?: string;
+  readonly?: boolean;
 }
 
-export default function Input({ title, placeholder, color, bgColor }: Props) {
+export default function Input({
+  title,
+  placeholder,
+  color,
+  bgColor,
+  inputKey,
+  onChange,
+  value,
+  type,
+  readonly,
+}: Props) {
   return (
     <div className="w-full flex flex-col gap-[6px]">
       {title && (
@@ -19,11 +34,15 @@ export default function Input({ title, placeholder, color, bgColor }: Props) {
       )}
       <div className="w-full relative">
         <input
-          type="text"
+          type={type || "text"}
           placeholder={placeholder}
-          className={`w-full h-[44px] rounded-[10px] outline-none px-3 font-light text-[12px] ${
+          className={`w-full h-[44px] rounded-[10px] outline-none px-3 font-light text-[14px] ${
             bgColor ? `${bgColor}` : "border border-blue bg-white"
           }`}
+          value={value}
+          onChange={(e) => onChange(inputKey as string, e.target.value)}
+          onWheel={(e) => e.currentTarget.blur()}
+          readOnly={readonly}
         />
       </div>
     </div>

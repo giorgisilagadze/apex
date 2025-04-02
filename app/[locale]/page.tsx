@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className="w-full flex flex-col sm:gap-[100px] gap-[60px]">
       <MainSwiper />
-      <Filter sort={projects} />
+      <Filter page="home" />
       <Projects />
       <AboutUsComp />
       <News />

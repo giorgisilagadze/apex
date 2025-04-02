@@ -30,7 +30,7 @@ export default async function SingleProject({
       </div>
       <div className="w-full flex flex-col gap-[60px]">
         <div className="w-full bg-blueOpacityLight">
-          <Filter />
+          <Filter page="project" />
         </div>
         <div className="w-full flex items-center flex-col md500:flex-row">
           <div className="md500:w-[70%] w-full md600:h-[650px] h-[550px] relative">
@@ -69,9 +69,7 @@ export default async function SingleProject({
           <h1 className="sm:text-[30px] text-[24px]">პროექტის გალერეა</h1>
           <GallerySwiper />
         </div>
-        <div className="mt-[60px]">
-          <OtherProjects />
-        </div>
+        <div className="mt-[60px]">{/* <OtherProjects /> */}</div>
         <Contact />
         <SendEmail />
       </div>

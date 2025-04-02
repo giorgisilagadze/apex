@@ -97,7 +97,10 @@ button {
 
 .filter::-webkit-scrollbar {
   width: 4px;
+}
 
+.topFilter::-webkit-scrollbar {
+  height: 2px;
 }
 
 .filter::-webkit-scrollbar-thumb {
@@ -110,4 +113,30 @@ button {
   background-color: rgba(217, 217, 217, 1);
   border-radius: 10px;
   margin-bottom: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -300px 0;
+  }
+  100% {
+    background-position: 300px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #f8f8f8 25%, #f1f0f0 50%, #f8f8f8 75%);
+  background-size: 300px 100%;
+  animation: shimmer 1.8s infinite linear;
 }

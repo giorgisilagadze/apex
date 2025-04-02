@@ -32,7 +32,7 @@ export default async function SingleFloor({
       </div>
       <div className="w-full flex flex-col gap-[100px]">
         <div className="w-full bg-blueOpacityLight">
-          <Filter />
+          <Filter page="floor" />
         </div>
         <Contact />
         <SendEmail />
