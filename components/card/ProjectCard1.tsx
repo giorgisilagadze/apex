@@ -15,7 +15,7 @@ export default function ProjectCard1({ item }: Props) {
   return (
     <div className="w-full lg:h-[500px] h-[450px] relative">
       <Image
-        src={"/images/banner1.jpeg"}
+        src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
         alt="image"
         layout="fill"
         objectFit="cover"
@@ -27,9 +27,7 @@ export default function ProjectCard1({ item }: Props) {
           <p className="text-[30px] text-white font-semibold">{item.name}</p>
           <div className="flex items-center gap-2">
             <IoLocationSharp className="text-[16px] text-white" />
-            <p className="text-[14px] text-white font-light">
-              შ.ნუცუბიძის ქუჩა, თბილისი
-            </p>
+            <p className="text-[14px] text-white font-light">{item.address}</p>
           </div>
         </div>
         <div className="flex lg:items-center sm:items-start md500:items-center justify-between lg:flex-row sm:flex-col md500:flex-row flex-col gap-4">
@@ -39,7 +37,7 @@ export default function ProjectCard1({ item }: Props) {
             </p>
             <div className="w-full h-[1px] bg-white"></div>
             <div className="flex items-center gap-2">
-              <MdSell className="text-[16px] text-white mt-1" />
+              <MdSell className="text-[16px] text-white" />
               <p className="text-[14px] text-white font-light">
                 გაყიდულია 138 ბინა
               </p>

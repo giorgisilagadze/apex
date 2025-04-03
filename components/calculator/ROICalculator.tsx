@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/legacy/image";
 import Input from "../input/Input";
 import { IoMdPlay } from "react-icons/io";
@@ -14,26 +16,36 @@ export default function ROICalculator() {
             placeholder={"აპექს დიდი დიღომი"}
             title="პროექტი"
             bgColor="bg-[rgba(242,242,242,1)]"
+            onChange={() => {}}
+            value={""}
           />
           <Input
             placeholder={"სტუდიო"}
             title="აპარტამენტის ტიპი:"
             bgColor="bg-[rgba(242,242,242,1)]"
+            onChange={() => {}}
+            value={""}
           />
           <Input
             placeholder={"ყოველთვიური"}
             title="გაქირავების ტიპი:"
             bgColor="bg-[rgba(242,242,242,1)]"
+            onChange={() => {}}
+            value={""}
           />
           <Input
             placeholder={"45"}
             title="მ2:"
             bgColor="bg-[rgba(242,242,242,1)]"
+            onChange={() => {}}
+            value={""}
           />
           <Input
             placeholder={"1950$"}
             title="მ2-ის ფასი:"
             bgColor="bg-[rgba(242,242,242,1)]"
+            onChange={() => {}}
+            value={""}
           />
           <div className="w-full flex flex-col gap-[6px]">
             <p className="text-[14px] ">შედეგი:</p>
