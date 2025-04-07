@@ -16,6 +16,64 @@ import ScreenSize from "@/hooks/ScreenSize";
 
 export default function AboutUs() {
   const dimension = ScreenSize();
+
+  const employees = [
+    {
+      id: 1,
+      name: "აზალინა ბოლქვაძე",
+      position: "გაყიდვების მენეჯერი",
+      image: "/images/employees/1.jpg",
+    },
+    {
+      id: 2,
+      name: "გიორგი მიქავა",
+      position: "ბუღალტერი",
+      image: "/images/employees/2.jpg",
+    },
+    {
+      id: 3,
+      name: "ეკა ფორჩხიძე",
+      position: "გაყიდვების ხელმძღვანელი",
+      image: "/images/employees/3.jpg",
+    },
+    {
+      id: 4,
+      name: "თამარ აბაშიძე",
+      position: "ბუღალტერი",
+      image: "/images/employees/4.jpg",
+    },
+    {
+      id: 5,
+      name: "ლელა კახაძე",
+      position: "მარკეტინგის ხელმძღვანელი",
+      image: "/images/employees/5.jpg",
+    },
+    {
+      id: 6,
+      name: "მარიამ ჩალაძე",
+      position: "ბუღალტერი",
+      image: "/images/employees/6.jpg",
+    },
+    {
+      id: 7,
+      name: "მარიშკა ფანცულაია",
+      position: "გაყიდვების მენეჯერი",
+      image: "/images/employees/7.jpg",
+    },
+    {
+      id: 8,
+      name: "ნიკოლოზ ფორჩხიძე",
+      position: "ოპერაციების დირექტორი",
+      image: "/images/employees/8.jpg",
+    },
+    {
+      id: 9,
+      name: "სოფო ყურაშვილი",
+      position: "იურიდიული დეპარტამენტის ხელმძღვანელი",
+      image: "/images/employees/9.jpg",
+    },
+  ];
+
   return (
     <div className="w-full ">
       <div className="w-full sm:h-[400px] h-[300px] relative">
@@ -85,7 +143,7 @@ export default function AboutUs() {
             </h1>
           </div>
           <div className="w-full xl1680:h-[470px] xl:h-[420px] lg:h-[470px] h-[420px] relative flex items-center md600:gap-10 gap-6">
-            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300 prevv">
+            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300 prevv select-none">
               <BsArrowDown className="mr-[-20px] text-[26px] rotate-90" />
             </div>
             <Swiper
@@ -111,13 +169,13 @@ export default function AboutUs() {
                   : 1
               }
             >
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-                <SwiperSlide key={item} className="w-full !h-[400px]">
-                  <EmployeeCard />
+              {employees.map((item) => (
+                <SwiperSlide key={item.id} className="w-full !h-[400px]">
+                  <EmployeeCard item={item} />
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300 nextt">
+            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300 nextt select-none">
               <BsArrowDown className=" ml-[-20px] text-[26px] -rotate-90" />
             </div>
           </div>

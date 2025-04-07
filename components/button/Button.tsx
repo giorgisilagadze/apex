@@ -14,6 +14,7 @@ interface Props {
   rounded?: string;
   fontWeight?: string;
   right?: boolean;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 export default function Button({
@@ -28,6 +29,7 @@ export default function Button({
   rounded,
   fontWeight,
   right,
+  type,
 }: Props) {
   return (
     <button
@@ -39,6 +41,7 @@ export default function Button({
         fontWeight ? fontWeight : ""
       }   flex items-center justify-center gap-2  hover:shadow-dropDown duration-300`}
       onClick={onClick}
+      type={type ? type : "button"}
     >
       {Icon && !right && <Icon className="mt-[2px]" />}
       <p className="text-[14px]">{title}</p>

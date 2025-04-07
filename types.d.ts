@@ -73,3 +73,8 @@ interface SelectedValues {
   priceFrom: string;
   priceTo: string;
 }
+
+interface ApexAdmin {
+  adminToken: string | null;
+  setAdminToken: (value: string | null) => void;
+}

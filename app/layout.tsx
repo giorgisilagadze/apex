@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pallecarte.ge",
-  description: "Pallecarte",
+  title: "apex.ge",
+  description: "Apex",
 };
 
 export default async function RootLayout({
