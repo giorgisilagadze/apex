@@ -77,4 +77,25 @@ interface SelectedValues {
 interface ApexAdmin {
   adminToken: string | null;
   setAdminToken: (value: string | null) => void;
+  toast: {
+    isVisible: boolean;
+    text: string;
+    type: string;
+  };
+  setToast: (isVisible: boolean, text: string, type: string) => void;
+}
+
+interface NewsItem {
+  id: number;
+  title: string;
+  title_en: string;
+  title_ru: string;
+  text: string;
+  text_en: string;
+  text_ru: string;
+  img: string;
+  cover: string | null;
+  sort: number | null;
+  created_at: string;
+  type: string;
 }

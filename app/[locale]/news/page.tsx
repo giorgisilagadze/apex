@@ -3,11 +3,25 @@
 import PagePagination from "@/components/PagePagination";
 import SendEmail from "@/components/SendEmail";
 import ProjectCard from "@/components/card/ProjectCard";
+import Shimmer from "@/components/shimmer/Shimmer";
+import axios from "axios";
 import Image from "next/legacy/image";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { CiSearch } from "react-icons/ci";
 
 export default function News() {
-  const [clickedType, setClickedType] = useState(1);
+  const [news, setNews] = useState<{ data: NewsItem[]; total: number } | null>(
+    null
+  );
+  const [clickedType, setClickedType] = useState("ყველა");
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState<number>();
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
   const types = [
     {
       id: 1,
@@ -15,17 +29,50 @@ export default function News() {
     },
     {
       id: 2,
-      title: "პროექტები",
+      title: "პროექტი",
     },
     {
       id: 3,
-      title: "ღონისძიებები",
+      title: "ღონისძიება",
     },
     {
       id: 4,
-      title: "გამოფენები",
+      title: "გამოფენა",
     },
   ];
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    const page = params.get("page");
+    const type = params.get("type");
+    setCurrentPage(page ? parseInt(page) - 1 : 0);
+    setClickedType(type ? type : "ყველა");
+  }, []);
+
+  useEffect(() => {
+    if (typeof currentPage !== "undefined")
+      (async () => {
+        setIsLoading(true);
+        try {
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}/news?page=${
+              currentPage + 1
+            }&per_page=12${
+              clickedType !== "ყველა" ? `&type=${clickedType}` : ""
+            }`
+          );
+          const data = response.data;
+          setNews(data);
+          const params = new URLSearchParams(searchParams);
+          params.set("page", (currentPage + 1).toString());
+          params.set("type", clickedType);
+          replace(`${pathname}?${params}`, { scroll: false });
+        } catch (err) {
+        } finally {
+          setIsLoading(false);
+        }
+      })();
+  }, [currentPage, clickedType]);
 
   return (
     <div className="w-full ">
@@ -49,39 +96,86 @@ export default function News() {
       </div>
       <div className="w-full sm:mt-[100px] mt-[40px] flex flex-col items-center gap-10">
         <div className="flex items-center md500:gap-6 gap-4">
-          {types.map((item) => (
-            <div
-              className="flex flex-col items-center gap-[2px]"
-              key={item.id}
-              onClick={() => setClickedType(item.id)}
-            >
-              <p
-                className={`text-[14px] font-light hover:opacity-50 duration-300 cursor-pointer ${
-                  item.id == clickedType ? "text-blue" : "text-black"
-                }`}
-              >
-                {item.title}
-              </p>
-              <div
-                className={`w-[40px] h-[1px] ${
-                  item.id == clickedType ? "bg-blue" : "bg-transparent"
-                }`}
-              ></div>
-            </div>
-          ))}
+          {!isLoading
+            ? types.map((item) => (
+                <div
+                  className="flex flex-col items-center gap-[2px]"
+                  key={item.id}
+                  onClick={() => {
+                    setClickedType(item.title);
+                    setCurrentPage(0);
+                  }}
+                >
+                  <p
+                    className={`text-[14px] font-light hover:opacity-50 duration-300 cursor-pointer ${
+                      item.title == clickedType ? "text-blue" : "text-black"
+                    }`}
+                  >
+                    {item.title}
+                  </p>
+                  <div
+                    className={`w-[40px] h-[1px] ${
+                      item.title == clickedType ? "bg-blue" : "bg-transparent"
+                    }`}
+                  ></div>
+                </div>
+              ))
+            : [1, 2, 3, 4].map((item) => (
+                <div
+                  className="flex flex-col items-center gap-[2px]"
+                  key={item}
+                >
+                  <Shimmer
+                    width="w-[60px]"
+                    height="h-[21px]"
+                    rounded="rounded-[5px]"
+                  />
+                  <Shimmer height="h-[1px]" rounded="rounded-[5px]" />
+                </div>
+              ))}
         </div>
         <PagePagination
-          dataLength={60}
-          itemsPerPage={9}
+          dataLength={news?.total as number}
+          itemsPerPage={12}
           both={false}
-          currentPage={0}
-          setCurrentPage={() => {}}
-          onClick={() => {}}
+          currentPage={currentPage as number}
+          setCurrentPage={setCurrentPage}
         >
           <div className="w-full grid lg1250:grid-cols-3 md600:grid-cols-2 gap-x-5 gap-y-8 xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-              <ProjectCard key={item} />
-            ))}
+            {!isLoading ? (
+              news && news.data.length !== 0 ? (
+                news.data?.map((item: NewsItem) => (
+                  <ProjectCard key={item.id} item={item} />
+                ))
+              ) : (
+                <div className="w-full lg1250:col-span-3 md600:col-span-2 h-[300px] flex items-center justify-center flex-col gap-3 text-[14px] border border-[#eee] mt-5 rounded-[10px]">
+                  <CiSearch className="text-[24px]" />
+                  <p>სიახლეები არ მოიძებნა</p>
+                </div>
+              )
+            ) : (
+              [1, 2, 3, 4, 5, 6].map((item) => (
+                <div key={item} className="w-full flex flex-col gap-4">
+                  <Shimmer
+                    height="xl:h-[350px] lg1250:h-[300px] lg:h-[350px] md600:h-[300px] h-[350px]"
+                    rounded="rounded-[10px]"
+                  />
+                  <div className="w-full flex flex-col gap-1">
+                    <Shimmer
+                      width="w-[100px]"
+                      height="h-[21px]"
+                      rounded="rounded-[5px]"
+                    />
+                    <Shimmer height="h-[30px]" rounded="rounded-[5px]" />
+                    <Shimmer
+                      width="w-[100px]"
+                      height="h-[21px]"
+                      rounded="rounded-[5px]"
+                    />
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </PagePagination>
         <div className="mt-[60px] w-full">

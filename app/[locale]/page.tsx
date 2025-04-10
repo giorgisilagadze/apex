@@ -5,8 +5,13 @@ import Contact from "@/components/home/Contact";
 import MainSwiper from "@/components/home/MainSwiper";
 import News from "@/components/home/News";
 import Projects from "@/components/home/Projects";
+import { FetchNews } from "@/serverside/FetchNews";
 
-export default function Home() {
+export default async function Home() {
+  const news = await FetchNews();
+
+  console.log(news);
+
   const projects = [
     {
       id: 1,
@@ -27,7 +32,7 @@ export default function Home() {
       <Filter page="home" />
       <Projects />
       <AboutUsComp />
-      <News />
+      <News news={news.data.slice(0, 3)} />
       <Contact />
       <SendEmail />
     </div>

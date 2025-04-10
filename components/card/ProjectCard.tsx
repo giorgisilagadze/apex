@@ -2,28 +2,34 @@ import { useLocale } from "next-intl";
 import Image from "next/legacy/image";
 import Link from "next/link";
 
-export default function ProjectCard() {
+interface Props {
+  item: NewsItem;
+}
+
+export default function ProjectCard({ item }: Props) {
   const locale = useLocale();
   return (
     <div className="w-full flex flex-col gap-4">
-      <Link href={`/${locale}/news/10`}>
-        <div className="w-full xl:h-[350px] lg1250:h-[300px] lg:h-[350px] md600:h-[300px] h-[350px]  relative">
+      <Link href={`/${locale}/news/${item.id}`} className="w-full">
+        <div className="w-full xl:h-[350px] lg1250:h-[300px] lg:h-[350px] md600:h-[300px] h-[350px] relative">
           <Image
-            src={"/images/card.png"}
+            src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
             alt="card-image"
             layout="fill"
             objectFit="cover"
             className="rounded-[10px] cursor-pointer"
           />
           <div className="absolute top-0 right-0 rounded-tr-[10px] rounded-bl-[10px] bg-black px-5 py-2">
-            <p className="text-[14px] text-white font-light">პროექტები</p>
+            <p className="text-[14px] text-white font-light">{item.type}</p>
           </div>
         </div>
       </Link>
       <div className="w-full flex flex-col gap-1">
-        <p className="text-[14px] text-blue">07.02.2025</p>
-        <p className="text-[20px] font-bold">
-          საშემოდგომო შეთავაზებები დაიწყო!
+        <p className="text-[14px] text-blue">
+          {item.created_at.slice(0, 10).replaceAll("-", ".")}
+        </p>
+        <p className="text-[20px] font-bold sm:truncate sm:text-ellipsis">
+          {item.title}
         </p>
         <Link href={`/${locale}/news/10`}>
           <div className="flex items-center gap-3 cursor-pointer hover:opacity-50 duration-300">

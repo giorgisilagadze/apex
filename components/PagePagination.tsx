@@ -15,7 +15,7 @@ interface Prop {
   both: boolean;
   currentPage: number;
   setCurrentPage: (currentPage: number) => void;
-  onClick: (page: number) => void;
+  onClick?: (page: number) => void;
 }
 
 export default function PagePagination({
@@ -27,37 +27,26 @@ export default function PagePagination({
   setCurrentPage,
   onClick,
 }: Prop) {
-  const [currentPageLocal, setCurrentPageLocal] = useState(currentPage);
-
   const pageCount = dataLength ? Math.ceil(dataLength / itemsPerPage) : 0;
 
   const handlePageClick = (event: { selected: number }) => {
     setCurrentPage(event.selected);
-    setCurrentPageLocal(event.selected);
+
     localStorage.setItem("currentCarPage", JSON.stringify(event.selected + 1));
-    onClick(event.selected);
-    ScrollToTop();
+    onClick?.(event.selected);
   };
 
   const handleNextPage = () => {
-    if (currentPageLocal + 1 < Math.ceil(dataLength / itemsPerPage)) {
+    if (currentPage + 1 < Math.ceil(dataLength / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
-      setCurrentPageLocal(currentPageLocal + 1);
-      ScrollToTop();
     }
   };
 
   const handlePrevPage = () => {
-    if (currentPageLocal !== 0) {
+    if (currentPage !== 0) {
       setCurrentPage(currentPage - 1);
-      setCurrentPageLocal(currentPageLocal - 1);
-      ScrollToTop();
     }
   };
-
-  useEffect(() => {
-    setCurrentPageLocal(currentPage);
-  }, [currentPage]);
 
   return (
     <>
@@ -74,9 +63,9 @@ export default function PagePagination({
           pageLinkClassName={`w-8 h-8 text-md flex items-center justify-center rounded-[50%] hover:bg-blue duration-200 ml-1 hover:text-white`}
           previousLinkClassName={`hidden`}
           nextLinkClassName={`hidden`}
-          activeLinkClassName={"bg-mainColor text-blue"}
+          activeLinkClassName={"bg-blue text-white"}
           onPageChange={handlePageClick}
-          forcePage={currentPageLocal}
+          forcePage={currentPage}
         />
       )}
 
@@ -84,7 +73,10 @@ export default function PagePagination({
 
       <div className="flex items-center md500:gap-[60px] gap-[40px] mt-4">
         {dataLength !== 0 && (
-          <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300">
+          <div
+            className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300"
+            onClick={handlePrevPage}
+          >
             <BsArrowDown className="mr-[-20px] text-[26px] rotate-90" />
           </div>
         )}
@@ -96,17 +88,20 @@ export default function PagePagination({
           pageCount={pageCount}
           renderOnZeroPageCount={null}
           breakLinkClassName={"font-bold text-gray-400"}
-          breakClassName={"w-8 h-8 flex items-center justify-center"}
+          breakClassName={"w-8 h-8 flex items-center justify-center "}
           containerClassName={`flex items-center gap-1`}
           pageLinkClassName={`w-8 h-8 text-md flex items-center justify-center rounded-[50%] hover:bg-blue duration-200 ml-1 hover:text-white`}
           previousLinkClassName={`hidden`}
           nextLinkClassName={`hidden`}
-          activeLinkClassName={"bg-mainColor text-blue"}
+          activeLinkClassName={"bg-blue text-white"}
           onPageChange={handlePageClick}
-          forcePage={currentPageLocal}
+          forcePage={currentPage}
         />
         {dataLength !== 0 && (
-          <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300">
+          <div
+            className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300"
+            onClick={handleNextPage}
+          >
             <BsArrowDown className=" ml-[-20px] text-[26px] -rotate-90" />
           </div>
         )}

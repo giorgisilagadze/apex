@@ -9,7 +9,7 @@ interface Props {
   data?: string[];
   onClick?: (filterKey: string, value: string) => void;
   filterKey: string;
-  selectedValues: SelectedValues;
+  selectedValues: SelectedValues | any;
 }
 
 export default function SelectComp({

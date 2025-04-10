@@ -15,6 +15,7 @@ interface Props {
   fontWeight?: string;
   right?: boolean;
   type?: "button" | "submit" | "reset" | undefined;
+  isLoading?: boolean;
 }
 
 export default function Button({
@@ -30,6 +31,7 @@ export default function Button({
   fontWeight,
   right,
   type,
+  isLoading,
 }: Props) {
   return (
     <button
@@ -39,13 +41,26 @@ export default function Button({
         rounded ? rounded : "rounded-[10px]"
       } ${
         fontWeight ? fontWeight : ""
-      }   flex items-center justify-center gap-2  hover:shadow-dropDown duration-300`}
+      }   flex items-center justify-center gap-2  hover:shadow-dropDown duration-300 `}
       onClick={onClick}
       type={type ? type : "button"}
     >
-      {Icon && !right && <Icon className="mt-[2px]" />}
-      <p className="text-[14px]">{title}</p>
-      {Icon && right && <Icon className="mt-[2px] -rotate-[135deg]" />}
+      {isLoading ? (
+        <div
+          className="loader"
+          style={
+            {
+              "--loader-color": "rgba(255, 255, 255, 0.6)",
+            } as React.CSSProperties
+          }
+        ></div>
+      ) : (
+        <div className="flex items-center justify-center gap-2">
+          {Icon && !right && <Icon className="mt-[2px]" />}
+          <p className="text-[14px]">{title}</p>
+          {Icon && right && <Icon className="mt-[2px] -rotate-[135deg]" />}
+        </div>
+      )}
     </button>
   );
 }

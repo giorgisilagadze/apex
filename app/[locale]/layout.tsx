@@ -6,6 +6,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider } from "next-intl";
+import CustomToast from "@/components/CustomToast";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -30,6 +31,7 @@ export default async function RootLayout({
   return (
     <div>
       <NextIntlClientProvider messages={messages}>
+        <CustomToast />
         <Header />
         {children}
         <Footer />

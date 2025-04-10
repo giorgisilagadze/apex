@@ -68,7 +68,7 @@ export default function Layout({ children }: any) {
                   className={`flex items-center gap-5 py-3 px-5 duration-300 cursor-pointer rounded-[10px] ${
                     pathname == item.link
                       ? "bg-white text-black"
-                      : "hover:opacity-65 text-white"
+                      : " text-white hover:bg-[#eee] hover:text-black"
                   }`}
                 >
                   <p className="text-[14px] leading-[22px]">{item.title}</p>
@@ -76,7 +76,7 @@ export default function Layout({ children }: any) {
               </Link>
             ))}
           </div>
-          <div className="lg1110:w-[calc(100%-300px)] w-full bg-white min-h-[calc(100vh-70px)] rounded-tl-[10px]">
+          <div className="lg1110:w-[calc(100%-300px)] w-full bg-white min-h-[calc(100vh-70px)] lg1110:rounded-tl-[10px]">
             {children}
           </div>
         </div>

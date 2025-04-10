@@ -14,7 +14,7 @@ import useApexAdmin from "@/utils/ApexAdmin";
 //        /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/
 
 export default function Admin() {
-  const { adminToken, setAdminToken } = useApexAdmin();
+  const { adminToken, setAdminToken, setToast } = useApexAdmin();
 
   const locale = useLocale();
 
@@ -28,7 +28,7 @@ export default function Admin() {
   const route = useRouter();
 
   useEffect(() => {
-    adminToken && route.push(`/${locale}/admin/adminPanel/users`);
+    adminToken && route.push(`/${locale}/admin/adminPanel/news`);
   }, [adminToken]);
 
   const onChange = (inputKey: string, value: string) => {
@@ -54,7 +54,7 @@ export default function Admin() {
         localStorage.setItem("adminTokenApex", response.data.access_token);
       } catch (err: any) {
         setIsLoading(false);
-        // setToast(true, "მეილი ან პაროლი არასწორია", "error");
+        setToast(true, "მეილი ან პაროლი არასწორია", "error");
       }
     }
   };

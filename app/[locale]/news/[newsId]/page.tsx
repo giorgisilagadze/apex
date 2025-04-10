@@ -1,5 +1,7 @@
 import SendEmail from "@/components/SendEmail";
 import OtherNewsCard from "@/components/card/OtherNewsCard";
+import { FetchNews } from "@/serverside/FetchNews";
+import { FetchSingleNews } from "@/serverside/FetchSingleNews";
 import Image from "next/legacy/image";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
@@ -7,9 +9,11 @@ import { RiInstagramFill } from "react-icons/ri";
 export default async function SingleNews({
   params,
 }: {
-  params: Promise<{ newsId: number }>;
+  params: Promise<{ newsId: string }>;
 }) {
   const newsId = (await params).newsId;
+  const singleNews: NewsItem = await FetchSingleNews(newsId);
+  const news: { data: NewsItem[]; total: number } = await FetchNews();
 
   const socIcons = [
     {
@@ -33,25 +37,21 @@ export default async function SingleNews({
   const types = [
     {
       id: 1,
-      title: "პროექტები",
-      count: 76,
+      title: "პროექტი",
+      count: news.data.filter((item) => item.type == "პროექტი").length,
     },
     {
       id: 2,
-      title: "ღონისძიებები",
-      count: 52,
+      title: "ღონისძიება",
+      count: news.data.filter((item) => item.type == "ღონისძიება").length,
     },
     {
       id: 3,
-      title: "გამოფენები",
-      count: 160,
-    },
-    {
-      id: 4,
-      title: "მარკეტინგი",
-      count: 91,
+      title: "გამოფენა",
+      count: news.data.filter((item) => item.type == "გამოფენა").length,
     },
   ];
+
   return (
     <div className="w-full ">
       <div className="w-full sm:h-[400px] h-[300px] relative">
@@ -76,67 +76,30 @@ export default async function SingleNews({
           <div className="w-full flex flex-col gap-4">
             <div className="w-full xl:h-[500px] h-[400px] relative">
               <Image
-                src={"/images/swiper2.jpeg"}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/${singleNews.img}`}
                 alt="project-image"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-[10px]"
               />
               <div className="absolute top-0 right-0 rounded-tr-[10px] rounded-bl-[10px] bg-black px-5 py-2">
-                <p className="text-[14px] text-white font-light">პროექტები</p>
+                <p className="text-[14px] text-white font-light">
+                  {singleNews.type}
+                </p>
               </div>
             </div>
-            <div className="w-full flex flex-col gap-1">
-              <p className="text-[14px] text-blue">07.02.2025</p>
-              <p className="text-[22px] font-bold">
-                საშემოდგომო შეთავაზებები დაიწყო!
+            <div className="w-full flex flex-col gap-3">
+              <p className="text-[14px] text-blue">
+                {singleNews.created_at.slice(0, 10).replaceAll("-", ".")}
               </p>
-              <p className="text-[14px] text-grey font-light">
-                APEX Development-ში საშემოდგომო შეთავაზება დაიწყო! შეარჩიე
-                სასურველი ბინა მშენებარე პროექტში 'აპექს ისანი' ან 'აპექს
-                ნუცუბიძე' და ისარგებლე აქციის პირობით: ერთიანი გადახდისას მიიღეთ
-                კვადრატულზე $150-იანი ფასდაკლება, ხოლო 50%-იანი წინასწარი
-                შენატანისას ისარგებლეთ $75-იანი ფასდაკლებით.  აქციია მოქმედებს
-                შერჩეულ ბინებზე, როგორც ერთ-საძინებლიან, ასევე დიდ
-                ბინებზე.  შეგახსენებთ, რომ კომპლექსში 'აპექს ნუცუბიძე' ბინები
-                42,3კვ.მ-დან იწყება, ხოლო პროექტში 'აპექს ისანი' ბინები
-                47კვ.მ-დან შეგიძლიათ შეიძინოთ. 
-              </p>
+              <p className="text-[22px] font-bold">{singleNews.title}</p>
+              <div
+                dangerouslySetInnerHTML={{ __html: singleNews.text }}
+                className="editor"
+              />
             </div>
           </div>
           <div className="w-full flex flex-col gap-4">
-            <div className="w-full sm:h-[400px] h-[500px] grid sm:grid-cols-2 gap-6">
-              <div className="w-full h-full relative">
-                <Image
-                  src={"/images/swiper1.jpeg"}
-                  alt="project-image"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-[10px]"
-                />
-              </div>
-              <div className="w-full h-full relative">
-                <Image
-                  src={"/images/swiper3.jpeg"}
-                  alt="project-image"
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-[10px]"
-                />
-              </div>
-            </div>
-            <p className="text-[18px] font-bold">გრანდიოზული ფასდაკლებები</p>
-            <p className="text-[14px] text-grey font-light sm:max-w-[80%]">
-              APEX Development-ში საშემოდგომო შეთავაზება დაიწყო! შეარჩიე
-              სასურველი ბინა მშენებარე პროექტში 'აპექს ისანი' ან 'აპექს
-              ნუცუბიძე' და ისარგებლე აქციის პირობით: ერთიანი გადახდისას მიიღეთ
-              კვადრატულზე $150-იანი ფასდაკლება, ხოლო 50%-იანი წინასწარი
-              შენატანისას ისარგებლეთ $75-იანი ფასდაკლებით.  აქციია მოქმედებს
-              შერჩეულ ბინებზე, როგორც ერთ-საძინებლიან, ასევე დიდ
-              ბინებზე.  შეგახსენებთ, რომ კომპლექსში 'აპექს ნუცუბიძე' ბინები
-              42,3კვ.მ-დან იწყება, ხოლო პროექტში 'აპექს ისანი' ბინები 47კვ.მ-დან
-              შეგიძლიათ შეიძინოთ. 
-            </p>
             <div className="flex items-center gap-3 mt-4">
               <p className="text-[12px] font-bold">გაზიარება</p>
               {socIcons.map((item) => (
@@ -169,9 +132,11 @@ export default async function SingleNews({
           </div>
           <div className="flex flex-col w-full gap-4">
             <h1 className="font-bold text-[18px]">სხვა სიახლეები</h1>
-            {[1, 2, 3, 4].map((item) => (
-              <OtherNewsCard key={item} />
-            ))}
+            {news.data
+              .filter((item) => item.id !== parseInt(newsId))
+              .map((item) => (
+                <OtherNewsCard key={item.id} item={item} />
+              ))}
           </div>
         </div>
       </div>

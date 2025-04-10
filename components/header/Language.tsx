@@ -48,8 +48,6 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
     else setLanguage("RU");
   }, []);
 
-  console.log(isLangClicked);
-
   return (
     <div
       ref={LanguageRef}
