@@ -5,8 +5,68 @@ import Input from "../input/Input";
 import SelectComp from "../input/SelectComp";
 import Button from "../button/Button";
 import { BsArrowDown } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Contact() {
+  const [projects, setProjects] = useState<Building[]>([]);
+  const [values, setValues] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    project: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/project`
+        );
+        const data = response.data;
+        setProjects(data);
+      } catch (err) {
+      } finally {
+      }
+    })();
+  }, []);
+
+  const handleOnChange = (key: string, value: string) => {
+    setValues({ ...values, [key]: value });
+  };
+
+  const handleUpload = async () => {
+    setIsSubmited(true);
+    const hasEmptyField = Object.keys(values).some(
+      (value) => value.trim() === ""
+    );
+    console.log(hasEmptyField);
+
+    if (hasEmptyField) return;
+
+    if (!isLoading) {
+      setIsLoading(true);
+      try {
+        // const response = await axios.post(
+        //   `${process.env.NEXT_PUBLIC_API_URL}/project`,
+        //   {
+        //     name: values.name,
+        //     phone: values.phone,
+        //     email: values.email,
+        //     project: values.project,
+        //   }
+        // );
+      } catch {
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  console.log(values);
+
   return (
     <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 grid lg:grid-cols-2">
       <div className="w-full lg:h-[500px] md500:h-[400px] h-[350px] relative">
@@ -30,26 +90,40 @@ export default function Contact() {
             placeholder={"მაგ. დავითი"}
             title="სახელი და გვარი"
             color="text-white"
+            onChange={handleOnChange}
+            value={values["name"]}
+            inputKey="name"
           />
           <Input
             placeholder={"+995"}
             title="ტელეფონის ნომერი"
             color="text-white"
+            onChange={handleOnChange}
+            value={values["phone"]}
+            inputKey="phone"
+            type="number"
           />
           <Input
             placeholder={"Example@apexd.ge"}
             title="ელექტრონული ფოსტა"
             color="text-white"
+            onChange={handleOnChange}
+            value={values["email"]}
+            inputKey="email"
           />
           <SelectComp
-            placeholder={"აპექს ნუცუბიძე"}
+            placeholder={"აირჩიეთ"}
             title="პროექტები"
             color="text-white"
+            filterKey={"project"}
+            selectedValues={values}
+            onClick={handleOnChange}
+            data={projects.map((item) => item.name)}
           />
         </div>
         <Button
           title={"გაგზავნა"}
-          onClick={() => {}}
+          onClick={handleUpload}
           width={"w-full"}
           color="text-white"
           bgColor="bg-lightBlue"
@@ -57,6 +131,7 @@ export default function Contact() {
           icon={BsArrowDown}
           height="h-[45px]"
           rounded="rounded-[12px]"
+          isLoading={isLoading}
         />
       </div>
     </div>
