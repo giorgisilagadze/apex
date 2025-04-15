@@ -9,12 +9,12 @@ import { PiPencil } from "react-icons/pi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 interface Props {
-  item: NewsItem;
+  item: Partner;
   forRender: number;
   setForRender: (forRender: number) => void;
 }
 
-export default function NewsCard({ item, forRender, setForRender }: Props) {
+export default function PartnerCard({ item, forRender, setForRender }: Props) {
   const [isDeletePopUpVis, setIsDeletePopUpVis] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +24,7 @@ export default function NewsCard({ item, forRender, setForRender }: Props) {
     if (!isLoading) {
       setIsLoading(true);
       try {
-        const response = await axiosAdmin.delete(`/news/${item.id}`);
+        const response = await axiosAdmin.delete(`/partner/${item.id}`);
         setForRender(forRender + 1);
         setIsDeletePopUpVis(false);
       } catch (err) {
@@ -53,7 +53,7 @@ export default function NewsCard({ item, forRender, setForRender }: Props) {
           </p>
           <div className="flex items-center gap-3">
             <Link
-              href={`/${locale}/admin/adminPanel/news/${item.id}`}
+              href={`/${locale}/admin/adminPanel/partners/${item.id}`}
               className="w-10 h-10 rounded-[5px] flex items-center justify-center bg-[#eee] hover:shadow-dropDown duration-300 cursor-pointer"
             >
               <PiPencil className="text-[20px] text-black" />

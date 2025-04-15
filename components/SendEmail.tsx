@@ -2,12 +2,35 @@
 
 import { useState } from "react";
 import Button from "./button/Button";
-import ScreenSize from "@/hooks/ScreenSize";
+import useApexAdmin from "@/utils/ApexAdmin";
+import axios from "axios";
 
 export default function SendEmail() {
-  const [value, setValue] = useState("");
+  const { setToast } = useApexAdmin();
 
-  const dimension = ScreenSize();
+  const [value, setValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSend = async () => {
+    if (!value.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/))
+      return setToast(true, "მიუთითეთ ვალიდური მეილი", "error");
+    if (!isLoading) {
+      setIsLoading(true);
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/subscribe`,
+          {
+            mail: value,
+          }
+        );
+        setValue("");
+        setToast(true, "მეილი წარმატებით გაიგზავნა", "success");
+      } catch (err) {
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
 
   return (
     <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[80px] py-10 bg-blueOpacityLight flex items-center justify-between flex-col gap-6 lg:flex-row">
@@ -29,11 +52,12 @@ export default function SendEmail() {
         />
         <Button
           title={"გამოწერა"}
-          onClick={() => {}}
+          onClick={handleSend}
           width={"w-[130px]"}
           height="h-[48px]"
           bgColor="bg-lightBlue"
           rounded="rounded-[120px]"
+          isLoading={isLoading}
         />
       </div>
     </div>

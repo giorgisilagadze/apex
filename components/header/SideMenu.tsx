@@ -49,7 +49,7 @@ export default function SideMenu({
     {
       id: 5,
       title: "პარტნიორები",
-      link: `/${locale}/partniors`,
+      link: `/${locale}/partners`,
     },
   ];
 

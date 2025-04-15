@@ -7,8 +7,10 @@ import Button from "../button/Button";
 import { BsArrowDown } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useApexAdmin from "@/utils/ApexAdmin";
 
-export default function Contact() {
+export default function sContact() {
+  const { setToast } = useApexAdmin();
   const [projects, setProjects] = useState<Building[]>([]);
   const [values, setValues] = useState({
     name: "",
@@ -39,25 +41,27 @@ export default function Contact() {
 
   const handleUpload = async () => {
     setIsSubmited(true);
-    const hasEmptyField = Object.keys(values).some(
+    const hasEmptyField = Object.values(values).some(
       (value) => value.trim() === ""
     );
-    console.log(hasEmptyField);
 
     if (hasEmptyField) return;
 
     if (!isLoading) {
       setIsLoading(true);
       try {
-        // const response = await axios.post(
-        //   `${process.env.NEXT_PUBLIC_API_URL}/project`,
-        //   {
-        //     name: values.name,
-        //     phone: values.phone,
-        //     email: values.email,
-        //     project: values.project,
-        //   }
-        // );
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/lead`,
+          {
+            name: values.name,
+            phone: values.phone,
+            mail: values.email,
+            project: values.project,
+          }
+        );
+        setValues({ name: "", phone: "", email: "", project: "" });
+        setIsSubmited(false);
+        setToast(true, "მონაცემები წარმატებით გაიგზავნა", "success");
       } catch {
       } finally {
         setIsLoading(false);
@@ -89,32 +93,35 @@ export default function Contact() {
           <Input
             placeholder={"მაგ. დავითი"}
             title="სახელი და გვარი"
-            color="text-white"
+            color={isSubmited && !values.name ? "text-[red]" : "text-white"}
             onChange={handleOnChange}
             value={values["name"]}
             inputKey="name"
           />
+
           <Input
             placeholder={"+995"}
             title="ტელეფონის ნომერი"
-            color="text-white"
+            color={isSubmited && !values.phone ? "text-[red]" : "text-white"}
             onChange={handleOnChange}
             value={values["phone"]}
             inputKey="phone"
             type="number"
           />
+
           <Input
             placeholder={"Example@apexd.ge"}
             title="ელექტრონული ფოსტა"
-            color="text-white"
+            color={isSubmited && !values.email ? "text-[red]" : "text-white"}
             onChange={handleOnChange}
             value={values["email"]}
             inputKey="email"
           />
+
           <SelectComp
             placeholder={"აირჩიეთ"}
             title="პროექტები"
-            color="text-white"
+            color={isSubmited && !values.project ? "text-[red]" : "text-white"}
             filterKey={"project"}
             selectedValues={values}
             onClick={handleOnChange}

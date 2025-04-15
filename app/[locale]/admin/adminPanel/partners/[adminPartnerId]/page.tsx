@@ -11,12 +11,11 @@ import { axiosAdmin } from "@/utils/AxiosToken";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function SingleAdminNews() {
+export default function SingleAdminPartner() {
   const params = useParams();
 
   const { setToast } = useApexAdmin();
-  const [news, setNews] = useState({
-    type: "",
+  const [partner, setpartner] = useState({
     titleGeo: "",
     titleEng: "",
     titleRus: "",
@@ -24,8 +23,7 @@ export default function SingleAdminNews() {
     descriptionEng: "",
     descriptionRus: "",
   });
-  const [newsUpdate, setNewsUpdate] = useState({
-    type: "",
+  const [partnerUpdate, setpartnerUpdate] = useState({
     titleGeo: "",
     titleEng: "",
     titleRus: "",
@@ -33,7 +31,7 @@ export default function SingleAdminNews() {
     descriptionEng: "",
     descriptionRus: "",
   });
-  const [newsImage, setNewsImage] = useState([]);
+  const [partnerImage, setpartnerImage] = useState([]);
   const [backImage, setBackImage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isUploadLoading, setIsUploadLoading] = useState(false);
@@ -44,11 +42,12 @@ export default function SingleAdminNews() {
     setIsLoading(true);
     (async () => {
       try {
-        const response = await axiosAdmin.get(`/news/${params.adminNewsId}`);
+        const response = await axiosAdmin.get(
+          `/partner/${params.adminPartnerId}`
+        );
         const data = response.data;
-        setNews({
-          ...news,
-          type: data.type,
+        setpartner({
+          ...partner,
           titleGeo: data.title,
           titleEng: data.title_en,
           titleRus: data.title_ru,
@@ -56,9 +55,8 @@ export default function SingleAdminNews() {
           descriptionEng: data.text_en,
           descriptionRus: data.text_ru,
         });
-        setNewsUpdate({
-          ...newsUpdate,
-          type: data.type,
+        setpartnerUpdate({
+          ...partnerUpdate,
           titleGeo: data.title,
           titleEng: data.title_en,
           titleRus: data.title_ru,
@@ -75,18 +73,18 @@ export default function SingleAdminNews() {
   }, [forRender]);
 
   const handleOnChange = (key: string, value: string) => {
-    setNewsUpdate({ ...newsUpdate, [key]: value });
+    setpartnerUpdate({ ...partnerUpdate, [key]: value });
   };
 
   const handleUpdate = async (e: any) => {
     e.preventDefault();
-    const isinputValuesChange = Object.keys(news).some(
+    const isinputValuesChange = Object.keys(partner).some(
       (key) =>
-        newsUpdate[key as keyof typeof newsUpdate] !==
-        news[key as keyof typeof news]
+        partnerUpdate[key as keyof typeof partnerUpdate] !==
+        partner[key as keyof typeof partner]
     );
-    if (isinputValuesChange || newsImage.length !== 0) {
-      const hasEmptyField = Object.values(newsUpdate).some(
+    if (isinputValuesChange || partnerImage.length !== 0) {
+      const hasEmptyField = Object.values(partnerUpdate).some(
         (value) => value.trim() === ""
       );
 
@@ -98,21 +96,20 @@ export default function SingleAdminNews() {
         const form = e.target;
         const formData = new FormData(form);
 
-        formData.append("type", newsUpdate.type);
-        formData.append("title", newsUpdate.titleGeo);
-        formData.append("title_en", newsUpdate.titleEng);
-        formData.append("title_ru", newsUpdate.titleRus);
-        formData.append("text", newsUpdate.descriptionGeo);
-        formData.append("text_en", newsUpdate.descriptionEng);
-        formData.append("text_ru", newsUpdate.descriptionRus);
-        formData.append("id", params.adminNewsId as string);
+        formData.append("title", partnerUpdate.titleGeo);
+        formData.append("title_en", partnerUpdate.titleEng);
+        formData.append("title_ru", partnerUpdate.titleRus);
+        formData.append("text", partnerUpdate.descriptionGeo);
+        formData.append("text_en", partnerUpdate.descriptionEng);
+        formData.append("text_ru", partnerUpdate.descriptionRus);
+        formData.append("id", params.adminPartnerId as string);
         try {
           const response = await axiosAdmin.put(
-            `/news/${params.adminNewsId}`,
+            `/partner/${params.adminPartnerId}`,
             formData
           );
-          setToast(true, "სიახლე წარმატებით განახლდა", "success");
-          setNewsImage([]);
+          setToast(true, "პარტნიორი წარმატებით განახლდა", "success");
+          setpartnerImage([]);
           setHasUploaded(true);
           setForRender(forRender + 1);
         } catch (err) {
@@ -125,54 +122,46 @@ export default function SingleAdminNews() {
   };
 
   useEffect(() => {
-    const hasOneValue = Object.values(newsUpdate).some(
+    const hasOneValue = Object.values(partnerUpdate).some(
       (value) => value.trim() !== ""
     );
 
-    if (hasOneValue || newsImage.length != 0) {
+    if (hasOneValue || partnerImage.length != 0) {
       setHasUploaded(false);
     }
-  }, [newsUpdate, newsImage]);
+  }, [partnerUpdate, partnerImage]);
 
-  console.log(newsUpdate);
+  console.log(partnerUpdate);
 
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6 ">
       <h1 className="sm:text-[28px] text-[20px] text-mainColor">
-        სიახლე N{params.adminNewsId}
+        პარტნიორი - {partner.titleGeo}
       </h1>
       {!isLoading ? (
         <form
           className="flex flex-col sm:gap-8 gap-6 xl:w-[70%] w-full"
           onSubmit={handleUpdate}
         >
-          <SelectComp
-            placeholder={"აირჩიეთ ტიპი"}
-            filterKey={"type"}
-            selectedValues={newsUpdate}
-            title="სიახლის ტიპი"
-            data={["პროექტი", "ღონისძიება", "გამოფენა"]}
-            onClick={handleOnChange}
-          />
           <Input
-            placeholder={"სათაური"}
+            placeholder={"სახელი"}
             onChange={handleOnChange}
-            value={newsUpdate.titleGeo}
-            title="სათაური ქართულად"
+            value={partnerUpdate.titleGeo}
+            title="სახელი ქართულად"
             inputKey="titleGeo"
           />
           <Input
-            placeholder={"სათაური"}
+            placeholder={"სახელი"}
             onChange={handleOnChange}
-            value={newsUpdate.titleEng}
-            title="სათაური ინგლისურად"
+            value={partnerUpdate.titleEng}
+            title="სახელი ინგლისურად"
             inputKey="titleEng"
           />
           <Input
-            placeholder={"სათაური"}
+            placeholder={"სახელი"}
             onChange={handleOnChange}
-            value={newsUpdate.titleRus}
-            title="სათაური რუსულად"
+            value={partnerUpdate.titleRus}
+            title="სახელი რუსულად"
             inputKey="titleRus"
           />
           <div className="flex flex-col gap-[6px]">
@@ -180,7 +169,7 @@ export default function SingleAdminNews() {
             <TextEditor
               onChange={handleOnChange}
               inputKey={"descriptionGeo"}
-              value={newsUpdate.descriptionGeo}
+              value={partnerUpdate.descriptionGeo}
               hasUploaded={hasUploaded}
             />
           </div>
@@ -189,7 +178,7 @@ export default function SingleAdminNews() {
             <TextEditor
               onChange={handleOnChange}
               inputKey={"descriptionEng"}
-              value={newsUpdate.descriptionEng}
+              value={partnerUpdate.descriptionEng}
               hasUploaded={hasUploaded}
             />
           </div>
@@ -198,7 +187,7 @@ export default function SingleAdminNews() {
             <TextEditor
               onChange={handleOnChange}
               inputKey={"descriptionRus"}
-              value={newsUpdate.descriptionRus}
+              value={partnerUpdate.descriptionRus}
               hasUploaded={hasUploaded}
             />
           </div>
@@ -206,8 +195,8 @@ export default function SingleAdminNews() {
             <p className="text-[14px]">სიახლის ფოტო</p>
             <PhotoUpload
               name="image"
-              image={newsImage}
-              setImage={setNewsImage}
+              image={partnerImage}
+              setImage={setpartnerImage}
               backImage={backImage}
             />
           </div>

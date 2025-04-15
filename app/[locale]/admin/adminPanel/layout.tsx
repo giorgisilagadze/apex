@@ -21,6 +21,16 @@ export default function Layout({ children }: any) {
       title: "სიახლეები",
       link: `/${locale}/admin/adminPanel/news`,
     },
+    {
+      id: 2,
+      title: "ლიდები",
+      link: `/${locale}/admin/adminPanel/leads`,
+    },
+    {
+      id: 3,
+      title: "პარტნიორები",
+      link: `/${locale}/admin/adminPanel/partners`,
+    },
   ];
 
   const route = useRouter();
@@ -31,7 +41,7 @@ export default function Layout({ children }: any) {
 
   const logOut = async () => {
     try {
-      const response = await axiosAdmin.get("/adminAuth/logOut");
+      const response = await axiosAdmin.get("/admin/logOut");
 
       setAdminToken(null);
       localStorage.removeItem("adminTokenApex");

@@ -6,31 +6,19 @@ import MainSwiper from "@/components/home/MainSwiper";
 import News from "@/components/home/News";
 import Projects from "@/components/home/Projects";
 import { FetchNews } from "@/serverside/FetchNews";
+import { FetchProjects } from "@/serverside/FetchProjects";
 
 export default async function Home() {
   const news = await FetchNews();
+  const projects = await FetchProjects();
 
-  console.log(news);
+  console.log(projects);
 
-  const projects = [
-    {
-      id: 1,
-      title: "აპექს ნუცუბიძე",
-    },
-    {
-      id: 2,
-      title: "აპექს დიდი დიღომი",
-    },
-    {
-      id: 3,
-      title: "აპექს ნუცუბიძე ||",
-    },
-  ];
   return (
     <div className="w-full flex flex-col sm:gap-[100px] gap-[60px]">
       <MainSwiper />
       <Filter page="home" />
-      <Projects />
+      <Projects projects={projects} />
       <AboutUsComp />
       <News news={news.data.slice(0, 3)} />
       <Contact />

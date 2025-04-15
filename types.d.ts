@@ -99,3 +99,30 @@ interface NewsItem {
   created_at: string;
   type: string;
 }
+
+interface Lead {
+  id: number;
+  name: string;
+  mail: string;
+  phone: string;
+  project: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+interface Partner {
+  id: number;
+  title: string;
+  title_en: string;
+  title_ru: string;
+  text: string;
+  text_en: string;
+  text_ru: string;
+  img: string;
+  cover: string | null;
+  sort: number | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}

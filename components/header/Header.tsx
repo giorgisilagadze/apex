@@ -46,7 +46,7 @@ export default function Header() {
     {
       id: 5,
       title: "პარტნიორები",
-      link: `/${locale}/partniors`,
+      link: `/${locale}/partners`,
     },
   ];
   return (

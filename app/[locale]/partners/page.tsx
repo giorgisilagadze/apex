@@ -1,11 +1,12 @@
-"use client";
-
-import PagePagination from "@/components/PagePagination";
 import SendEmail from "@/components/SendEmail";
 import PartniorCard from "@/components/card/PartniorCard";
+import { FetchPartners } from "@/serverside/FetchPartners";
 import Image from "next/legacy/image";
 
-export default function Partniors() {
+export default async function Partniors() {
+  const partners: Partner[] = await FetchPartners();
+  console.log(partners);
+
   return (
     <div className="w-full ">
       <div className="w-full sm:h-[400px] h-[300px] relative">
@@ -43,25 +44,26 @@ export default function Partniors() {
               მნიშვნელოვანია ჩვენი კომპანიისთვის.
             </p>
           </div>
-          <PagePagination
+          {/* <PagePagination
             dataLength={20}
             itemsPerPage={3}
             both={false}
             currentPage={0}
             setCurrentPage={() => {}}
             onClick={() => {}}
-          >
-            <div className="w-full flex flex-col gap-[60px]">
-              {[1, 2, 3].map((item) => (
-                <PartniorCard
-                  key={item}
-                  isreverse={item % 2 == 0 ? true : false}
-                />
-              ))}
-            </div>
-          </PagePagination>
+          > */}
+          <div className="w-full flex flex-col gap-[60px]">
+            {partners.map((item, index) => (
+              <PartniorCard
+                key={item.id}
+                isreverse={(index + 1) % 2 == 0 ? true : false}
+                item={item}
+              />
+            ))}
+          </div>
+          {/* </PagePagination> */}
         </div>
-        <div className="mt-[60px] w-full">
+        <div className="mt-[100px] w-full">
           <SendEmail />
         </div>
       </div>

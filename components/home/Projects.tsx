@@ -10,36 +10,40 @@ import Image from "next/legacy/image";
 import ScreenSize from "@/hooks/ScreenSize";
 import { BsArrowDown } from "react-icons/bs";
 
-export default function Projects() {
+interface Props {
+  projects: Building[];
+}
+
+export default function Projects({ projects }: Props) {
   const dimension = ScreenSize();
 
-  const projects = [
-    {
-      id: 1,
-      title: "აპექს ნუცუბიძე I, II, III",
-      src: "/images/swiper1.jpeg",
-    },
-    {
-      id: 2,
-      title: "აპექს დიდი დიღომი",
-      src: "/images/swiper2.jpeg",
-    },
-    {
-      id: 3,
-      title: "აპექს ნუცუბიძე ბლოკი IV",
-      src: "/images/swiper3.jpeg",
-    },
-    {
-      id: 4,
-      title: "აპექს დიდი დიღომი",
-      src: "/images/swiper3.jpeg",
-    },
-    {
-      id: 5,
-      title: "აპექს ნუცუბიძე ბლოკი IV",
-      src: "/images/swiper3.jpeg",
-    },
-  ];
+  // const projects = [
+  //   {
+  //     id: 1,
+  //     title: "აპექს ნუცუბიძე I, II, III",
+  //     src: "/images/swiper1.jpeg",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "აპექს დიდი დიღომი",
+  //     src: "/images/swiper2.jpeg",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "აპექს ნუცუბიძე ბლოკი IV",
+  //     src: "/images/swiper3.jpeg",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "აპექს დიდი დიღომი",
+  //     src: "/images/swiper3.jpeg",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "აპექს ნუცუბიძე ბლოკი IV",
+  //     src: "/images/swiper3.jpeg",
+  //   },
+  // ];
 
   return (
     <div className="w-full flex flex-col gap-8">
@@ -85,7 +89,7 @@ export default function Projects() {
             >
               <div className="w-full h-full relative">
                 <Image
-                  src={item.src}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
                   alt="project-image"
                   layout="fill"
                   objectFit="cover"
@@ -94,7 +98,7 @@ export default function Projects() {
                 <div className="w-full h-full rounded-[10px] absolute left-0 top-0 bg-gradient-to-t from-[rgba(3,44,95,0.5)] via-[rgba(255,255,255,0.1)] to-[rgba(0,0,0,0)] z-[2]"></div>
                 <div className="absolute left-[50%] translate-x-[-50%] md500:bottom-[80px] bottom-6 z-[3]">
                   <p className="lg1250:text-[32px] md500:text-[26px] text-[20px] text-white font-bold md500:whitespace-nowrap text-center">
-                    {item.title}
+                    {item.name}
                   </p>
                 </div>
               </div>

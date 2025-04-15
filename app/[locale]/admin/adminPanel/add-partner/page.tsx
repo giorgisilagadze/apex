@@ -9,10 +9,9 @@ import useApexAdmin from "@/utils/ApexAdmin";
 import { axiosAdmin } from "@/utils/AxiosToken";
 import { useEffect, useState } from "react";
 
-export default function AddNews() {
+export default function AddPartner() {
   const { setToast } = useApexAdmin();
-  const [news, setNews] = useState({
-    type: "",
+  const [partner, setPartner] = useState({
     titleGeo: "",
     titleEng: "",
     titleRus: "",
@@ -20,21 +19,21 @@ export default function AddNews() {
     descriptionEng: "",
     descriptionRus: "",
   });
-  const [newsImage, setNewsImage] = useState([]);
+  const [partnerImage, setPartnerImage] = useState([]);
   const [isUploadLoading, setIsUploadLoading] = useState(false);
   const [hasUploaded, setHasUploaded] = useState(false);
 
   const handleOnChange = (key: string, value: string) => {
-    setNews({ ...news, [key]: value });
+    setPartner({ ...partner, [key]: value });
   };
 
   const handleUpload = async (e: any) => {
     e.preventDefault();
-    const hasEmptyField = Object.values(news).some(
+    const hasEmptyField = Object.values(partner).some(
       (value) => value.trim() === ""
     );
 
-    if (hasEmptyField || newsImage.length == 0) {
+    if (hasEmptyField || partnerImage.length == 0) {
       return setToast(true, "შეავსეთ ყველა ველი", "error");
     }
     if (!isUploadLoading) {
@@ -42,18 +41,16 @@ export default function AddNews() {
       const form = e.target;
       const formData = new FormData(form);
 
-      formData.append("type", news.type);
-      formData.append("title", news.titleGeo);
-      formData.append("title_en", news.titleEng);
-      formData.append("title_ru", news.titleRus);
-      formData.append("text", news.descriptionGeo);
-      formData.append("text_en", news.descriptionEng);
-      formData.append("text_ru", news.descriptionRus);
+      formData.append("title", partner.titleGeo);
+      formData.append("title_en", partner.titleEng);
+      formData.append("title_ru", partner.titleRus);
+      formData.append("text", partner.descriptionGeo);
+      formData.append("text_en", partner.descriptionEng);
+      formData.append("text_ru", partner.descriptionRus);
       try {
-        const response = await axiosAdmin.post("/news", formData);
-        setToast(true, "სიახლე წარმატებით აიტვირთა", "success");
-        setNews({
-          type: "",
+        const response = await axiosAdmin.post("/partner", formData);
+        setToast(true, "პარტნიორი წარმატებით აიტვირთა", "success");
+        setPartner({
           titleGeo: "",
           titleEng: "",
           titleRus: "",
@@ -61,7 +58,7 @@ export default function AddNews() {
           descriptionEng: "",
           descriptionRus: "",
         });
-        setNewsImage([]);
+        setPartnerImage([]);
         setHasUploaded(true);
       } catch (err) {
         setToast(true, "დაფიქსირდა შეცდომა", "error");
@@ -72,53 +69,45 @@ export default function AddNews() {
   };
 
   useEffect(() => {
-    const hasOneValue = Object.values(news).some(
+    const hasOneValue = Object.values(partner).some(
       (value) => value.trim() !== ""
     );
 
-    if (hasOneValue || newsImage.length != 0) {
+    if (hasOneValue || partnerImage.length != 0) {
       setHasUploaded(false);
     }
-  }, [news, newsImage]);
+  }, [partner, partnerImage]);
 
-  console.log(news);
+  console.log(partner);
 
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6 ">
       <h1 className="sm:text-[28px] text-[20px] text-mainColor">
-        სიახლის დამატება
+        პარტნიორის დამატება
       </h1>
       <form
         className="flex flex-col sm:gap-8 gap-6 xl:w-[70%] w-full"
         onSubmit={handleUpload}
       >
-        <SelectComp
-          placeholder={"აირჩიეთ ტიპი"}
-          filterKey={"type"}
-          selectedValues={news}
-          title="სიახლის ტიპი"
-          data={["პროექტი", "ღონისძიება", "გამოფენა"]}
-          onClick={handleOnChange}
-        />
         <Input
-          placeholder={"სათაური"}
+          placeholder={"სახელი"}
           onChange={handleOnChange}
-          value={news.titleGeo}
-          title="სათაური ქართულად"
+          value={partner.titleGeo}
+          title="სახელი ქართულად"
           inputKey="titleGeo"
         />
         <Input
-          placeholder={"სათაური"}
+          placeholder={"სახელი"}
           onChange={handleOnChange}
-          value={news.titleEng}
-          title="სათაური ინგლისურად"
+          value={partner.titleEng}
+          title="სახელი ინგლისურად"
           inputKey="titleEng"
         />
         <Input
-          placeholder={"სათაური"}
+          placeholder={"სახელი"}
           onChange={handleOnChange}
-          value={news.titleRus}
-          title="სათაური რუსულად"
+          value={partner.titleRus}
+          title="სახელი რუსულად"
           inputKey="titleRus"
         />
         <div className="flex flex-col gap-[6px]">
@@ -126,7 +115,7 @@ export default function AddNews() {
           <TextEditor
             onChange={handleOnChange}
             inputKey={"descriptionGeo"}
-            value={news.descriptionGeo}
+            value={partner.descriptionGeo}
             hasUploaded={hasUploaded}
           />
         </div>
@@ -135,7 +124,7 @@ export default function AddNews() {
           <TextEditor
             onChange={handleOnChange}
             inputKey={"descriptionEng"}
-            value={news.descriptionEng}
+            value={partner.descriptionEng}
             hasUploaded={hasUploaded}
           />
         </div>
@@ -144,13 +133,17 @@ export default function AddNews() {
           <TextEditor
             onChange={handleOnChange}
             inputKey={"descriptionRus"}
-            value={news.descriptionRus}
+            value={partner.descriptionRus}
             hasUploaded={hasUploaded}
           />
         </div>
         <div className="flex flex-col gap-[6px]">
-          <p className="text-[14px]">სიახლის ფოტო</p>
-          <PhotoUpload name="image" image={newsImage} setImage={setNewsImage} />
+          <p className="text-[14px]">პარნიორის ფოტო</p>
+          <PhotoUpload
+            name="image"
+            image={partnerImage}
+            setImage={setPartnerImage}
+          />
         </div>
         <div className="w-full flex justify-end">
           <Button
