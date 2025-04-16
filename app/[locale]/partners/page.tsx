@@ -5,7 +5,6 @@ import Image from "next/legacy/image";
 
 export default async function Partniors() {
   const partners: Partner[] = await FetchPartners();
-  console.log(partners);
 
   return (
     <div className="w-full ">

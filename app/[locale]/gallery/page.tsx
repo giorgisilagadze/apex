@@ -1,64 +1,21 @@
-"use client";
-
 import PagePagination from "@/components/PagePagination";
 import SendEmail from "@/components/SendEmail";
 import ImagesComp from "@/components/gallery/ImagesComp";
+import { FetchGallery } from "@/serverside/FetchGallery";
 import Image from "next/legacy/image";
-import { useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function Gallery() {
-  const [type, setType] = useState(1);
+interface Props {
+  searchParams: {
+    type?: string;
+  };
+}
 
-  const data = [
-    {
-      id: 1,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 2,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 3,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 4,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 5,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 6,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 7,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 8,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 9,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 10,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 11,
-      src: "/images/apartment2.jpeg",
-    },
-    {
-      id: 12,
-      src: "/images/apartment2.jpeg",
-    },
-  ];
+export default async function Gallery({ searchParams }: Props) {
+  const type = searchParams.type === "video" ? "video" : "photo";
+  const data: GalleryItem[] = await FetchGallery(type);
 
   return (
     <div className="w-full flex flex-col sm:gap-[100px] gap-[40px]">
@@ -83,35 +40,27 @@ export default function Gallery() {
         <div className="w-[230px] h-[55px] rounded-[30px] bg-[rgba(217,217,217,1)] flex items-center justify-between relative">
           <div
             className={`absolute w-[50%] h-full duration-300 bg-blue rounded-[30px] ${
-              type == 1 ? "left-0" : "left-[50%]"
+              type === "photo" ? "left-0" : "left-[50%]"
             }`}
           ></div>
-          <p
+          <Link
+            href="?type=photo"
             className="text-[14px] text-white z-[1] cursor-pointer h-full w-full flex items-center justify-center"
-            onClick={() => setType(1)}
           >
             ფოტო
-          </p>
-          <p
+          </Link>
+          <Link
+            href="?type=video"
             className="text-[14px] text-white z-[1] cursor-pointer h-full w-full flex items-center justify-center"
-            onClick={() => setType(2)}
           >
             ვიდეო
-          </p>
+          </Link>
         </div>
-        <PagePagination
-          dataLength={30}
-          itemsPerPage={8}
-          both={false}
-          currentPage={0}
-          setCurrentPage={() => {}}
-          onClick={() => {}}
-        >
-          <div className="w-full flex flex-col gap-1">
-            <ImagesComp data={data.slice(0, 6)} />
-            <ImagesComp data={data.slice(6, data.length)} />
-          </div>
-        </PagePagination>
+        <div className="w-full flex flex-col gap-1">
+          <ImagesComp data={data.slice(0, 6)} />
+          <ImagesComp data={data.slice(6, 12)} />
+          <ImagesComp data={data.slice(12, data.length)} />
+        </div>
       </div>
       <SendEmail />
     </div>

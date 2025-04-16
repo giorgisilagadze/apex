@@ -126,3 +126,11 @@ interface Partner {
   updated_at: string;
   deleted_at: string | null;
 }
+
+interface GalleryItem {
+  id: number;
+  url: string;
+  type: "photo" | "video";
+  alt: string | null;
+  sort: number | null;
+}

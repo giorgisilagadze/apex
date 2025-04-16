@@ -20,7 +20,7 @@ export default function PartniorCard({ isreverse, item }: Props) {
           objectFit="cover"
           className="rounded-[10px]"
         />
-        <div className="w-full h-full absolute top-0 left-0 bg-blueOpacity rounded-[10px]"></div>
+        {/* <div className="w-full h-full absolute top-0 left-0 bg-blueOpacity rounded-[10px]"></div> */}
         <div className="absolute left-8 bottom-6 flex flex-col gap-2">
           <div className="w-full h-[1px] bg-white"></div>
           <p className="text-[22px] text-white font-bold">{item.title}</p>

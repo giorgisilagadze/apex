@@ -21,6 +21,8 @@ export default function Projects() {
           `${process.env.NEXT_PUBLIC_API_URL}/building`
         );
         const data = response.data;
+        console.log(data);
+
         setProjects(data);
       } catch (err) {
       } finally {
