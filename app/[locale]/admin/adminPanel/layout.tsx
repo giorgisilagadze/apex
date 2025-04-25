@@ -31,6 +31,11 @@ export default function Layout({ children }: any) {
       title: "პარტნიორები",
       link: `/${locale}/admin/adminPanel/partners`,
     },
+    {
+      id: 4,
+      title: "პროექტები",
+      link: `/${locale}/admin/adminPanel/projects`,
+    },
   ];
 
   const route = useRouter();

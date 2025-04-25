@@ -33,7 +33,7 @@ h1 {
 
 p,
 input,
-button {
+button, textarea {
   font-family: book;
   font-feature-settings: "case" on;
 

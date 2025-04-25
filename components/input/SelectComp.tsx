@@ -1,6 +1,7 @@
 import useClickOutside from "@/hooks/useClickOutside";
 import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { RxCross1 } from "react-icons/rx";
 
 interface Props {
   title?: string;
@@ -45,9 +46,19 @@ export default function SelectComp({
               ? selectedValues[filterKey as keyof SelectedValues] || placeholder
               : placeholder}
           </p>
-          <MdKeyboardArrowDown
-            className={`text-[18px] ${isClicked && "rotate-180"} duration-300`}
-          />
+          <div className="flex items-center gap-2">
+            {selectedValues[filterKey as keyof SelectedValues] && (
+              <RxCross1
+                className={`text-[14px] cursor-pointer hover:opacity-60 duration-300`}
+                onClick={() => onClick?.(filterKey, "")}
+              />
+            )}
+            <MdKeyboardArrowDown
+              className={`text-[18px] ${
+                isClicked && "rotate-180"
+              } duration-300`}
+            />
+          </div>
         </div>
         <div
           className={`${
