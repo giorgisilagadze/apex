@@ -13,7 +13,7 @@ interface Props {
   };
 }
 
-export default async function Gallery({ searchParams }: Props) {
+export default async function Gallery({ searchParams }: any) {
   const type = searchParams.type === "video" ? "video" : "photo";
   const data: GalleryItem[] = await FetchGallery(type);
 
