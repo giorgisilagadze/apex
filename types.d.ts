@@ -221,3 +221,48 @@ interface Maping {
   freeApartmentCount: string;
   id: string;
 }
+
+interface Apartment1 {
+  id: number;
+  oID: number;
+  number: string;
+  area: string;
+  studio: string;
+  summer_area: string;
+  living_space: string;
+  price: string;
+  status: string;
+  sold: string;
+  image: string;
+  img: string;
+  pdf: string;
+  coords: string;
+  position: number;
+  building: string;
+  building_id: number;
+  project: string;
+  project_id: number;
+  floorID: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+
+  // Nullable fields
+  address: string | null;
+  bathroom: string | null;
+  bathroom2: string | null;
+  bedroom: string | null;
+  bedroom2: string | null;
+  bedroom3: string | null;
+  floor: string | null;
+  floor_id: string | null;
+  hall: string | null;
+  livingarea: string | null;
+  maping: string | null;
+  o_id: string | null;
+  otherarea: string | null;
+  price2: string | null;
+  projectID: string | null;
+  ptype: string | null;
+  type: string | null;
+}

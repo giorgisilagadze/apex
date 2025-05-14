@@ -186,7 +186,9 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
             setDimensions({ width, height, naturalWidth, naturalHeight });
           }
         }}
-        className={`w-full h-auto`}
+        className={`w-full ${
+          !isFloor ? (isImageLoaded ? "h-auto" : "aspect-[40/41]") : "h-auto"
+        } `}
       />
       {/* 
       <map name="image-map">

@@ -10,12 +10,12 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { PiBuildingApartmentLight } from "react-icons/pi";
 
 interface Props {
-  item: Floor;
+  item: Apartment1;
   forRender: number;
   setForRender: (forRender: number) => void;
 }
 
-export default function FloorCard({ item, forRender, setForRender }: Props) {
+export default function Aparmtment({ item, forRender, setForRender }: Props) {
   const [isDeletePopUpVis, setIsDeletePopUpVis] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +25,7 @@ export default function FloorCard({ item, forRender, setForRender }: Props) {
     if (!isLoading) {
       setIsLoading(true);
       try {
-        const response = await axiosAdmin.delete(`/floor/${item.id}`);
+        const response = await axiosAdmin.delete(`/apartment/${item.id}`);
         setForRender(forRender + 1);
         setIsDeletePopUpVis(false);
       } catch (err) {
@@ -38,7 +38,7 @@ export default function FloorCard({ item, forRender, setForRender }: Props) {
   return (
     <>
       <div className=" w-full flex flex-col border-x border-b border border-[#eee] mt-4 rounded-[5px]">
-        <div className="w-full p-6 grid grid-cols-4 gap-5 items-center border-b border-[#eee]">
+        <div className="w-full p-6 grid grid-cols-5 gap-5 items-center border-b border-[#eee]">
           <div className="relative">
             <Image
               src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
@@ -48,16 +48,14 @@ export default function FloorCard({ item, forRender, setForRender }: Props) {
               className="rounded-[5px]"
             />
           </div>
-          <p className="text-[14px] font-medium">{item.title}</p>
-          <Link
-            href={`/${locale}/admin/adminPanel/apartments/${item.id}`}
-            className="w-10 h-10 rounded-[5px] flex items-center justify-center bg-blue hover:shadow-dropDown duration-300 cursor-pointer"
-          >
-            <PiBuildingApartmentLight className="text-[20px] text-white" />
-          </Link>
+          <p className="text-[14px] font-medium">{item.number}</p>
+          <p className="text-[14px] font-medium">{item.status}</p>
+          <p className="text-[14px] font-medium">
+            {item.living_space}მ<sup>2</sup>
+          </p>
           <div className="flex items-center gap-3">
             <Link
-              href={`/${locale}/admin/adminPanel/floors/${item.project_id}/${item.id}`}
+              href={`/${locale}/admin/adminPanel/apartments/${item.floor_id}/${item.id}`}
               className="w-10 h-10 rounded-[5px] flex items-center justify-center bg-[#eee] hover:shadow-dropDown duration-300 cursor-pointer"
             >
               <PiPencil className="text-[20px] text-black" />

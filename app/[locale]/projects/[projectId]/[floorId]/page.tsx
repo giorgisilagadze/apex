@@ -15,6 +15,7 @@ export default async function SingleFloor({
   const projectId = (await params).projectId;
 
   const floor = await FetchSingleFloor(floorId);
+  console.log(floor);
 
   return (
     <div className="w-full">
