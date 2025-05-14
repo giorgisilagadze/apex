@@ -20,26 +20,27 @@ export default function Footer() {
     {
       id: 1,
       title: "მთავარი",
+      link: `/${locale}`,
     },
     {
       id: 2,
       title: "ჩვენ შესახებ",
+      link: `/${locale}/about-us`,
     },
     {
       id: 3,
       title: "პროექტები",
+      link: `/${locale}/projects`,
     },
     {
       id: 4,
       title: "სიახლეები",
+      link: `/${locale}/news`,
     },
     {
       id: 5,
       title: "გალერეა",
-    },
-    {
-      id: 6,
-      title: "კონტაქტი",
+      link: `/${locale}/gallery`,
     },
   ];
 
@@ -58,14 +59,17 @@ export default function Footer() {
     {
       id: 1,
       icon: <FaFacebookF className="text-[14px] text-white" />,
+      link: "https://www.facebook.com/apexd.ge",
     },
     {
       id: 2,
       icon: <RiInstagramFill className="text-[15px] text-white" />,
+      link: "https://www.instagram.com/apexd.ge/",
     },
     {
       id: 3,
       icon: <FaLinkedinIn className="text-[14px] text-white" />,
+      link: "https://www.linkedin.com/company/apex-development-%E1%83%90%E1%83%9E%E1%83%94%E1%83%A5%E1%83%A1-%E1%83%93%E1%83%94%E1%83%95%E1%83%94%E1%83%9A%E1%83%9D%E1%83%9E%E1%83%9B%E1%83%94%E1%83%9C%E1%83%A2%E1%83%98/",
     },
   ];
 
@@ -138,12 +142,14 @@ export default function Footer() {
               </h1>
               <div className="flex items-center gap-3">
                 {socIcons.map((item) => (
-                  <div
+                  <a
                     key={item.id}
                     className="w-8 h-8 rounded-[50%] flex items-center justify-center hover:border hover:border-white duration-300 cursor-pointer"
+                    href={item.link}
+                    target="_blank"
                   >
                     {item.icon}
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>

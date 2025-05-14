@@ -24,7 +24,13 @@ export default function ProjectCard1({ item }: Props) {
       <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-blueOpacity to-transparent rounded-[10px]"></div>
       <div className="w-full h-full absolute top-0 left-0 md500:p-7 p-6 flex flex-col justify-between">
         <div className="flex flex-col gap-1">
-          <p className="text-[30px] text-white font-semibold">{item.name}</p>
+          <p className="text-[30px] text-white font-semibold">
+            {locale == "ge"
+              ? item.title
+              : locale == "en"
+              ? item.title_en
+              : item.title_ru}
+          </p>
           <div className="flex items-center gap-2">
             <IoLocationSharp className="text-[16px] text-white" />
             <p className="text-[14px] text-white font-light">{item.address}</p>

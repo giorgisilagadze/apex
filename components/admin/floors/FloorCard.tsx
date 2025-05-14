@@ -10,12 +10,12 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { PiBuildingApartmentLight } from "react-icons/pi";
 
 interface Props {
-  item: Building;
+  item: Floor;
   forRender: number;
   setForRender: (forRender: number) => void;
 }
 
-export default function ProjectCard({ item, forRender, setForRender }: Props) {
+export default function FloorCard({ item, forRender, setForRender }: Props) {
   const [isDeletePopUpVis, setIsDeletePopUpVis] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +25,7 @@ export default function ProjectCard({ item, forRender, setForRender }: Props) {
     if (!isLoading) {
       setIsLoading(true);
       try {
-        const response = await axiosAdmin.delete(`/building/${item.id}`);
+        const response = await axiosAdmin.delete(`/floor/${item.id}`);
         setForRender(forRender + 1);
         setIsDeletePopUpVis(false);
       } catch (err) {
@@ -38,7 +38,7 @@ export default function ProjectCard({ item, forRender, setForRender }: Props) {
   return (
     <>
       <div className=" w-full flex flex-col border-x border-b border border-[#eee] mt-4 rounded-[5px]">
-        <div className="w-full p-6 grid grid-cols-5 gap-5 items-center border-b border-[#eee]">
+        <div className="w-full p-6 grid grid-cols-4 gap-5 items-center border-b border-[#eee]">
           <div className="relative">
             <Image
               src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
@@ -48,8 +48,7 @@ export default function ProjectCard({ item, forRender, setForRender }: Props) {
               className="rounded-[5px]"
             />
           </div>
-          <p className="text-[14px] font-medium">{item.name}</p>
-          <p className="text-[14px] font-medium">{item.status}</p>
+          <p className="text-[14px] font-medium">{item.title}</p>
           <Link
             href={`/${locale}/admin/adminPanel/floors/${item.id}`}
             className="w-10 h-10 rounded-[5px] flex items-center justify-center bg-blue hover:shadow-dropDown duration-300 cursor-pointer"
@@ -58,7 +57,7 @@ export default function ProjectCard({ item, forRender, setForRender }: Props) {
           </Link>
           <div className="flex items-center gap-3">
             <Link
-              href={`/${locale}/admin/adminPanel/projects/${item.id}`}
+              href={`/${locale}/admin/adminPanel/floors/${item.project_id}/${item.id}`}
               className="w-10 h-10 rounded-[5px] flex items-center justify-center bg-[#eee] hover:shadow-dropDown duration-300 cursor-pointer"
             >
               <PiPencil className="text-[20px] text-black" />

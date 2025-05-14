@@ -9,9 +9,17 @@ interface Props {
   title: string;
   subtitle: string;
   isfloor?: boolean;
+  soldPerc: string;
+  donePerc: string;
 }
 
-export default function SaleInfo({ title, subtitle, isfloor }: Props) {
+export default function SaleInfo({
+  title,
+  subtitle,
+  isfloor,
+  soldPerc,
+  donePerc,
+}: Props) {
   return (
     <div
       className={`w-full h-full bg-blue flex lg1110:items-center items-start relative ${
@@ -39,16 +47,22 @@ export default function SaleInfo({ title, subtitle, isfloor }: Props) {
         <div className="w-full flex flex-col gap-2">
           <p className="text-white">გაყიდული ბინები</p>
           <div className="w-full h-8 rounded-[15px] bg-[rgba(237,240,244,1)] relative">
-            <div className="absolute top-0 left-0 h-full w-[30%] rounded-tl-[15px] rounded-bl-[15px] bg-lightBlue flex items-center justify-center">
-              <p className="text-[14px] text-white">30%</p>
+            <div
+              className={`absolute top-0 left-0 h-full rounded-tl-[15px] rounded-bl-[15px] bg-lightBlue flex items-center justify-center`}
+              style={{ width: `${soldPerc}%` }}
+            >
+              <p className="text-[14px] text-white">{soldPerc}%</p>
             </div>
           </div>
         </div>
         <div className="w-full flex flex-col gap-2">
           <p className="text-white">შესრულებული სამუშაოები</p>
           <div className="w-full h-8 rounded-[15px] bg-[rgba(237,240,244,1)] relative">
-            <div className="absolute top-0 left-0 h-full w-[15%] rounded-tl-[15px] rounded-bl-[15px] bg-lightBlue flex items-center justify-center">
-              <p className="text-[14px] text-white">15%</p>
+            <div
+              className="absolute top-0 left-0 h-full  rounded-tl-[15px] rounded-bl-[15px] bg-lightBlue flex items-center justify-center"
+              style={{ width: `${donePerc}%` }}
+            >
+              <p className="text-[14px] text-white">{donePerc}%</p>
             </div>
           </div>
         </div>

@@ -15,25 +15,29 @@ export default function SingleAdminProject() {
   const params = useParams();
 
   const { setToast } = useApexAdmin();
-  const [news, setNews] = useState({
+  const [project, setProject] = useState({
     type: "",
     titleGeo: "",
     titleEng: "",
     titleRus: "",
+    floor: "",
+    map: "",
     descriptionGeo: "",
     descriptionEng: "",
     descriptionRus: "",
   });
-  const [newsUpdate, setNewsUpdate] = useState({
+  const [projectUpdate, setProjectUpdate] = useState({
     type: "",
     titleGeo: "",
     titleEng: "",
     titleRus: "",
+    floor: "",
+    map: "",
     descriptionGeo: "",
     descriptionEng: "",
     descriptionRus: "",
   });
-  const [newsImage, setNewsImage] = useState([]);
+  const [projectImage, setProjectImage] = useState([]);
   const [backImage, setBackImage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isUploadLoading, setIsUploadLoading] = useState(false);
@@ -48,26 +52,30 @@ export default function SingleAdminProject() {
           `/building/${params.adminProjectId}`
         );
         const data = response.data;
-        // setNews({
-        //   ...news,
-        //   type: data.type,
-        //   titleGeo: data.title,
-        //   titleEng: data.title_en,
-        //   titleRus: data.title_ru,
-        //   descriptionGeo: data.text,
-        //   descriptionEng: data.text_en,
-        //   descriptionRus: data.text_ru,
-        // });
-        // setNewsUpdate({
-        //   ...newsUpdate,
-        //   type: data.type,
-        //   titleGeo: data.title,
-        //   titleEng: data.title_en,
-        //   titleRus: data.title_ru,
-        //   descriptionGeo: data.text,
-        //   descriptionEng: data.text_en,
-        //   descriptionRus: data.text_ru,
-        // });
+        setProject({
+          ...project,
+          type: data.status,
+          titleGeo: data.title,
+          titleEng: data.title_en,
+          titleRus: data.title_ru,
+          floor: data.max_floor.toString(),
+          map: data.maping !== null ? data.maping : "",
+          descriptionGeo: data.text !== null ? data.text : "",
+          descriptionEng: data.text_en !== null ? data.text_en : "",
+          descriptionRus: data.text_ru !== null ? data.text_ru : "",
+        });
+        setProjectUpdate({
+          ...projectUpdate,
+          type: data.status,
+          titleGeo: data.title,
+          titleEng: data.title_en,
+          titleRus: data.title_ru,
+          floor: data.max_floor.toString(),
+          map: data.maping !== null ? data.maping : "",
+          descriptionGeo: data.text !== null ? data.text : "",
+          descriptionEng: data.text_en !== null ? data.text_en : "",
+          descriptionRus: data.text_ru !== null ? data.text_ru : "",
+        });
         setBackImage(data.img);
       } catch (err) {
       } finally {
@@ -77,64 +85,68 @@ export default function SingleAdminProject() {
   }, [forRender]);
 
   const handleOnChange = (key: string, value: string) => {
-    setNewsUpdate({ ...newsUpdate, [key]: value });
+    setProjectUpdate({ ...projectUpdate, [key]: value });
   };
 
-  //   const handleUpdate = async (e: any) => {
-  //     e.preventDefault();
-  //     const isinputValuesChange = Object.keys(news).some(
-  //       (key) =>
-  //         newsUpdate[key as keyof typeof newsUpdate] !==
-  //         news[key as keyof typeof news]
-  //     );
-  //     if (isinputValuesChange || newsImage.length !== 0) {
-  //       const hasEmptyField = Object.values(newsUpdate).some(
-  //         (value) => value.trim() === ""
-  //       );
+  const handleUpdate = async (e: any) => {
+    e.preventDefault();
+    const isinputValuesChange = Object.keys(project).some(
+      (key) =>
+        projectUpdate[key as keyof typeof projectUpdate] !==
+        project[key as keyof typeof project]
+    );
+    if (isinputValuesChange || projectImage.length !== 0) {
+      const hasEmptyField = Object.values(projectUpdate).some(
+        (value) => value.trim() === ""
+      );
 
-  //       if (hasEmptyField) {
-  //         return setToast(true, "შეავსეთ ყველა ველი", "error");
-  //       }
-  //       if (!isUploadLoading) {
-  //         setIsUploadLoading(true);
-  //         const form = e.target;
-  //         const formData = new FormData(form);
+      if (hasEmptyField) {
+        return setToast(true, "შეავსეთ ყველა ველი", "error");
+      }
+      if (!isUploadLoading) {
+        setIsUploadLoading(true);
+        const form = e.target;
+        const formData = new FormData(form);
 
-  //         formData.append("type", newsUpdate.type);
-  //         formData.append("title", newsUpdate.titleGeo);
-  //         formData.append("title_en", newsUpdate.titleEng);
-  //         formData.append("title_ru", newsUpdate.titleRus);
-  //         formData.append("text", newsUpdate.descriptionGeo);
-  //         formData.append("text_en", newsUpdate.descriptionEng);
-  //         formData.append("text_ru", newsUpdate.descriptionRus);
-  //         formData.append("id", params.adminNewsId as string);
-  //         try {
-  //           const response = await axiosAdmin.put(
-  //             `/news/${params.adminNewsId}`,
-  //             formData
-  //           );
-  //           setToast(true, "სიახლე წარმატებით განახლდა", "success");
-  //           setNewsImage([]);
-  //           setHasUploaded(true);
-  //           setForRender(forRender + 1);
-  //         } catch (err) {
-  //           setToast(true, "დაფიქსირდა შეცდომა", "error");
-  //         } finally {
-  //           setIsUploadLoading(false);
-  //         }
-  //       }
-  //     }
-  //   };
+        formData.append("status", projectUpdate.type);
+        formData.append("title", projectUpdate.titleGeo);
+        formData.append("title_en", projectUpdate.titleEng);
+        formData.append("title_ru", projectUpdate.titleRus);
+        formData.append("max_floor", projectUpdate.floor);
+        formData.append("maping", projectUpdate.map);
+        formData.append("text", projectUpdate.descriptionGeo);
+        formData.append("text_en", projectUpdate.descriptionEng);
+        formData.append("text_ru", projectUpdate.descriptionRus);
+        formData.append("id", params.adminProjectId as string);
+        try {
+          const response = await axiosAdmin.put(
+            `/building/${params.adminProjectId}`,
+            formData
+          );
+          setToast(true, "პროექტი წარმატებით განახლდა", "success");
+          setProjectImage([]);
+          setHasUploaded(true);
+          setForRender(forRender + 1);
+        } catch (err) {
+          setToast(true, "დაფიქსირდა შეცდომა", "error");
+        } finally {
+          setIsUploadLoading(false);
+        }
+      }
+    }
+  };
 
   useEffect(() => {
-    const hasOneValue = Object.values(newsUpdate).some(
+    const hasOneValue = Object.values(projectUpdate).some(
       (value) => value.trim() !== ""
     );
 
-    if (hasOneValue || newsImage.length != 0) {
+    if (hasOneValue || projectImage.length != 0) {
       setHasUploaded(false);
     }
-  }, [newsUpdate, newsImage]);
+  }, [projectUpdate, projectImage]);
+
+  console.log(projectUpdate);
 
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6 ">
@@ -142,12 +154,12 @@ export default function SingleAdminProject() {
       {!isLoading ? (
         <form
           className="flex flex-col sm:gap-8 gap-6 xl:w-[70%] w-full"
-          //   onSubmit={handleUpdate}
+          onSubmit={handleUpdate}
         >
           <SelectComp
             placeholder={"აირჩიეთ სტატუსი"}
             filterKey={"type"}
-            selectedValues={newsUpdate}
+            selectedValues={projectUpdate}
             title="პროექტის სტატუსი"
             data={["მიმდინარე", "დასრულებული"]}
             onClick={handleOnChange}
@@ -155,28 +167,28 @@ export default function SingleAdminProject() {
           <Input
             placeholder={"სათაური"}
             onChange={handleOnChange}
-            value={newsUpdate.titleGeo}
+            value={projectUpdate.titleGeo}
             title="სათაური ქართულად"
             inputKey="titleGeo"
           />
           <Input
             placeholder={"სათაური"}
             onChange={handleOnChange}
-            value={newsUpdate.titleEng}
+            value={projectUpdate.titleEng}
             title="სათაური ინგლისურად"
             inputKey="titleEng"
           />
           <Input
             placeholder={"სათაური"}
             onChange={handleOnChange}
-            value={newsUpdate.titleRus}
+            value={projectUpdate.titleRus}
             title="სათაური რუსულად"
             inputKey="titleRus"
           />
           <Input
             placeholder={"სართული"}
             onChange={handleOnChange}
-            value={newsUpdate.titleRus}
+            value={projectUpdate.floor}
             title="სართულების რაოდენობა"
             inputKey="floor"
           />
@@ -185,6 +197,8 @@ export default function SingleAdminProject() {
             <textarea
               className="resize-none w-full min-h-[150px] border border-blue bg-white rounded-[10px] outline-none p-3 font-light text-[14px]"
               placeholder="მაპირება"
+              onChange={(e) => handleOnChange("map", e.target.value)}
+              value={projectUpdate.map}
             ></textarea>
           </div>
           <div className="flex flex-col gap-[6px]">
@@ -192,7 +206,7 @@ export default function SingleAdminProject() {
             <TextEditor
               onChange={handleOnChange}
               inputKey={"descriptionGeo"}
-              value={newsUpdate.descriptionGeo}
+              value={projectUpdate.descriptionGeo}
               hasUploaded={hasUploaded}
             />
           </div>
@@ -201,7 +215,7 @@ export default function SingleAdminProject() {
             <TextEditor
               onChange={handleOnChange}
               inputKey={"descriptionEng"}
-              value={newsUpdate.descriptionEng}
+              value={projectUpdate.descriptionEng}
               hasUploaded={hasUploaded}
             />
           </div>
@@ -210,7 +224,7 @@ export default function SingleAdminProject() {
             <TextEditor
               onChange={handleOnChange}
               inputKey={"descriptionRus"}
-              value={newsUpdate.descriptionRus}
+              value={projectUpdate.descriptionRus}
               hasUploaded={hasUploaded}
             />
           </div>
@@ -218,8 +232,8 @@ export default function SingleAdminProject() {
             <p className="text-[14px]">პროექტის ფოტო</p>
             <PhotoUpload
               name="image"
-              image={newsImage}
-              setImage={setNewsImage}
+              image={projectImage}
+              setImage={setProjectImage}
               backImage={backImage}
             />
           </div>

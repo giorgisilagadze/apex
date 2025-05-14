@@ -2,6 +2,7 @@ import SendEmail from "@/components/SendEmail";
 import OtherNewsCard from "@/components/card/OtherNewsCard";
 import { FetchNews } from "@/serverside/FetchNews";
 import { FetchSingleNews } from "@/serverside/FetchSingleNews";
+import { getLocale } from "next-intl/server";
 import Image from "next/legacy/image";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
@@ -14,6 +15,8 @@ export default async function SingleNews({
   const newsId = (await params).newsId;
   const singleNews: NewsItem = await FetchSingleNews(newsId);
   const news: { data: NewsItem[]; total: number } = await FetchNews();
+
+  const locale = await getLocale();
 
   const socIcons = [
     {
@@ -92,9 +95,22 @@ export default async function SingleNews({
               <p className="text-[14px] text-blue">
                 {singleNews.created_at.slice(0, 10).replaceAll("-", ".")}
               </p>
-              <p className="text-[22px] font-bold">{singleNews.title}</p>
+              <p className="text-[22px] font-bold">
+                {locale == "ge"
+                  ? singleNews.title
+                  : locale == "en"
+                  ? singleNews.title_en
+                  : singleNews.text_ru}
+              </p>
               <div
-                dangerouslySetInnerHTML={{ __html: singleNews.text }}
+                dangerouslySetInnerHTML={{
+                  __html:
+                    locale == "ge"
+                      ? singleNews.text
+                      : locale == "en"
+                      ? singleNews.text_en
+                      : singleNews.text_ru,
+                }}
                 className="editor"
               />
             </div>

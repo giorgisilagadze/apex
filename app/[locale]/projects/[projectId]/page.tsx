@@ -6,6 +6,8 @@ import GallerySwiper from "@/components/singleProject/GallerySwiper";
 import MapImage from "@/components/singleProject/MapImage";
 import OtherProjects from "@/components/singleProject/OtherProjects";
 import SaleInfo from "@/components/singleProject/SaleInfo";
+import { FetchSingleProject } from "@/serverside/FetchSingleProject";
+import { getLocale } from "next-intl/server";
 
 import Image from "next/legacy/image";
 
@@ -15,17 +17,32 @@ export default async function SingleProject({
   params: Promise<{ projectId: string }>;
 }) {
   const projectId = (await params).projectId;
+  const project: Building = await FetchSingleProject(projectId);
+  const locale = await getLocale();
+
+  console.log(project);
 
   return (
     <div className="w-full">
       <div className="w-full grid lg1110:grid-cols-5">
         <SaleInfo
-          title="აპექს
-დიდი დიღომი"
-          subtitle="მიმდინარე"
+          title={
+            locale == "ge"
+              ? project.title
+              : locale == "en"
+              ? project.title_en
+              : project.title_ru
+          }
+          subtitle={project.status}
+          soldPerc={project.sold_percent}
+          donePerc={project.finish_percent}
         />
         <div className="w-full lg1110:col-span-3">
-          <MapImage />
+          <MapImage
+            image={project.img}
+            id={projectId}
+            map={project.mapingJson}
+          />
         </div>
       </div>
       <div className="w-full flex flex-col gap-[60px]">
@@ -49,7 +66,7 @@ export default async function SingleProject({
                 პროექტის შესახებ
               </p>
             </div>
-            <h1 className="sm:text-[30px] text-[24px] text-blue">
+            {/* <h1 className="sm:text-[30px] text-[24px] text-blue">
               რატომ აპექს დიდი დიღომი?
             </h1>
             <p className="text-[14px] text-blue">
@@ -62,7 +79,18 @@ export default async function SingleProject({
               შეგახსენებთ, რომ კომპლექსში 'აპექს ნუცუბიძე' ბინები 42,3კვ.მ-დან
               იწყება, ხოლო პროექტში 'აპექს ისანი' ბინები 47კვ.მ-დან შეგიძლიათ
               შეიძინოთ.
-            </p>
+            </p> */}
+            <div
+              dangerouslySetInnerHTML={{
+                __html:
+                  locale == "ge"
+                    ? project.text
+                    : locale == "en"
+                    ? project.text_en
+                    : project.text_ru,
+              }}
+              className="editor text-blue"
+            />
           </div>
         </div>
         <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex flex-col gap-8 items-center">

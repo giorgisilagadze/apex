@@ -26,16 +26,30 @@ interface Apartment {
 
 interface Building {
   id: number;
+  oID: number;
   project_id: number;
   name: string;
-  sort: number | null;
-  status: string;
-  img: string;
-  maping: string | null;
-  created_at: string;
-  updated_at: string;
+  title: string;
+  title_en: string;
+  title_ru: string;
+  address: string | null;
+  address_en: string | null;
+  created_at: string; // ISO timestamp
+  updated_at: string; // ISO timestamp
   deleted_at: string | null;
-  address: string;
+  finish_percent: string; // e.g., "95"
+  sold_percent: string; // e.g., "100"
+  image: string;
+  img: string;
+  google_map: string | null;
+  maping: string | null;
+  mapingJson: Maping[];
+  max_floor: number;
+  sort: number;
+  status: string; // e.g., "დასრულებული"
+  text: string; // HTML string
+  text_en: string; // HTML string
+  text_ru: string;
 }
 
 interface ProjectBuilding {
@@ -133,4 +147,77 @@ interface GalleryItem {
   type: "photo" | "video";
   alt: string | null;
   sort: number | null;
+}
+
+interface Apartment {
+  id: number;
+  o_id: number | null;
+  project_id: number;
+  building_id: number;
+  floor_id: number;
+  status: string | null;
+  address: string | null;
+  area: number | null;
+  bathroom: number | null;
+  bathroom2: number | null;
+  bedroom: number | null;
+  bedroom2: number | null;
+  bedroom3: number | null;
+  building: string | null;
+  coords: string | null;
+  created_at: string;
+  deleted_at: string | null;
+  floor: number | null;
+  floorID: number;
+  hall: number | null;
+  image: string;
+  img: string;
+  living_space: number | null;
+  livingarea: number | null;
+  maping: string | null;
+  number: number | null;
+  oID: number;
+  otherarea: number | null;
+  pdf: string | null;
+  position: number | null;
+  price: number | null;
+  price2: number | null;
+  project: string | null;
+  projectID: number | null;
+  ptype: string | null;
+  sold: string | null;
+  studio: number | null;
+  summer_area: number | null;
+  type: string | null;
+  updated_at: string;
+}
+
+interface Floor {
+  id: number;
+  building_id: number;
+  coords: string;
+  created_at: string;
+  deleted_at: string | null;
+  image: string;
+  img: string;
+  maping: string | null;
+  name: string | null;
+  number: number;
+  oID: number;
+  projectID: number;
+  project_id: number;
+  sold: string | null;
+  sort: number | null;
+  status: string | null;
+  title: string;
+  updated_at: string;
+  apartments: Apartment[];
+}
+
+interface Maping {
+  coords: string;
+  href: string;
+  title: string;
+  freeApartmentCount: string;
+  id: string;
 }
