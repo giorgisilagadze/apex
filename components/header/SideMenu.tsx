@@ -14,6 +14,8 @@ interface Props {
   setIsSideMenuVis: (isSideMenuVis: boolean) => void;
   isLangClicked: boolean;
   setIsLangCLicked: (isLangClicked: boolean) => void;
+  isContactClicked: boolean;
+  setIsContactClicked: (isContactClicked: boolean) => void;
 }
 
 export default function SideMenu({
@@ -21,6 +23,8 @@ export default function SideMenu({
   setIsSideMenuVis,
   isLangClicked,
   setIsLangCLicked,
+  isContactClicked,
+  setIsContactClicked,
 }: Props) {
   const locale = useLocale();
   const [isSearchVis, setIsSearchVis] = useState(false);
@@ -92,6 +96,17 @@ export default function SideMenu({
     },
   ];
 
+  const callPhone = () => {
+    const phoneNumber = "555045555";
+    // Construct the phone call URL
+    const phoneUrl = `tel:${phoneNumber}`;
+
+    // Open the phone dialer
+    if (typeof window !== "undefined") {
+      window.open(phoneUrl, "_self");
+    }
+  };
+
   return (
     <div
       className={`fixed top-0 right-0 w-[100vw] h-[100vh] flex justify-center items-center ${
@@ -140,7 +155,7 @@ export default function SideMenu({
             </Link>
           ))}
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1" onClick={callPhone}>
           <IoMdCall className="text-[18px] " />
           <p className="text-[14px]">+995 555 045 555</p>
         </div>
@@ -150,7 +165,10 @@ export default function SideMenu({
         </div>
         <Button
           title={"დაგვიკავშირდით"}
-          onClick={() => {}}
+          onClick={() => {
+            setIsSideMenuVis(false);
+            setIsContactClicked(true);
+          }}
           width={"w-full"}
           bgColor="bg-white"
           color="text-blue"

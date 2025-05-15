@@ -36,7 +36,7 @@ export default function Filter({ page, isSingleProject }: Props) {
     priceTo: "",
   });
   const [isFilerLoading, setIsFilterLoading] = useState(true);
-  const [aparts, setAparts] = useState<Apartment[]>();
+  const [aparts, setAparts] = useState<Apartment1[]>();
   const [isApartsLoading, setIsApartsLoading] = useState(false);
   const [floor, setFloor] = useState<string>("");
 

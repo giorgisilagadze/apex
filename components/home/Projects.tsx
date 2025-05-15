@@ -9,6 +9,8 @@ import "swiper/css/pagination";
 import Image from "next/legacy/image";
 import ScreenSize from "@/hooks/ScreenSize";
 import { BsArrowDown } from "react-icons/bs";
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 
 interface Props {
   projects: Building[];
@@ -17,33 +19,8 @@ interface Props {
 export default function Projects({ projects }: Props) {
   const dimension = ScreenSize();
 
-  // const projects = [
-  //   {
-  //     id: 1,
-  //     title: "აპექს ნუცუბიძე I, II, III",
-  //     src: "/images/swiper1.jpeg",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "აპექს დიდი დიღომი",
-  //     src: "/images/swiper2.jpeg",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "აპექს ნუცუბიძე ბლოკი IV",
-  //     src: "/images/swiper3.jpeg",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "აპექს დიდი დიღომი",
-  //     src: "/images/swiper3.jpeg",
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "აპექს ნუცუბიძე ბლოკი IV",
-  //     src: "/images/swiper3.jpeg",
-  //   },
-  // ];
+  const locale = useLocale();
+  const route = useRouter();
 
   return (
     <div className="w-full flex flex-col gap-8">
@@ -87,7 +64,10 @@ export default function Projects({ projects }: Props) {
               key={item.id}
               className="w-[600px] lg1350:!h-[600px] lg:!h-[500px] md500:!h-[400px] !h-[330px]"
             >
-              <div className="w-full h-full relative">
+              <div
+                className="w-full h-full relative cursor-pointer"
+                onClick={() => route.push(`/${locale}/projects/${item.id}`)}
+              >
                 <Image
                   src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
                   alt="project-image"

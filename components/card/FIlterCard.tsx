@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 
 interface Props {
-  item: Apartment;
+  item: Apartment1;
   selectedCurr: string;
 }
 
@@ -20,7 +20,8 @@ export default function FilterCard({ item, selectedCurr }: Props) {
         <div className="flex items-center gap-3 w-[246px]">
           <div className="w-[80px] h-[80px] relative">
             <Image
-              src={"/images/apartament.png"}
+              // src={"/images/apartament.png"}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
               alt="apartament"
               layout="fill"
               objectFit="cover"
@@ -50,10 +51,14 @@ export default function FilterCard({ item, selectedCurr }: Props) {
         </div>
         <div className="flex items-center gap-1">
           <h1 className="text-[14px]">ფასი: </h1>
-          <p className="text-[14px]">
+          {/* <p className="text-[14px]">
             {parseInt(
               selectedCurr == "ლარი" ? item.price : item.price2
             ).toFixed(0)}{" "}
+            {selectedCurr == "ლარი" ? "GEL" : "USD"}
+          </p> */}
+          <p className="text-[14px]">
+            {parseInt(item.price).toFixed(0)}{" "}
             {selectedCurr == "ლარი" ? "GEL" : "USD"}
           </p>
         </div>
@@ -77,7 +82,8 @@ export default function FilterCard({ item, selectedCurr }: Props) {
         <div className="flex items-start gap-3 sm:w-[266px] w-full">
           <div className="sm:w-[100px] w-full sm:h-[100px] md600:h-[200px] md500:h-[150px] h-[220px] relative">
             <Image
-              src={"/images/apartament.png"}
+              // src={"/images/apartament.png"}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
               alt="apartament"
               layout="fill"
               objectFit="cover"

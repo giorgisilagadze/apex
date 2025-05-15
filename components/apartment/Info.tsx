@@ -5,34 +5,38 @@ import Button from "../button/Button";
 import { HiDocumentText } from "react-icons/hi2";
 import { SiArchicad } from "react-icons/si";
 
-export default function Info() {
+interface Props {
+  apartment: Apartment1;
+}
+
+export default function Info({ apartment }: Props) {
   const [selectedCurr, setSelectedCurr] = useState("$");
 
   const details = [
     {
       id: 1,
       title: "საერთო ფართი:",
-      value: "36.5კვ.მ",
+      value: `${apartment.area} მ`,
     },
     {
       id: 2,
       title: "საძინებელი:",
-      value: "12.5კვ.მ",
+      value: `${apartment.bedroom} მ`,
     },
     {
       id: 3,
       title: "აივანი",
-      value: "7.3კვ.მ",
+      value: `${apartment.summer_area} მ`,
     },
     {
       id: 4,
       title: "აბაზანა",
-      value: "5.3კვ.მ",
+      value: `${apartment.bathroom} მ`,
     },
     {
       id: 5,
       title: "ჰოლი",
-      value: "4კვ.მ",
+      value: `${apartment.hall} მ`,
     },
   ];
   return (
@@ -41,18 +45,20 @@ export default function Info() {
         <div className="w-full flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <hr className="lg1250:w-[100px] sm:w-10 w-6 h-[1px] border-none bg-black" />
-            <p className="text-[14px]">აპექს დიდი დიღომი</p>
+            <p className="text-[14px]">{apartment.building}</p>
           </div>
           <h1 className="sm:text-[44px] text-[32px] lg1250:px-[100px] sm:px-10 px-6">
-            ბინა #115
+            ბინა #{apartment.number}
           </h1>
         </div>
-        <h1 className="text-[16px] whitespace-nowrap">სართული 11</h1>
+        <h1 className="text-[16px] whitespace-nowrap">
+          სართული {apartment.floor}
+        </h1>
       </div>
       <div className="lg1250:pl-[100px] sm:pl-10 pl-6 flex flex-col gap-5">
         <div className="flex items-center gap-2">
           <h1>
-            57.5{" "}
+            {Number(apartment.area).toFixed(1)}{" "}
             <span>
               მ<sup>2</sup>
             </span>
@@ -68,7 +74,7 @@ export default function Info() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <h1 className="text-[30px]">75.565</h1>
+          <h1 className="text-[30px]">{Number(apartment.price).toFixed(3)}</h1>
           <div className="px-2 py-1 flex items-center gap-2 rounded-[12px] border border-[#eee]">
             <div
               className={`w-8 h-8 rounded-[50%] flex items-center justify-center cursor-pointer ${
@@ -98,7 +104,10 @@ export default function Info() {
               </div>
               <div>
                 <h1 className="text-[14px]">{item.title}</h1>
-                <p className="text-[14px]">{item.value}</p>
+                <p className="text-[14px]">
+                  {item.value}
+                  <sup>2</sup>
+                </p>
               </div>
             </div>
           ))}

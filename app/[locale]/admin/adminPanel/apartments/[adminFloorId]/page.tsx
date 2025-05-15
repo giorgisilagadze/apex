@@ -22,6 +22,7 @@ export default function SingleFloorApartments() {
   const [newApartment, setNewApartment] = useState({
     status: "",
     price: "",
+    price2: "",
     number: "",
     wholeSpace: "",
     livingSpace: "",
@@ -96,6 +97,7 @@ export default function SingleFloorApartments() {
         setNewApartment({
           status: "",
           price: "",
+          price2: "",
           number: "",
           wholeSpace: "",
           livingSpace: "",
@@ -134,6 +136,12 @@ export default function SingleFloorApartments() {
       title: "1მ2 ფასი $",
       inputKey: "price",
       value: newApartment.price,
+    },
+    {
+      id: 14,
+      title: "სრული ფასი $",
+      inputKey: "price2",
+      value: newApartment.price2,
     },
     {
       id: 2,

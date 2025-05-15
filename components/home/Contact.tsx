@@ -9,7 +9,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useApexAdmin from "@/utils/ApexAdmin";
 
-export default function sContact() {
+interface Props {
+  isPopUp?: boolean;
+  setIsContactClicked?: (arg1: boolean) => void;
+}
+
+export default function sContact({ isPopUp, setIsContactClicked }: Props) {
   const { setToast } = useApexAdmin();
   const [projects, setProjects] = useState<Building[]>([]);
   const [values, setValues] = useState({
@@ -61,6 +66,7 @@ export default function sContact() {
         );
         setValues({ name: "", phone: "", email: "", project: "" });
         setIsSubmited(false);
+        setIsContactClicked?.(false);
         setToast(true, "მონაცემები წარმატებით გაიგზავნა", "success");
       } catch {
       } finally {
@@ -72,8 +78,20 @@ export default function sContact() {
   console.log(values);
 
   return (
-    <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 grid lg:grid-cols-2">
-      <div className="w-full lg:h-[500px] md500:h-[400px] h-[350px] relative">
+    <div
+      className={`w-full ${
+        !isPopUp
+          ? "xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6"
+          : ""
+      } grid lg:grid-cols-2`}
+    >
+      <div
+        className={`w-full ${
+          !isPopUp
+            ? "lg:h-[500px] md500:h-[400px] h-[350px]"
+            : "lg:h-[500px] md600:h-[300px] h-[0px]"
+        } relative`}
+      >
         <Image
           src={"/images/contact.jpg"}
           alt="project-image"
@@ -82,7 +100,13 @@ export default function sContact() {
           className="rounded-tl-[10px] lg:rounded-bl-[10px] rounded-tr-[10px] lg:rounded-tr-[0px]"
         />
       </div>
-      <div className="w-full h-full bg-blue lg:rounded-tr-[10px] rounded-bl-[10px] lg:rounded-bl-[0px] rounded-br-[10px] flex justify-center flex-col gap-5 xxl:px-[100px] md500:px-10 px-6 py-10 lg:py-0">
+      <div
+        className={`w-full h-full bg-blue ${
+          !isPopUp
+            ? "lg:rounded-tr-[10px] rounded-bl-[10px] lg:rounded-bl-[0px] rounded-br-[10px]"
+            : "lg:rounded-tr-[10px] rounded-bl-[10px] lg:rounded-bl-[0px] rounded-br-[10px] rounded-tl-[10px] rounded-tr-[10px] md600:rounded-tl-[0px] md600:rounded-tr-[0px]"
+        } flex justify-center flex-col gap-5 xxl:px-[100px] md500:px-10 px-6 py-10 lg:py-0`}
+      >
         <p className="sm:text-[28px] text-[20px] font-bold text-white">
           დაგვიტოვეთ საკონტაქტო
         </p>

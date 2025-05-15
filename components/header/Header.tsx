@@ -13,11 +13,14 @@ import { useLocale } from "next-intl";
 import { CiMenuFries } from "react-icons/ci";
 import SideMenu from "./SideMenu";
 import { usePathname } from "next/navigation";
+import PopUpComp from "../popUp/PopUpComp";
+import Contact from "../home/Contact";
 
 export default function Header() {
   const [hoveredPageId, sethoveredPageId] = useState(0);
   const [isLangClicked, setIsLangCLicked] = useState(false);
   const [isSideMenuVis, setIsSideMenuVis] = useState(false);
+  const [isContactClicked, setIsContactClicked] = useState(false);
 
   const locale = useLocale();
   const pathname = usePathname();
@@ -49,6 +52,18 @@ export default function Header() {
       link: `/${locale}/partners`,
     },
   ];
+
+  const callPhone = () => {
+    const phoneNumber = "555045555";
+    // Construct the phone call URL
+    const phoneUrl = `tel:${phoneNumber}`;
+
+    // Open the phone dialer
+    if (typeof window !== "undefined") {
+      window.open(phoneUrl, "_self");
+    }
+  };
+
   return (
     <>
       {" "}
@@ -80,7 +95,10 @@ export default function Header() {
             ))}
           </div>
           <div className="flex items-center gap-4">
-            <div className="lg1350:flex items-center gap-1 hidden">
+            <div
+              className="lg1350:flex items-center gap-1 hidden cursor-pointer hover:opacity-60 duration-300"
+              onClick={callPhone}
+            >
               <IoMdCall className="text-[18px] text-white" />
               <p className="text-[14px] text-white">+995 555 045 555</p>
             </div>
@@ -98,7 +116,7 @@ export default function Header() {
             <div className="lg1110:block hidden">
               <Button
                 title={"დაგვიკავშირდით"}
-                onClick={() => {}}
+                onClick={() => setIsContactClicked(true)}
                 width={"w-[200px]"}
                 bgColor="bg-white"
                 color="text-blue"
@@ -121,7 +139,16 @@ export default function Header() {
         setIsSideMenuVis={setIsSideMenuVis}
         isLangClicked={isLangClicked}
         setIsLangCLicked={setIsLangCLicked}
+        isContactClicked={isContactClicked}
+        setIsContactClicked={setIsContactClicked}
       />
+      <PopUpComp
+        isPopUpVisible={isContactClicked}
+        setIsPopUpVisible={setIsContactClicked}
+        width={"lg1350:w-[60%] sm:w-[80%] w-[90%]"}
+      >
+        <Contact isPopUp={true} setIsContactClicked={setIsContactClicked} />
+      </PopUpComp>
     </>
   );
 }
