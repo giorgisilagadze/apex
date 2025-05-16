@@ -328,12 +328,12 @@ export default function SingleAdminProject() {
               rounded="rounded-[10px]"
             />
             <Shimmer
-              width="w-[190px]"
+              width="w-[191px]"
               height="h-[170px]"
               rounded="rounded-[10px]"
             />
             <Shimmer
-              width="w-[190px]"
+              width="w-[191px]"
               height="h-[170px]"
               rounded="rounded-[10px]"
             />
