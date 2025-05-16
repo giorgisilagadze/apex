@@ -15,6 +15,7 @@ import SideMenu from "./SideMenu";
 import { usePathname } from "next/navigation";
 import PopUpComp from "../popUp/PopUpComp";
 import Contact from "../home/Contact";
+import { RxCross1 } from "react-icons/rx";
 
 export default function Header() {
   const [hoveredPageId, sethoveredPageId] = useState(0);
@@ -146,8 +147,15 @@ export default function Header() {
         isPopUpVisible={isContactClicked}
         setIsPopUpVisible={setIsContactClicked}
         width={"lg1350:w-[60%] sm:w-[80%] w-[90%]"}
+        bg="bg-trasparent"
       >
-        <Contact isPopUp={true} setIsContactClicked={setIsContactClicked} />
+        <div className="w-full flex flex-col gap-2">
+          <RxCross1
+            className="text-white text-[20px] self-end cursor-pointer hover:opacity-50 duration-300"
+            onClick={() => setIsContactClicked(false)}
+          />
+          <Contact isPopUp={true} setIsContactClicked={setIsContactClicked} />
+        </div>
       </PopUpComp>
     </>
   );

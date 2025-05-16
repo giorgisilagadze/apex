@@ -361,7 +361,7 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
                     }}
                     onMouseMove={() => setHoveredId(item.title)}
                   >
-                    "თავისუფალი
+                    თავისუფალი
                   </p>
                 </Link>
               ) : (

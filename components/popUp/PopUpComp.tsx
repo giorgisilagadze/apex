@@ -7,6 +7,7 @@ interface Props {
   isPopUpVisible: boolean;
   setIsPopUpVisible: (isPopUpVisible: boolean) => void;
   width: string;
+  bg?: string;
 }
 
 export default function PopUpComp({
@@ -14,6 +15,7 @@ export default function PopUpComp({
   setIsPopUpVisible,
   width,
   children,
+  bg,
 }: Props) {
   UseOverflow(isPopUpVisible);
 
@@ -33,7 +35,9 @@ export default function PopUpComp({
           setIsPopUpVisible(false);
         }}
       ></div>
-      <div className={`${width} rounded-[10px] bg-white z-[6]`}>{children}</div>
+      <div className={`${width} rounded-[10px] ${bg ? bg : "bg-white"} z-[6]`}>
+        {children}
+      </div>
     </div>
   );
 }

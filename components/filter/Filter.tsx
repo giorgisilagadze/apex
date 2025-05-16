@@ -303,7 +303,7 @@ export default function Filter({ page, isSingleProject }: Props) {
       setIsApartsLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/apartment?${queryString}`
+          `${process.env.NEXT_PUBLIC_API_URL}/apartment?${queryString}&building_id=${projectId}`
         );
         let data = response.data;
         data = data.sort((a: { price2: number }, b: { price2: number }) =>
@@ -414,7 +414,11 @@ export default function Filter({ page, isSingleProject }: Props) {
         <div className="w-full flex flex-col ">
           {!isFilerLoading ? (
             <div
-              className={`w-full lg:px-12 px-6 py-7 grid lg:grid-cols-6 md600:grid-cols-3 md500:grid-cols-2 gap-4 items-center rounded-bl-[16px] rounded-br-[16px] `}
+              className={`w-full lg:px-12 px-6 py-7 grid ${
+                page == "project" || page == "floor"
+                  ? "lg:grid-cols-6"
+                  : "lg:grid-cols-5"
+              } md600:grid-cols-3 md500:grid-cols-2 gap-4 items-end rounded-bl-[16px] rounded-br-[16px] `}
             >
               {(page == "project" || page == "floor") && (
                 <div className="w-full flex flex-col gap-[6px]">
@@ -432,7 +436,7 @@ export default function Filter({ page, isSingleProject }: Props) {
                   />
                 </div>
               )}
-              {page !== "project" && page !== "floor" ? (
+              {/* {page !== "project" && page !== "floor" ? (
                 <SelectComp
                   title="ბლოკი"
                   placeholder="აირჩიეთ"
@@ -442,6 +446,18 @@ export default function Filter({ page, isSingleProject }: Props) {
                   selectedValues={selectedValues}
                 />
               ) : (
+                <div className="w-full flex flex-col gap-[6px]">
+                  <p className="text-[14px] font-medium">ბლოკი</p>
+                  <Input
+                    placeholder={""}
+                    inputKey=""
+                    onChange={() => {}}
+                    value={selectedValues.building}
+                    readonly={true}
+                  />
+                </div>
+              )} */}
+              {(page == "project" || page == "floor") && (
                 <div className="w-full flex flex-col gap-[6px]">
                   <p className="text-[14px] font-medium">ბლოკი</p>
                   <Input
@@ -510,15 +526,15 @@ export default function Filter({ page, isSingleProject }: Props) {
                   />
                 </div>
               </div>
-              <div className="w-full flex items-center justify-end gap-4 flex-col md500:flex-row z-[1]">
-                {dimension[0] !== 0 && dimension[0] < 500 ? (
+              <div className="w-full flex items-end justify-end gap-4 flex-col md500:flex-row z-[1]">
+                {/* {dimension[0] !== 0 && dimension[0] < 500 ? (
                   <div className="w-full rounded-[16px] bg-[#eee] py-[11px] flex items-center justify-center gap-2">
                     <VscSettings className="text-[28px]" />
                     <p className="text-[14px] font-medium">ფილტრი</p>
                   </div>
                 ) : (
                   <VscSettings className="text-[28px]" />
-                )}
+                )} */}
                 <Button
                   title={"ძებნა"}
                   onClick={() =>
@@ -584,11 +600,11 @@ export default function Filter({ page, isSingleProject }: Props) {
                 </div>
               </div>
               <div className="w-full flex items-center justify-end gap-4 flex-col md500:flex-row">
-                <Shimmer
+                {/* <Shimmer
                   width={"w-full md500:w-[50px]"}
                   height="h-[50px]"
                   rounded="rounded-[16px]"
-                />
+                /> */}
                 <Shimmer
                   width={"md500:w-[110px] w-full"}
                   height="h-[50px]"

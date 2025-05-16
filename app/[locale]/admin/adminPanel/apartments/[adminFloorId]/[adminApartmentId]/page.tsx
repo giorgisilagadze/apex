@@ -174,13 +174,13 @@ export default function SingleAdminApartment() {
   const inputs = [
     {
       id: 1,
-      title: "1მ2 ფასი $",
+      title: "სრული ფასი $",
       inputKey: "price",
       value: apartUpdate.price,
     },
     {
       id: 14,
-      title: "სრული ფასი $",
+      title: "1მ2 ფასი $",
       inputKey: "price2",
       value: apartUpdate.price2,
     },

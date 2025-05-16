@@ -4,9 +4,11 @@ import { FaPause, FaPlay } from "react-icons/fa";
 export default function VideoItem({
   item,
   className,
+  isLocal,
 }: {
   item: any;
   className: string;
+  isLocal?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -38,7 +40,11 @@ export default function VideoItem({
         playsInline
       >
         <source
-          src={`${process.env.NEXT_PUBLIC_API_URL}/${item.url}`}
+          src={
+            !isLocal
+              ? `${process.env.NEXT_PUBLIC_API_URL}/${item.url}`
+              : `${item.url}`
+          }
           type="video/mp4"
         />
       </video>

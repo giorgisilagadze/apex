@@ -78,6 +78,7 @@ export default function SingleFloorApartments() {
 
       formData.append("status", newApartment.status);
       formData.append("price", newApartment.price);
+      formData.append("price2", newApartment.price2);
       formData.append("number", newApartment.number);
       formData.append("area", newApartment.wholeSpace);
       formData.append("living_space", newApartment.livingSpace);
@@ -133,13 +134,13 @@ export default function SingleFloorApartments() {
   const inputs = [
     {
       id: 1,
-      title: "1მ2 ფასი $",
+      title: "სრული ფასი $",
       inputKey: "price",
       value: newApartment.price,
     },
     {
       id: 14,
-      title: "სრული ფასი $",
+      title: "1მ2 ფასი $",
       inputKey: "price2",
       value: newApartment.price2,
     },

@@ -3,6 +3,7 @@
 import Image from "next/legacy/image";
 import Input from "../input/Input";
 import { IoMdPlay } from "react-icons/io";
+import VideoItem from "../gallery/VideoItem";
 
 export default function ROICalculator() {
   return (
@@ -57,7 +58,7 @@ export default function ROICalculator() {
           </div>
         </div>
         <div className="w-full lg:h-full sm:h-[50%] h-[300px] relative flex items-center justify-center">
-          <Image
+          {/* <Image
             src={"/images/single-project.jpeg"}
             alt="project"
             layout="fill"
@@ -66,7 +67,12 @@ export default function ROICalculator() {
           />
           <div className="w-[70px] h-[70px] rounded-[50%] bg-white flex items-center justify-center z-[1]">
             <IoMdPlay className="text-[24px] ml-1" />
-          </div>
+          </div> */}
+          <VideoItem
+            className="w-full h-full"
+            item={{ url: "/images/video1.mp4", id: 1 }}
+            isLocal={true}
+          />
         </div>
       </div>
     </div>

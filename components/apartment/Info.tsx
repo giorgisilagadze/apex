@@ -74,7 +74,7 @@ export default function Info({ apartment }: Props) {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <h1 className="text-[30px]">{Number(apartment.price).toFixed(3)}</h1>
+          <h1 className="text-[30px]">{Number(apartment.price).toFixed(0)}</h1>
           <div className="px-2 py-1 flex items-center gap-2 rounded-[12px] border border-[#eee]">
             <div
               className={`w-8 h-8 rounded-[50%] flex items-center justify-center cursor-pointer ${
