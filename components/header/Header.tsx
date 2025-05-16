@@ -69,7 +69,11 @@ export default function Header() {
     <>
       {" "}
       {!pathname.includes(`/${locale}/admin`) && (
-        <header className="w-full flex items-center justify-between lg1110:px-[60px] px-6 py-[24px] absolute z-10 bg-transparent">
+        <header
+          className={`w-full flex items-center justify-between lg1110:px-[60px] px-6 py-[24px] absolute ${
+            isContactClicked ? "z-[1]" : "z-10"
+          } z-10 bg-transparent`}
+        >
           <Link href={`/${locale}`} className="cursor-pointer">
             <Image src={"/images/logo.png"} alt="logo" width={50} height={60} />
           </Link>
@@ -103,10 +107,10 @@ export default function Header() {
               <IoMdCall className="text-[18px] text-white" />
               <p className="text-[14px] text-white">+995 555 045 555</p>
             </div>
-            <div className="lg1110:flex items-center gap-1 hidden">
+            {/* <div className="lg1110:flex items-center gap-1 hidden">
               <BsCameraVideo className="text-[16px] text-white" />
               <p className="text-[14px] text-white font-light">ვიდეო ზარი</p>
-            </div>
+            </div> */}
             <div className="hidden lg1110:block">
               <Language
                 isLangClicked={isLangClicked}

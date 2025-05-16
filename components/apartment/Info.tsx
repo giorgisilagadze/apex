@@ -16,7 +16,7 @@ export default function Info({ apartment }: Props) {
     {
       id: 1,
       title: "საერთო ფართი:",
-      value: `${apartment.area} მ`,
+      value: `${parseInt(apartment.area).toFixed(0)} მ`,
     },
     {
       id: 2,
@@ -58,7 +58,7 @@ export default function Info({ apartment }: Props) {
       <div className="lg1250:pl-[100px] sm:pl-10 pl-6 flex flex-col gap-5">
         <div className="flex items-center gap-2">
           <h1>
-            {Number(apartment.area).toFixed(1)}{" "}
+            {Number(apartment.area).toFixed(0)}{" "}
             <span>
               მ<sup>2</sup>
             </span>

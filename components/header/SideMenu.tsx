@@ -159,10 +159,10 @@ export default function SideMenu({
           <IoMdCall className="text-[18px] " />
           <p className="text-[14px]">+995 555 045 555</p>
         </div>
-        <div className="flex items-center gap-1">
+        {/* <div className="flex items-center gap-1">
           <BsCameraVideo className="text-[16px]" />
           <p className="text-[14px] font-light">ვიდეო ზარი</p>
-        </div>
+        </div> */}
         <Button
           title={"დაგვიკავშირდით"}
           onClick={() => {

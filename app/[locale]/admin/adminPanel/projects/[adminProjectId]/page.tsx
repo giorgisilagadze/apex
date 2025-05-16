@@ -39,6 +39,8 @@ export default function SingleAdminProject() {
   });
   const [projectImage, setProjectImage] = useState([]);
   const [backImage, setBackImage] = useState("");
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [backGalleryImages, setBackGalleryImages] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isUploadLoading, setIsUploadLoading] = useState(false);
   const [hasUploaded, setHasUploaded] = useState(false);
@@ -95,7 +97,11 @@ export default function SingleAdminProject() {
         projectUpdate[key as keyof typeof projectUpdate] !==
         project[key as keyof typeof project]
     );
-    if (isinputValuesChange || projectImage.length !== 0) {
+    if (
+      isinputValuesChange ||
+      projectImage.length !== 0 ||
+      galleryImages.length !== 0
+    ) {
       const hasEmptyField = Object.values(projectUpdate).some(
         (value) => value.trim() === ""
       );
@@ -235,6 +241,15 @@ export default function SingleAdminProject() {
               image={projectImage}
               setImage={setProjectImage}
               backImage={backImage}
+            />
+          </div>
+          <div className="flex flex-col gap-[6px]">
+            <p className="text-[14px]">პროექტის გალერია</p>
+            <PhotoUpload
+              name="galery"
+              image={galleryImages}
+              setImage={setGalleryImages}
+              isMultiply={true}
             />
           </div>
           <div className="w-full flex justify-end">

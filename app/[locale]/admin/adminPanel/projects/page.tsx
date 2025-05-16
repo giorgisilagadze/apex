@@ -31,12 +31,12 @@ export default function Projects() {
         <h1 className="sm:text-[28px] text-[20px] text-mainColor self-start">
           პროექტები
         </h1>
-        <Button
+        {/* <Button
           title="პროექტის დამატება"
           onClick={() => route.push(`/${locale}/admin/adminPanel/add-news`)}
           width={"w-[200px]"}
           bgColor="bg-blue"
-        />
+        /> */}
       </div>
 
       <div className="w-full overflow-x-auto topFilter">
@@ -61,7 +61,7 @@ export default function Projects() {
             ) : (
               <div className="w-full h-[200px] flex items-center justify-center flex-col gap-3 text-[14px] border border-[#eee] mt-5">
                 <CiSearch className="text-[24px]" />
-                <p>სიახლეები არ მოიძებნა</p>
+                <p>პროექტები არ მოიძებნა</p>
               </div>
             )
           ) : (

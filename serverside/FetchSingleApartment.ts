@@ -1,8 +1,11 @@
 export async function FetchSingleApartment(id: string) {
   try {
-    const res = await fetch(`https://apex.artspace.support/apartment/${id}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `https://apex.artspace.support/apartment/${id}?relation=1`,
+      {
+        cache: "no-store",
+      }
+    );
     if (!res.ok) {
       throw new Error("Network response was not ok");
     }

@@ -26,10 +26,21 @@ export default function PhotoUpload({
   };
 
   const handleMultipleFilesChange = (event: any) => {
-    let tmpImageList: any = [];
+    let tmpImageList: any = isMultiply ? [...image] : [];
     for (let i = 0; i < event.target.files.length; i++) {
       const file = event.target.files[i];
-      tmpImageList = [{ file, id: Date.now() }];
+      if (isMultiply) {
+        const isDuplicate = tmpImageList.some(
+          (photo: any) => photo.file.name === file.name
+        );
+
+        if (!isDuplicate) {
+          tmpImageList.push({ file, id: Date.now() + i });
+        }
+      } else {
+        // Ensure the file is wrapped in an object to maintain consistency
+        tmpImageList = [{ file, id: Date.now() }];
+      }
     }
     setImage(tmpImageList);
   };
@@ -38,6 +49,8 @@ export default function PhotoUpload({
     const newPhotoes = image.filter((item: any) => item.id !== id);
     setImage(newPhotoes);
   };
+
+  console.log(image);
 
   return (
     <div className="w-full flex flex-col gap-5">
