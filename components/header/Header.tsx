@@ -76,7 +76,7 @@ export default function Header() {
           } z-10 bg-transparent`}
         >
           <Link href={`/${locale}`} className="cursor-pointer">
-            <Image src={"/images/logo.png"} alt="logo" width={50} height={60} />
+            <Image src={"/images/logo.png"} alt="logo" width={60} height={60} />
           </Link>
           <div className="items-center gap-7 hidden lg1110:flex">
             {nav.map((item) => (

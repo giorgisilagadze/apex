@@ -157,6 +157,7 @@ export default function Footer() {
                     className="w-8 h-8 rounded-[50%] flex items-center justify-center hover:border hover:border-white duration-300 cursor-pointer"
                     href={item.link}
                     target="_blank"
+                    aria-label="social icons"
                   >
                     {item.icon}
                   </a>
@@ -165,7 +166,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="w-full py-4 flex items-center justify-center border-t border-[rgba(97,94,94,1)]">
-            <p className="text-grey text-[14px]">
+            <p className="text-white text-[14px]">
               © {currentYear} Apex Development. All rights reserved.
             </p>
           </div>
