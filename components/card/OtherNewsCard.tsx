@@ -1,4 +1,4 @@
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import Link from "next/link";
 
@@ -24,7 +24,13 @@ export default function OtherNewsCard({ item }: Props) {
         />
       </div>
       <div className="flex flex-col gap-1 sm:max-w-[180px] max-w-[70%]">
-        <p className="text-[14px] font-light line-clamp-3">{item.title}</p>
+        <p className="text-[14px] font-light line-clamp-3">
+          {locale == "ge"
+            ? item.title
+            : locale == "en"
+            ? item.title_en
+            : item.title_ru}
+        </p>
         <p className="text-[14px] text-blue">
           {" "}
           {item.created_at.slice(0, 10).replaceAll("-", ".")}

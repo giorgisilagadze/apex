@@ -7,7 +7,7 @@ import MapImage from "@/components/singleProject/MapImage";
 import OtherProjects from "@/components/singleProject/OtherProjects";
 import SaleInfo from "@/components/singleProject/SaleInfo";
 import { FetchSingleProject } from "@/serverside/FetchSingleProject";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import Image from "next/legacy/image";
 
@@ -19,8 +19,7 @@ export default async function SingleProject({
   const projectId = (await params).projectId;
   const project: Building = await FetchSingleProject(projectId);
   const locale = await getLocale();
-
-  console.log(project);
+  const t = await getTranslations("SingleProject");
 
   return (
     <div className="w-full">
@@ -33,7 +32,7 @@ export default async function SingleProject({
               ? project.title_en
               : project.title_ru
           }
-          subtitle={project.status}
+          subtitle={t(project.status)}
           soldPerc={project.sold_percent}
           donePerc={project.finish_percent}
         />
@@ -62,9 +61,7 @@ export default async function SingleProject({
           <div className="sm:p-[60px] p-10 sm:max-w-[550px] max-w-[450px] flex flex-col gap-4 bg-[rgba(237,240,244,1)] lg:ml-[-100px] md600:ml-[-200px] md500:ml-[-300px] z-[1] md500:rounded-[10px]">
             <div className="flex items-center gap-3">
               <div className="w-[50px] h-[1px] bg-blue"></div>
-              <p className="text-[14px] text-blue font-light">
-                პროექტის შესახებ
-              </p>
+              <p className="text-[14px] text-blue font-light">{t("about")}</p>
             </div>
             {/* <h1 className="sm:text-[30px] text-[24px] text-blue">
               რატომ აპექს დიდი დიღომი?
@@ -94,7 +91,7 @@ export default async function SingleProject({
           </div>
         </div>
         <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex flex-col gap-8 items-center">
-          <h1 className="sm:text-[30px] text-[24px]">პროექტის გალერეა</h1>
+          <h1 className="sm:text-[30px] text-[24px]">{t("projectGallery")}</h1>
           <GallerySwiper />
         </div>
         <div className="mt-[60px]">{/* <OtherProjects /> */}</div>

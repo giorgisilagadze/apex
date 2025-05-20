@@ -78,8 +78,6 @@ export default function AddPartner() {
     }
   }, [partner, partnerImage]);
 
-  console.log(partner);
-
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6 ">
       <h1 className="sm:text-[28px] text-[20px] text-mainColor">

@@ -4,10 +4,11 @@ import { BsArrowDown } from "react-icons/bs";
 import Button from "../button/Button";
 import { HiDocumentText } from "react-icons/hi2";
 import { SiArchicad } from "react-icons/si";
+import { useTranslations } from "next-intl";
 
 interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   isfloor?: boolean;
   soldPerc: string;
   donePerc: string;
@@ -20,6 +21,7 @@ export default function SaleInfo({
   soldPerc,
   donePerc,
 }: Props) {
+  const t = useTranslations("SingleProject");
   return (
     <div
       className={`w-full h-full bg-blue flex lg1110:items-center items-start relative ${
@@ -29,10 +31,12 @@ export default function SaleInfo({
       }`}
     >
       <div className="w-full flex flex-col xl:gap-6 gap-4">
-        <div className="flex items-center gap-2">
-          <hr className="xl:w-[100px] lg1110:w-[60px] w-6 h-[1px] border-none bg-white" />
-          <p className="text-[14px] text-white">{subtitle}</p>
-        </div>
+        {!isfloor && (
+          <div className="flex items-center gap-2">
+            <hr className="xl:w-[100px] lg1110:w-[60px] w-6 h-[1px] border-none bg-white" />
+            <p className="text-[14px] text-white">{subtitle}</p>
+          </div>
+        )}
         <h1 className="xl:text-[50px] text-[42px] text-white xl:px-[100px] lg1110:px-[60px] px-6">
           {title}
         </h1>
@@ -45,7 +49,7 @@ export default function SaleInfo({
         }`}
       >
         <div className="w-full flex flex-col gap-2">
-          <p className="text-white">გაყიდული ბინები</p>
+          <p className="text-white">{t("sold")}</p>
           <div className="w-full h-8 rounded-[15px] bg-[rgba(237,240,244,1)] relative">
             <div
               className={`absolute top-0 left-0 h-full rounded-tl-[15px] rounded-bl-[15px] bg-lightBlue flex items-center justify-center`}
@@ -56,7 +60,7 @@ export default function SaleInfo({
           </div>
         </div>
         <div className="w-full flex flex-col gap-2">
-          <p className="text-white">შესრულებული სამუშაოები</p>
+          <p className="text-white">{t("work")}</p>
           <div className="w-full h-8 rounded-[15px] bg-[rgba(237,240,244,1)] relative">
             <div
               className="absolute top-0 left-0 h-full  rounded-tl-[15px] rounded-bl-[15px] bg-lightBlue flex items-center justify-center"
@@ -68,7 +72,7 @@ export default function SaleInfo({
         </div>
         <div className="w-full flex items-center justify-between mt-8 flex-col xl1680:flex-row gap-5">
           <Button
-            title={"პრეზენტაციის გადმოწერა"}
+            title={t("download")}
             onClick={() => {}}
             width={"xl1680:w-[240px] w-full"}
             bgColor="bg-white"
@@ -89,9 +93,9 @@ export default function SaleInfo({
         </div>
       </div>
       {!isfloor && (
-        <div className="absolute left-[50%] translate-x-[-50%] xl:bottom-[40px] bottom-6 z-[3] flex flex-col gap-4 bounce">
+        <div className="absolute left-[50%] translate-x-[-50%] xl:bottom-[40px] bottom-6 z-[3] flex flex-col items-center gap-4 bounce">
           <p className="xl:text-[14px] text-[12px] text-white font-extralight hidden lg1350:block">
-            Scroll
+            {t("scroll")}
           </p>
           <div className="flex items-center justify-center xl:w-[32px] xl:h-[32px] w-5 h-5 rounded-[50%] border border-white">
             <BsArrowDown className="text-white xl:mt-[-26px] mt-[-20px] xl:text-[26px] text-[20px]" />

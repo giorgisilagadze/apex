@@ -1,4 +1,5 @@
 import useClickOutside from "@/hooks/useClickOutside";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
@@ -24,6 +25,7 @@ export default function SelectComp1({
   const selectRef = useRef(null);
 
   useClickOutside(selectRef, () => setIsClicked(false));
+  const t = useTranslations("SingleApartmnet");
 
   return (
     <div className="w-full flex flex-col gap-[6px]">
@@ -40,7 +42,7 @@ export default function SelectComp1({
           onClick={() => setIsClicked(!isClicked)}
         >
           <p className="text-[14px] font-light whitespace-nowrap truncate">
-            {value ? value : placeholder}
+            {value ? t(value) : placeholder}
           </p>
           <div className="flex items-center gap-2">
             {value && (
@@ -72,7 +74,7 @@ export default function SelectComp1({
                 setIsClicked(false);
               }}
             >
-              {item}
+              {t(item)}
             </div>
           ))}
         </div>

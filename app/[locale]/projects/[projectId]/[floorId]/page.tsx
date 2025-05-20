@@ -4,6 +4,7 @@ import Contact from "@/components/home/Contact";
 import MapImage from "@/components/singleProject/MapImage";
 import SaleInfo from "@/components/singleProject/SaleInfo";
 import { FetchSingleFloor } from "@/serverside/FetchSingleFloor";
+import { getTranslations } from "next-intl/server";
 import Image from "next/legacy/image";
 
 export default async function SingleFloor({
@@ -15,17 +16,16 @@ export default async function SingleFloor({
   const projectId = (await params).projectId;
 
   const floor = await FetchSingleFloor(floorId);
-  console.log(floor);
+  const t = await getTranslations("SingleApartmnet");
 
   return (
     <div className="w-full">
       <div className="w-full">
         <SaleInfo
-          title={`სართული ${floor.title}`}
-          subtitle="აპექს დიდი დიღომი"
+          title={`${t("floor")} ${floor.title}`}
           isfloor={true}
           donePerc="70"
-          soldPerc="20"
+          soldPerc={floor.soldProcent}
         />
         <div className="w-full py-[60px] xl1600:px-[240px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
           <div className="w-full">

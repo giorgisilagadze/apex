@@ -1,6 +1,7 @@
 "use client";
 
 import useClickOutside from "@/hooks/useClickOutside";
+import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
@@ -22,6 +23,8 @@ export default function SortSelect({
 
   useClickOutside(divRef, () => setIsClicked(false));
 
+  const t = useTranslations("Filter");
+
   return (
     <div className="relative" ref={divRef}>
       <div
@@ -29,7 +32,7 @@ export default function SortSelect({
         onClick={() => setIsClicked(!isClicked)}
       >
         <h1 className={`text-[14px] text-blue`}>{title}</h1>
-        <p className="text-[14px] text-blue">{selected}</p>
+        <p className="text-[14px] text-blue">{t(selected)}</p>
         <MdKeyboardArrowDown
           className={`mt-[-2px] text-blue ${
             isClicked && "rotate-180"
@@ -52,7 +55,7 @@ export default function SortSelect({
               setIsClicked(false);
             }}
           >
-            <p className="text-[14px]">{item.value}</p>
+            <p className="text-[14px]">{t(item.value)}</p>
           </div>
         ))}
       </div>

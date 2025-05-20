@@ -3,7 +3,7 @@ import Button from "../button/Button";
 
 import { IoEye } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Props {
   item: Apartment1;
@@ -13,6 +13,8 @@ interface Props {
 export default function FilterCard({ item, selectedCurr }: Props) {
   const route = useRouter();
   const locale = useLocale();
+  const t = useTranslations("Filter.card");
+  const f = useTranslations("Filter");
 
   return (
     <>
@@ -28,29 +30,31 @@ export default function FilterCard({ item, selectedCurr }: Props) {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <h1 className="text-[14px]">{item.type}</h1>
+            <h1 className="text-[14px]">{f(item.type)}</h1>
             <p className="text-[14px]">#{item.id}</p>
             <p className="text-[14px]">
-              {parseInt(item.area).toFixed(0)}მ<sup>2</sup>
+              {parseInt(item.area).toFixed(0)}
+              {t("area")}
+              <sup>2</sup>
             </p>
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-1">
-            <h1 className="text-[14px]">ბინის ID: </h1>
+            <h1 className="text-[14px]">ID: </h1>
             <p className="text-[14px]">{item.id}</p>
           </div>
           <div className="flex items-center gap-1">
-            <h1 className="text-[14px]">სართული: </h1>
+            <h1 className="text-[14px]">{t("floor")}: </h1>
             <p className="text-[14px]">{item.floor}</p>
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <h1 className="text-[14px]">სტატუსი: </h1>
-          <p className="text-[14px]">{item.status}</p>
+          <h1 className="text-[14px]">{t("status")}: </h1>
+          <p className="text-[14px]">{t(item.status)}</p>
         </div>
         <div className="flex items-center gap-1">
-          <h1 className="text-[14px]">ფასი: </h1>
+          <h1 className="text-[14px]">{t("price")}: </h1>
           {/* <p className="text-[14px]">
             {parseInt(
               selectedCurr == "ლარი" ? item.price : item.price2
@@ -59,12 +63,13 @@ export default function FilterCard({ item, selectedCurr }: Props) {
           </p> */}
           <p className="text-[14px]">
             {parseInt(item.price).toFixed(0)}{" "}
-            {selectedCurr == "ლარი" ? "GEL" : "USD"}
+            {/* {selectedCurr == "ლარი" ? "GEL" : "USD"} */}
+            USD
           </p>
         </div>
         <div className="flex self-center ">
           <Button
-            title="ბინის ნახვა"
+            title={t("see")}
             bgColor="bg-blue"
             color="text-white"
             icon={IoEye}
@@ -90,40 +95,44 @@ export default function FilterCard({ item, selectedCurr }: Props) {
             />
           </div>
           <div className="sm:flex flex-col gap-3 hidden">
-            <h1 className="text-[14px]">{item.type}</h1>
+            <h1 className="text-[14px]">{f(item.type)}</h1>
             <p className="text-[14px]">#{item.id}</p>
             <p className="text-[14px]">
-              {parseInt(item.area).toFixed(0)}მ<sup>2</sup>
+              {parseInt(item.area).toFixed(0)}
+              {t("area")}
+              <sup>2</sup>
             </p>
           </div>
         </div>
         <div className="flex flex-col gap-3">
           <div className="sm:hidden items-center gap-3 flex">
-            <h1 className="text-[14px]">{item.type}</h1>
+            <h1 className="text-[14px]">{f(item.type)}</h1>
             <p className="text-[14px]">#{item.id}</p>
             <p className="text-[14px]">
-              {parseInt(item.area).toFixed(0)}მ<sup>2</sup>
+              {parseInt(item.area).toFixed(0)}
+              {t("area")}
+              <sup>2</sup>
             </p>
           </div>
           <div className="flex items-center gap-1">
-            <h1 className="text-[14px]">ბინის ID: </h1>
+            <h1 className="text-[14px]">ID: </h1>
             <p className="text-[14px]">{item.id}</p>
           </div>
           <div className="flex items-center gap-1">
-            <h1 className="text-[14px]">სართული: </h1>
+            <h1 className="text-[14px]">{t("floor")}: </h1>
             <p className="text-[14px]">{item.floor}</p>
           </div>
           <div className="flex items-center gap-1">
-            <h1 className="text-[14px]">სტატუსი: </h1>
-            <p className="text-[14px]">{item.status}</p>
+            <h1 className="text-[14px]">{t("status")}: </h1>
+            <p className="text-[14px]">{t(item.status)}</p>
           </div>
           <div className="flex items-center gap-1">
-            <h1 className="text-[14px]">ფასი: </h1>
+            <h1 className="text-[14px]">{t("price")}: </h1>
             <p className="text-[14px]">{parseInt(item.price).toFixed(0)}GEL</p>
           </div>
           <div className="sm:hidden self-start flex w-full">
             <Button
-              title="ბინის ნახვა"
+              title={t("see")}
               bgColor="bg-blue"
               color="text-white"
               icon={IoEye}
@@ -139,7 +148,7 @@ export default function FilterCard({ item, selectedCurr }: Props) {
         </div>
         <div className="sm:flex self-end hidden">
           <Button
-            title="ბინის ნახვა"
+            title={t("see")}
             bgColor="bg-blue"
             color="text-white"
             icon={IoEye}

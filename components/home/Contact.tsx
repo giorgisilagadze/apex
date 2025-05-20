@@ -8,6 +8,7 @@ import { BsArrowDown } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useApexAdmin from "@/utils/ApexAdmin";
+import { useTranslations } from "next-intl";
 
 interface Props {
   isPopUp?: boolean;
@@ -25,6 +26,9 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
+
+  const t = useTranslations("LeaveContact");
+  const f = useTranslations("Filter");
 
   useEffect(() => {
     (async () => {
@@ -67,15 +71,13 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
         setValues({ name: "", phone: "", email: "", project: "" });
         setIsSubmited(false);
         setIsContactClicked?.(false);
-        setToast(true, "მონაცემები წარმატებით გაიგზავნა", "success");
+        setToast(true, t("success"), "success");
       } catch {
       } finally {
         setIsLoading(false);
       }
     }
   };
-
-  console.log(values);
 
   return (
     <div
@@ -108,15 +110,13 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
         } flex justify-center flex-col gap-5 xxl:px-[100px] md500:px-10 px-6 py-10 lg:py-0`}
       >
         <p className="sm:text-[28px] text-[20px] font-bold text-white">
-          დაგვიტოვეთ საკონტაქტო
+          {t("title")}
         </p>
-        <p className="text-[14px] text-white font-light">
-          ჩვენი მენეჯერი დაგიკავშირდებათ 15 წუთის განმავლობაში
-        </p>
+        <p className="text-[14px] text-white font-light">{t("subtitle")}</p>
         <div className="w-full grid md500:grid-cols-2 gap-5">
           <Input
-            placeholder={"მაგ. დავითი"}
-            title="სახელი და გვარი"
+            placeholder={t("namePlaceholder")}
+            title={t("name")}
             color={isSubmited && !values.name ? "text-[red]" : "text-white"}
             onChange={handleOnChange}
             value={values["name"]}
@@ -124,8 +124,8 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
           />
 
           <Input
-            placeholder={"+995"}
-            title="ტელეფონის ნომერი"
+            placeholder={t("phonePlaceholder")}
+            title={t("phone")}
             color={isSubmited && !values.phone ? "text-[red]" : "text-white"}
             onChange={handleOnChange}
             value={values["phone"]}
@@ -134,8 +134,8 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
           />
 
           <Input
-            placeholder={"Example@apexd.ge"}
-            title="ელექტრონული ფოსტა"
+            placeholder={t("emailPlaceholder")}
+            title={t("email")}
             color={isSubmited && !values.email ? "text-[red]" : "text-white"}
             onChange={handleOnChange}
             value={values["email"]}
@@ -143,8 +143,8 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
           />
 
           <SelectComp
-            placeholder={"აირჩიეთ"}
-            title="პროექტები"
+            placeholder={t("choose")}
+            title={t("projects")}
             color={isSubmited && !values.project ? "text-[red]" : "text-white"}
             filterKey={"project"}
             selectedValues={values}
@@ -153,7 +153,7 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
           />
         </div>
         <Button
-          title={"გაგზავნა"}
+          title={t("send")}
           onClick={handleUpload}
           width={"w-full"}
           color="text-white"

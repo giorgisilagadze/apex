@@ -7,6 +7,7 @@ import VideoItem from "../gallery/VideoItem";
 import SelectComp from "../input/SelectComp";
 import { useEffect, useState } from "react";
 import SelectComp1 from "../input/SelectComp1";
+import { useTranslations } from "next-intl";
 
 interface Props {
   apartment: Apartment1;
@@ -15,6 +16,9 @@ interface Props {
 export default function ROICalculator({ apartment }: Props) {
   const [selectedType, setSelectedType] = useState("სრული");
   const [roi, setRoi] = useState<number>();
+
+  const t = useTranslations("SingleApartmnet");
+  const f = useTranslations("Filter");
 
   useEffect(() => {
     if (selectedType) {
@@ -42,55 +46,53 @@ export default function ROICalculator({ apartment }: Props) {
     }
   }, [selectedType]);
 
-  console.log(parseInt(Number(apartment.area).toFixed(0)));
-
   return (
     <div className="w-full shadow-dropDown relative">
       <div className="w-full flex items-center justify-center h-[68px] bg-blue rounded-tl-[15px] rounded-tr-[15px]">
-        <p className="text-white">ROI კალკულატორი</p>
+        <p className="text-white">{t("roi")}</p>
       </div>
       <div className="sm:p-10 p-6 grid lg:grid-cols-3 sm:grid-cols-2 gap-14 bg-white">
         <div className="w-full lg:col-span-2 grid lg:grid-cols-2 gap-5">
           <Input
             placeholder={""}
-            title="პროექტი"
+            title={t("project")}
             bgColor="bg-[rgba(242,242,242,1)]"
             onChange={() => {}}
             value={apartment.project}
             readonly={true}
           />
           <Input
-            placeholder={"სტუდიო"}
-            title="აპარტამენტის ტიპი:"
+            placeholder={""}
+            title={t("projectType")}
             bgColor="bg-[rgba(242,242,242,1)]"
             onChange={() => {}}
-            value={apartment.type as string}
+            value={f(apartment.type) as string}
             readonly={true}
           />
           <SelectComp1
-            placeholder={"აირჩიეთ"}
+            placeholder={t("choose")}
             value={selectedType}
             setValue={setSelectedType}
             data={["სრული", "ნახევარი"]}
-            title="გადახდის ტიპი"
+            title={t("payment")}
           />
           <Input
             placeholder={""}
-            title="მ2:"
+            title={`${t("area")}²`}
             bgColor="bg-[rgba(242,242,242,1)]"
             onChange={() => {}}
             value={Number(apartment.area).toFixed(0)}
           />
           <Input
             placeholder={""}
-            title="მ2-ის ფასი:"
+            title={t("price")}
             bgColor="bg-[rgba(242,242,242,1)]"
             onChange={() => {}}
             value={Number(apartment.price2).toFixed(0) as string}
           />
           <Input
             placeholder={"ROI"}
-            title="შედეგი:"
+            title={t("result")}
             bgColor="bg-[rgba(242,242,242,1)]"
             onChange={() => {}}
             value={`${roi ? (roi * 100).toFixed(0) : "X"}%`}

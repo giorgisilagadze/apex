@@ -5,6 +5,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useClickOutside from "@/hooks/useClickOutside";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Props {
   isLangClicked: boolean;
@@ -12,11 +13,14 @@ interface Props {
 }
 
 export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
-  const pathName = usePathname();
   const [language, setLanguage] = useState<string>("GE");
   const LanguageRef = useRef<HTMLDivElement>(null);
+
+  const pathName = usePathname();
   const route = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations("Header");
+  const locale = useLocale();
 
   useClickOutside(LanguageRef, () => setIsLangCLicked(false));
 
@@ -71,7 +75,9 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
           isLangClicked
             ? "opacity-100 pointer-events-auto lg:top-[45px] top-8"
             : "opacity-0 pointer-events-none lg:top-[53px] top-10"
-        } duration-300 lg:py-3 px-3 py-2 flex flex-col gap-1 z-[3] absolute bg-white w-[90px] shadow-dropDown rounded-[10px]`}
+        } duration-300 lg:py-3 px-3 py-2 flex flex-col gap-1 z-[3] absolute bg-white ${
+          locale == "en" ? "w-[90px] left-0" : "w-[110px] left-[-16px]"
+        } shadow-dropDown rounded-[10px]`}
       >
         {data.map((item) => (
           <p
@@ -82,7 +88,7 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
             className="cursor-pointer text-[14px] hover:opacity-50 duration-300"
             key={item.id}
           >
-            {item.text}
+            {t(item.text)}
           </p>
         ))}
       </div>

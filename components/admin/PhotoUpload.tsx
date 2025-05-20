@@ -50,8 +50,6 @@ export default function PhotoUpload({
     setImage(newPhotoes);
   };
 
-  console.log(image);
-
   return (
     <div className="w-full flex flex-col gap-5">
       {backImage && (

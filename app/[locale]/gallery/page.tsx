@@ -2,6 +2,7 @@ import PagePagination from "@/components/PagePagination";
 import SendEmail from "@/components/SendEmail";
 import ImagesComp from "@/components/gallery/ImagesComp";
 import { FetchGallery } from "@/serverside/FetchGallery";
+import { getTranslations } from "next-intl/server";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -17,6 +18,8 @@ export default async function Gallery({ searchParams }: any) {
   const type = searchParams.type === "video" ? "video" : "photo";
   const data: GalleryItem[] = await FetchGallery(type);
 
+  const t = await getTranslations("Gallery");
+
   return (
     <div className="w-full flex flex-col sm:gap-[100px] gap-[40px]">
       <div className="w-full sm:h-[400px] h-[300px] relative">
@@ -29,11 +32,9 @@ export default async function Gallery({ searchParams }: any) {
         <div className="w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.5)]"></div>
         <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 absolute top-[50%] translate-y-[-50%] left-0 flex sm:items-center justify-between sm:flex-row flex-col sm:gap-4">
           <h1 className="lg:text-[60px] text-[40px] font-light text-white">
-            გალერეა
+            {t("title")}
           </h1>
-          <p className="text-[14px] text-white sm:self-center">
-            მთავარი / გალერეა
-          </p>
+          <p className="text-[14px] text-white sm:self-center">{t("page")}</p>
         </div>
       </div>
       <div className="w-full flex flex-col items-center sm:gap-[60px] gap-10 xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
@@ -47,13 +48,13 @@ export default async function Gallery({ searchParams }: any) {
             href="?type=photo"
             className="text-[14px] text-white z-[1] cursor-pointer h-full w-full flex items-center justify-center"
           >
-            ფოტო
+            {t("image")}
           </Link>
           <Link
             href="?type=video"
             className="text-[14px] text-white z-[1] cursor-pointer h-full w-full flex items-center justify-center"
           >
-            ვიდეო
+            {t("video")}
           </Link>
         </div>
         <div className="w-full flex flex-col gap-1">

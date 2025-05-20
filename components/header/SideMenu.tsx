@@ -3,7 +3,7 @@ import { RxCross1 } from "react-icons/rx";
 import Language from "./Language";
 import Link from "next/link";
 import { PiUser } from "react-icons/pi";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoMdCall } from "react-icons/io";
 import { BsCameraVideo } from "react-icons/bs";
@@ -27,72 +27,33 @@ export default function SideMenu({
   setIsContactClicked,
 }: Props) {
   const locale = useLocale();
-  const [isSearchVis, setIsSearchVis] = useState(false);
+  const t = useTranslations("Header");
 
   const nav = [
     {
       id: 1,
-      title: "ჩვენ შესახებ",
+      title: t("aboutUs"),
       link: `/${locale}/about-us`,
     },
     {
       id: 2,
-      title: "პროექტები",
+      title: t("projects"),
       link: `/${locale}/projects`,
     },
     {
       id: 3,
-      title: "სიახლეები",
+      title: t("news"),
       link: `/${locale}/news`,
     },
     {
       id: 4,
-      title: "გალერეა",
+      title: t("gallery"),
       link: `/${locale}/gallery`,
     },
     {
       id: 5,
-      title: "პარტნიორები",
+      title: t("partniors"),
       link: `/${locale}/partners`,
-    },
-  ];
-
-  const products = [
-    {
-      id: 1,
-      title: "Trousers",
-    },
-    {
-      id: 2,
-      title: "Jacket",
-    },
-    {
-      id: 3,
-      title: "Blazer",
-    },
-    {
-      id: 4,
-      title: "Shirts",
-    },
-    {
-      id: 5,
-      title: "Knitwear",
-    },
-    {
-      id: 6,
-      title: "T-shirts",
-    },
-    {
-      id: 7,
-      title: "Outwear",
-    },
-    {
-      id: 8,
-      title: "Shoes",
-    },
-    {
-      id: 9,
-      title: "Accessories",
     },
   ];
 
@@ -136,7 +97,7 @@ export default function SideMenu({
             }}
           >
             <RxCross1 className="text-[18px]" />
-            <p className="text-[14px] mt-[3px]">გათიშვა</p>
+            <p className="text-[14px] mt-[3px]">{t("close")}</p>
           </div>
           <Language
             isLangClicked={isLangClicked}
@@ -164,7 +125,7 @@ export default function SideMenu({
           <p className="text-[14px] font-light">ვიდეო ზარი</p>
         </div> */}
         <Button
-          title={"დაგვიკავშირდით"}
+          title={t("contact")}
           onClick={() => {
             setIsSideMenuVis(false);
             setIsContactClicked(true);

@@ -6,31 +6,33 @@ import ScreenSize from "@/hooks/ScreenSize";
 
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { useTranslations } from "next-intl";
 
 export default function AboutUsComp() {
-  const dimension = ScreenSize();
+  const t = useTranslations("HomePage.About");
 
+  const dimension = ScreenSize();
   const { ref, inView } = useInView({ triggerOnce: true });
 
   const data = [
     {
       id: 1,
-      title: "კმაყოფილი მომხმარებელი",
+      title: t("customer"),
       count: "5532",
     },
     {
       id: 2,
-      title: "წელი ბაზარზე",
+      title: t("year"),
       count: "15",
     },
     {
       id: 3,
-      title: "დასრულებული პროექტი",
+      title: t("done"),
       count: "25",
     },
     {
       id: 4,
-      title: "მიმდინარე პროექტი",
+      title: t("current"),
       count: "6",
     },
   ];
@@ -41,24 +43,17 @@ export default function AboutUsComp() {
         <div className="w-full flex flex-col gap-2">
           <div className="flex items-center gap-3">
             <div className="w-[50px] h-[1px] bg-blue"></div>
-            <p className="text-[14px] text-blue font-light">ჩვენ შესახებ</p>
+            <p className="text-[14px] text-blue font-light">{t("aboutUs")}</p>
           </div>
           <h1 className="sm:text-[30px] text-[24px] font-semibold">
-            კომპანიის შესახებ
+            {t("aboutUs1")}
           </h1>
           <p className="text-[14px] leading-6 text-grey font-light lg1350:w-[480px] w-full mt-2">
-            სამშენებლო კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან
-            ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის
-            პროდუქტსა და მომსახურებას და ქმნის თითოეული ინდივიდისთვის სასურველს
-            კომფორტს. ამჟამად, აპექს დეველოპმენტი 10 დასრულებულ და 3 მიმდინარე
-            პროექტს ითვლის თბილისის მასშტაბით. სამშენებლო კომპანია აპექს
-            დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია სთავაზობს
-            მომხმარებელს მაღალი ხარისხის პროდუქტსა და მომსახურებას და ქმნის
-            თითოეული ინდივიდისთვის სასურველს კომფორტს.
+            {t("text")}
           </p>
           <div className="mt-4">
             <Button
-              title="ჩვენ შესახებ"
+              title={t("aboutUs")}
               height="h-[54px]"
               bgColor="bg-blue"
               color="text-white"

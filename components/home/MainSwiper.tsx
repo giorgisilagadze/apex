@@ -1,6 +1,8 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Image from "next/legacy/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { BsArrowDown } from "react-icons/bs";
@@ -8,24 +10,26 @@ import { BsArrowDown } from "react-icons/bs";
 export default function MainSwiper() {
   const [shownProject, setShownProject] = useState(1);
 
+  const t = useTranslations("HomePage.Slider");
+
   const projects = [
     {
       id: 1,
       image: "/images/video.mp4",
-      title1: "შიდა 0%-იანი განვადება",
-      title2: "აპექს ნუცუბიძე",
+      title1: t("text"),
+      title2: t("apexNuts"),
     },
     {
       id: 2,
       image: "/images/banner1.jpeg",
-      title1: "შიდა 0%-იანი განვადება",
-      title2: "აპექსი დიდი დიღომი",
+      title1: t("text"),
+      title2: t("apexDig"),
     },
     {
       id: 3,
       image: "/images/banner2.png",
-      title1: "შიდა 0%-იანი განვადება",
-      title2: "აპექს ნუცუბიძე ||",
+      title1: t("text"),
+      title2: t("apexNuts2"),
     },
   ];
 
@@ -33,14 +37,17 @@ export default function MainSwiper() {
     {
       id: 1,
       title: ".Facebook",
+      link: "https://www.facebook.com/apexd.ge",
     },
     {
       id: 2,
       title: ".Instagram",
+      link: "https://www.instagram.com/apexd.ge/",
     },
     {
       id: 3,
       title: ".TikTok",
+      link: "https://www.tiktok.com/@apex_development",
     },
   ];
 
@@ -135,16 +142,15 @@ export default function MainSwiper() {
       </div>
       <div className="absolute top-[50%] translate-y-[-50%] right-[-60px] z-[3] items-start gap-4 rotate-90 hidden sm:flex">
         {socials.map((item) => (
-          <p
-            className="text-[14px] text-white font-extralight cursor-pointer hover:opacity-50 duration-300"
-            key={item.id}
-          >
-            {item.title}
-          </p>
+          <Link href={item.link} target="_blank" key={item.id}>
+            <p className="text-[14px] text-white font-extralight cursor-pointer hover:opacity-50 duration-300">
+              {item.title}
+            </p>
+          </Link>
         ))}
       </div>
-      <div className="absolute left-[50%] translate-x-[-50%] sm:bottom-[40px] bottom-6 z-[3] flex-col gap-4 bounce hidden sm:flex">
-        <p className="text-[14px] text-white font-extralight">Scroll</p>
+      <div className="absolute left-[50%] translate-x-[-50%] sm:bottom-[40px] bottom-6 z-[3] flex-col gap-4 bounce hidden sm:flex items-center">
+        <p className="text-[14px] text-white font-extralight">{t("scroll")}</p>
         <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white">
           <BsArrowDown className="text-white mt-[-26px] text-[26px]" />
         </div>

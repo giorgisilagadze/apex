@@ -8,7 +8,7 @@ import { IoMdCall } from "react-icons/io";
 import { BsCameraVideo } from "react-icons/bs";
 import Button from "../button/Button";
 import Language from "./Language";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { CiMenuFries } from "react-icons/ci";
 import SideMenu from "./SideMenu";
@@ -24,32 +24,33 @@ export default function Header() {
   const [isContactClicked, setIsContactClicked] = useState(false);
 
   const locale = useLocale();
+  const t = useTranslations("Header");
   const pathname = usePathname();
 
   const nav = [
     {
       id: 1,
-      title: "ჩვენ შესახებ",
+      title: t("aboutUs"),
       link: `/${locale}/about-us`,
     },
     {
       id: 2,
-      title: "პროექტები",
+      title: t("projects"),
       link: `/${locale}/projects`,
     },
     {
       id: 3,
-      title: "სიახლეები",
+      title: t("news"),
       link: `/${locale}/news`,
     },
     {
       id: 4,
-      title: "გალერეა",
+      title: t("gallery"),
       link: `/${locale}/gallery`,
     },
     {
       id: 5,
-      title: "პარტნიორები",
+      title: t("partniors"),
       link: `/${locale}/partners`,
     },
   ];
@@ -120,7 +121,7 @@ export default function Header() {
 
             <div className="lg1110:block hidden">
               <Button
-                title={"დაგვიკავშირდით"}
+                title={t("contact")}
                 onClick={() => setIsContactClicked(true)}
                 width={"w-[200px]"}
                 bgColor="bg-white"

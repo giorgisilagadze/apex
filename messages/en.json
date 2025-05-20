@@ -1,6 +1,219 @@
 {
-    "HomePage": {
-      "title": "Hello world!",
-      "about": "Go to the about page"
+  "Header": {
+    "aboutUs": "About Us",
+    "projects": "Projects",
+    "news": "News",
+    "gallery": "Gallery",
+    "partniors": "Partners",
+    "video": "Video Call",
+    "contact": "Contact Us",
+    "close": "Close",
+    "Georgian": "Georgian",
+    "English": "English"
+  },
+  "Footer": {
+    "links": "Links",
+    "home": "Home",
+    "aboutUs": "About Us",
+    "projects": "Projects",
+    "news": "News",
+    "gallery": "Gallery",
+    "partniors": "Partners",
+    "info": "Information",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy",
+    "subscribe": "Subscribe"
+  },
+  "HomePage": {
+    "Slider": {
+      "apexNuts": "Apex Nutsubidze",
+      "apexDig": "Apex Didi Dighomi",
+      "apexNuts2": "Apex Nutsubidze II",
+      "text": "0% Internal Installment",
+      "scroll": "Scroll"
+    },
+    "CurrentProjects": {
+      "projects": "Projects",
+      "current": "Current Projects"
+    },
+    "About": {
+      "aboutUs": "About Us",
+      "aboutUs1": "About the Company",
+      "text": "Apex Development has been operating in the market since 2012. The company offers high-quality products and services, creating desired comfort for each individual. Currently, Apex Development has 10 completed and 3 ongoing projects across Tbilisi.",
+      "customer": "Satisfied Customers",
+      "year": "Years in the Market",
+      "done": "Completed Projects",
+      "current": "Ongoing Projects"
+    },
+    "News": {
+      "blog": "Blog",
+      "news": "News",
+      "all": "View All",
+      "more": "View More",
+      "პროექტი": "Project",
+      "ღონისძიება": "Event",
+      "გამოფენა": "Exhibition"
     }
+  },
+  "LeaveContact": {
+    "title": "Leave Your Contact",
+    "subtitle": "Our manager will contact you within 15 minutes",
+    "name": "Full Name",
+    "namePlaceholder": "e.g., David",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+995",
+    "email": "Email",
+    "emailPlaceholder": "Example@apexd.ge",
+    "projects": "Projects",
+    "success": "Data sent successfully",
+    "choose": "Choose",
+    "send": "Send"
+  },
+  "subscribtion": {
+    "title": "Subscribe to News",
+    "subtitle": "Be the first to know all the news that interests you!",
+    "email": "Email",
+    "subscribe": "Subscribe",
+    "error": "Please enter a valid email",
+    "success": "Email sent successfully"
+  },
+  "Filter": {
+    "ისანი": "Isani",
+    "აპექს ნუცუბიძე I, II, III": "Apex Nutsubidze I, II, III",
+    "აპექს დიდი დიღომი": "Apex Didi Dighomi",
+    "choose": "Choose",
+    "category": "Category",
+    "სადგომი": "Parking",
+    "ტექნიკური სათავსო": "Technical Storage",
+    "საოფისე ფართი": "Office Space",
+    "ბინა": "Apartment",
+    "სადგომი(ღიაა)": "Parking (Open)",
+    "კომერციული ფართი": "Commercial Space",
+    "სათავსო": "Storage",
+    "status": "Status",
+    "ყველა": "All",
+    "მშენებარე": "Under Construction",
+    "დასრულებული": "Completed",
+    "project": "Project",
+    "block": "Block",
+    "area": "m",
+    "from": "From",
+    "to": "To",
+    "price": "Price",
+    "search": "Search",
+    "nodata": "No records found",
+    "available": "Available",
+    "currency": "Currency",
+    "lari": "Lari",
+    "dollar": "Dollar",
+    "დაბლიდან მაღლა": "Ascending Price",
+    "მაღლიდან დაბლა": "Descending Price",
+    "card": {
+      "apartment": "Apartment",
+      "area": "m",
+      "floor": "Floor",
+      "status": "Status",
+      "გასაყიდი": "For Sale",
+      "გაყიდული": "Sold",
+      "გადაცემული": "Transferred",
+      "განვადებით გაყიდული": "Sold with installment",
+      "პირადი რეზერვი": "Personal reserve",
+      "სხვა დაჯგუფებელი": "Other grouping",
+      "price": "Price",
+      "see": "View"
+    }
+  },
+  "AboutUs": {
+    "title": "About Us",
+    "page": "Home / About Us",
+    "ourMission": "Our Mission",
+    "companyMission": "Company Mission",
+    "employees": "Employees",
+    "team": "Our Team",
+    "გაყიდვების მენეჯერი": "Sales Manager",
+    "ბუღალტერი": "Accountant",
+    "გაყიდვების ხელმძღვანელი": "Head of Sales",
+    "მარკეტინგის ხელმძღვანელი": "Head of Marketing",
+    "ოპერაციების დირექტორი": "Operations Director",
+    "იურიდიული დეპარტამენტის ხელმძღვანელი": "Head of Legal Department",
+    "employee1": "Azalina Bolkvadze",
+    "employee2": "Giorgi Mikava",
+    "employee3": "Eka Forchkidze",
+    "employee4": "Tamar Abashidze",
+    "employee5": "Lela Kakhadze",
+    "employee6": "Mariam Chaladze",
+    "employee7": "Marishka Pantsulaia",
+    "employee8": "Nikoloz Forchkidze",
+    "employee9": "Sopho Qurasvili"
+  },
+  "NewsPage": {
+    "title": "News",
+    "page": "Home / News",
+    "ყველა": "All",
+    "პროექტი": "Project",
+    "ღონისძიება": "Event",
+    "გამოფენა": "Exhibition",
+    "nodata": "No News found",
+    "share": "Share",
+    "categories": "Categories",
+    "other": "Other News"
+  },
+  "Gallery": {
+    "title": "Gallery",
+    "page": "Home / Gallery",
+    "image": "Photo",
+    "video": "Video"
+  },
+  "Partners": {
+    "title": "Partners",
+    "page": "Home / Partners",
+    "text1": "The Role of Partners in Our Activities",
+    "text2": "Partners are very important to us for many reasons. They offer numerous benefits that contribute to the company's growth, innovation, and overall success. Partnerships often involve collaboration with organizations that have additional skills, experience, and strengths. Our collaboration with partners helps us better implement an innovative culture. Additionally, such organizations help us strengthen credibility and reputation, which is very important for our company.",
+    "about": "About the Partner"
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "page": "Home / Projects",
+    "card": {
+      "მიმდინარე": "Ongoing",
+      "დასრულებული": "Completed",
+      "sold": "Sold",
+      "apartment": "Apartment",
+      "seeMore": "Read More"
+    }
+  },
+  "SingleProject": {
+    "მიმდინარე": "Ongoing",
+    "დასრულებული": "Completed",
+    "sold": "Sold Apartments",
+    "work": "Completed Works",
+    "download": "Download Presentation",
+    "scroll": "Scroll Down",
+    "floor": "Floor",
+    "available": "Available Apartment",
+    "available1": "Available",
+    "sold1": "Sold",
+    "about": "About the Project",
+    "projectGallery": "Project Gallery"
+  },
+  "SingleApartmnet": {
+    "apartment": "Apartment",
+    "floor": "Floor",
+    "area": "m",
+    "wholeArea": "Total Area",
+    "bedroom": "Bedroom",
+    "summer": "Balcony",
+    "bathroom": "Bathroom",
+    "hall": "Hall",
+    "download": "Download Presentation",
+    "roi": "ROI Calculator",
+    "project": "Project",
+    "projectType": "Apartment Type",
+    "payment": "Payment Type",
+    "სრული": "Full",
+    "ნახევარი": "Half",
+    "price": "Price per m²",
+    "result": "Result",
+    "choose": "Choose"
   }
+}

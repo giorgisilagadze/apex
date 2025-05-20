@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import Image from "next/legacy/image";
 import ScreenSize from "@/hooks/ScreenSize";
 import { BsArrowDown } from "react-icons/bs";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -21,6 +21,7 @@ export default function Projects({ projects }: Props) {
 
   const locale = useLocale();
   const route = useRouter();
+  const t = useTranslations("HomePage.CurrentProjects");
 
   return (
     <div className="w-full flex flex-col gap-8">
@@ -28,10 +29,10 @@ export default function Projects({ projects }: Props) {
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3">
             <div className="w-[50px] h-[1px] bg-blue"></div>
-            <p className="text-[14px] text-blue font-light">პროექტები</p>
+            <p className="text-[14px] text-blue font-light">{t("projects")}</p>
           </div>
           <h1 className="sm:text-[30px] text-[24px] font-semibold">
-            მიმდინარე პროექტები
+            {t("current")}
           </h1>
         </div>
         <div className="md500:flex items-center gap-7 hidden">
@@ -78,7 +79,11 @@ export default function Projects({ projects }: Props) {
                 <div className="w-full h-full rounded-[10px] absolute left-0 top-0 bg-gradient-to-t from-[rgba(3,44,95,0.5)] via-[rgba(255,255,255,0.1)] to-[rgba(0,0,0,0)] z-[2]"></div>
                 <div className="absolute left-[50%] translate-x-[-50%] md500:bottom-[80px] bottom-6 z-[3]">
                   <p className="lg1250:text-[32px] md500:text-[26px] text-[20px] text-white font-bold md500:whitespace-nowrap text-center">
-                    {item.name}
+                    {locale == "en"
+                      ? item.title_en
+                      : locale == "ge"
+                      ? item.title
+                      : item.title_ru}
                   </p>
                 </div>
               </div>

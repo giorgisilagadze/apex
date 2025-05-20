@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -25,6 +25,7 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
   });
 
   const locale = useLocale();
+  const t = useTranslations("SingleProject");
 
   // const mapAreas = [
   //   {
@@ -167,8 +168,6 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
 
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
-
-  console.log(hoveredId);
 
   return (
     <div className="w-full relative">
@@ -340,11 +339,11 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
                   }}
                 >
                   <p className="lg1250:text-[16px] sm:text-[14px] text-[12px]">
-                    სართული {item.title}
+                    {t("floor")} {item.title}
                   </p>
                   <div className="w-[1px] h-3 bg-white sm:block hidden"></div>
                   <p className="lg1250:text-[16px] sm:text-[14px] text-[12px]">
-                    თავისუფალი ბინა: {item.freeApartmentCount}
+                    {t("available")}: {item.freeApartmentCount}
                   </p>
                 </div>
               ) : item.href !== "#" ? (
@@ -361,7 +360,7 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
                     }}
                     onMouseMove={() => setHoveredId(item.title)}
                   >
-                    თავისუფალი
+                    {t("available1")}
                   </p>
                 </Link>
               ) : (
@@ -377,7 +376,7 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
                   }}
                   onMouseMove={() => setHoveredId(item.title)}
                 >
-                  გაყიდული
+                  {t("sold1")}
                 </p>
               )}
             </div>

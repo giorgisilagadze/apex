@@ -1,4 +1,4 @@
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { BsArrowDown } from "react-icons/bs";
@@ -12,6 +12,7 @@ interface Props {
 
 export default function ProjectCard1({ item }: Props) {
   const locale = useLocale();
+  const t = useTranslations("ProjectsPage.card");
   return (
     <div className="w-full lg:h-[500px] h-[450px] relative">
       <Image
@@ -33,19 +34,21 @@ export default function ProjectCard1({ item }: Props) {
           </p>
           <div className="flex items-center gap-2">
             <IoLocationSharp className="text-[16px] text-white" />
-            <p className="text-[14px] text-white font-light">{item.address}</p>
+            <p className="text-[14px] text-white font-light">
+              {locale == "ge" ? item.address : item.address_en}
+            </p>
           </div>
         </div>
         <div className="flex lg:items-center sm:items-start md500:items-center justify-between lg:flex-row sm:flex-col md500:flex-row flex-col gap-4">
           <div className="flex flex-col gap-3">
             <p className="text-[22px] text-white font-semibold">
-              {item.status}
+              {t(item.status)}
             </p>
             <div className="w-full h-[1px] bg-white"></div>
             <div className="flex items-center gap-2">
               <MdSell className="text-[16px] text-white" />
               <p className="text-[14px] text-white font-light">
-                გაყიდულია 138 ბინა
+                {t("sold")} {item.sold_percent}%
               </p>
             </div>
           </div>
@@ -53,7 +56,7 @@ export default function ProjectCard1({ item }: Props) {
             href={`/${locale}/projects/${item.id}`}
             className="px-5 py-3 lg:w-auto sm:w-full w-auto flex items-center gap-5 border border-white rounded-[30px] cursor-pointer hover:opacity-50 duration-300 justify-center"
           >
-            <p className="text-[14px] text-white font-light">ვრცლად</p>
+            <p className="text-[14px] text-white font-light">{t("seeMore")}</p>
             <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white cursor-pointer">
               <BsArrowDown className="text-white ml-[-26px] text-[26px] -rotate-90" />
             </div>

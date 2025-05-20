@@ -1,4 +1,4 @@
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import Link from "next/link";
 
@@ -8,6 +8,7 @@ interface Props {
 
 export default function ProjectCard({ item }: Props) {
   const locale = useLocale();
+  const t = useTranslations("HomePage.News");
   return (
     <div className="w-full flex flex-col gap-4">
       <Link href={`/${locale}/news/${item.id}`} className="w-full">
@@ -20,7 +21,7 @@ export default function ProjectCard({ item }: Props) {
             className="rounded-[10px] cursor-pointer"
           />
           <div className="absolute top-0 right-0 rounded-tr-[10px] rounded-bl-[10px] bg-black px-5 py-2">
-            <p className="text-[14px] text-white font-light">{item.type}</p>
+            <p className="text-[14px] text-white font-light">{t(item.type)}</p>
           </div>
         </div>
       </Link>
@@ -29,12 +30,16 @@ export default function ProjectCard({ item }: Props) {
           {item.created_at.slice(0, 10).replaceAll("-", ".")}
         </p>
         <p className="text-[20px] font-bold sm:truncate sm:text-ellipsis">
-          {item.title}
+          {locale == "ge"
+            ? item.title
+            : locale == "en"
+            ? item.title_en
+            : item.text_ru}
         </p>
-        <Link href={`/${locale}/news/10`}>
+        <Link href={`/${locale}/news/${item.id}`}>
           <div className="flex items-center gap-3 cursor-pointer hover:opacity-50 duration-300">
             <div className="w-[30px] h-[1px] bg-black mt-[3px]"></div>
-            <p className="text-[14px] font-light">მეტის ნახვა</p>
+            <p className="text-[14px] font-light">{t("more")}</p>
           </div>
         </Link>
       </div>

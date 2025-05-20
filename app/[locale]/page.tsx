@@ -12,8 +12,6 @@ export default async function Home() {
   const news = await FetchNews();
   const projects = await FetchProjects();
 
-  console.log(news);
-
   return (
     <div className="w-full flex flex-col sm:gap-[100px] gap-[60px]">
       <MainSwiper />

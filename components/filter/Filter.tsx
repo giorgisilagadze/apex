@@ -14,6 +14,7 @@ import Image from "next/legacy/image";
 import axios from "axios";
 import Shimmer from "../shimmer/Shimmer";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface Props {
   page: string;
@@ -43,6 +44,7 @@ export default function Filter({ page, isSingleProject }: Props) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const t = useTranslations("Filter");
 
   const currency = [
     {
@@ -108,74 +110,6 @@ export default function Filter({ page, isSingleProject }: Props) {
     return { parsedFilters, projectId, floorId };
   };
 
-  // useEffect(() => {
-  //   // get params
-  //   const parsedFilters = parseFilters(searchParams.toString());
-  //   const isEmpty = Object.values(parsedFilters).every((value) => value == "");
-  //   if (!isEmpty) {
-  //     setSelectedValues(() => {
-  //       const newValues = parsedFilters;
-  //       handleSearch(newValues, floor);
-  //       return newValues;
-  //     });
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     setIsFilterLoading(true);
-  //     try {
-  //       const response = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_API_URL}/apartment/getFilters`
-  //       );
-  //       const data = response.data;
-  //       setFilterValues(data);
-
-  //       // get building id
-  //       if (page === "project" || page === "floor") {
-  //         let lastElement: string | undefined;
-  //         let floor: string | undefined;
-  //         if (page === "project")
-  //           lastElement = pathname.split("/").filter(Boolean).pop();
-  //         else {
-  //           const pathParts = pathname.split("/").filter(Boolean);
-  //           lastElement = pathParts.at(-2);
-  //           floor = pathParts.at(-1);
-  //           setFloor(floor ?? "");
-  //         }
-  //         console.log(lastElement);
-
-  //         if (lastElement) {
-  //           const selectedBuilding = data.projectBuilding
-  //             .flatMap((project: ProjectBuilding) => project.buildings)
-  //             .find(
-  //               (building: Building) =>
-  //                 building.id === parseInt(lastElement as string)
-  //             );
-
-  //           if (selectedBuilding) {
-  //             setSelectedValues({
-  //               ...selectedValues,
-  //               building: selectedBuilding.name,
-  //             });
-  //             setSelectedProjectId(selectedBuilding.project_id);
-  //             handleSearch(
-  //               {
-  //                 ...selectedValues,
-  //                 building: selectedBuilding.name,
-  //               },
-  //               floor
-  //             );
-  //           }
-  //         }
-  //       }
-  //     } catch (err) {
-  //     } finally {
-  //       setIsFilterLoading(false);
-  //     }
-  //   })();
-  // }, []);
-
   useEffect(() => {
     const fetchFilters = async () => {
       setIsFilterLoading(true);
@@ -199,7 +133,7 @@ export default function Filter({ page, isSingleProject }: Props) {
         let newValues = parsedFilters;
         let lastElement: string | undefined;
         let floor: string | undefined;
-
+        let selectedBuilding;
         if (page === "project" || page === "floor") {
           const pathParts = pathname.split("/").filter(Boolean);
           if (page === "project") {
@@ -211,7 +145,7 @@ export default function Filter({ page, isSingleProject }: Props) {
           }
 
           if (lastElement) {
-            const selectedBuilding = data.projectBuilding
+            selectedBuilding = data.projectBuilding
               .flatMap((project: ProjectBuilding) => project.buildings)
               .find(
                 (building: Building) =>
@@ -227,9 +161,23 @@ export default function Filter({ page, isSingleProject }: Props) {
 
         if (Object.values(newValues).some((value) => value !== "")) {
           setSelectedValues(newValues);
-          handleSearch(newValues, floorId || floor, parseInt(projectId));
+          const parsedProjectId = parseInt(projectId);
+          handleSearch(
+            newValues,
+            floorId || floor,
+            isNaN(parsedProjectId)
+              ? selectedBuilding.project_id
+              : parsedProjectId
+          );
         } else {
-          handleSearch(newValues, floorId || floor, parseInt(projectId));
+          const parsedProjectId = parseInt(projectId);
+          handleSearch(
+            newValues,
+            floorId || floor,
+            isNaN(parsedProjectId)
+              ? selectedBuilding.project_id
+              : parsedProjectId
+          );
         }
       } catch (err) {
       } finally {
@@ -285,7 +233,7 @@ export default function Filter({ page, isSingleProject }: Props) {
         .map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
 
       if (floor !== undefined && floor !== "") {
-        params.push(`floor=${encodeURIComponent(floor)}`);
+        params.push(`floor_id=${encodeURIComponent(floor)}`);
       }
 
       const queryString = params.join("&");
@@ -306,10 +254,10 @@ export default function Filter({ page, isSingleProject }: Props) {
           `${process.env.NEXT_PUBLIC_API_URL}/apartment?${queryString}&building_id=${projectId}`
         );
         let data = response.data;
-        data = data.sort((a: { price2: number }, b: { price2: number }) =>
+        data = data.sort((a: { price: number }, b: { price: number }) =>
           selectedPrice === "დაბლიდან მაღლა"
-            ? a.price2 - b.price2
-            : b.price2 - a.price2
+            ? a.price - b.price
+            : b.price - a.price
         );
         setAparts(data);
       } catch (err) {
@@ -323,8 +271,8 @@ export default function Filter({ page, isSingleProject }: Props) {
     if (aparts) {
       const sortedData = [...aparts].sort((a, b) =>
         selectedPrice === "დაბლიდან მაღლა"
-          ? Number(a.price2) - Number(b.price2)
-          : Number(b.price2) - Number(a.price2)
+          ? Number(a.price) - Number(b.price)
+          : Number(b.price) - Number(a.price)
       );
       setAparts(sortedData);
     }
@@ -371,7 +319,7 @@ export default function Filter({ page, isSingleProject }: Props) {
                         : "text-black font-light"
                     } text-[14px]`}
                   >
-                    {item.name}
+                    {t(item.name)}
                   </p>
                   <div
                     className={`w-full h-[2px] ${
@@ -393,17 +341,17 @@ export default function Filter({ page, isSingleProject }: Props) {
           ) : (
             <div className="flex sm:items-center gap-5 flex-wrap">
               <div className="flex items-center gap-1">
-                <h1 className={`text-[14px] text-blue`}>თავისუფალია:</h1>
-                <p className="text-[14px] text-blue">{aparts?.length} ბინა</p>
+                <h1 className={`text-[14px] text-blue`}>{t("available")}:</h1>
+                <p className="text-[14px] text-blue">{aparts?.length}</p>
               </div>
-              <SortSelect
+              {/* <SortSelect
                 title="ვალუტა"
                 data={currency}
                 selected={selectedCurr}
                 setSelected={setSelectedCurr}
-              />
+              /> */}
               <SortSelect
-                title="ფასი"
+                title={t("price")}
                 data={price}
                 selected={selectedPrice}
                 setSelected={setSelectedPrice}
@@ -422,7 +370,7 @@ export default function Filter({ page, isSingleProject }: Props) {
             >
               {(page == "project" || page == "floor") && (
                 <div className="w-full flex flex-col gap-[6px]">
-                  <p className="text-[14px] font-medium">პროექტი</p>
+                  <p className="text-[14px] font-medium">{t("project")}</p>
                   <Input
                     placeholder={""}
                     inputKey=""
@@ -430,7 +378,13 @@ export default function Filter({ page, isSingleProject }: Props) {
                     value={
                       filterValues?.projectBuilding.find(
                         (item) => item.id == selectedProjectId
-                      )?.name ?? ""
+                      )?.name
+                        ? t(
+                            filterValues?.projectBuilding.find(
+                              (item) => item.id == selectedProjectId
+                            )?.name
+                          )
+                        : ""
                     }
                     readonly={true}
                   />
@@ -459,7 +413,7 @@ export default function Filter({ page, isSingleProject }: Props) {
               )} */}
               {(page == "project" || page == "floor") && (
                 <div className="w-full flex flex-col gap-[6px]">
-                  <p className="text-[14px] font-medium">ბლოკი</p>
+                  <p className="text-[14px] font-medium">{t("block")}</p>
                   <Input
                     placeholder={""}
                     inputKey=""
@@ -470,8 +424,8 @@ export default function Filter({ page, isSingleProject }: Props) {
                 </div>
               )}
               <SelectComp
-                title="კატეგორია"
-                placeholder="აირჩიეთ"
+                title={t("category")}
+                placeholder={t("choose")}
                 data={filterValues?.type}
                 onClick={handleSelect}
                 filterKey="type"
@@ -479,8 +433,8 @@ export default function Filter({ page, isSingleProject }: Props) {
               />
               {page !== "project" && page !== "floor" && (
                 <SelectComp
-                  title="სტატუსი"
-                  placeholder="აირჩიეთ"
+                  title={t("status")}
+                  placeholder={t("choose")}
                   data={status}
                   onClick={handleSelect}
                   filterKey="status"
@@ -490,18 +444,19 @@ export default function Filter({ page, isSingleProject }: Props) {
 
               <div className="w-full flex flex-col gap-[6px]">
                 <p className="text-[14px] font-medium">
-                  მ<sup>2</sup>
+                  {t("area")}
+                  <sup>2</sup>
                 </p>
                 <div className="w-full grid grid-cols-2 gap-1">
                   <Input
-                    placeholder={"დან"}
+                    placeholder={t("from")}
                     inputKey="areaFrom"
                     onChange={handleSelect}
                     value={selectedValues["areaFrom"]}
                     type="number"
                   />
                   <Input
-                    placeholder={"მდე"}
+                    placeholder={t("to")}
                     inputKey="areaTo"
                     onChange={handleSelect}
                     value={selectedValues["areaTo"]}
@@ -510,16 +465,16 @@ export default function Filter({ page, isSingleProject }: Props) {
                 </div>
               </div>
               <div className="w-full flex flex-col gap-[6px]">
-                <p className="text-[14px] font-medium">ფასი</p>
+                <p className="text-[14px] font-medium">{t("price")}</p>
                 <div className="w-full grid grid-cols-2 gap-1">
                   <Input
-                    placeholder={"დან"}
+                    placeholder={t("from")}
                     inputKey="priceFrom"
                     onChange={handleSelect}
                     value={selectedValues["priceFrom"]}
                   />
                   <Input
-                    placeholder={"მდე"}
+                    placeholder={t("to")}
                     inputKey="priceTo"
                     onChange={handleSelect}
                     value={selectedValues["priceTo"]}
@@ -536,7 +491,7 @@ export default function Filter({ page, isSingleProject }: Props) {
                   <VscSettings className="text-[28px]" />
                 )} */}
                 <Button
-                  title={"ძებნა"}
+                  title={t("search")}
                   onClick={() =>
                     handleSearch(selectedValues, floor, selectedProjectId)
                   }
@@ -627,7 +582,7 @@ export default function Filter({ page, isSingleProject }: Props) {
                 ) : (
                   <div className="w-full h-[200px] flex items-center justify-center flex-col gap-3 text-[14px]">
                     <CiSearch className="text-[24px]" />
-                    <p>ჩანაწერი ვერ მოიძებნა</p>
+                    <p>{t("nodata")}</p>
                   </div>
                 )
               ) : (

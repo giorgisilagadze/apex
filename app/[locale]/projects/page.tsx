@@ -6,12 +6,14 @@ import ProjectCard1 from "@/components/card/ProjectCard1";
 import Filter from "@/components/filter/Filter";
 import Shimmer from "@/components/shimmer/Shimmer";
 import axios from "axios";
+import { useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
 
 export default function Projects() {
   const [projects, setProjects] = useState<Building[]>();
   const [isLoading, setIsLoading] = useState(true);
+  const t = useTranslations("ProjectsPage");
 
   useEffect(() => {
     (async () => {
@@ -21,7 +23,6 @@ export default function Projects() {
           `${process.env.NEXT_PUBLIC_API_URL}/building`
         );
         const data = response.data;
-        console.log(data);
 
         setProjects(data);
       } catch (err) {
@@ -43,11 +44,9 @@ export default function Projects() {
         <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-blueOpacity to-transparent"></div>
         <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 absolute top-[50%] translate-y-[-50%] left-0 flex sm:items-center justify-between sm:flex-row flex-col sm:gap-4">
           <h1 className="lg:text-[60px] text-[40px] font-light text-white">
-            პროექტები
+            {t("title")}
           </h1>
-          <p className="text-[14px] text-white sm:self-center">
-            მთავარი / პროექტები
-          </p>
+          <p className="text-[14px] text-white sm:self-center">{t("page")}</p>
         </div>
       </div>
       <div className="md600:mt-[-100px] md500:mt-[-150px] mt-[-100px]">

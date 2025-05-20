@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "../button/Button";
 import { HiDocumentText } from "react-icons/hi2";
 import { SiArchicad } from "react-icons/si";
+import { useTranslations } from "next-intl";
 
 interface Props {
   apartment: Apartment1;
@@ -11,34 +12,36 @@ interface Props {
 
 export default function Info({ apartment }: Props) {
   const [selectedCurr, setSelectedCurr] = useState("$");
+  const t = useTranslations("SingleApartmnet");
 
   const details = [
     {
       id: 1,
-      title: "საერთო ფართი:",
-      value: `${parseInt(apartment.area).toFixed(0)} მ`,
+      title: `${t("wholeArea")}:`,
+      value: parseInt(apartment.area).toFixed(0),
     },
     {
       id: 2,
-      title: "საძინებელი:",
-      value: `${apartment.bedroom} მ`,
+      title: `${t("bedroom")}:`,
+      value: apartment.bedroom,
     },
     {
       id: 3,
-      title: "აივანი",
-      value: `${apartment.summer_area} მ`,
+      title: `${t("summer")}:`,
+      value: apartment.summer_area,
     },
     {
       id: 4,
-      title: "აბაზანა",
-      value: `${apartment.bathroom} მ`,
+      title: `${t("bathroom")}:`,
+      value: apartment.bathroom,
     },
     {
       id: 5,
-      title: "ჰოლი",
-      value: `${apartment.hall} მ`,
+      title: `${t("hall")}:`,
+      value: apartment.hall,
     },
   ];
+
   return (
     <div className="w-full bg-white sm:rounded-tr-[15px] sm:rounded-br-[15px] py-8 sm:pr-[60px] pr-6 flex flex-col gap-2">
       <div className="w-full flex items-start justify-between">
@@ -48,11 +51,11 @@ export default function Info({ apartment }: Props) {
             <p className="text-[14px]">{apartment.building}</p>
           </div>
           <h1 className="sm:text-[44px] text-[32px] lg1250:px-[100px] sm:px-10 px-6">
-            ბინა #{apartment.number}
+            {t("apartment")} #{apartment.number}
           </h1>
         </div>
         <h1 className="text-[16px] whitespace-nowrap">
-          სართული {apartment.floor}
+          {t("floor")} {apartment.floor}
         </h1>
       </div>
       <div className="lg1250:pl-[100px] sm:pl-10 pl-6 flex flex-col gap-5">
@@ -60,15 +63,17 @@ export default function Info({ apartment }: Props) {
           <h1>
             {Number(apartment.area).toFixed(0)}{" "}
             <span>
-              მ<sup>2</sup>
+              {t("area")}
+              <sup>2</sup>
             </span>
           </h1>
           <div className="w-[2px] h-5 bg-black"></div>
           <div className="flex items-center gap-2">
             <h1>
-              $ 1295{" "}
+              $ {Number(apartment.price2).toFixed(0)}{" "}
               <span>
-                მ<sup>2</sup>
+                {t("area")}
+                <sup>2</sup>
               </span>
             </h1>
           </div>
@@ -95,26 +100,29 @@ export default function Info({ apartment }: Props) {
           </div>
         </div>
         <div className="w-full grid grid-cols-2 gap-5">
-          {details.map((item) => (
-            <div key={item.id} className="flex items-center gap-3">
-              <div className="w-5 h-5 border border-[rgba(64,95,242,1)] rounded-[50%] flex items-center justify-center">
-                <div className="w-2 h-2 rounded-[50%] bg-lightBlue flex items-center justify-center">
-                  <div className="w-1 h-1 rounded-[50%] border border-white"></div>
+          {details
+            .filter((item) => item.value !== null)
+            .map((item) => (
+              <div key={item.id} className="flex items-center gap-3">
+                <div className="w-5 h-5 border border-[rgba(64,95,242,1)] rounded-[50%] flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-[50%] bg-lightBlue flex items-center justify-center">
+                    <div className="w-1 h-1 rounded-[50%] border border-white"></div>
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-[14px]">{item.title}</h1>
+                  <p className="text-[14px]">
+                    {item.value}
+                    {t("area")}
+                    <sup>2</sup>
+                  </p>
                 </div>
               </div>
-              <div>
-                <h1 className="text-[14px]">{item.title}</h1>
-                <p className="text-[14px]">
-                  {item.value}
-                  <sup>2</sup>
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className="w-full flex items-center gap-3 mt-8 flex-col md600:flex-row">
           <Button
-            title={"პრეზენტაციის გადმოწერა"}
+            title={t("download")}
             onClick={() => {}}
             width={"md600:w-[240px] w-full"}
             bgColor="bg-blue"

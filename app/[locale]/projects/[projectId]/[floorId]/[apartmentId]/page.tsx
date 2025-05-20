@@ -3,6 +3,7 @@ import Info from "@/components/apartment/Info";
 import ROICalculator from "@/components/calculator/ROICalculator";
 import Contact from "@/components/home/Contact";
 import { FetchSingleApartment } from "@/serverside/FetchSingleApartment";
+import { getTranslations } from "next-intl/server";
 import Image from "next/legacy/image";
 
 export default async function Apartment({

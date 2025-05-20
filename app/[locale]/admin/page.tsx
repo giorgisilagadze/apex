@@ -11,8 +11,6 @@ import { useLocale, useTranslations } from "next-intl";
 import Input from "@/components/input/Input";
 import useApexAdmin from "@/utils/ApexAdmin";
 
-//        /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/
-
 export default function Admin() {
   const { adminToken, setAdminToken, setToast } = useApexAdmin();
 

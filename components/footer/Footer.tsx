@@ -1,7 +1,7 @@
 "use client";
 
 import { UseScrollToTop } from "@/hooks/UseScrollToTop";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -14,44 +14,50 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const locale = useLocale();
+  const t = useTranslations("Footer");
   const pathname = usePathname();
 
   const nav = [
     {
-      id: 1,
-      title: "მთავარი",
+      id: 6,
+      title: t("home"),
       link: `/${locale}`,
     },
     {
-      id: 2,
-      title: "ჩვენ შესახებ",
+      id: 1,
+      title: t("aboutUs"),
       link: `/${locale}/about-us`,
     },
     {
-      id: 3,
-      title: "პროექტები",
+      id: 2,
+      title: t("projects"),
       link: `/${locale}/projects`,
     },
     {
-      id: 4,
-      title: "სიახლეები",
+      id: 3,
+      title: t("news"),
       link: `/${locale}/news`,
     },
     {
-      id: 5,
-      title: "გალერეა",
+      id: 4,
+      title: t("gallery"),
       link: `/${locale}/gallery`,
+    },
+    {
+      id: 5,
+      title: t("partniors"),
+      link: `/${locale}/partners`,
     },
   ];
 
   const nav1 = [
     {
       id: 7,
-      title: "წესები და პირობები",
+      title: t("terms"),
     },
     {
       id: 8,
-      title: "კონფიდენციალურობა",
+      title: t("privacy"),
     },
   ];
 
@@ -89,7 +95,9 @@ export default function Footer() {
               <Image src={"/images/logo.png"} alt="logo-image" layout="fill" />
             </div>
             <div className="flex flex-col gap-6 w-[1/2] sm:w-auto">
-              <h1 className="text-white font-medium text-[14px]">ბმულები</h1>
+              <h1 className="text-white font-medium text-[14px]">
+                {t("links")}
+              </h1>
               <div className="flex flex-col gap-3">
                 {nav.map((item) => (
                   <div key={item.id} className="w-fit">
@@ -113,7 +121,9 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-[1/2] sm:w-auto">
-              <h1 className="text-white font-medium text-[14px]">ინფორმაცია</h1>
+              <h1 className="text-white font-medium text-[14px]">
+                {t("info")}
+              </h1>
               <div className="flex flex-col gap-3">
                 {nav1.map((item) => (
                   <div key={item.id} className="w-fit">
@@ -138,7 +148,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-6 w-full sm:w-auto">
               <h1 className="text-white font-medium text-[14px]">
-                გამოგვიწერეთ
+                {t("subscribe")}
               </h1>
               <div className="flex items-center gap-3">
                 {socIcons.map((item) => (
