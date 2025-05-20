@@ -1,5 +1,6 @@
 import useClickOutside from "@/hooks/useClickOutside";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
@@ -29,6 +30,7 @@ export default function SelectComp({
   useClickOutside(selectRef, () => setIsClicked(false));
 
   const t = useTranslations("Filter");
+  const pathname = usePathname();
 
   return (
     <div className="w-full flex flex-col gap-[6px]">
@@ -47,7 +49,9 @@ export default function SelectComp({
           <p className="text-[14px] font-light whitespace-nowrap truncate">
             {filterKey
               ? selectedValues[filterKey as keyof SelectedValues]
-                ? t(selectedValues[filterKey as keyof SelectedValues])
+                ? !pathname.includes("/admin")
+                  ? t(selectedValues[filterKey as keyof SelectedValues])
+                  : selectedValues[filterKey as keyof SelectedValues]
                 : placeholder
               : placeholder}
           </p>
@@ -81,7 +85,7 @@ export default function SelectComp({
                 setIsClicked(false);
               }}
             >
-              {t(item)}
+              {!pathname.includes("/admin") ? t(item) : item}
             </div>
           ))}
         </div>

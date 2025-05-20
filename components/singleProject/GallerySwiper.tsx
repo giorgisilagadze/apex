@@ -16,7 +16,11 @@ import Image from "next/legacy/image";
 //   images: { id: number; product_id: number; url: string }[];
 // }
 
-export default function GallerySwiper() {
+interface Props {
+  images: Gallery[];
+}
+
+export default function GallerySwiper({ images }: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [slidesPerView, setSlidesPerView] = useState(4);
 
@@ -29,13 +33,6 @@ export default function GallerySwiper() {
     else if (width[0] >= 600) setSlidesPerView(3);
     else setSlidesPerView(2);
   }, [width[0]]);
-
-  const images = [
-    "/images/apart1.jpeg",
-    "/images/apart2.jpeg",
-    "/images/apart3.jpeg",
-    "/images/apart4.jpeg",
-  ];
 
   return (
     <>
@@ -58,10 +55,10 @@ export default function GallerySwiper() {
             modules={[FreeMode, Navigation, Thumbs]}
             className="w-full h-full rounded-[12px]"
           >
-            {images.map((item: string) => (
-              <SwiperSlide key={item} className="w-full h-full relative">
+            {images.map((item: Gallery) => (
+              <SwiperSlide key={item.id} className="w-full h-full relative">
                 <Image
-                  src={item}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.url}`}
                   alt="gallery"
                   layout="fill"
                   objectFit="cover"
@@ -94,13 +91,13 @@ export default function GallerySwiper() {
             modules={[FreeMode, Navigation, Thumbs]}
             className="mySwiper w-full grid grid-cols-4 gap-5"
           >
-            {images.map((item: string) => (
+            {images.map((item: Gallery) => (
               <SwiperSlide
-                key={item}
+                key={item.id}
                 className="w-full md600:!h-[250px] !h-[200px] relative cursor-pointer"
               >
                 <Image
-                  src={item}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.url}`}
                   alt="gallery"
                   layout="fill"
                   objectFit="cover"

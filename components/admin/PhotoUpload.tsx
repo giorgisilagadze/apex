@@ -9,6 +9,7 @@ interface Props {
   image: any;
   setImage: (image: any) => void;
   backImage?: string;
+  backImages?: any;
   isMultiply?: boolean;
 }
 
@@ -18,6 +19,7 @@ export default function PhotoUpload({
   image,
   backImage,
   isMultiply,
+  backImages,
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -52,6 +54,25 @@ export default function PhotoUpload({
 
   return (
     <div className="w-full flex flex-col gap-5">
+      <div className="w-full flex flex-wrap gap-4">
+        {backImages &&
+          backImages.length !== 0 &&
+          backImages.map((item: any) => (
+            <div className="relative" key={item.id}>
+              <img
+                src={`${process.env.NEXT_PUBLIC_API_URL}/${item.url}`}
+                alt="main-photo"
+                className={`md500:w-[190px] w-full h-[170px] rounded-[10px] object-cover hover:opacity-80 duration-300`}
+              />
+              {/* <div
+                  className="w-5 h-5 bg-black rounded-[50%] absolute top-2 right-2 flex items-center justify-center cursor-pointer"
+                  onClick={() => handleBackDelete(item.id)}
+                >
+                  <RxCross1 className="text-white text-[12px]" />
+                </div> */}
+            </div>
+          ))}
+      </div>
       {backImage && (
         <img
           src={`${process.env.NEXT_PUBLIC_API_URL}/${backImage}`}

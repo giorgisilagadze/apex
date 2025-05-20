@@ -75,9 +75,7 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
           isLangClicked
             ? "opacity-100 pointer-events-auto lg:top-[45px] top-8"
             : "opacity-0 pointer-events-none lg:top-[53px] top-10"
-        } duration-300 lg:py-3 px-3 py-2 flex flex-col gap-1 z-[3] absolute bg-white ${
-          locale == "en" ? "w-[90px] left-0" : "w-[110px] left-[-16px]"
-        } shadow-dropDown rounded-[10px]`}
+        } duration-300 lg:py-3 px-3 py-2 flex flex-col gap-1 z-[3] left-[-16px] w-[110px] absolute bg-white shadow-dropDown rounded-[10px]`}
       >
         {data.map((item) => (
           <p

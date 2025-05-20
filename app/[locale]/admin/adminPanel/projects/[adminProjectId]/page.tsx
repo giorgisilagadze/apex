@@ -79,6 +79,7 @@ export default function SingleAdminProject() {
           descriptionRus: data.text_ru !== null ? data.text_ru : "",
         });
         setBackImage(data.img);
+        setBackGalleryImages(data.galery);
       } catch (err) {
       } finally {
         setIsLoading(false);
@@ -131,6 +132,7 @@ export default function SingleAdminProject() {
           );
           setToast(true, "პროექტი წარმატებით განახლდა", "success");
           setProjectImage([]);
+          setGalleryImages([]);
           setHasUploaded(true);
           setForRender(forRender + 1);
         } catch (err) {
@@ -247,6 +249,7 @@ export default function SingleAdminProject() {
               name="galery"
               image={galleryImages}
               setImage={setGalleryImages}
+              backImages={backGalleryImages}
               isMultiply={true}
             />
           </div>

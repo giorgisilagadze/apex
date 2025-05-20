@@ -51,7 +51,7 @@ export default async function SingleProject({
         <div className="w-full flex items-center flex-col md500:flex-row">
           <div className="md500:w-[70%] w-full md600:h-[650px] h-[550px] relative">
             <Image
-              src={"/images/apartment2.jpeg"}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${project.galery[0].url}`}
               alt="project-image"
               layout="fill"
               objectFit="cover"
@@ -63,20 +63,6 @@ export default async function SingleProject({
               <div className="w-[50px] h-[1px] bg-blue"></div>
               <p className="text-[14px] text-blue font-light">{t("about")}</p>
             </div>
-            {/* <h1 className="sm:text-[30px] text-[24px] text-blue">
-              რატომ აპექს დიდი დიღომი?
-            </h1>
-            <p className="text-[14px] text-blue">
-              APEX Development-ში საშემოდგომო შეთავაზება დაიწყო! შეარჩიე
-              სასურველი ბინა მშენებარე პროექტში 'აპექს ისანი' ან 'აპექს
-              ნუცუბიძე' და ისარგებლე აქციის პირობით: ერთიანი გადახდისას მიიღეთ
-              კვადრატულზე $150-იანი ფასდაკლება, ხოლო 50%-იანი წინასწარი
-              შენატანისას ისარგებლეთ $75-იანი ფასდაკლებით. აქციია მოქმედებს
-              შერჩეულ ბინებზე, როგორც ერთ-საძინებლიან, ასევე დიდ ბინებზე.
-              შეგახსენებთ, რომ კომპლექსში 'აპექს ნუცუბიძე' ბინები 42,3კვ.მ-დან
-              იწყება, ხოლო პროექტში 'აპექს ისანი' ბინები 47კვ.მ-დან შეგიძლიათ
-              შეიძინოთ.
-            </p> */}
             <div
               dangerouslySetInnerHTML={{
                 __html:
@@ -90,10 +76,14 @@ export default async function SingleProject({
             />
           </div>
         </div>
-        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex flex-col gap-8 items-center">
-          <h1 className="sm:text-[30px] text-[24px]">{t("projectGallery")}</h1>
-          <GallerySwiper />
-        </div>
+        {project.galery && (
+          <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex flex-col gap-8 items-center">
+            <h1 className="sm:text-[30px] text-[24px]">
+              {t("projectGallery")}
+            </h1>
+            <GallerySwiper images={project.galery} />
+          </div>
+        )}
         <div className="mt-[60px]">{/* <OtherProjects /> */}</div>
         <Contact />
         <SendEmail />

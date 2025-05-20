@@ -24,6 +24,15 @@ interface Apartment {
   deleted_at: string | null;
 }
 
+interface Gallery {
+  building_id: number;
+  created_at: string;
+  deleted_at: null | string;
+  id: number;
+  updated_at: string;
+  url: string;
+}
+
 interface Building {
   id: number;
   oID: number;
@@ -50,6 +59,7 @@ interface Building {
   text: string; // HTML string
   text_en: string; // HTML string
   text_ru: string;
+  galery: Gallery[];
 }
 
 interface ProjectBuilding {
