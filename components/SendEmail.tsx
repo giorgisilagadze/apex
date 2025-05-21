@@ -15,25 +15,24 @@ export default function SendEmail() {
   const t = useTranslations("subscribtion");
 
   const handleSend = async () => {
-    // if (!value.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/))
-    //   return setToast(true, t("error"), "error");
-    // if (!isLoading) {
-    //   setIsLoading(true);
-    //   try {
-    //     const response = await axios.post(
-    //       `${process.env.NEXT_PUBLIC_API_URL}/subscribe`,
-    //       {
-    //         mail: value,
-    //       }
-    //     );
-    //     setValue("");
-    //     setToast(true, t("success"), "success");
-    //   } catch (err) {
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // }
-    setToast(true, t("success"), "success");
+    if (!value.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/))
+      return setToast(true, t("error"), "error");
+    if (!isLoading) {
+      setIsLoading(true);
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/subscribe`,
+          {
+            mail: value,
+          }
+        );
+        setValue("");
+        setToast(true, t("success"), "success");
+      } catch (err) {
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
