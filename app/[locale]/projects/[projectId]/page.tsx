@@ -21,6 +21,8 @@ export default async function SingleProject({
   const locale = await getLocale();
   const t = await getTranslations("SingleProject");
 
+  console.log(project);
+
   return (
     <div className="w-full">
       <div className="w-full grid lg1110:grid-cols-5">
@@ -48,35 +50,37 @@ export default async function SingleProject({
         <div className="w-full bg-blueOpacityLight">
           <Filter page="project" />
         </div>
-        <div className="w-full flex items-center flex-col md500:flex-row">
-          <div className="md500:w-[70%] w-full md600:h-[650px] h-[550px] relative">
-            <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}/${project.galery[0].url}`}
-              alt="project-image"
-              layout="fill"
-              objectFit="cover"
-              className="md500:rounded-tr-[10px] md500rounded-br-[10px]"
-            />
-          </div>
-          <div className="sm:p-[60px] p-10 sm:max-w-[550px] max-w-[450px] flex flex-col gap-4 bg-[rgba(237,240,244,1)] lg:ml-[-100px] md600:ml-[-200px] md500:ml-[-300px] z-[1] md500:rounded-[10px]">
-            <div className="flex items-center gap-3">
-              <div className="w-[50px] h-[1px] bg-blue"></div>
-              <p className="text-[14px] text-blue font-light">{t("about")}</p>
+        {project.galery.length !== 0 && (
+          <div className="w-full flex items-center flex-col md500:flex-row">
+            <div className="md500:w-[70%] w-full md600:h-[650px] h-[550px] relative">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_API_URL}/${project.galery[0].url}`}
+                alt="project-image"
+                layout="fill"
+                objectFit="cover"
+                className="md500:rounded-tr-[10px] md500rounded-br-[10px]"
+              />
             </div>
-            <div
-              dangerouslySetInnerHTML={{
-                __html:
-                  locale == "ge"
-                    ? project.text
-                    : locale == "en"
-                    ? project.text_en
-                    : project.text_ru,
-              }}
-              className="editor text-blue"
-            />
+            <div className="sm:p-[60px] p-10 sm:max-w-[550px] max-w-[450px] flex flex-col gap-4 bg-[rgba(237,240,244,1)] lg:ml-[-100px] md600:ml-[-200px] md500:ml-[-300px] z-[1] md500:rounded-[10px]">
+              <div className="flex items-center gap-3">
+                <div className="w-[50px] h-[1px] bg-blue"></div>
+                <p className="text-[14px] text-blue font-light">{t("about")}</p>
+              </div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html:
+                    locale == "ge"
+                      ? project.text
+                      : locale == "en"
+                      ? project.text_en
+                      : project.text_ru,
+                }}
+                className="editor text-blue"
+              />
+            </div>
           </div>
-        </div>
-        {project.galery && (
+        )}
+        {project.galery.length !== 0 && (
           <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex flex-col gap-8 items-center">
             <h1 className="sm:text-[30px] text-[24px]">
               {t("projectGallery")}

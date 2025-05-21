@@ -215,5 +215,9 @@
     "price": "Price per m²",
     "result": "Result",
     "choose": "Choose"
+  },
+  "404": {
+    "text": "The requested page was not found",
+    "button": "Return to the homepage"
   }
 }

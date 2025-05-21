@@ -22,7 +22,7 @@ export default function CustomToast() {
         <motion.div
           initial={{ x: 300, opacity: 0 }}
           animate={{ x: dimension[0] > 500 ? 0 : 10, opacity: 1 }}
-          exit={{ x: 300, opacity: 0 }}
+          exit={{ x: 500, opacity: 0 }}
           transition={{
             type: "spring",
             stiffness: 300,

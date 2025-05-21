@@ -27,100 +27,6 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
   const locale = useLocale();
   const t = useTranslations("SingleProject");
 
-  // const mapAreas = [
-  //   {
-  //     id: "area1",
-  //     coords: "406,943,3396,1318,3400,1456,409,1098",
-  //     shape: "poly",
-  //     href: "#",
-  //     title: "სართული: 13",
-  //   },
-  //   {
-  //     id: "area2",
-  //     coords: "409,1131,3400,1479,3400,1607,409,1282",
-  //     shape: "poly",
-  //     href: "",
-  //     title: "სართული: 12",
-  //   },
-  //   {
-  //     id: "area3",
-  //     coords: "403,1305,3396,1634,3396,1762,403,1453",
-  //     shape: "poly",
-  //     href: "",
-  //     title: "სართული: 11",
-  //   },
-  //   {
-  //     id: "area4",
-  //     coords: "399,1482,3400,1782,3400,1906,403,1637",
-  //     shape: "poly",
-  //     href: "",
-  //     title: "სართული: 10",
-  //   },
-  //   {
-  //     id: "area5",
-  //     coords: "399,1660,3400,1933,3400,2058,403,1814",
-  //     shape: "poly",
-  //     href: "#",
-  //     title: "სართული: 9",
-  //   },
-  //   {
-  //     id: "area6",
-  //     coords: "399,1837,3406,2081,3400,2206,406,1992",
-  //     shape: "poly",
-  //     href: "",
-  //     title: "სართული: 8",
-  //   },
-  //   {
-  //     id: "area7",
-  //     coords: "399,2018,3400,2229,3400,2353,403,2169",
-  //     shape: "poly",
-  //     href: "",
-  //     title: "სართული: 7",
-  //   },
-  //   {
-  //     id: "area8",
-  //     coords: "409,2192,3403,2376,3400,2505,409,2340",
-  //     shape: "poly",
-  //     href: "#",
-  //     title: "სართული: 6",
-  //   },
-  //   {
-  //     id: "area9",
-  //     coords: "403,2370,3403,2528,3403,2649,403,2521",
-  //     shape: "poly",
-  //     href: "/",
-  //     title: "სართული: 5",
-  //   },
-  //   {
-  //     id: "area10",
-  //     coords: "403,2547,3403,2679,3403,2800,409,2699",
-  //     shape: "poly",
-  //     href: "/",
-  //     title: "სართული: 4",
-  //   },
-  //   {
-  //     id: "area11",
-  //     coords: "399,2725,3400,2827,3400,2952,403,2879",
-  //     shape: "poly",
-  //     href: "/",
-  //     title: "სართული: 3",
-  //   },
-  //   {
-  //     id: "area12",
-  //     coords: "403,2902,3406,2978,3403,3100,403,3050",
-  //     shape: "poly",
-  //     href: "/",
-  //     title: "სართული: 2",
-  //   },
-  //   {
-  //     id: "area13",
-  //     coords: "396,3080,3403,3126,3406,3254,393,3228",
-  //     shape: "poly",
-  //     href: "/",
-  //     title: "სართული: 1",
-  //   },
-  // ];
-
   const convertCoordsToScaled = (coords: string) => {
     const { width, height, naturalWidth, naturalHeight } = dimensions;
 
@@ -171,118 +77,27 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
 
   return (
     <div className="w-full relative">
-      <img
-        // src={"/images/single-project.jpeg"}
-        src={`${process.env.NEXT_PUBLIC_API_URL}/${image}`}
-        alt="project-image"
-        // useMap="#image-map"
-        ref={imageRef}
-        onLoad={() => {
-          setIsImageLoaded(true);
-          if (imageRef.current) {
-            const { width, height } = imageRef.current.getBoundingClientRect();
-            const { naturalWidth, naturalHeight } = imageRef.current;
-            setDimensions({ width, height, naturalWidth, naturalHeight });
-          }
-        }}
-        className={`w-full ${
-          !isFloor ? (isImageLoaded ? "h-auto" : "aspect-[40/41]") : "h-auto"
-        } `}
-      />
-      {/* 
-      <map name="image-map">
-        <area
-          target=""
-          alt=""
-          title="13"
-          coords="406,943,3396,1318,3400,1456,409,1098"
-          shape="poly"
+      <div className={`w-full ${isFloor ? "" : "aspect-[40/41]"}`}>
+        <img
+          // src={"/images/single-project.jpeg"}
+          src={`${process.env.NEXT_PUBLIC_API_URL}/${image}`}
+          alt="project-image"
+          // useMap="#image-map"
+          ref={imageRef}
+          onLoad={() => {
+            setIsImageLoaded(true);
+            if (imageRef.current) {
+              const { width, height } =
+                imageRef.current.getBoundingClientRect();
+              const { naturalWidth, naturalHeight } = imageRef.current;
+              setDimensions({ width, height, naturalWidth, naturalHeight });
+            }
+          }}
+          className={`w-full h-full`}
+          // ${!isFloor ? (isImageLoaded ? "h-auto" : "aspect-[40/41]") : "h-auto"}
         />
-        <area
-          target=""
-          alt=""
-          title="12"
-          coords="409,1131,3400,1479,3400,1607,409,1282"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="11"
-          coords="403,1305,3396,1634,3396,1762,403,1453"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="10"
-          coords="399,1482,3400,1782,3400,1906,403,1637"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="9"
-          coords="399,1660,3400,1933,3400,2058,403,1814"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="8"
-          coords="399,1837,3406,2081,3400,2206,406,1992"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="7"
-          coords="399,2018,3400,2229,3400,2353,403,2169"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="6"
-          coords="409,2192,3403,2376,3400,2505,409,2340"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="5"
-          coords="403,2370,3403,2528,3403,2649,403,2521"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="4"
-          coords="403,2547,3403,2679,3403,2800,409,2699"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="3"
-          coords="399,2725,3400,2827,3400,2952,403,2879"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="2"
-          coords="403,2902,3406,2978,3403,3100,403,3050"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt=""
-          title="1"
-          coords="396,3080,3403,3126,3406,3254,393,3228"
-          shape="poly"
-        />
-      </map> */}
+      </div>
+
       {isImageLoaded &&
         dimensions.width &&
         map.map((item) => {
