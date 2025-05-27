@@ -2,6 +2,7 @@ import SendEmail from "@/components/SendEmail";
 import Filter from "@/components/filter/Filter";
 import AboutUsComp from "@/components/home/AboutUsComp";
 import Contact from "@/components/home/Contact";
+import Italy from "@/components/home/Italy";
 import MainSwiper from "@/components/home/MainSwiper";
 import News from "@/components/home/News";
 import Projects from "@/components/home/Projects";
@@ -18,6 +19,7 @@ export default async function Home() {
       <Filter page="home" />
       <Projects projects={projects} />
       <AboutUsComp />
+      <Italy />
       <News news={news.data.slice(0, 3)} />
       <Contact />
       <SendEmail />

@@ -34,7 +34,9 @@
     },
     "CurrentProjects": {
       "projects": "Projects",
-      "current": "Current Projects"
+      "current": "Current Projects",
+      "მიმდინარე": "Ongoing",
+      "დასრულებული": "Completed"
     },
     "About": {
       "aboutUs": "About Us",

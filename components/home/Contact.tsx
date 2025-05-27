@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useApexAdmin from "@/utils/ApexAdmin";
 import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
 
 interface Props {
   isPopUp?: boolean;
@@ -87,7 +88,11 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
           : ""
       } grid lg:grid-cols-2`}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
         className={`w-full ${
           !isPopUp
             ? "lg:h-[500px] md500:h-[400px] h-[350px]"
@@ -101,8 +106,12 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
           objectFit="cover"
           className="rounded-tl-[10px] lg:rounded-bl-[10px] rounded-tr-[10px] lg:rounded-tr-[0px]"
         />
-      </div>
-      <div
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
         className={`w-full h-full bg-blue ${
           !isPopUp
             ? "lg:rounded-tr-[10px] rounded-bl-[10px] lg:rounded-bl-[0px] rounded-br-[10px]"
@@ -164,7 +173,7 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
           rounded="rounded-[12px]"
           isLoading={isLoading}
         />
-      </div>
+      </motion.div>
     </div>
   );
 }
