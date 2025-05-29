@@ -118,7 +118,17 @@ export default function Projects({ projects }: Props) {
                   objectFit="cover"
                   className="z-[1] rounded-[10px]"
                 />
-                <div className="w-full h-full rounded-[10px] absolute left-0 top-0 bg-gradient-to-t from-[rgba(3,44,95,0.5)] via-[rgba(255,255,255,0.1)] to-[rgba(0,0,0,0)] z-[2]"></div>
+                <div
+                  className={`w-full h-full rounded-[10px] absolute left-0 top-0 bg-gradient-to-t via-[rgba(255,255,255,0.1)] to-[rgba(0,0,0,0)] z-[2] duration-700
+           
+                  `}
+                  style={{
+                    backgroundImage:
+                      hoveredId == item.id
+                        ? "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%)"
+                        : "linear-gradient(to top, rgba(3,44,95,0.5) 0%, rgba(0,0,0,0) 40%)",
+                  }}
+                ></div>
                 <div
                   className={`absolute left-5 z-[3] flex flex-col gap-3 ${
                     hoveredId == item.id
@@ -149,7 +159,7 @@ export default function Projects({ projects }: Props) {
                           ? item.text
                           : item.text_ru,
                     }}
-                    className="editor text-[12px] text-[rgba(219,219,219,1)] max-h-[110px] overflow-hidden text-ellipsis"
+                    className="editor text-[12px] text-white max-h-[110px] overflow-hidden text-ellipsis"
                   />
                   <div className="flex items-center gap-2">
                     <p className="text-[16px] text-white">პროექტის ნახვა</p>

@@ -6,6 +6,7 @@ import ProjectCard1 from "@/components/card/ProjectCard1";
 import Filter from "@/components/filter/Filter";
 import Shimmer from "@/components/shimmer/Shimmer";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
@@ -32,6 +33,24 @@ export default function Projects() {
     })();
   }, []);
 
+  const container = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15, // delay between each card
+      },
+    },
+  };
+
+  const card = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
     <div className="w-full ">
       <div className="w-full sm:h-[550px] h-[450px] relative">
@@ -53,18 +72,27 @@ export default function Projects() {
         <Filter page="allProjects" />
       </div>
       <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 md600:pt-[100px] pt-[60px] flex flex-col gap-[40px] items-center">
-        {/* <PagePagination
-          dataLength={50}
-          itemsPerPage={6}
-          both={false}
-          currentPage={0}
-          setCurrentPage={() => {}}
-          onClick={() => {}}
-        > */}
-        <div className="w-full grid sm:grid-cols-2 gap-x-4 gap-y-6">
+        <motion.div
+          className="w-full grid sm:grid-cols-2 gap-x-4 gap-y-6"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
           {!isLoading
-            ? projects?.map((item) => (
-                <ProjectCard1 key={item.id} item={item} />
+            ? projects?.map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 100 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }} // 20% of element must be visible
+                  transition={{
+                    delay: index * 0.1, // 100ms stagger
+                    duration: 0.6,
+                    ease: "easeOut",
+                  }}
+                  key={item.id}
+                >
+                  <ProjectCard1 item={item} />
+                </motion.div>
               ))
             : [1, 2, 3, 4, 5, 6].map((item) => (
                 <div
@@ -90,8 +118,7 @@ export default function Projects() {
                   </div>
                 </div>
               ))}
-        </div>
-        {/* </PagePagination> */}
+        </motion.div>
       </div>
       <div className="mt-[80px]">
         <SendEmail />

@@ -61,7 +61,7 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
         className="flex items-center gap-1 lg:py-[8px] py-[6px] rounded-[30px] hover:opacity-50 duration-300 lg1110:text-white text-black"
         onMouseDown={() => setIsLangCLicked(!isLangClicked)}
       >
-        <p className={`cursor-pointer lg1110:text-[14px] text[16px]`}>
+        <p className={`cursor-pointer lg1110:text-[16px] text-[14px]`}>
           {language}
         </p>
         <MdKeyboardArrowDown

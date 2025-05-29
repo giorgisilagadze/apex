@@ -82,7 +82,7 @@ export default function Header() {
             {nav.map((item) => (
               <Link className={`cursor-pointer`} href={item.link} key={item.id}>
                 <p
-                  className="text-[14px] text-white"
+                  className="text-white"
                   onMouseOver={() => {
                     sethoveredPageId(item.id);
                   }}
@@ -106,7 +106,7 @@ export default function Header() {
               onClick={callPhone}
             >
               <IoMdCall className="text-[18px] text-white" />
-              <p className="text-[14px] text-white">+995 555 045 555</p>
+              <p className="text-[16px] text-white">+995 555 045 555</p>
             </div>
             {/* <div className="lg1110:flex items-center gap-1 hidden">
               <BsCameraVideo className="text-[16px] text-white" />
