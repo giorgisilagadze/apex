@@ -40,21 +40,12 @@ export default function Italy() {
           </button>
         </div>
         <div className="flex items-end">
-          <div className="xl1550:w-[300px] w-[200px] aspect-square relative left-[150px]">
-            <Image
-              src={"/images/italy2.png"}
-              alt="bg"
-              layout="fill"
-              objectFit="cover"
-              className="z-[3]"
-            />
-          </div>
-          <div className="xl1550:w-[500px] w-[400px] aspect-square relative">
+          <div className="w-[600px] aspect-[4/3] relative">
             <Image
               src={"/images/italy.png"}
               alt="bg"
               layout="fill"
-              objectFit="cover"
+              // objectFit="cover"
               className="z-[2]"
             />
           </div>

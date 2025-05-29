@@ -5,6 +5,7 @@ import Contact from "@/components/home/Contact";
 import Italy from "@/components/home/Italy";
 import MainSwiper from "@/components/home/MainSwiper";
 import News from "@/components/home/News";
+import Partners from "@/components/home/Partners";
 import Projects from "@/components/home/Projects";
 import { FetchNews } from "@/serverside/FetchNews";
 import { FetchProjects } from "@/serverside/FetchProjects";
@@ -19,9 +20,10 @@ export default async function Home() {
       <Filter page="home" />
       <Projects projects={projects} />
       <AboutUsComp />
-      <Italy />
+      {/* <Italy /> */}
       <News news={news.data.slice(0, 3)} />
       <Contact />
+      <Partners />
       <SendEmail />
     </div>
   );

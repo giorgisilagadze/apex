@@ -235,7 +235,7 @@ export default function AboutUsComp() {
               )
             )}
           </div>
-          <div className="w-[120px] h-[120px] z-[3] bg-white rounded-[50%] flex items-center justify-center absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]">
+          <div className="w-[120px] h-[120px] z-[3] bg-white rounded-[15px] flex items-center justify-center absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]">
             <div className="w-[100px] aspect-square relative">
               <Image
                 src={"/images/logo1.png"}

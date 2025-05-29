@@ -28,21 +28,6 @@ export default function Projects({ projects }: Props) {
 
   const [hoveredId, setHoveredId] = useState<number>();
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    }),
-  };
-
-  console.log(hoveredId);
-
   return (
     <div className="w-full flex flex-col gap-8 bg-blue py-[80px]">
       <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex items-center justify-between">
