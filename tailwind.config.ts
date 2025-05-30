@@ -21,6 +21,15 @@ export default {
         dropDown: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
         topShadow: "0px 10px 40px 0px rgba(0, 0, 0, 0.05)",
       },
+      animation: {
+        "soft-bounce": "soft-bounce 1.5s infinite",
+      },
+      keyframes: {
+        "soft-bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-4px)" },
+        },
+      },
     },
     screens: {
       md: { min: "375px" },

@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 export default function Projects() {
   const [projects, setProjects] = useState<Building[]>();
   const [isLoading, setIsLoading] = useState(true);
+  const [clickedType, setClickedType] = useState("ყველა");
   const t = useTranslations("ProjectsPage");
 
   useEffect(() => {
@@ -42,14 +43,20 @@ export default function Projects() {
     },
   };
 
-  const card = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+  const types = [
+    {
+      id: 1,
+      title: "ყველა",
     },
-  };
+    {
+      id: 2,
+      title: "მიმდინარე",
+    },
+    {
+      id: 3,
+      title: "დასრულებული",
+    },
+  ];
 
   return (
     <div className="w-full ">
@@ -71,7 +78,31 @@ export default function Projects() {
       <div className="md600:mt-[-100px] md500:mt-[-150px] mt-[-100px]">
         <Filter page="allProjects" />
       </div>
-      <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 md600:pt-[100px] pt-[60px] flex flex-col gap-[40px] items-center">
+      <div className="w-full flex items-center md500:gap-6 gap-4 sm:mt-[60px] mt-[40px] justify-center">
+        {types.map((item) => (
+          <div
+            className="flex flex-col items-center gap-[2px]"
+            key={item.id}
+            onClick={() => {
+              setClickedType(item.title);
+            }}
+          >
+            <p
+              className={`text-[16px] font-light hover:opacity-50 duration-300 cursor-pointer ${
+                item.title == clickedType ? "text-blue" : "text-black"
+              }`}
+            >
+              {item.title}
+            </p>
+            <div
+              className={`w-[40px] h-[1px] ${
+                item.title == clickedType ? "bg-blue" : "bg-transparent"
+              }`}
+            ></div>
+          </div>
+        ))}
+      </div>
+      <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 pt-[60px] flex flex-col gap-[40px] items-center">
         <motion.div
           className="w-full grid sm:grid-cols-2 gap-x-4 gap-y-6"
           variants={container}

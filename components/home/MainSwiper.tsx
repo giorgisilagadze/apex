@@ -131,7 +131,9 @@ export default function MainSwiper() {
             onMouseOver={() => setShownProject(item.id)}
           >
             <p className="text-[14px] text-white">{"0" + item.id}</p>
-            <p className="text-[14px] text-white font-light">{item.title2}</p>
+            <p className="text-[14px] text-white font-light flex items-center">
+              {item.title2}
+            </p>
             <div
               className={`w-full h-[1px] ${
                 shownProject == item.id ? "bg-white" : "bg-transparent"
@@ -140,7 +142,7 @@ export default function MainSwiper() {
           </div>
         ))}
       </div>
-      <div className="absolute top-[50%] translate-y-[-50%] right-[-60px] z-[3] items-start gap-4 rotate-90 hidden sm:flex">
+      {/* <div className="absolute top-[50%] translate-y-[-50%] right-[-60px] z-[3] items-start gap-4 rotate-90 hidden sm:flex">
         {socials.map((item) => (
           <Link href={item.link} target="_blank" key={item.id}>
             <p className="text-[14px] text-white font-extralight cursor-pointer hover:opacity-50 duration-300">
@@ -148,7 +150,7 @@ export default function MainSwiper() {
             </p>
           </Link>
         ))}
-      </div>
+      </div> */}
       <div className="absolute left-[50%] translate-x-[-50%] sm:bottom-[40px] bottom-6 z-[3] flex-col gap-4 bounce hidden sm:flex items-center">
         <p className="text-[14px] text-white font-extralight">{t("scroll")}</p>
         <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white">

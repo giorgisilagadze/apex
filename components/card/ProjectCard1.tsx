@@ -1,6 +1,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BsArrowDown } from "react-icons/bs";
 
 import { IoLocationSharp } from "react-icons/io5";
@@ -13,8 +14,12 @@ interface Props {
 export default function ProjectCard1({ item }: Props) {
   const locale = useLocale();
   const t = useTranslations("ProjectsPage.card");
+  const route = useRouter();
   return (
-    <div className="w-full lg:h-[500px] h-[450px] relative">
+    <div
+      className="w-full lg:h-[500px] h-[450px] relative cursor-pointer"
+      onClick={() => route.push(`/${locale}/projects/${item.id}`)}
+    >
       <Image
         src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
         alt="image"
@@ -22,6 +27,7 @@ export default function ProjectCard1({ item }: Props) {
         objectFit="cover"
         className="rounded-[10px]"
       />
+
       <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-blueOpacity to-transparent rounded-[10px]"></div>
       <div className="w-full h-full absolute top-0 left-0 md500:p-7 p-6 flex flex-col justify-between">
         <div className="flex flex-col gap-1">

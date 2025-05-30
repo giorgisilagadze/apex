@@ -190,3 +190,11 @@ input[type="number"] {
     background: #fff;
   }
 }
+
+
+.PhoneInputInput {
+  outline: none;
+  height: 44px;
+  padding-left: 12px;
+  font-size: 14px;
+}

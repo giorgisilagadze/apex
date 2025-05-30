@@ -28,7 +28,7 @@
     "Slider": {
       "apexNuts": "Apex Nutsubidze",
       "apexDig": "Apex Didi Dighomi",
-      "apexNuts2": "Apex Nutsubidze II",
+      "apexNuts2": "Isani",
       "text": "0% Internal Installment",
       "scroll": "Scroll"
     },
@@ -36,17 +36,24 @@
       "projects": "Projects",
       "current": "Current Projects",
       "მიმდინარე": "Ongoing",
-      "დასრულებული": "Completed"
+      "დასრულებული": "Completed",
+      "see": "See Project",
+      "seeAll": "See All Projects"
     },
     "About": {
       "aboutUs": "About Us",
-      "aboutUs1": "About the Company",
-      "text": "Apex Development has been operating in the market since 2012. The company offers high-quality products and services, creating desired comfort for each individual. Currently, Apex Development has 10 completed and 3 ongoing projects across Tbilisi.",
-      "customer": "Satisfied Customers",
-      "year": "Years in the Market",
-      "done": "Completed Projects",
-      "current": "Ongoing Projects"
-    },
+      "aboutUs1": "Company Overview",
+      "text": "Since 2012, Apex Development has been creating high-quality residential and multifunctional spaces. With more than 20 completed projects to date, we have thousands of satisfied residents and owners.",
+      "done": "Successfully Completed Project",
+      "text1": "Apex Development partners with leading banks and financial institutions to make the apartment purchasing process as simple and accessible as possible for our buyers. Our partners include: Bank of Georgia, TBC Bank, Liberty Bank, BasisBank, and Credo Bank.",
+      "partner": "Partner Financial Institution",
+      "text2": "Apex Development has fulfilled the dream of thousands of people seeking a home. Our apartments are more than just walls and ceilings — they are spaces where your comfortable life begins.",
+      "apartment": "Apartments Sold",
+      "customer": "Satisfied Customer",
+      "year": "Years on the Market",
+      "current": "Ongoing Project",
+      "historyOfSuccess": "History of Success"
+    },    
     "News": {
       "blog": "Blog",
       "news": "News",
@@ -221,5 +228,23 @@
   "404": {
     "text": "The requested page was not found",
     "button": "Return to the homepage"
+  },
+  "bookCall": {
+    "title": "Request a Call",
+    "name": "Full Name",
+    "phone": "Phone Number",
+    "send": "Send",
+    "enterName": "Enter your full name",
+    "enterPhone": "Enter your phone number",
+    "success": "Your information has been successfully sent"
+  },
+  "toast": {
+    "off": "Close"
+  },
+  "Italy": {
+    "title": "Do you own an Italian courtyard-style house and are considering its development?",
+    "subtitle": "Would you like your old house to be replaced with a modern apartment building? Contact us — we are looking for homeowners interested in collaboration.",
+    "text": "Leave us your information and we will get in touch to discuss the details.",
+    "contact": "Contact Us"
   }
 }

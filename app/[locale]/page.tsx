@@ -20,7 +20,7 @@ export default async function Home() {
       <Filter page="home" />
       <Projects projects={projects} />
       <AboutUsComp />
-      {/* <Italy /> */}
+      <Italy />
       <News news={news.data.slice(0, 3)} />
       <Contact />
       <Partners />

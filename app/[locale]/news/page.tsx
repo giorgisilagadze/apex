@@ -107,7 +107,7 @@ export default function News() {
                   }}
                 >
                   <p
-                    className={`text-[14px] font-light hover:opacity-50 duration-300 cursor-pointer ${
+                    className={`text-[16px] font-light hover:opacity-50 duration-300 cursor-pointer ${
                       item.title == clickedType ? "text-blue" : "text-black"
                     }`}
                   >

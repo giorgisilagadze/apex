@@ -105,7 +105,7 @@ export default function Header() {
               className="lg1350:flex items-center gap-1 hidden cursor-pointer hover:opacity-60 duration-300"
               onClick={callPhone}
             >
-              <IoMdCall className="text-[18px] text-white" />
+              <IoMdCall className="text-[18px] text-white animate-soft-bounce" />
               <p className="text-[16px] text-white">+995 555 045 555</p>
             </div>
             {/* <div className="lg1110:flex items-center gap-1 hidden">

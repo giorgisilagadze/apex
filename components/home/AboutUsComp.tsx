@@ -48,9 +48,8 @@ export default function AboutUsComp() {
     {
       id: 1,
       icon: <PiBuildingOfficeFill className="text-[40px] text-blue" />,
-      title: "წარმატების ისტორია",
-      description:
-        "სამშენებლო კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის პროდუქტსა და მომსახურებას და ქმნის თითოეული ინდივიდისთვის სასურველს კომფორტს.",
+      title: t("historyOfSuccess"),
+      description: t("text"),
       count: 20,
       labelKey: "done",
       image: "/images/about1.jpg",
@@ -58,21 +57,19 @@ export default function AboutUsComp() {
     {
       id: 2,
       icon: <PiBuildingOfficeFill className="text-[40px] text-blue" />,
-      title: "წარმატების ისტორია",
-      description:
-        "სამშენებლო კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის პროდუქტსა და მომსახურებას და ქმნის თითოეული ინდივიდისთვის სასურველს კომფორტს.",
-      count: 6,
-      labelKey: "current",
+      title: t("historyOfSuccess"),
+      description: t("text1"),
+      count: 5,
+      labelKey: "partner",
       image: "/images/about2.jpg",
     },
     {
       id: 3,
       icon: <PiBuildingOfficeFill className="text-[40px] text-blue" />,
-      title: "წარმატების ისტორია",
-      description:
-        "სამშენებლო კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის პროდუქტსა და მომსახურებას და ქმნის თითოეული ინდივიდისთვის სასურველს კომფორტს.",
-      count: 5532,
-      labelKey: "customer",
+      title: t("historyOfSuccess"),
+      description: t("text2"),
+      count: 2500,
+      labelKey: "apartment",
       image: "/images/about3.jpg",
     },
   ];
@@ -281,7 +278,7 @@ export default function AboutUsComp() {
           className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[80px] py-[60px] flex flex-col gap-6 items-center"
         >
           <h1 className="sm:text-[30px] text-[24px] font-semibold text-white">
-            წარმატების ისტორია
+            {t("historyOfSuccess")}
           </h1>
           <div className="w-full grid lg1250:grid-cols-3 md600:grid-cols-2 gap-5">
             {aboutData.map((item, index) => (
@@ -292,7 +289,7 @@ export default function AboutUsComp() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  className="w-full px-7 pt-7 pb-8 flex flex-col md600:gap-8 gap-6 bg-white rounded-[20px]"
+                  className="w-full px-7 pt-7 pb-8 flex flex-col md600:gap-8 gap-6 bg-white rounded-[20px] justify-between"
                 >
                   <div className="w-full flex flex-col gap-3">
                     {item.icon}

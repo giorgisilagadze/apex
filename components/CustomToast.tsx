@@ -4,11 +4,14 @@ import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useApexAdmin from "@/utils/ApexAdmin";
 import ScreenSize from "@/hooks/ScreenSize";
+import { useTranslations } from "next-intl";
 
 export default function CustomToast() {
   const { toast, setToast } = useApexAdmin();
 
   const dimension = ScreenSize();
+
+  const t = useTranslations("toast");
 
   useEffect(() => {
     if (toast.isVisible) {
@@ -40,7 +43,7 @@ export default function CustomToast() {
             className="px-4 h-[35px] bg-black text-white self-end shadow-md hover:opacity-50 duration-300"
             onClick={() => setToast(false, "", "")}
           >
-            <p className="text-[14px]">გათიშვა</p>
+            <p className="text-[14px]">{t("off")}</p>
           </button>
         </motion.div>
       )}

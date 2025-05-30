@@ -67,8 +67,10 @@ export default function Partners() {
             dimension[0] > 1440
               ? 6
               : dimension[0] > 1024
+              ? 5
+              : dimension[0] > 768
               ? 4
-              : dimension[0] > 400
+              : dimension[0] > 500
               ? 3
               : 2
           }
@@ -78,12 +80,8 @@ export default function Partners() {
               key={item.id}
               className="sm:w-[200px] w-[150px] !h-[150px] flex items-center justify-center border border-[#eee] sm:py-8 py-10 sm:px-4 px-4 rounded-[10px]"
             >
-              <div
-                className={`${
-                  item.id == 4 ? "w-full" : "sm:w-[85%] w-full"
-                } sm:h-[90%] h-full m-auto relative`}
-              >
-                <Image layout="fill" src={item.img} />
+              <div className={`w-full h-full flex items-center justify-center`}>
+                <img src={item.img} alt="partner" />
               </div>
             </SwiperSlide>
           ))}
