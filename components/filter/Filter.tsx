@@ -15,6 +15,7 @@ import axios from "axios";
 import Shimmer from "../shimmer/Shimmer";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import useClickOutside from "@/hooks/useClickOutside";
 
 interface Props {
   page: string;
@@ -40,6 +41,14 @@ export default function Filter({ page, isSingleProject }: Props) {
   const [aparts, setAparts] = useState<Apartment1[]>();
   const [isApartsLoading, setIsApartsLoading] = useState(false);
   const [floor, setFloor] = useState<string>("");
+  const [isAreaVisible, setIsAreaVisible] = useState(false);
+  const [isPriceVisible, setIsPriceVisible] = useState(false);
+
+  const areaRef = useRef(null);
+  const priceRef = useRef(null);
+
+  useClickOutside(areaRef, () => setIsAreaVisible(false));
+  useClickOutside(priceRef, () => setIsPriceVisible(false));
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -70,26 +79,12 @@ export default function Filter({ page, isSingleProject }: Props) {
 
   const status = ["ყველა", "მშენებარე", "დასრულებული"];
 
+  const minPrices = ["10 000", "20 000", "30 000", "75 000", "100 000"];
+  const maxPrices = ["30 000", "50 000", "80 000", "150 000", "250 000"];
+  const minAreas = ["32", "50", "70", "100", "120", "150"];
+  const maxAreas = ["50", "70", "100", "120", "150", "200"];
+
   const dimension = ScreenSize();
-
-  // const parseFilters = (filterString: string) => {
-  //   const params = new URLSearchParams(filterString);
-  //   const parsedFilters = {
-  //     building: params.get("building") || "",
-  //     type: params.get("type") || "",
-  //     status: params.get("status") || "",
-  //     areaFrom: params.get("areaFrom") || "",
-  //     areaTo: params.get("areaTo") || "",
-  //     priceFrom: params.get("priceFrom") || "",
-  //     priceTo: params.get("priceTo") || "",
-  //   };
-  //   const projectId = params.get("project") || "";
-  //   setSelectedProjectId(parseInt(projectId));
-  //   const floorId = params.get("floor") || "";
-  //   setFloor(floorId);
-
-  //   return parsedFilters;
-  // };
 
   const parseFilters = (filterString: string) => {
     const params = new URLSearchParams(filterString);
@@ -102,9 +97,8 @@ export default function Filter({ page, isSingleProject }: Props) {
       priceFrom: params.get("priceFrom") || "",
       priceTo: params.get("priceTo") || "",
     };
-    const projectId =
-      params.get("project") ||
-      (page !== "project" && page !== "floor" ? "1" : "");
+    const projectId = params.get("project") || "";
+    // (page !== "project" && page !== "floor" ? "1" : "");
     const floorId = params.get("floor") || "";
 
     return { parsedFilters, projectId, floorId };
@@ -200,6 +194,11 @@ export default function Filter({ page, isSingleProject }: Props) {
 
   const handleSelect = (key: string, value: string) => {
     setSelectedValues({ ...selectedValues, [key]: value });
+    if (key == "building") {
+      setSelectedProjectId(
+        filterValues?.projectBuilding.find((item) => item.name == value)?.id
+      );
+    }
   };
   const handleClear = () => {
     setSelectedValues({
@@ -251,7 +250,9 @@ export default function Filter({ page, isSingleProject }: Props) {
       setIsApartsLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/apartment?${queryString}&building_id=${projectId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/apartment?${queryString}${
+            projectId ? `&building_id=${projectId}` : ""
+          }`
         );
         let data = response.data;
         data = data.sort((a: { price: number }, b: { price: number }) =>
@@ -303,27 +304,54 @@ export default function Filter({ page, isSingleProject }: Props) {
         >
           {page !== "project" && page !== "floor" ? (
             !isFilerLoading ? (
-              filterValues?.projectBuilding.map((item) => (
+              // filterValues?.projectBuilding.map((item) => (
+              //   <div
+              //     key={item.id}
+              //     className="flex flex-col gap-2 cursor-pointer"
+              //     onClick={() => {
+              //       setSelectedProjectId(item.id);
+              //       handleClear();
+              //     }}
+              //   >
+              //     <p
+              //       className={`${
+              //         selectedProjectId == item.id
+              //           ? "text-blue font-medium"
+              //           : "text-black font-light"
+              //       } text-[14px]`}
+              //     >
+              //       {t(item.name)}
+              //     </p>
+              //     <div
+              //       className={`w-full h-[2px] ${
+              //         selectedProjectId == item.id ? "bg-blue" : "bg-trasparent"
+              //       }`}
+              //     ></div>
+              //   </div>
+              // ))
+              status.map((item) => (
                 <div
-                  key={item.id}
+                  key={item}
                   className="flex flex-col gap-2 cursor-pointer"
                   onClick={() => {
-                    setSelectedProjectId(item.id);
-                    handleClear();
+                    handleSelect("status", item);
+                    // handleClear();
                   }}
                 >
                   <p
                     className={`${
-                      selectedProjectId == item.id
+                      selectedValues.status == item
                         ? "text-blue font-medium"
                         : "text-black font-light"
                     } text-[14px]`}
                   >
-                    {t(item.name)}
+                    {t(item)}
                   </p>
                   <div
                     className={`w-full h-[2px] ${
-                      selectedProjectId == item.id ? "bg-blue" : "bg-trasparent"
+                      selectedValues.status == item
+                        ? "bg-blue"
+                        : "bg-trasparent"
                     }`}
                   ></div>
                 </div>
@@ -431,7 +459,7 @@ export default function Filter({ page, isSingleProject }: Props) {
                 filterKey="type"
                 selectedValues={selectedValues}
               />
-              {page !== "project" && page !== "floor" && (
+              {/* {page !== "project" && page !== "floor" && (
                 <SelectComp
                   title={t("status")}
                   placeholder={t("choose")}
@@ -440,14 +468,31 @@ export default function Filter({ page, isSingleProject }: Props) {
                   filterKey="status"
                   selectedValues={selectedValues}
                 />
+              )} */}
+
+              {page !== "project" && page !== "floor" && (
+                <SelectComp
+                  title={t("project")}
+                  placeholder={t("choose")}
+                  data={filterValues?.projectBuilding.map((item) => item.name)}
+                  onClick={handleSelect}
+                  filterKey="building"
+                  selectedValues={selectedValues}
+                />
               )}
 
-              <div className="w-full flex flex-col gap-[6px]">
+              <div
+                className="w-full flex flex-col gap-[6px] relative"
+                ref={areaRef}
+              >
                 <p className="text-[14px] font-medium">
                   {t("area")}
                   <sup>2</sup>
                 </p>
-                <div className="w-full grid grid-cols-2 gap-1">
+                <div
+                  className="w-full grid grid-cols-2 gap-1"
+                  onClick={() => setIsAreaVisible(true)}
+                >
                   <Input
                     placeholder={t("from")}
                     inputKey="areaFrom"
@@ -463,10 +508,70 @@ export default function Filter({ page, isSingleProject }: Props) {
                     type="number"
                   />
                 </div>
+                <div
+                  className={`${
+                    isAreaVisible
+                      ? "pointer-events-auto opacity-100 z-[2]"
+                      : "pointer-events-none opacity-0 z-[-1]"
+                  } duration-300 absolute top-[76px] left-0 w-full rounded-[10px] border border-blue bg-white px-3 py-4 grid grid-cols-2 gap-1`}
+                >
+                  <div className="w-full flex flex-col">
+                    <p className="text-[12px] text-center">{t("min")}</p>
+                    {minAreas.map((item) => (
+                      <div
+                        className=" border-b border-[#eee] flex justify-center cursor-pointer hover:bg-blue hover:text-white duration-300 py-2"
+                        key={item}
+                        onClick={() => {
+                          if (selectedValues["areaTo"]) {
+                            if (
+                              parseInt(item) <
+                              parseInt(selectedValues["areaTo"])
+                            )
+                              handleSelect("areaFrom", item);
+                          } else handleSelect("areaFrom", item);
+                        }}
+                      >
+                        <p className="text-[14px]">
+                          {item} {t("area")}
+                          <sup>2</sup>
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="w-full flex flex-col">
+                    <p className="text-[12px] text-center">{t("max")}</p>
+                    {maxAreas.map((item) => (
+                      <div
+                        className=" border-b border-[#eee] flex justify-center cursor-pointer hover:bg-blue hover:text-white duration-300 py-2"
+                        key={item}
+                        onClick={() => {
+                          if (selectedValues["areaFrom"]) {
+                            if (
+                              parseInt(item) >
+                              parseInt(selectedValues["areaFrom"])
+                            )
+                              handleSelect("areaTo", item);
+                          } else handleSelect("areaTo", item);
+                        }}
+                      >
+                        <p className="text-[14px]">
+                          {item} {t("area")}
+                          <sup>2</sup>
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="w-full flex flex-col gap-[6px]">
+              <div
+                className="w-full flex flex-col gap-[6px] relative"
+                ref={priceRef}
+              >
                 <p className="text-[14px] font-medium">{t("price")}</p>
-                <div className="w-full grid grid-cols-2 gap-1">
+                <div
+                  className="w-full grid grid-cols-2 gap-1"
+                  onClick={() => setIsPriceVisible(true)}
+                >
                   <Input
                     placeholder={t("from")}
                     inputKey="priceFrom"
@@ -479,6 +584,54 @@ export default function Filter({ page, isSingleProject }: Props) {
                     onChange={handleSelect}
                     value={selectedValues["priceTo"]}
                   />
+                </div>
+                <div
+                  className={`${
+                    isPriceVisible
+                      ? "pointer-events-auto opacity-100 z-[2]"
+                      : "pointer-events-none opacity-0 z-[-1]"
+                  } duration-300 absolute top-[76px] left-0 w-full rounded-[10px] border border-blue bg-white px-3 py-4 grid grid-cols-2 gap-1`}
+                >
+                  <div className="w-full flex flex-col">
+                    <p className="text-[12px] text-center">{t("min")}</p>
+                    {minPrices.map((item) => (
+                      <div
+                        className="border-b border-[#eee] flex justify-center cursor-pointer hover:bg-blue hover:text-white duration-300 py-2"
+                        key={item}
+                        onClick={() => {
+                          if (selectedValues["priceTo"]) {
+                            if (
+                              parseInt(item) <
+                              parseInt(selectedValues["priceTo"])
+                            )
+                              handleSelect("priceFrom", item);
+                          } else handleSelect("priceFrom", item);
+                        }}
+                      >
+                        <p className="text-[14px]">$ {item}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="w-full flex flex-col">
+                    <p className="text-[12px] text-center">{t("max")}</p>
+                    {maxPrices.map((item) => (
+                      <div
+                        className="border-b border-[#eee] flex justify-center cursor-pointer hover:bg-blue hover:text-white duration-300 py-2"
+                        key={item}
+                        onClick={() => {
+                          if (selectedValues["priceFrom"]) {
+                            if (
+                              parseInt(item) >
+                              parseInt(selectedValues["priceFrom"])
+                            )
+                              handleSelect("priceTo", item);
+                          } else handleSelect("priceTo", item);
+                        }}
+                      >
+                        <p className="text-[14px]">$ {item}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="w-full flex items-end justify-end gap-4 flex-col md500:flex-row z-[1]">
@@ -506,7 +659,11 @@ export default function Filter({ page, isSingleProject }: Props) {
             </div>
           ) : (
             <div
-              className={`w-full lg:px-12 px-6 py-7 grid lg:grid-cols-6 md600:grid-cols-3 md500:grid-cols-2 gap-4 items-center rounded-bl-[16px] rounded-br-[16px] `}
+              className={`w-full lg:px-12 px-6 py-7 grid ${
+                page == "project" || page == "floor"
+                  ? "lg:grid-cols-6"
+                  : "lg:grid-cols-5"
+              } md600:grid-cols-3 md500:grid-cols-2 gap-4 items-center rounded-bl-[16px] rounded-br-[16px] `}
             >
               <div className="flex flex-col gap-[6px] w-full">
                 <Shimmer
@@ -524,14 +681,14 @@ export default function Filter({ page, isSingleProject }: Props) {
                 />
                 <Shimmer height="h-[44px]" rounded="rounded-[10px]" />
               </div>
-              <div className="flex flex-col gap-[6px] w-full">
+              {/* <div className="flex flex-col gap-[6px] w-full">
                 <Shimmer
                   width="w-[80px]"
                   height="h-[21px]"
                   rounded="rounded-[4px]"
                 />
                 <Shimmer height="h-[44px]" rounded="rounded-[10px]" />
-              </div>
+              </div> */}
               <div className="flex flex-col gap-[6px] w-full">
                 <Shimmer
                   width="w-[80px]"

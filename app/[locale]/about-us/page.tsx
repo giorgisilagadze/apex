@@ -14,9 +14,12 @@ import { BsArrowDown } from "react-icons/bs";
 import SendEmail from "@/components/SendEmail";
 import ScreenSize from "@/hooks/ScreenSize";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 export default function AboutUs() {
   const dimension = ScreenSize();
+
+  const [hoveredYear, setHoveredYear] = useState<string>();
 
   const t = useTranslations("AboutUs");
   const t1 = useTranslations("HomePage.About");
@@ -97,6 +100,79 @@ export default function AboutUs() {
       </div>
       <div className="w-full sm:mt-[100px] mt-10">
         <AboutUsComp />
+        <div className="w-full xl1600:pl-[330px] xl1600:pr-[100px] lg1250:pl-[200px] lg:pl-[100px] sm:pl-[64px] pl-6 sm:py-[60px] py-10 grid grid-cols-5">
+          <div className="w-full flex flex-col gap-5 col-span-2">
+            <div className="w-full h-[350px] relative">
+              <Image
+                src={"/images/about1.jpg"}
+                alt="about"
+                layout="fill"
+                className="rounded-[20px]"
+              />
+            </div>
+            <p className="text-[13px] text-grey">
+              სამშენებლო კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან
+              ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის
+              პროდუქტსა და მომსახურებას და ქმნის თითოეული ინდივიდისთვის
+              სასურველს კომფორტს. ამჟამად, აპექს დეველოპმენტი 10 დასრულებულ და 3
+              მიმდინარე პროექტს ითვლის თბილისის მასშტაბით. სამშენებლო კომპანია
+              აპექს დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია
+              სთავაზობს მომხმარებელს მაღალი ხარისხის პროდუქტსა და მომსახურებას
+              და ქმნის თითოეული ინდივიდისთვის სასურველს კომფორტს. სამშენებლო
+              კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს.
+              კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის პროდუქტსა და
+              მომსახურებას და ქმნის თითოეული ინდივიდისთვის სასურველს კომფორტს.
+              ამჟამად, აპექს დეველოპმენტი 10 დასრულებულ და 3 მიმდინარე პროექტს
+              ითვლის თბილისის მასშტაბით. სამშენებლო კომპანია აპექს დეველოპმენტი
+              ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს
+              მაღალი ხარისხის პროდუქტსა და მომსახურებას და ქმნის თითოეული
+              ინდივიდისთვის სასურველს კომფორტს.
+            </p>
+          </div>
+          <div className="w-full h-[900px] relative col-span-3">
+            <Image
+              src={"/images/tree.png"}
+              alt="about"
+              layout="fill"
+              className="opacity-10"
+            />
+            <div className="absolute top-[130px] left-[50%] translate-x-[50%] z-[1] flex flex-col gap-2">
+              {["2018", "2019", "2021", "2022", "2023"].map((item, index) => (
+                <div
+                  className="flex flex-col items-center gap-1 relative cursor-pointer"
+                  onMouseEnter={() => setHoveredYear(item)}
+                  onMouseLeave={() => setHoveredYear(undefined)}
+                >
+                  <div className="w-[1px] h-[50px] bg-blue"></div>
+                  <h1 className="text-blue text-[18px]">{item}</h1>
+                  <div
+                    className={`absolute w-[150px] top-0  ${
+                      (index + 1) % 2 == 0 ? "left-[200%]" : "right-[200%]"
+                    } ${
+                      hoveredYear == item
+                        ? "opacity-100 pointer-events-auto"
+                        : "opacity-0 pointer-events-none"
+                    } duration-300`}
+                  >
+                    <h1
+                      className={`sm:text-[32px] text-[24px] text-[rgba(47,159,42,1)]  border-b-[2px] border-blue w-full mb-3 ${
+                        (index + 1) % 2 != 0 && "text-end"
+                      }`}
+                    >
+                      {item}
+                    </h1>
+                    {[1, 2, 3, 4, 5].map((item) => (
+                      <div className="flex items-center gap-3" key={item}>
+                        <div className="w-1 h-1 rounded-[50%] bg-blue"></div>
+                        <h1 className="text-[15px] text-blue">ბერბუკის 1</h1>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
         <div className="w-full grid sm:grid-cols-2 lg1110:gap-[100px] sm:gap-10 items-center">
           <div className="w-full lg:h-[600px] sm:h-full h-[400px] relative">
             <Image

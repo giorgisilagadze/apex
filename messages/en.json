@@ -117,6 +117,8 @@
     "dollar": "Dollar",
     "დაბლიდან მაღლა": "Ascending Price",
     "მაღლიდან დაბლა": "Descending Price",
+    "min": "MIN",
+    "max": "MAX",
     "card": {
       "apartment": "Apartment",
       "area": "m",

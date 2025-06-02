@@ -59,7 +59,7 @@ export default function Call() {
   };
 
   return (
-    <div className="fixed top-1/2 -translate-y-1/2 right-0 z-[5] flex flex-col gap-[2px] w-[60px] items-end">
+    <div className="fixed top-1/2 -translate-y-1/2 right-0 z-[5] flex-col gap-[2px] w-[60px] items-end sm:flex hidden">
       <a
         className="w-[50px] h-[50px] hover:w-[60px] rounded-tl-[10px] rounded-bl-[10px] bg-black flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black hover:shadow-dropDown duration-300"
         href={"https://www.facebook.com/apexd.ge"}
