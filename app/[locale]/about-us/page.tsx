@@ -81,6 +81,44 @@ export default function AboutUs() {
     },
   ];
 
+  const tree = [
+    {
+      id: 1,
+      year: "2015",
+      projects: ["დადიანის 22"],
+    },
+    {
+      id: 2,
+      year: "2016",
+      projects: ["მეცკევიჩის 56", "მეტრეველის 4", "მეტრეველის 6"],
+    },
+    {
+      id: 3,
+      year: "2018",
+      projects: ["დადიანის 125", "ცაგარელის 70"],
+    },
+    {
+      id: 4,
+      year: "2019",
+      projects: ["დადიანის 111", "ბერბუკის 1"],
+    },
+    {
+      id: 5,
+      year: "2021",
+      projects: ["დადიანის 90"],
+    },
+    {
+      id: 6,
+      year: "2022",
+      projects: ["აპექს ავლაბარი"],
+    },
+    {
+      id: 7,
+      year: "2023",
+      projects: ["აპექს ლისი"],
+    },
+  ];
+
   return (
     <div className="w-full ">
       <div className="w-full sm:h-[400px] h-[300px] relative">
@@ -100,9 +138,9 @@ export default function AboutUs() {
       </div>
       <div className="w-full sm:mt-[100px] mt-10">
         <AboutUsComp />
-        <div className="w-full xl1600:pl-[330px] xl1600:pr-[100px] lg1250:pl-[200px] lg:pl-[100px] sm:pl-[64px] pl-6 sm:py-[60px] py-10 grid grid-cols-5">
-          <div className="w-full flex flex-col gap-5 col-span-2">
-            <div className="w-full h-[350px] relative">
+        <div className="w-full xl1600:pl-[330px] xl1600:pr-[100px] lg1250:pl-[200px] lg:pl-[100px] sm:pl-[64px] pl-6 pr-6 sm:pr-[64px] lg:pr-[100px] lg1110:pr-0 sm:py-[60px] py-10 grid lg1110:grid-cols-5">
+          <div className="w-full flex flex-col gap-5 lg1110:col-span-2">
+            <div className="w-full md500:h-[350px] h-[300px] relative">
               <Image
                 src={"/images/about1.jpg"}
                 alt="about"
@@ -129,27 +167,28 @@ export default function AboutUs() {
               ინდივიდისთვის სასურველს კომფორტს.
             </p>
           </div>
-          <div className="w-full h-[900px] relative col-span-3">
+          <div className="w-full sm:h-[900px] md500:h-[700px] h-[600px] relative lg1110:col-span-3">
             <Image
               src={"/images/tree.png"}
               alt="about"
               layout="fill"
-              className="opacity-10"
+              className="opacity-70"
             />
-            <div className="absolute top-[130px] left-[50%] translate-x-[50%] z-[1] flex flex-col gap-2">
-              {["2018", "2019", "2021", "2022", "2023"].map((item, index) => (
+            <div className="absolute sm:top-[130px] top-[50px] left-[50%] translate-x-[-50%] z-[1] flex flex-col gap-2">
+              {tree.map((item, index) => (
                 <div
                   className="flex flex-col items-center gap-1 relative cursor-pointer"
-                  onMouseEnter={() => setHoveredYear(item)}
+                  onMouseEnter={() => setHoveredYear(item.year)}
                   onMouseLeave={() => setHoveredYear(undefined)}
+                  key={item.id}
                 >
-                  <div className="w-[1px] h-[50px] bg-blue"></div>
-                  <h1 className="text-blue text-[18px]">{item}</h1>
+                  <div className="w-[1px] sm:h-[50px] h-[30px] bg-blue"></div>
+                  <h1 className="text-blue text-[18px]">{item.year}</h1>
                   <div
-                    className={`absolute w-[150px] top-0  ${
+                    className={`absolute sm:w-[150px] w-[120px] top-0  ${
                       (index + 1) % 2 == 0 ? "left-[200%]" : "right-[200%]"
                     } ${
-                      hoveredYear == item
+                      hoveredYear == item.year
                         ? "opacity-100 pointer-events-auto"
                         : "opacity-0 pointer-events-none"
                     } duration-300`}
@@ -159,12 +198,14 @@ export default function AboutUs() {
                         (index + 1) % 2 != 0 && "text-end"
                       }`}
                     >
-                      {item}
+                      {item.year}
                     </h1>
-                    {[1, 2, 3, 4, 5].map((item) => (
+                    {item.projects.map((item) => (
                       <div className="flex items-center gap-3" key={item}>
                         <div className="w-1 h-1 rounded-[50%] bg-blue"></div>
-                        <h1 className="text-[15px] text-blue">ბერბუკის 1</h1>
+                        <h1 className="sm:text-[15px] text-[13px] text-blue">
+                          {item}
+                        </h1>
                       </div>
                     ))}
                   </div>
@@ -227,7 +268,7 @@ export default function AboutUs() {
                 prevEl: ".prevv",
               }}
               modules={[FreeMode, Navigation, Pagination]}
-              spaceBetween={30}
+              spaceBetween={20}
               pagination={{
                 clickable: true,
               }}

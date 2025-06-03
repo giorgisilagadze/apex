@@ -77,7 +77,7 @@ export default function Filter({ page, isSingleProject }: Props) {
     },
   ];
 
-  const status = ["ყველა", "მშენებარე", "დასრულებული"];
+  const status = ["ყველა", "მიმდინარე", "დასრულებული"];
 
   const minPrices = ["10 000", "20 000", "30 000", "75 000", "100 000"];
   const maxPrices = ["30 000", "50 000", "80 000", "150 000", "250 000"];
@@ -513,7 +513,7 @@ export default function Filter({ page, isSingleProject }: Props) {
                     isAreaVisible
                       ? "pointer-events-auto opacity-100 z-[2]"
                       : "pointer-events-none opacity-0 z-[-1]"
-                  } duration-300 absolute top-[76px] left-0 w-full rounded-[10px] border border-blue bg-white px-3 py-4 grid grid-cols-2 gap-1`}
+                  } duration-300 absolute top-[76px] left-0 w-full min-w-[201px] rounded-[10px] border border-blue bg-white px-3 py-4 grid grid-cols-2 gap-1`}
                 >
                   <div className="w-full flex flex-col">
                     <p className="text-[12px] text-center">{t("min")}</p>
@@ -590,7 +590,7 @@ export default function Filter({ page, isSingleProject }: Props) {
                     isPriceVisible
                       ? "pointer-events-auto opacity-100 z-[2]"
                       : "pointer-events-none opacity-0 z-[-1]"
-                  } duration-300 absolute top-[76px] left-0 w-full rounded-[10px] border border-blue bg-white px-3 py-4 grid grid-cols-2 gap-1`}
+                  } duration-300 absolute top-[76px] left-0 w-full min-w-[201px] rounded-[10px] border border-blue bg-white px-3 py-4 grid grid-cols-2 gap-1`}
                 >
                   <div className="w-full flex flex-col">
                     <p className="text-[12px] text-center">{t("min")}</p>
@@ -634,7 +634,13 @@ export default function Filter({ page, isSingleProject }: Props) {
                   </div>
                 </div>
               </div>
-              <div className="w-full flex items-end justify-end gap-4 flex-col md500:flex-row z-[1]">
+              <div
+                className={`${
+                  page !== "project" && page !== "floor"
+                    ? "col-span-2 lg:col-span-1"
+                    : "col-span-1"
+                } w-full flex items-end justify-end gap-4 flex-col md500:flex-row z-[1]`}
+              >
                 {/* {dimension[0] !== 0 && dimension[0] < 500 ? (
                   <div className="w-full rounded-[16px] bg-[#eee] py-[11px] flex items-center justify-center gap-2">
                     <VscSettings className="text-[28px]" />
@@ -648,7 +654,11 @@ export default function Filter({ page, isSingleProject }: Props) {
                   onClick={() =>
                     handleSearch(selectedValues, floor, selectedProjectId)
                   }
-                  width={"md500:w-[110px] w-full"}
+                  width={`${
+                    page !== "project" && page !== "floor"
+                      ? "md600:w-[110px] w-full"
+                      : "md500:w-[110px] w-full"
+                  }`}
                   height="h-[50px]"
                   bgColor="bg-blue"
                   color="text-white"
@@ -711,14 +721,24 @@ export default function Filter({ page, isSingleProject }: Props) {
                   <Shimmer height="h-[44px]" rounded="rounded-[10px]" />
                 </div>
               </div>
-              <div className="w-full flex items-center justify-end gap-4 flex-col md500:flex-row">
+              <div
+                className={`${
+                  page !== "project" && page !== "floor"
+                    ? "col-span-2 lg:col-span-1"
+                    : "col-span-1"
+                }  w-full flex items-center justify-end gap-4 flex-col md500:flex-row`}
+              >
                 {/* <Shimmer
                   width={"w-full md500:w-[50px]"}
                   height="h-[50px]"
                   rounded="rounded-[16px]"
                 /> */}
                 <Shimmer
-                  width={"md500:w-[110px] w-full"}
+                  width={`${
+                    page !== "project" && page !== "floor"
+                      ? "md600:w-[110px] w-full"
+                      : "md500:w-[110px] w-full"
+                  }`}
                   height="h-[50px]"
                   rounded="rounded-[16px]"
                 />

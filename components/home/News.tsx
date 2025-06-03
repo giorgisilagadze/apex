@@ -5,6 +5,7 @@ import ProjectCard from "../card/ProjectCard";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import Image from "next/legacy/image";
 
 interface Props {
   news: NewsItem[];
@@ -15,7 +16,7 @@ export default function News({ news }: Props) {
   const t = useTranslations("HomePage.News");
 
   return (
-    <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[120px] py-[60px] flex flex-col gap-8 sm:mt-[-100px] mt-[-60px] bg-blue">
+    <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[120px] py-[60px] flex flex-col gap-8 sm:mt-[-100px] mt-[-60px] bg-blue relative">
       <div className="w-full flex items-end justify-between">
         <div className="w-full flex flex-col gap-2">
           <div className="items-center gap-3 flex">
@@ -49,6 +50,26 @@ export default function News({ news }: Props) {
             <ProjectCard key={item.id} item={item} isWhite={true} />
           </motion.div>
         ))}
+      </div>
+      <div className="absolute top-0 left-[-100px]">
+        <div className="w-[300px] h-[300px] relative">
+          <Image src={"/images/1w.png"} alt="bg" layout="fill" />
+        </div>
+      </div>
+      <div className="absolute top-0 right-[-100px]">
+        <div className="w-[300px] h-[300px] relative">
+          <Image src={"/images/2w.png"} alt="bg" layout="fill" />
+        </div>
+      </div>
+      <div className="absolute bottom-0 left-[-100px]">
+        <div className="w-[300px] h-[300px] relative">
+          <Image src={"/images/3w.png"} alt="bg" layout="fill" />
+        </div>
+      </div>
+      <div className="absolute bottom-0 right-[-100px]">
+        <div className="w-[300px] h-[300px] relative">
+          <Image src={"/images/4w.png"} alt="bg" layout="fill" />
+        </div>
       </div>
     </div>
   );
