@@ -21,6 +21,9 @@ export default function SingleAdminProject() {
     titleEng: "",
     titleRus: "",
     floor: "",
+    ijara: "",
+    fullSale: "",
+    halfSale: "",
     map: "",
     descriptionGeo: "",
     descriptionEng: "",
@@ -32,6 +35,9 @@ export default function SingleAdminProject() {
     titleEng: "",
     titleRus: "",
     floor: "",
+    ijara: "",
+    fullSale: "",
+    halfSale: "",
     map: "",
     descriptionGeo: "",
     descriptionEng: "",
@@ -61,6 +67,9 @@ export default function SingleAdminProject() {
           titleEng: data.title_en,
           titleRus: data.title_ru,
           floor: data.max_floor.toString(),
+          ijara: parseInt(data.ijara).toFixed(2),
+          fullSale: parseInt(data.fullSale).toFixed(2),
+          halfSale: parseInt(data.halfSale).toFixed(2),
           map: data.maping !== null ? data.maping : "",
           descriptionGeo: data.text !== null ? data.text : "",
           descriptionEng: data.text_en !== null ? data.text_en : "",
@@ -73,6 +82,9 @@ export default function SingleAdminProject() {
           titleEng: data.title_en,
           titleRus: data.title_ru,
           floor: data.max_floor.toString(),
+          ijara: parseInt(data.ijara).toFixed(2),
+          fullSale: parseInt(data.fullSale).toFixed(2),
+          halfSale: parseInt(data.halfSale).toFixed(2),
           map: data.maping !== null ? data.maping : "",
           descriptionGeo: data.text !== null ? data.text : "",
           descriptionEng: data.text_en !== null ? data.text_en : "",
@@ -197,6 +209,30 @@ export default function SingleAdminProject() {
             value={projectUpdate.floor}
             title="სართულების რაოდენობა"
             inputKey="floor"
+          />
+          <Input
+            placeholder={"იჯარა"}
+            onChange={handleOnChange}
+            value={projectUpdate.ijara}
+            title="იჯარა"
+            inputKey="ijara"
+            type="number"
+          />
+          <Input
+            placeholder={"სრული შენატანი"}
+            onChange={handleOnChange}
+            value={projectUpdate.fullSale}
+            title="სრული შენატანი"
+            inputKey="fullSale"
+            type="number"
+          />
+          <Input
+            placeholder={"ნახევარი შენატანი"}
+            onChange={handleOnChange}
+            value={projectUpdate.halfSale}
+            title="ნახევარი შენატანი"
+            inputKey="halfSale"
+            type="number"
           />
           <div className="flex flex-col gap-[6px]">
             <p className="text-[14px]">პროექტის მაპირება</p>

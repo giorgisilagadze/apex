@@ -13,6 +13,7 @@ interface Props {
   onClick?: (filterKey: string, value: string) => void;
   filterKey: string;
   selectedValues: SelectedValues | any;
+  isTranslated?: boolean;
 }
 
 export default function SelectComp({
@@ -23,6 +24,7 @@ export default function SelectComp({
   onClick,
   filterKey,
   selectedValues,
+  isTranslated,
 }: Props) {
   const [isClicked, setIsClicked] = useState(false);
   const selectRef = useRef(null);
@@ -49,7 +51,7 @@ export default function SelectComp({
           <p className="text-[14px] font-light whitespace-nowrap truncate">
             {filterKey
               ? selectedValues[filterKey as keyof SelectedValues]
-                ? !pathname.includes("/admin")
+                ? !pathname.includes("/admin") && !isTranslated
                   ? t(selectedValues[filterKey as keyof SelectedValues])
                   : selectedValues[filterKey as keyof SelectedValues]
                 : placeholder
@@ -85,7 +87,7 @@ export default function SelectComp({
                 setIsClicked(false);
               }}
             >
-              {!pathname.includes("/admin") ? t(item) : item}
+              {!pathname.includes("/admin") && !isTranslated ? t(item) : item}
             </div>
           ))}
         </div>

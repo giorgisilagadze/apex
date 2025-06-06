@@ -1,4 +1,5 @@
 import SendEmail from "@/components/SendEmail";
+import ROICalculatorMain from "@/components/calculator/ROICalculatorMain";
 import Filter from "@/components/filter/Filter";
 import AboutUsComp from "@/components/home/AboutUsComp";
 import Contact from "@/components/home/Contact";
@@ -44,12 +45,19 @@ export default async function Home() {
         </div>
       </div>
       <div className="w-full flex flex-col sm:gap-[100px] gap-[60px]">
-        <Projects projects={projects} />
+        <Projects
+          projects={projects.filter(
+            (item: Building) => (item.status = "მიმდინარე")
+          )}
+        />
         <AboutUsComp />
         <Italy />
         <News news={news.data.slice(0, 3)} />
         <Contact />
         <Partners />
+        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
+          <ROICalculatorMain projects={projects} />
+        </div>
         <SendEmail />
       </div>
     </div>

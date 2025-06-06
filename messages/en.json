@@ -185,6 +185,7 @@
   "ProjectsPage": {
     "title": "Projects",
     "page": "Home / Projects",
+    "noProject": "No Project Found",
     "card": {
       "მიმდინარე": "Ongoing",
       "დასრულებული": "Completed",

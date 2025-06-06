@@ -53,22 +53,42 @@ export default function News({ news }: Props) {
       </div>
       <div className="absolute top-0 left-[-100px]">
         <div className="w-[300px] h-[300px] relative">
-          <Image src={"/images/1w.png"} alt="bg" layout="fill" />
+          <Image
+            src={"/images/1w.png"}
+            alt="bg"
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       </div>
-      <div className="absolute top-0 right-[-100px]">
+      <div className="absolute top-0 right-[0px]">
         <div className="w-[300px] h-[300px] relative">
-          <Image src={"/images/2w.png"} alt="bg" layout="fill" />
+          <Image
+            src={"/images/2w.png"}
+            alt="bg"
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       </div>
       <div className="absolute bottom-0 left-[-100px]">
         <div className="w-[300px] h-[300px] relative">
-          <Image src={"/images/3w.png"} alt="bg" layout="fill" />
+          <Image
+            src={"/images/3w.png"}
+            alt="bg"
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       </div>
-      <div className="absolute bottom-0 right-[-100px]">
+      <div className="absolute bottom-0 right-[0px]">
         <div className="w-[300px] h-[300px] relative">
-          <Image src={"/images/4w.png"} alt="bg" layout="fill" />
+          <Image
+            src={"/images/4w.png"}
+            alt="bg"
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       </div>
     </div>

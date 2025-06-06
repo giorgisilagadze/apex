@@ -7,45 +7,50 @@ import VideoItem from "../gallery/VideoItem";
 import SelectComp from "../input/SelectComp";
 import { useEffect, useState } from "react";
 import SelectComp1 from "../input/SelectComp1";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Project } from "next/dist/build/swc/types";
 
 interface Props {
-  apartment: Apartment1;
+  projects: Building[];
 }
 
-export default function ROICalculator({ apartment }: Props) {
+export default function ROICalculatorMain({ projects }: Props) {
   const [selectedType, setSelectedType] = useState("სრული");
+  const [data, setData] = useState({
+    project: "",
+    area: "",
+    price: "",
+  });
+
   const [roi, setRoi] = useState<number>();
 
   const t = useTranslations("SingleApartmnet");
   const f = useTranslations("Filter");
+  const locale = useLocale();
 
-  const ijara = Number(parseFloat(apartment.projectR.ijara).toFixed(2));
-  const fullSale = Number(parseFloat(apartment.projectR.fullSale).toFixed(2));
-  const halfSale = Number(parseFloat(apartment.projectR.halfSale).toFixed(2));
+  const handleOnChange = (key: string, value: string) => {
+    setData({ ...data, [key]: value });
+  };
 
   useEffect(() => {
-    if (selectedType) {
-      if (selectedType == "სრული") {
-        const result =
-          (parseInt(Number(apartment.area).toFixed(0)) * ijara * 12) /
-          (parseInt(Number(apartment.area).toFixed(0)) *
-            (parseInt(Number(apartment.price2).toFixed(0)) - fullSale));
+    if (!data.project || !data.area || !data.price) return;
 
-        setRoi(result);
-      } else {
-        const result =
-          (parseInt(Number(apartment.area).toFixed(0)) * ijara * 12) /
-          (parseInt(Number(apartment.area).toFixed(0)) *
-            (parseInt(Number(apartment.price2).toFixed(0)) - halfSale));
+    const project = projects.find((item) => item.title === data.project);
+    if (!project) return;
 
-        setRoi(result);
-      }
-    }
-  }, [selectedType]);
+    const area = Math.round(Number(data.area));
+    const price = Math.round(Number(data.price));
+    const ijara = Number(parseFloat(project.ijara).toFixed(2));
+    const fullSale = Number(parseFloat(project.fullSale).toFixed(2));
+    const halfSale = Number(parseFloat(project.halfSale).toFixed(2));
 
-  console.log(roi);
+    const saleValue = selectedType === "სრული" ? fullSale : halfSale;
+    const numerator = area * ijara * 12;
+    const denominator = area * (price - saleValue);
+
+    const roi = numerator / denominator;
+    setRoi(roi);
+  }, [data, selectedType]);
 
   return (
     <div className="w-full shadow-dropDown relative">
@@ -54,20 +59,27 @@ export default function ROICalculator({ apartment }: Props) {
       </div>
       <div className="sm:p-10 p-6 grid lg:grid-cols-3 sm:grid-cols-2 gap-14 bg-white">
         <div className="w-full lg:col-span-2 grid lg:grid-cols-2 gap-5">
-          <Input
-            placeholder={""}
+          <SelectComp
             title={t("project")}
-            bgColor="bg-[rgba(242,242,242,1)]"
-            onChange={() => {}}
-            value={apartment.project}
-            readonly={true}
+            placeholder={t("choose")}
+            data={projects.map((item) =>
+              locale == "ge"
+                ? item.title
+                : locale == "en"
+                ? item.title_en
+                : item.title_ru
+            )}
+            onClick={handleOnChange}
+            filterKey="project"
+            selectedValues={data}
+            isTranslated={true}
           />
           <Input
             placeholder={""}
             title={t("projectType")}
             bgColor="bg-[rgba(242,242,242,1)]"
             onChange={() => {}}
-            value={f(apartment.type) as string}
+            value={f("ბინა")}
             readonly={true}
           />
           <SelectComp1
@@ -78,18 +90,22 @@ export default function ROICalculator({ apartment }: Props) {
             title={t("payment")}
           />
           <Input
-            placeholder={""}
+            placeholder={`${t("area")}²`}
             title={`${t("area")}²`}
             bgColor="bg-[rgba(242,242,242,1)]"
-            onChange={() => {}}
-            value={Number(apartment.area).toFixed(0)}
+            onChange={handleOnChange}
+            value={data.area}
+            inputKey="area"
+            type="number"
           />
           <Input
-            placeholder={""}
+            placeholder={t("price")}
             title={t("price")}
             bgColor="bg-[rgba(242,242,242,1)]"
-            onChange={() => {}}
-            value={Number(apartment.price2).toFixed(0) as string}
+            onChange={handleOnChange}
+            value={data.price}
+            inputKey="price"
+            type="number"
           />
           <Input
             placeholder={"ROI"}

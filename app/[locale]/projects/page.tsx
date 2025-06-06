@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
+import { IoSearchOutline } from "react-icons/io5";
 
 export default function Projects() {
   const [projects, setProjects] = useState<Building[]>();
@@ -22,7 +23,9 @@ export default function Projects() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/building`
+          `${process.env.NEXT_PUBLIC_API_URL}/building?${
+            clickedType !== "ყველა" ? `status=${clickedType}` : ""
+          } `
         );
         const data = response.data;
 
@@ -32,7 +35,7 @@ export default function Projects() {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [clickedType]);
 
   const container = {
     hidden: {},
@@ -109,8 +112,9 @@ export default function Projects() {
           initial="hidden"
           animate="visible"
         >
-          {!isLoading
-            ? projects?.map((item, index) => (
+          {!isLoading ? (
+            projects?.length !== 0 ? (
+              projects?.map((item, index) => (
                 <motion.div
                   initial={{ opacity: 0, y: 100 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -125,30 +129,38 @@ export default function Projects() {
                   <ProjectCard1 item={item} />
                 </motion.div>
               ))
-            : [1, 2, 3, 4, 5, 6].map((item) => (
-                <div
-                  key={item}
-                  className="w-full lg:h-[500px] h-[450px] rounded-[10px] border border-[#eee] relative"
-                >
-                  <div className="absolute top-0 left-0 w-full h-full">
-                    <Shimmer height="h-full" rounded="rounded-[10px]" />
+            ) : (
+              <div className="w-full sm:col-span-2 h-[100px] flex items-center gap-2 justify-center">
+                <IoSearchOutline className="text-[16px]" />
+                <p className="text-[14px]">{t("noProject")}</p>
+              </div>
+            )
+          ) : (
+            [1, 2, 3, 4, 5, 6].map((item) => (
+              <div
+                key={item}
+                className="w-full lg:h-[500px] h-[450px] rounded-[10px] border border-[#eee] relative"
+              >
+                <div className="absolute top-0 left-0 w-full h-full">
+                  <Shimmer height="h-full" rounded="rounded-[10px]" />
+                </div>
+                <div className="w-full h-full md500:p-7 p-6 flex flex-col justify-between absolute top-0 left-0">
+                  <div className="flex flex-col gap-1 w-full">
+                    <div className="w-[60%] h-[45px] rounded-[8px] bg-white"></div>
+                    <div className="w-[40%] h-[21px] rounded-[8px] bg-white"></div>
                   </div>
-                  <div className="w-full h-full md500:p-7 p-6 flex flex-col justify-between absolute top-0 left-0">
-                    <div className="flex flex-col gap-1 w-full">
-                      <div className="w-[60%] h-[45px] rounded-[8px] bg-white"></div>
-                      <div className="w-[40%] h-[21px] rounded-[8px] bg-white"></div>
+                  <div className="flex lg:items-center sm:items-start md500:items-center justify-between lg:flex-row sm:flex-col md500:flex-row flex-col gap-4">
+                    <div className="flex flex-col gap-3">
+                      <div className="w-[140px] h-[33px] rounded-[8px] bg-white"></div>
+                      <div className="w-[169px] h-[1px] bg-white"></div>
+                      <div className="w-[169px] h-[21px] bg-white rounded-[8px]"></div>
                     </div>
-                    <div className="flex lg:items-center sm:items-start md500:items-center justify-between lg:flex-row sm:flex-col md500:flex-row flex-col gap-4">
-                      <div className="flex flex-col gap-3">
-                        <div className="w-[140px] h-[33px] rounded-[8px] bg-white"></div>
-                        <div className="w-[169px] h-[1px] bg-white"></div>
-                        <div className="w-[169px] h-[21px] bg-white rounded-[8px]"></div>
-                      </div>
-                      <div className="lg:w-[155px] sm:w-full md500:w-[155px] h-[58px] bg-white rounded-[30px]"></div>
-                    </div>
+                    <div className="lg:w-[155px] sm:w-full md500:w-[155px] h-[58px] bg-white rounded-[30px]"></div>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))
+          )}
         </motion.div>
       </div>
       <div className="mt-[80px]">

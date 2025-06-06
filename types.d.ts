@@ -60,6 +60,9 @@ interface Building {
   text_en: string; // HTML string
   text_ru: string;
   galery: Gallery[];
+  ijara: string;
+  fullSale: string;
+  halfSale: string;
 }
 
 interface ProjectBuilding {
@@ -232,6 +235,38 @@ interface Maping {
   id: string;
 }
 
+interface ProjectR {
+  id: number;
+  oID: number;
+  name: string;
+  title: string;
+  title_en: string;
+  title_ru: string;
+  sub_text: string | null;
+  sub_text_en: string | null;
+  sub_text_ru: string | null;
+  text: string;
+  text_en: string;
+  text_ru: string;
+  address: string | null;
+  address_en: string | null;
+  google_map: string | null;
+  maping: string | null;
+  image: string;
+  img: string;
+  max_floor: number;
+  finish_percent: string; // consider changing to number if always numeric
+  sold_percent: string; // same here
+  status: string;
+  ijara: string; // also can be number
+  fullSale: string;
+  halfSale: string;
+  sort: number | null;
+  created_at: string; // ISO date string
+  updated_at: string;
+  deleted_at: string | null;
+}
+
 interface Apartment1 {
   id: number;
   oID: number;
@@ -275,4 +310,5 @@ interface Apartment1 {
   projectID: string | null;
   ptype: string | null;
   type: string | null;
+  projectR: ProjectR;
 }

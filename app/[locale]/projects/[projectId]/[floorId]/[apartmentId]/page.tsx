@@ -15,6 +15,8 @@ export default async function Apartment({
 
   const apartment: Apartment1 = await FetchSingleApartment(apartmentId);
 
+  console.log(apartment);
+
   return (
     <div className="w-full">
       <div className="w-full pb-[80px] lg1110:pt-[200px] pt-[150px] bg-blue flex justify-between flex-col lg1110:flex-row xl1600:pr-[140px] lg1110:pr-[80px] sm:pr-6 lg1110:items-center gap-6">
