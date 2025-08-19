@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider } from "next-intl";
 import CustomToast from "@/components/CustomToast";
 import Call from "@/components/Call";
+import Change from "@/components/Change";
 
 export default async function RootLayout({
   children,
@@ -28,6 +29,7 @@ export default async function RootLayout({
     <div>
       <NextIntlClientProvider messages={messages}>
         <Call />
+
         <CustomToast />
         <Header />
         {children}

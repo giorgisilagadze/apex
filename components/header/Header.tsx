@@ -22,6 +22,7 @@ export default function Header() {
   const [isLangClicked, setIsLangCLicked] = useState(false);
   const [isSideMenuVis, setIsSideMenuVis] = useState(false);
   const [isContactClicked, setIsContactClicked] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const locale = useLocale();
   const t = useTranslations("Header");
@@ -55,6 +56,15 @@ export default function Header() {
     },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const callPhone = () => {
     const phoneNumber = "555045555";
     // Construct the phone call URL
@@ -71,9 +81,13 @@ export default function Header() {
       {" "}
       {!pathname.includes(`/${locale}/admin`) && (
         <header
-          className={`w-full flex items-center justify-between lg1110:px-[60px] px-6 py-[24px] absolute ${
+          className={`w-full flex items-center justify-between fixed lg1110:px-[60px] px-6 py-[20px] ${
             isContactClicked ? "z-[1]" : "z-10"
-          } z-10 bg-transparent`}
+          } z-10 ${
+            scrolled
+              ? "bg-[rgba(1,1,1,0.6)] backdrop-blur-[10px]"
+              : "bg-transparent"
+          } duration-300`}
         >
           <Link href={`/${locale}`} className="cursor-pointer">
             <Image src={"/images/logo.png"} alt="logo" width={70} height={70} />
@@ -134,7 +148,7 @@ export default function Header() {
             <Image src={"/images/logo.png"} alt="logo" width={50} height={60} />
           </Link> */}
             <CiMenuFries
-              className={`text-[24px] rotate-180 lg1110:hidden text-white`}
+              className={`text-[24px] lg1110:hidden text-white`}
               onClick={() => setIsSideMenuVis(true)}
             />
           </div>
@@ -151,7 +165,7 @@ export default function Header() {
       <PopUpComp
         isPopUpVisible={isContactClicked}
         setIsPopUpVisible={setIsContactClicked}
-        width={"lg1350:w-[60%] sm:w-[80%] w-[90%]"}
+        width={"lg1350:w-[80%] sm:w-[80%] w-[90%]"}
         bg="bg-trasparent"
       >
         <div className="w-full flex flex-col gap-2">

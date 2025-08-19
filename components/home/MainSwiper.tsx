@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { BsArrowDown } from "react-icons/bs";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function MainSwiper() {
   const [shownProject, setShownProject] = useState(1);
@@ -31,33 +32,21 @@ export default function MainSwiper() {
       title1: t("text"),
       title2: t("apexNuts2"),
     },
-  ];
-
-  const socials = [
     {
-      id: 1,
-      title: ".Facebook",
-      link: "https://www.facebook.com/apexd.ge",
-    },
-    {
-      id: 2,
-      title: ".Instagram",
-      link: "https://www.instagram.com/apexd.ge/",
-    },
-    {
-      id: 3,
-      title: ".TikTok",
-      link: "https://www.tiktok.com/@apex_development",
+      id: 4,
+      image: "/images/banner1.jpeg",
+      title1: t("text"),
+      title2: t("apexHolb"),
     },
   ];
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShownProject((prev) => (prev < projects.length ? prev + 1 : 1));
-  //   }, 5000);
+  const handleNext = () => {
+    setShownProject((prev) => (prev < projects.length ? prev + 1 : 1));
+  };
 
-  //   return () => clearTimeout(timer);
-  // }, [shownProject]);
+  const handlePrev = () => {
+    setShownProject((prev) => (prev > 1 ? prev - 1 : projects.length));
+  };
 
   return (
     <div className="w-full lg1250:h-[878px] sm:h-[700px] h-[600px] relative">
@@ -98,30 +87,47 @@ export default function MainSwiper() {
             objectFit="cover"
           /> */}
           <div
-            className={`flex flex-col md500:gap-4 gap-3 z-[3] absolute lg1250:top-[300px] sm:top-[200px] md500:top-[150px] lg:max-w-[440px] md500:max-w-[300px] w-[280px] md500:w-auto top-[50%] translate-y-[-50%] md500:translate-y-0 ${
-              shownProject == item.id
-                ? "lg1250:left-[250px] sm:left-[175px] md500:left-[120px] left-[40px] opacity-100 duration-[1500ms]"
-                : "lg1250:left-[500px] sm:left-[425px] md600:left-[325px] md500:left-[200px] left-[80px] opacity-0 duration-[2500ms]"
-            }`}
+            className={`md500:flex flex-col lg1250:gap-4 gap-1 z-[3] absolute lg1250:top-[200px] sm:top-[120px] md500:top-[100px] top-[80px] lg:max-w-[600px] md500:max-w-[500px] w-[280px] md500:w-auto md500:translate-y-0 lg1250:left-[250px] sm:left-[175px] md500:left-[120px] left-[100px] hidden`}
           >
-            <p className="sm:text-[20px] md500:text-[16px] text-[14px] text-white font-light">
+            {/* <p className="sm:text-[20px] md500:text-[16px] text-[14px] text-white font-light">
               {item.title1}
-            </p>
-            <h1 className="sm:text-[66px] text-[44px] sm:leading-[70px] leading-[55px] text-white font-bold">
-              {item.title2}
-            </h1>
+            </p> */}
+            {projects.map((each) => (
+              <h1
+                className={`lg1250:text-[48px] sm:text-[38px] md500:text-[30px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 ${
+                  shownProject == each.id
+                    ? "border-white"
+                    : " border-transparent"
+                } duration-300`}
+                key={each.id}
+              >
+                {each.title2}
+              </h1>
+            ))}
           </div>
           <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-blueOpacity to-transparent"></div>
         </div>
       ))}
-      <div className="absolute top-[50%] translate-y-[-50%] sm:left-[60px] left-6 z-[3] items-start md500:flex hidden">
+      <div
+        className="sm:w-[80px] w-[50px] sm:h-[80px] h-[50px] rounded-[50%] bg-[rgba(3,44,95,0.5)] flex items-center justify-center absolute top-[50%] translate-y-[-50%] lg1250:left-[100px] sm:left-[60px] left-6 z-[2] cursor-pointer hover:bg-[rgba(3,44,95,0.9)] duration-300"
+        onClick={handlePrev}
+      >
+        <IoIosArrowBack className="sm:text-[40px] text-[24px] text-white" />
+      </div>
+      <div
+        className="sm:w-[80px] w-[50px] sm:h-[80px] h-[50px] rounded-[50%] bg-[rgba(3,44,95,0.5)] flex items-center justify-center absolute top-[50%] translate-y-[-50%] lg1250:right-[100px] sm:right-[60px] right-6 z-[2] cursor-pointer hover:bg-[rgba(3,44,95,0.9)] duration-300"
+        onClick={handleNext}
+      >
+        <IoIosArrowBack className="sm:text-[40px] text-[24px] text-white rotate-180" />
+      </div>
+      {/* <div className="absolute top-[50%] translate-y-[-50%] sm:left-[60px] left-6 z-[3] items-start md500:flex hidden">
         <p className="text-[14px] text-white font-extralight w-5">
           0{shownProject}
         </p>
         <p className="text-[14px] text-white font-extralight">/</p>
         <p className="text-[32px] text-white">0{projects.length}</p>
-      </div>
-      <div className="absolute bottom-10 sm:left-[60px] left-6 z-[3] flex items-start sm:gap-10 gap-4">
+      </div> */}
+      {/* <div className="absolute bottom-10 sm:left-[60px] left-6 z-[3] flex items-start sm:gap-10 gap-4">
         {projects.map((item) => (
           <div
             className={`flex flex-col gap-3 max-w-[100px] duration-500 cursor-pointer ${
@@ -141,7 +147,7 @@ export default function MainSwiper() {
             ></div>
           </div>
         ))}
-      </div>
+      </div> */}
       {/* <div className="absolute top-[50%] translate-y-[-50%] right-[-60px] z-[3] items-start gap-4 rotate-90 hidden sm:flex">
         {socials.map((item) => (
           <Link href={item.link} target="_blank" key={item.id}>
@@ -151,12 +157,12 @@ export default function MainSwiper() {
           </Link>
         ))}
       </div> */}
-      <div className="absolute left-[50%] translate-x-[-50%] sm:bottom-[40px] bottom-6 z-[3] flex-col gap-4 bounce hidden sm:flex items-center">
+      {/* <div className="absolute left-[50%] translate-x-[-50%] sm:bottom-[40px] bottom-6 z-[3] flex-col gap-4 bounce hidden sm:flex items-center">
         <p className="text-[14px] text-white font-extralight">{t("scroll")}</p>
         <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white">
           <BsArrowDown className="text-white mt-[-26px] text-[26px]" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

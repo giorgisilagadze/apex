@@ -1,5 +1,6 @@
 import SendEmail from "@/components/SendEmail";
 import Button from "@/components/button/Button";
+import ROICalculator from "@/components/calculator/ROICalculator";
 import Filter from "@/components/filter/Filter";
 import Contact from "@/components/home/Contact";
 import GallerySwiper from "@/components/singleProject/GallerySwiper";
@@ -20,8 +21,6 @@ export default async function SingleProject({
   const project: Building = await FetchSingleProject(projectId);
   const locale = await getLocale();
   const t = await getTranslations("SingleProject");
-
-  console.log(project);
 
   return (
     <div className="w-full">
@@ -58,8 +57,12 @@ export default async function SingleProject({
                 alt="project-image"
                 layout="fill"
                 objectFit="cover"
-                className="md500:rounded-tr-[10px] md500rounded-br-[10px]"
+                className="md500:rounded-tr-[10px] md500:rounded-br-[10px]"
               />
+              <div className="w-full h-full bg-[rgba(0,0,0,0.4)] backdrop-blur-[10px] z-[1] md500:rounded-tr-[10px] md500:rounded-br-[10px]"></div>
+              <div className="w-[67%] z-[2] absolute top-1/2 -translate-y-1/2 left-[100px]">
+                {/* <ROICalculator apartment={{} as Apartment1} /> */}
+              </div>
             </div>
             <div className="sm:p-[60px] p-10 sm:max-w-[550px] max-w-[450px] flex flex-col gap-4 bg-[rgba(237,240,244,1)] lg:ml-[-100px] md600:ml-[-200px] md500:ml-[-300px] z-[1] md500:rounded-[10px]">
               <div className="flex items-center gap-3">
@@ -88,10 +91,11 @@ export default async function SingleProject({
             <GallerySwiper images={project.galery} />
           </div>
         )}
-        <div className="mt-[60px]">{/* <OtherProjects /> */}</div>
-        <Contact />
-        <SendEmail />
+        <div className="mt-[60px]">
+          <OtherProjects projectId={projectId} />
+        </div>
       </div>
+      <Contact />
     </div>
   );
 }

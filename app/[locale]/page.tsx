@@ -1,3 +1,4 @@
+import Change from "@/components/Change";
 import SendEmail from "@/components/SendEmail";
 import ROICalculatorMain from "@/components/calculator/ROICalculatorMain";
 import Filter from "@/components/filter/Filter";
@@ -18,48 +19,27 @@ export default async function Home() {
 
   return (
     <div className="w-full">
+      <Change />
       <MainSwiper />
-      <div className="w-full sm:py-[100px] py-[60px] relative">
-        <div className="w-full z-[1] relative">
-          <Filter page="home" />
-        </div>
-        <div className="absolute top-0 left-0 z-[0]">
-          <div className="w-[300px] h-[200px] relative">
-            <Image
-              src={"/images/4.png"}
-              alt="bg"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-        </div>
-        <div className="absolute bottom-0 right-0 z-[0]">
-          <div className="w-[500px] h-[200px] relative">
-            <Image
-              src={"/images/1.png"}
-              alt="bg"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-        </div>
+      <div className="w-full z-[2] relative lg1250:top-[-300px] top-[-220px]">
+        <Filter page="home" />
       </div>
-      <div className="w-full flex flex-col sm:gap-[100px] gap-[60px]">
+      <div className="w-full mt-[-198px]">
         <Projects
           projects={projects.filter(
             (item: Building) => (item.status = "მიმდინარე")
           )}
         />
-        <AboutUsComp />
-        <Italy />
-        <News news={news.data.slice(0, 3)} />
-        <Contact />
-        <Partners />
-        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
-          <ROICalculatorMain projects={projects} />
-        </div>
-        <SendEmail />
       </div>
+      {/* <AboutUsComp /> */}
+      <Italy />
+      <News news={news.data.slice(0, 5)} />
+      <Contact />
+      {/* <Partners /> */}
+      {/* <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
+          <ROICalculatorMain projects={projects} />
+        </div> */}
+      {/* <SendEmail /> */}
     </div>
   );
 }

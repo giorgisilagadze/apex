@@ -29,7 +29,7 @@ export default function Projects({ projects }: Props) {
   const [hoveredId, setHoveredId] = useState<number>();
 
   return (
-    <div className="w-full flex flex-col gap-8 bg-blue py-[80px]">
+    <div className="w-full flex flex-col gap-8 bg-blue sm:py-[80px] py-10">
       <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3">
@@ -50,7 +50,7 @@ export default function Projects({ projects }: Props) {
         </div>
       </div>
       <div className="w-full relative lg:px-[80px] sm:px-[60px] px-6">
-        <Swiper
+        {/* <Swiper
           loop={true}
           // centeredSlides={true} // Centers active slide
           navigation={{
@@ -80,10 +80,6 @@ export default function Projects({ projects }: Props) {
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(undefined)}
             >
-              {/* <div
-                className="w-full h-full relative cursor-pointer"
-                onClick={() => route.push(`/${locale}/projects/${item.id}`)}
-              > */}
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -141,68 +137,79 @@ export default function Projects({ projects }: Props) {
                     <IoArrowForwardCircleOutline className="text-[24px] text-white" />
                   </div>
                 </div>
-                {/* <div
-                  className={`w-full h-full rounded-[10px] absolute left-0 top-0 bg-gradient-to-t via-[rgba(255,255,255,0.1)] to-[rgba(0,0,0,0)] z-[2] duration-700
-           
-                  `}
-                  style={{
-                    backgroundImage:
-                      hoveredId == item.id
-                        ? "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%)"
-                        : "linear-gradient(to top, rgba(3,44,95,0.5) 0%, rgba(0,0,0,0) 40%)",
-                  }}
-                ></div> */}
-                {/* <div
-                  className={`absolute left-5 z-[3] flex flex-col gap-3 ${
-                    hoveredId == item.id
-                      ? "opacity-100 md600:bottom-[35px] bottom-6"
-                      : "opacity-0 md600:bottom-[10px] bottom-2"
-                  } duration-500`}
-                >
-                  <p className="lg1250:text-[28px] md600:text-[22px] text-[18px] text-white font-bold md500:whitespace-nowrap">
-                    {locale == "en"
-                      ? item.title_en
-                      : locale == "ge"
-                      ? item.title
-                      : item.title_ru}
-                  </p>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        locale == "en"
-                          ? item.text_en
-                          : locale == "ge"
-                          ? item.text
-                          : item.text_ru,
-                    }}
-                    className="editor text-[12px] text-white max-h-[110px] overflow-hidden text-ellipsis"
-                  />
-                  <div className="flex items-center gap-2">
-                    <p className="text-[16px] text-white">{t("see")}</p>
-                    <IoArrowForwardCircleOutline className="text-[24px] text-white" />
-                  </div>
-                </div> */}
-                {/* <div
-                  className={`absolute left-5 z-[3] flex flex-col gap-3 md600:bottom-[35px] bottom-6 ${
-                    hoveredId != item.id ? "opacity-100" : "opacity-0"
-                  } duration-500`}
-                >
-                  <p className="lg1250:text-[28px] md600:text-[22px] text-[18px] text-white font-bold md500:whitespace-nowrap text-center">
-                    {locale == "en"
-                      ? item.title_en
-                      : locale == "ge"
-                      ? item.title
-                      : item.title_ru}
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-[30px] h-[2px] bg-white"></div>
-                    <p className="sm:text-[14px] text-[12px] text-white font-light">
-                      {t(item.status)}
-                    </p>
-                  </div>
-                </div> */}
               </motion.div>
-              {/* </div> */}
+            </SwiperSlide>
+          ))}
+        </Swiper> */}
+        <Swiper
+          loop={true}
+          centeredSlides={true} // centers the active slide
+          navigation={{
+            nextEl: ".nextt",
+            prevEl: ".prevv",
+          }}
+          modules={[FreeMode, Navigation]}
+          spaceBetween={30}
+          pagination={{ clickable: true }}
+          className="w-full h-full mySwiper"
+          slidesPerView={
+            dimension[0] > 1600
+              ? 3
+              : dimension[0] > 1024
+              ? 3
+              : dimension[0] > 600
+              ? 1.5
+              : 1
+          }
+        >
+          {projects.map((item, index) => (
+            <SwiperSlide key={item.id} className="custom-slide">
+              {/* Add a new div to handle the scaling and brightness */}
+              <div className="inner-slide-content w-full h-full">
+                <motion.div
+                  initial={{ opacity: 0, y: 100 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    delay: index * 0.1,
+                    duration: 0.6,
+                    ease: "easeOut",
+                  }}
+                  className="w-full h-full flex flex-col gap-4"
+                >
+                  <div
+                    className="w-full aspect-[6/5] relative cursor-pointer"
+                    onClick={() => route.push(`/${locale}/projects/${item.id}`)}
+                  >
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
+                      alt="project-image"
+                      layout="fill"
+                      objectFit="cover"
+                      className="z-[1] rounded-[10px]"
+                    />
+                  </div>
+
+                  <div className="w-full flex flex-col gap-2">
+                    <p className="lg1250:text-[26px] md600:text-[22px] text-[18px] text-white font-bold md500:whitespace-nowrap">
+                      {locale == "en"
+                        ? item.title_en
+                        : locale == "ge"
+                        ? item.title
+                        : item.title_ru}
+                    </p>
+                    <div
+                      className="flex items-center gap-2 cursor-pointer hover:opacity-50 duration-300"
+                      onClick={() =>
+                        route.push(`/${locale}/projects/${item.id}`)
+                      }
+                    >
+                      <p className="text-[16px] text-white">{t("see")}</p>
+                      <IoArrowForwardCircleOutline className="text-[24px] text-white" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

@@ -10,6 +10,9 @@ import axios from "axios";
 import useApexAdmin from "@/utils/ApexAdmin";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import { GoClock } from "react-icons/go";
+import { PiBuildingOfficeLight } from "react-icons/pi";
+import { LuBriefcaseBusiness } from "react-icons/lu";
 
 interface Props {
   isPopUp?: boolean;
@@ -24,12 +27,36 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
     phone: "",
     email: "",
     project: "",
+    hours: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
 
   const t = useTranslations("LeaveContact");
   const f = useTranslations("Filter");
+
+  const about = [
+    {
+      id: 1,
+      icon: <GoClock className="text-[20px] text-blue" />,
+      title: t("working hours"),
+      text: t("hours1"),
+    },
+    {
+      id: 2,
+      icon: <LuBriefcaseBusiness className="text-[20px] text-blue" />,
+      title: t("marketing"),
+      text: "Marketing@apexd.ge",
+    },
+    {
+      id: 3,
+      icon: <PiBuildingOfficeLight className="text-[20px] text-blue" />,
+      title: t("sale"),
+      text: "Contact@apexd.ge",
+    },
+  ];
+
+  const hours = ["09:00 - 13:00", "14:00 - 18:00", "19:00 - 22:00"];
 
   useEffect(() => {
     (async () => {
@@ -67,9 +94,10 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
             phone: values.phone,
             mail: values.email,
             project: values.project,
+            // hours: values.hours,
           }
         );
-        setValues({ name: "", phone: "", email: "", project: "" });
+        setValues({ name: "", phone: "", email: "", project: "", hours: "" });
         setIsSubmited(false);
         setIsContactClicked?.(false);
         setToast(true, t("success"), "success");
@@ -81,13 +109,162 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
   };
 
   return (
-    <div
-      className={`w-full ${
-        !isPopUp
-          ? "xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6"
-          : ""
-      } grid lg:grid-cols-2`}
-    >
+    <div className={`w-full ${!isPopUp ? "" : ""} grid lg:grid-cols-2`}>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className={`w-full bg-white relative ${
+          !isPopUp
+            ? "lg:h-[700px] md500:h-[670px] h-[994px]"
+            : "lg:h-[623px] h-[593px] overflow-y-scroll md500:overflow-y-hidden lg:rounded-tl-[10px] lg:rounded-bl-[10px] lg:rounded-tr-[0px] lg:rounded-br-[10px] rounded-[10px]"
+        }`}
+      >
+        <div className="w-[70%] h-full relative mx-auto">
+          <Image
+            src={"/images/tree.png"}
+            alt="about"
+            layout="fill"
+            className="opacity-70"
+          />
+        </div>
+
+        <div
+          className={`w-full flex justify-start flex-col gap-5 ${
+            isPopUp
+              ? "lg1250:px-10  px-6"
+              : "xl1600:px-[140px] lg1250:px-[100px] sm:px-[64px] px-6"
+          } py-10 absolute top-0 left-0 z-[1]`}
+        >
+          <div className="w-full flex items-center xl1600:gap-8 gap-4">
+            {!isPopUp && (
+              <div className="relative md500:!w-[100px] md500:!h-[100px] w-[50px] h-[50px]">
+                <Image src={"/images/logo1.png"} alt="about" layout="fill" />
+              </div>
+            )}
+
+            <h1 className="xl:text-[30px] lg1110:text-[26px] md500:text-[20px] text-[18px] font-bold text-purple whitespace-nowrap">
+              {t("title")}
+            </h1>
+          </div>
+
+          {/* <p className="text-[14px] text-blue font-light">{t("subtitle")}</p> */}
+          <div className="w-full grid md500:grid-cols-2 gap-5">
+            <Input
+              placeholder={t("namePlaceholder")}
+              title={t("name")}
+              color={isSubmited && !values.name ? "text-[red]" : "text-blue"}
+              onChange={handleOnChange}
+              value={values["name"]}
+              inputKey="name"
+              bgColor="bg-[rgb(241,244,247)]"
+              height="h-[56px]"
+            />
+
+            <Input
+              placeholder={t("phonePlaceholder")}
+              title={t("phone")}
+              color={isSubmited && !values.phone ? "text-[red]" : "text-blue"}
+              onChange={handleOnChange}
+              value={values["phone"]}
+              inputKey="phone"
+              type="number"
+              bgColor="bg-[rgb(241,244,247)]"
+              height="h-[56px]"
+            />
+
+            <Input
+              placeholder={t("emailPlaceholder")}
+              title={t("email")}
+              color={isSubmited && !values.email ? "text-[red]" : "text-blue"}
+              onChange={handleOnChange}
+              value={values["email"]}
+              inputKey="email"
+              bgColor="bg-[rgb(241,244,247)]"
+              height="h-[56px]"
+            />
+
+            <SelectComp
+              placeholder={t("choose")}
+              title={t("projects")}
+              color={isSubmited && !values.project ? "text-[red]" : "text-blue"}
+              filterKey={"project"}
+              selectedValues={values}
+              onClick={handleOnChange}
+              data={projects.map((item) => item.name)}
+              bgColor="bg-[rgb(241,244,247)]"
+              height="h-[56px]"
+            />
+          </div>
+          <SelectComp
+            placeholder={t("choose")}
+            title={t("when")}
+            color={isSubmited && !values.hours ? "text-[red]" : "text-blue"}
+            filterKey={"hours"}
+            selectedValues={values}
+            onClick={handleOnChange}
+            data={hours}
+            bgColor="bg-[rgb(241,244,247)]"
+            height="h-[56px]"
+            isTranslated={true}
+          />
+          <Button
+            title={t("send")}
+            onClick={handleUpload}
+            width={"w-full"}
+            color="text-white"
+            bgColor="bg-blue"
+            right={true}
+            icon={BsArrowDown}
+            height="h-[56px]"
+            rounded="rounded-[12px]"
+            isLoading={isLoading}
+          />
+          <div className="w-full flex md500:items-start md500:justify-between md500:flex-row flex-col md500:gap-0 gap-5 items-center justify-center">
+            {about.map((item) => (
+              <div
+                className="flex flex-col items-center gap-[2px]"
+                key={item.id}
+              >
+                {item.icon}
+                <h1
+                  className={`${
+                    isPopUp
+                      ? "xl1550:text-[16px] text-[12px]"
+                      : "lg1250:text-[16px] text-[14px]"
+                  } text-blue`}
+                >
+                  {item.title}
+                </h1>
+                <div>
+                  <p
+                    className={`${
+                      isPopUp
+                        ? "xl1550:text-[15px] text-[12px]"
+                        : "lg1250:text-[15px] text-[13px]"
+                    } text-center`}
+                  >
+                    {item.text}
+                  </p>
+                  {item.id == 1 && (
+                    <p
+                      className={`${
+                        isPopUp
+                          ? "xl1550:text-[15px] text-[12px]"
+                          : "lg1250:text-[15px] text-[13px]"
+                      } text-center`}
+                    >
+                      {t("hours2")}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -95,83 +272,20 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
         viewport={{ once: true }}
         className={`w-full ${
           !isPopUp
-            ? "lg:h-[500px] md500:h-[400px] h-[350px]"
-            : "lg:h-[500px] md600:h-[300px] h-[0px]"
+            ? "lg:h-[700px] md500:h-[400px] h-[350px]"
+            : "lg:h-[623px] hidden lg:block"
         } relative`}
       >
         <Image
-          src={"/images/contact.jpg"}
+          src={"/images/contact.png"}
           alt="project-image"
           layout="fill"
           objectFit="cover"
-          className="rounded-tl-[10px] lg:rounded-bl-[10px] rounded-tr-[10px] lg:rounded-tr-[0px]"
-        />
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className={`w-full h-full bg-blue ${
-          !isPopUp
-            ? "lg:rounded-tr-[10px] rounded-bl-[10px] lg:rounded-bl-[0px] rounded-br-[10px]"
-            : "lg:rounded-tr-[10px] rounded-bl-[10px] lg:rounded-bl-[0px] rounded-br-[10px] rounded-tl-[10px] rounded-tr-[10px] md600:rounded-tl-[0px] md600:rounded-tr-[0px]"
-        } flex justify-center flex-col gap-5 xxl:px-[100px] md500:px-10 px-6 py-10 lg:py-0`}
-      >
-        <p className="sm:text-[28px] text-[20px] font-bold text-white">
-          {t("title")}
-        </p>
-        <p className="text-[14px] text-white font-light">{t("subtitle")}</p>
-        <div className="w-full grid md500:grid-cols-2 gap-5">
-          <Input
-            placeholder={t("namePlaceholder")}
-            title={t("name")}
-            color={isSubmited && !values.name ? "text-[red]" : "text-white"}
-            onChange={handleOnChange}
-            value={values["name"]}
-            inputKey="name"
-          />
-
-          <Input
-            placeholder={t("phonePlaceholder")}
-            title={t("phone")}
-            color={isSubmited && !values.phone ? "text-[red]" : "text-white"}
-            onChange={handleOnChange}
-            value={values["phone"]}
-            inputKey="phone"
-            type="number"
-          />
-
-          <Input
-            placeholder={t("emailPlaceholder")}
-            title={t("email")}
-            color={isSubmited && !values.email ? "text-[red]" : "text-white"}
-            onChange={handleOnChange}
-            value={values["email"]}
-            inputKey="email"
-          />
-
-          <SelectComp
-            placeholder={t("choose")}
-            title={t("projects")}
-            color={isSubmited && !values.project ? "text-[red]" : "text-white"}
-            filterKey={"project"}
-            selectedValues={values}
-            onClick={handleOnChange}
-            data={projects.map((item) => item.name)}
-          />
-        </div>
-        <Button
-          title={t("send")}
-          onClick={handleUpload}
-          width={"w-full"}
-          color="text-white"
-          bgColor="bg-lightBlue"
-          right={true}
-          icon={BsArrowDown}
-          height="h-[45px]"
-          rounded="rounded-[12px]"
-          isLoading={isLoading}
+          className={`${
+            !isPopUp
+              ? ""
+              : "rounded-tl-[0px] lg:rounded-br-[10px] rounded-tr-[0px] lg:rounded-tr-[10px]"
+          }`}
         />
       </motion.div>
     </div>

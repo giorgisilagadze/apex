@@ -28,7 +28,8 @@
     "Slider": {
       "apexNuts": "Apex Nutsubidze",
       "apexDig": "Apex Didi Dighomi",
-      "apexNuts2": "Isani",
+      "apexNuts2": "Apex Isani",
+      "apexHolb": "Apex Holbrooke",
       "text": "0% Internal Installment",
       "scroll": "Scroll"
     },
@@ -76,7 +77,13 @@
     "projects": "Projects",
     "success": "Data sent successfully",
     "choose": "Choose",
-    "send": "Send"
+    "send": "Send",
+    "when": "When should we contact you?",
+    "working hours": "Working hours",
+    "hours1": "Mon-Fri: 10:00 - 18:00",
+    "hours2": "Sat: 11:00 - 16:00",
+    "marketing": "Marketing",
+    "sale": "Sales office"
   },
   "subscribtion": {
     "title": "Subscribe to News",
@@ -105,6 +112,7 @@
     "დასრულებული": "Completed",
     "project": "Project",
     "block": "Block",
+    "areaTitle": "Sq. meter m",
     "area": "m",
     "from": "From",
     "to": "To",
@@ -192,7 +200,11 @@
       "sold": "Sold",
       "apartment": "Apartment",
       "seeMore": "Read More"
-    }
+    },
+    "ყველა": "All",
+    "მიმდინარე": "Ongoing",
+    "დასრულებული": "Completed",
+    "other": "Other Projects"
   },
   "SingleProject": {
     "მიმდინარე": "Ongoing",
@@ -245,9 +257,12 @@
     "off": "Close"
   },
   "Italy": {
-    "title": "Do you own an Italian courtyard-style house and are considering its development?",
-    "subtitle": "Would you like your old house to be replaced with a modern apartment building? Contact us — we are looking for homeowners interested in collaboration.",
-    "text": "Leave us your information and we will get in touch to discuss the details.",
-    "contact": "Contact Us"
+    "title": "Do you want your old house to be replaced by a modern building?",
+    "subtitle": "Contact us — we are looking for apartment owners for collaboration.",
+    "text": "Leave us your information and we will contact you to clarify the details.",
+    "all": "View all"
+  },
+  "Change": {
+    "title": "Replace the old with the new"
   }
 }

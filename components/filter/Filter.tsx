@@ -16,6 +16,7 @@ import Shimmer from "../shimmer/Shimmer";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import useClickOutside from "@/hooks/useClickOutside";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 interface Props {
   page: string;
@@ -294,12 +295,16 @@ export default function Filter({ page, isSingleProject }: Props) {
           className="z-[-1] pointer-events-none select-none"
         />
       )}
-      <div className={`w-full rounded-[16px] shadow-dropDown bg-white z-[1]`}>
+      <div className={`w-full rounded-[16px] shadow-dropDown z-[1]`}>
         <div
-          className={`flex items-center gap-5 shadow-topShadow lg:px-12 px-6 pt-5 pb-3 whitespace-nowrap topFilter ${
+          className={`flex items-center gap-5 shadow-topShadow lg:px-12 px-6 pt-5 pb-3 whitespace-nowrap rounded-tl-[16px] rounded-tr-[16px] ${
             page !== "project" &&
             page !== "floor" &&
             "overflow-x-auto overflow-y-hidden"
+          } ${
+            page === "home" || page === "allProjects"
+              ? "bg-[rgba(255,255,255,0.3)] backdrop-blur-[10px]"
+              : "bg-white"
           }`}
         >
           {page !== "project" && page !== "floor" ? (
@@ -332,28 +337,17 @@ export default function Filter({ page, isSingleProject }: Props) {
               status.map((item) => (
                 <div
                   key={item}
-                  className="flex flex-col gap-2 cursor-pointer"
+                  className={`flex flex-col gap-1 cursor-pointer rounded-[30px] py-2 px-3 ${
+                    selectedValues.status == item ? "bg-blue" : ""
+                  }`}
                   onClick={() => {
                     handleSelect("status", item);
                     // handleClear();
                   }}
                 >
-                  <p
-                    className={`${
-                      selectedValues.status == item
-                        ? "text-blue font-medium"
-                        : "text-black font-light"
-                    } text-[14px]`}
-                  >
+                  <p className={`font-medium text-[14px] text-white`}>
                     {t(item)}
                   </p>
-                  <div
-                    className={`w-full h-[2px] ${
-                      selectedValues.status == item
-                        ? "bg-blue"
-                        : "bg-trasparent"
-                    }`}
-                  ></div>
                 </div>
               ))
             ) : (
@@ -372,12 +366,6 @@ export default function Filter({ page, isSingleProject }: Props) {
                 <h1 className={`text-[14px] text-blue`}>{t("available")}:</h1>
                 <p className="text-[14px] text-blue">{aparts?.length}</p>
               </div>
-              {/* <SortSelect
-                title="ვალუტა"
-                data={currency}
-                selected={selectedCurr}
-                setSelected={setSelectedCurr}
-              /> */}
               <SortSelect
                 title={t("price")}
                 data={price}
@@ -387,18 +375,20 @@ export default function Filter({ page, isSingleProject }: Props) {
             </div>
           )}
         </div>
-        <div className="w-full flex flex-col ">
+        <div className="w-full flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px] ">
           {!isFilerLoading ? (
             <div
-              className={`w-full lg:px-12 px-6 py-7 grid ${
+              className={`w-full lg:px-12 px-6 py-7 md500:grid flex flex-col gap-4 ${
                 page == "project" || page == "floor"
                   ? "lg:grid-cols-6"
                   : "lg:grid-cols-5"
-              } md600:grid-cols-3 md500:grid-cols-2 gap-4 items-end rounded-bl-[16px] rounded-br-[16px] `}
+              } md600:grid-cols-3 md500:grid-cols-2 gap-4 items-end rounded-bl-[16px] rounded-br-[16px] bg-white`}
             >
               {(page == "project" || page == "floor") && (
                 <div className="w-full flex flex-col gap-[6px]">
-                  <p className="text-[14px] font-medium">{t("project")}</p>
+                  <h1 className="text-[14px] font-medium text-blue">
+                    {t("project")}
+                  </h1>
                   <Input
                     placeholder={""}
                     inputKey=""
@@ -415,6 +405,9 @@ export default function Filter({ page, isSingleProject }: Props) {
                         : ""
                     }
                     readonly={true}
+                    color="text-blue"
+                    bgColor="bg-white"
+                    isFilter={true}
                   />
                 </div>
               )}
@@ -441,13 +434,18 @@ export default function Filter({ page, isSingleProject }: Props) {
               )} */}
               {(page == "project" || page == "floor") && (
                 <div className="w-full flex flex-col gap-[6px]">
-                  <p className="text-[14px] font-medium">{t("block")}</p>
+                  <h1 className="text-[14px] font-medium text-blue">
+                    {t("block")}
+                  </h1>
                   <Input
                     placeholder={""}
                     inputKey=""
                     onChange={() => {}}
                     value={selectedValues.building}
                     readonly={true}
+                    color="text-blue"
+                    bgColor="bg-white"
+                    isFilter={true}
                   />
                 </div>
               )}
@@ -458,6 +456,9 @@ export default function Filter({ page, isSingleProject }: Props) {
                 onClick={handleSelect}
                 filterKey="type"
                 selectedValues={selectedValues}
+                color="text-blue"
+                bgColor="bg-white"
+                isFilter={true}
               />
               {/* {page !== "project" && page !== "floor" && (
                 <SelectComp
@@ -478,6 +479,9 @@ export default function Filter({ page, isSingleProject }: Props) {
                   onClick={handleSelect}
                   filterKey="building"
                   selectedValues={selectedValues}
+                  color="text-blue"
+                  bgColor="bg-white"
+                  isFilter={true}
                 />
               )}
 
@@ -485,27 +489,45 @@ export default function Filter({ page, isSingleProject }: Props) {
                 className="w-full flex flex-col gap-[6px] relative"
                 ref={areaRef}
               >
-                <p className="text-[14px] font-medium">
-                  {t("area")}
+                <h1 className="text-[14px] font-medium text-blue">
+                  {t("areaTitle")}
                   <sup>2</sup>
-                </p>
+                </h1>
                 <div
-                  className="w-full grid grid-cols-2 gap-1"
-                  onClick={() => setIsAreaVisible(true)}
+                  className="w-full flex items-center gap-1 h-[44px] cursor-pointer"
+                  onClick={() => setIsAreaVisible(!isAreaVisible)}
                 >
-                  <Input
-                    placeholder={t("from")}
-                    inputKey="areaFrom"
-                    onChange={handleSelect}
-                    value={selectedValues["areaFrom"]}
-                    type="number"
-                  />
-                  <Input
-                    placeholder={t("to")}
-                    inputKey="areaTo"
-                    onChange={handleSelect}
-                    value={selectedValues["areaTo"]}
-                    type="number"
+                  <div>
+                    <h1 className="text-blue text-[14px]">
+                      {selectedValues["areaFrom"] ? (
+                        <>
+                          {selectedValues["areaFrom"]}
+                          {t("area")}
+                          <sup>2</sup>
+                        </>
+                      ) : (
+                        t("from")
+                      )}
+                    </h1>
+                  </div>
+                  <div>-</div>
+                  <div>
+                    <h1 className="text-blue text-[14px]">
+                      {selectedValues["areaTo"] ? (
+                        <>
+                          {selectedValues["areaTo"]}
+                          {t("area")}
+                          <sup>2</sup>
+                        </>
+                      ) : (
+                        t("to")
+                      )}
+                    </h1>
+                  </div>
+                  <MdKeyboardArrowDown
+                    className={`text-[18px] ${
+                      isAreaVisible && "rotate-180"
+                    } text-blue duration-300`}
                   />
                 </div>
                 <div
@@ -567,22 +589,36 @@ export default function Filter({ page, isSingleProject }: Props) {
                 className="w-full flex flex-col gap-[6px] relative"
                 ref={priceRef}
               >
-                <p className="text-[14px] font-medium">{t("price")}</p>
+                <h1 className="text-[14px] font-medium text-blue">
+                  {t("price")}
+                </h1>
                 <div
-                  className="w-full grid grid-cols-2 gap-1"
+                  className="w-full flex items-center gap-1 h-[44px] cursor-pointer"
                   onClick={() => setIsPriceVisible(true)}
                 >
-                  <Input
-                    placeholder={t("from")}
-                    inputKey="priceFrom"
-                    onChange={handleSelect}
-                    value={selectedValues["priceFrom"]}
-                  />
-                  <Input
-                    placeholder={t("to")}
-                    inputKey="priceTo"
-                    onChange={handleSelect}
-                    value={selectedValues["priceTo"]}
+                  <div>
+                    <h1 className="text-blue text-[14px]">
+                      {selectedValues["priceFrom"] ? (
+                        <>${selectedValues["priceFrom"]}</>
+                      ) : (
+                        t("from")
+                      )}
+                    </h1>
+                  </div>
+                  <div>-</div>
+                  <div>
+                    <h1 className="text-blue text-[14px]">
+                      {selectedValues["priceTo"] ? (
+                        <>${selectedValues["priceTo"]}</>
+                      ) : (
+                        t("to")
+                      )}
+                    </h1>
+                  </div>
+                  <MdKeyboardArrowDown
+                    className={`text-[18px] ${
+                      isPriceVisible && "rotate-180"
+                    } text-blue duration-300`}
                   />
                 </div>
                 <div

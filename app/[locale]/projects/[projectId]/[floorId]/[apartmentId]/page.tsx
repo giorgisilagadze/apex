@@ -33,8 +33,7 @@ export default async function Apartment({
           />
         </div>
       </div>
-      <div className="w-full flex flex-col gap-[100px]">
-        <div
+      {/* <div
           className={`w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 relative sm:py-[80px] py-[60px] bg-blueOpacityLight`}
         >
           <Image
@@ -45,10 +44,9 @@ export default async function Apartment({
             className="z-[-1]"
           />
           <ROICalculator apartment={apartment} />
-        </div>
-        <Contact />
-        <SendEmail />
-      </div>
+        </div> */}
+      {/* <SendEmail /> */}
+      <Contact />
     </div>
   );
 }

@@ -13,6 +13,7 @@ export default {
         blueOpacity: "rgba(3, 44, 95, 0.5)",
         blueOpacityLight: "rgba(3, 44, 95, 0.1)",
         grey: "rgba(97, 94, 94, 1)",
+        purple: "rgba(45, 54, 145, 1)",
       },
       backgroundColor: {
         lightBlue: "rgba(64,95,242,1)",

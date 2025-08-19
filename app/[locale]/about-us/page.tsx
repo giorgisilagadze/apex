@@ -15,6 +15,7 @@ import SendEmail from "@/components/SendEmail";
 import ScreenSize from "@/hooks/ScreenSize";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import Contact from "@/components/home/Contact";
 
 export default function AboutUs() {
   const dimension = ScreenSize();
@@ -294,8 +295,9 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
-        <SendEmail />
+        {/* <SendEmail /> */}
       </div>
+      <Contact />
     </div>
   );
 }

@@ -38,23 +38,23 @@ export default function SelectComp1({
       )}
       <div className="w-full relative" ref={selectRef}>
         <div
-          className="w-full flex items-center justify-between px-3 h-[44px] rounded-[10px] border border-blue cursor-pointer bg-white"
+          className="w-full flex items-center justify-between px-3 h-[44px] rounded-[10px] border border-white cursor-pointer "
           onClick={() => setIsClicked(!isClicked)}
         >
-          <p className="text-[14px] font-light whitespace-nowrap truncate">
+          <p className="text-[14px] font-light whitespace-nowrap truncate text-white">
             {value ? t(value) : placeholder}
           </p>
           <div className="flex items-center gap-2">
             {value && (
               <RxCross1
-                className={`text-[14px] cursor-pointer hover:opacity-60 duration-300`}
+                className={`text-[14px] cursor-pointer hover:opacity-60 duration-300 text-white`}
                 onClick={() => setValue("")}
               />
             )}
             <MdKeyboardArrowDown
               className={`text-[18px] ${
                 isClicked && "rotate-180"
-              } duration-300`}
+              } duration-300 text-white`}
             />
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function SelectComp1({
         >
           {data?.map((item) => (
             <div
-              className={`w-full py-3 px-4 hover:px-5 hover:bg-blue bg-white hover:text-white duration-300 cursor-pointer text-[14px] whitespace-nowrap truncate `}
+              className={`w-full py-3 px-4 hover:px-5 hover:bg-grey bg-white hover:text-white duration-300 cursor-pointer text-[14px] whitespace-nowrap truncate `}
               key={item}
               onClick={() => {
                 setValue(item);

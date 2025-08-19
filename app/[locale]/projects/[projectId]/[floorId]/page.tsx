@@ -42,9 +42,9 @@ export default async function SingleFloor({
         <div className="w-full bg-blueOpacityLight">
           <Filter page="floor" />
         </div>
-        <Contact />
-        <SendEmail />
+        {/* <SendEmail /> */}
       </div>
+      <Contact />
     </div>
   );
 }

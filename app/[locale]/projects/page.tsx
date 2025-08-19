@@ -71,17 +71,17 @@ export default function Projects() {
           objectFit="cover"
         />
         <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-blueOpacity to-transparent"></div>
-        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 absolute top-[50%] translate-y-[-50%] left-0 flex sm:items-center justify-between sm:flex-row flex-col sm:gap-4">
+        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 absolute top-[35%] translate-y-[-35%] left-0 flex sm:items-center justify-between sm:flex-row flex-col sm:gap-4">
           <h1 className="lg:text-[60px] text-[40px] font-light text-white">
             {t("title")}
           </h1>
           <p className="text-[14px] text-white sm:self-center">{t("page")}</p>
         </div>
       </div>
-      <div className="md600:mt-[-100px] md500:mt-[-150px] mt-[-100px]">
+      <div className="sm:mt-[-250px] mt-[-200px]">
         <Filter page="allProjects" />
       </div>
-      <div className="w-full flex items-center md500:gap-6 gap-4 sm:mt-[60px] mt-[40px] justify-center">
+      <div className="w-full flex items-center md500:gap-6 gap-4 sm:mt-[100px] mt-[40px] justify-center">
         {types.map((item) => (
           <div
             className="flex flex-col items-center gap-[2px]"
@@ -95,7 +95,7 @@ export default function Projects() {
                 item.title == clickedType ? "text-blue" : "text-black"
               }`}
             >
-              {item.title}
+              {t(item.title)}
             </p>
             <div
               className={`w-[40px] h-[1px] ${
@@ -105,9 +105,9 @@ export default function Projects() {
           </div>
         ))}
       </div>
-      <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 pt-[60px] flex flex-col gap-[40px] items-center">
+      <div className="w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 py-[60px] flex flex-col gap-[40px] items-center ">
         <motion.div
-          className="w-full grid sm:grid-cols-2 gap-x-4 gap-y-6"
+          className="w-full grid lg1250:grid-cols-3 md600:grid-cols-2 gap-x-4 gap-y-6"
           variants={container}
           initial="hidden"
           animate="visible"
@@ -130,7 +130,7 @@ export default function Projects() {
                 </motion.div>
               ))
             ) : (
-              <div className="w-full sm:col-span-2 h-[100px] flex items-center gap-2 justify-center">
+              <div className="w-full lg1250:col-span-3 md600:cols-span-2 h-[300px] flex items-center gap-2 justify-center">
                 <IoSearchOutline className="text-[16px]" />
                 <p className="text-[14px]">{t("noProject")}</p>
               </div>
@@ -139,7 +139,7 @@ export default function Projects() {
             [1, 2, 3, 4, 5, 6].map((item) => (
               <div
                 key={item}
-                className="w-full lg:h-[500px] h-[450px] rounded-[10px] border border-[#eee] relative"
+                className="w-full h-[400px] rounded-[10px] border border-[#eee] relative"
               >
                 <div className="absolute top-0 left-0 w-full h-full">
                   <Shimmer height="h-full" rounded="rounded-[10px]" />
@@ -149,22 +149,19 @@ export default function Projects() {
                     <div className="w-[60%] h-[45px] rounded-[8px] bg-white"></div>
                     <div className="w-[40%] h-[21px] rounded-[8px] bg-white"></div>
                   </div>
-                  <div className="flex lg:items-center sm:items-start md500:items-center justify-between lg:flex-row sm:flex-col md500:flex-row flex-col gap-4">
+                  <div className="flex lg:items-center sm:items-start md500:items-start justify-between lg:flex-row md500:flex-col flex-col gap-4">
                     <div className="flex flex-col gap-3">
                       <div className="w-[140px] h-[33px] rounded-[8px] bg-white"></div>
                       <div className="w-[169px] h-[1px] bg-white"></div>
                       <div className="w-[169px] h-[21px] bg-white rounded-[8px]"></div>
                     </div>
-                    <div className="lg:w-[155px] sm:w-full md500:w-[155px] h-[58px] bg-white rounded-[30px]"></div>
+                    <div className="lg:w-[126px] w-full h-[50px] bg-white rounded-[30px]"></div>
                   </div>
                 </div>
               </div>
             ))
           )}
         </motion.div>
-      </div>
-      <div className="mt-[80px]">
-        <SendEmail />
       </div>
     </div>
   );

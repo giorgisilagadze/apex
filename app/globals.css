@@ -30,6 +30,11 @@ h1 {
 
 }
 
+.selectInput {
+  font-family: fsemibold !important;
+  font-feature-settings: "case" on;
+}
+
 
 p,
 input,
@@ -197,4 +202,27 @@ input[type="number"] {
   height: 44px;
   padding-left: 12px;
   font-size: 14px;
+}
+
+.custom-slide .inner-slide-content {
+  transform: scale(0.9);
+  transition: all 0.4s ease;
+  filter: brightness(0.6);
+}
+
+/*
+ * When the slide is active, we scale the inner div up.
+ */
+.swiper-slide-active .inner-slide-content {
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+/*
+ * Optional side slides more faded.
+ */
+.swiper-slide-next .inner-slide-content,
+.swiper-slide-prev .inner-slide-content {
+  filter: brightness(0.6);
+  transform: scale(0.9);
 }
