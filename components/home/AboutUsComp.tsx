@@ -94,8 +94,8 @@ export default function AboutUsComp() {
   ];
 
   return (
-    <div className="w-full flex flex-col gap-[80px]">
-      <div className="w-full grid lg:grid-cols-2 items-center gap-8 xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
+    <div className="w-full flex flex-col gap-[80px] bg-[rgba(250,250,250,1)] sm:py-[60px] py-10">
+      <div className="w-full grid lg:grid-cols-2 items-center gap-[80px] xl1600:px-[140px] lg1250:px-[100px] sm:px-[64px] px-6">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,92 +104,93 @@ export default function AboutUsComp() {
           className="w-full h-full relative"
         >
           <div className="w-full grid grid-cols-2 aspect-square gap-4">
-            {aboutData1.map((item) =>
-              item.id == 5 ? (
-                <div
-                  className="w-full h-full sm:mt-10 sm:pr-10"
-                  key={item.id}
-                  onMouseEnter={() => setHoveredImage(item.id)}
-                  onMouseLeave={() => setHoveredImage(undefined)}
-                >
-                  <div className="w-full aspect-square relative">
-                    <Image
-                      src={item.image}
-                      alt="about"
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-[10px]"
-                    />
-                    <motion.div
-                      animate={{ opacity: hoveredImage === item.id ? 1 : 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute top-0 left-0 w-full h-full backdrop-grayscale backdrop-brightness-75 bg-white/10 transition duration-500 z-[2] rounded-[10px]"
-                    />
-                    {hoveredImage === item.id && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-1/2 left-0 w-full h-full z-[3] pointer-events-none"
-                      >
-                        <motion.div
-                          initial={{ scaleY: 0, opacity: 1 }}
-                          animate={{ scaleY: 1, opacity: 0 }}
-                          transition={{
-                            duration: 0.6,
-                            ease: "easeInOut",
-                          }}
-                          style={{ originY: 0.5 }}
-                          className="absolute bottom-1/2 left-0 w-full h-full bg-gradient-to-t from-white/30 to-transparent"
-                        />
-                      </motion.div>
-                    )}
-                  </div>
-                </div>
-              ) : item.id == 7 ? (
-                <div
-                  className="w-full h-full sm:mb-10 sm:pr-10"
-                  key={item.id}
-                  onMouseEnter={() => setHoveredImage(item.id)}
-                  onMouseLeave={() => setHoveredImage(undefined)}
-                >
-                  <div className="w-full aspect-square relative">
-                    <Image
-                      src={item.image}
-                      alt="about"
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-[10px]"
-                    />
-                    <motion.div
-                      animate={{ opacity: hoveredImage === item.id ? 1 : 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute top-0 left-0 w-full h-full backdrop-grayscale backdrop-brightness-75 bg-white/10 transition duration-500 z-[2] rounded-[10px]"
-                    />
-                    {hoveredImage === item.id && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-1/2 left-0 w-full h-full z-[3] pointer-events-none"
-                      >
-                        <motion.div
-                          initial={{ scaleY: 0, opacity: 1 }}
-                          animate={{ scaleY: 1, opacity: 0 }}
-                          transition={{
-                            duration: 0.6,
-                            ease: "easeInOut",
-                          }}
-                          style={{ originY: 0.5 }}
-                          className="absolute bottom-1/2 left-0 w-full h-full bg-gradient-to-t from-white/30 to-transparent"
-                        />
-                      </motion.div>
-                    )}
-                  </div>
-                </div>
-              ) : (
+            {
+              aboutData1.map((item) => (
+                // item.id == 5 ? (
+                //   <div
+                //     className="w-full h-full sm:mt-10 sm:pr-10"
+                //     key={item.id}
+                //     onMouseEnter={() => setHoveredImage(item.id)}
+                //     onMouseLeave={() => setHoveredImage(undefined)}
+                //   >
+                //     <div className="w-full aspect-square relative">
+                //       <Image
+                //         src={item.image}
+                //         alt="about"
+                //         layout="fill"
+                //         objectFit="cover"
+                //         className="rounded-[10px]"
+                //       />
+                //       <motion.div
+                //         animate={{ opacity: hoveredImage === item.id ? 1 : 0 }}
+                //         transition={{ duration: 0.3 }}
+                //         className="absolute top-0 left-0 w-full h-full backdrop-grayscale backdrop-brightness-75 bg-white/10 transition duration-500 z-[2] rounded-[10px]"
+                //       />
+                //       {hoveredImage === item.id && (
+                //         <motion.div
+                //           initial={{ opacity: 0 }}
+                //           animate={{ opacity: 1 }}
+                //           exit={{ opacity: 0 }}
+                //           transition={{ duration: 0.2 }}
+                //           className="absolute top-1/2 left-0 w-full h-full z-[3] pointer-events-none"
+                //         >
+                //           <motion.div
+                //             initial={{ scaleY: 0, opacity: 1 }}
+                //             animate={{ scaleY: 1, opacity: 0 }}
+                //             transition={{
+                //               duration: 0.6,
+                //               ease: "easeInOut",
+                //             }}
+                //             style={{ originY: 0.5 }}
+                //             className="absolute bottom-1/2 left-0 w-full h-full bg-gradient-to-t from-white/30 to-transparent"
+                //           />
+                //         </motion.div>
+                //       )}
+                //     </div>
+                //   </div>
+                // ) : item.id == 7 ? (
+                //   <div
+                //     className="w-full h-full sm:mb-10 sm:pr-10"
+                //     key={item.id}
+                //     onMouseEnter={() => setHoveredImage(item.id)}
+                //     onMouseLeave={() => setHoveredImage(undefined)}
+                //   >
+                //     <div className="w-full aspect-square relative">
+                //       <Image
+                //         src={item.image}
+                //         alt="about"
+                //         layout="fill"
+                //         objectFit="cover"
+                //         className="rounded-[10px]"
+                //       />
+                //       <motion.div
+                //         animate={{ opacity: hoveredImage === item.id ? 1 : 0 }}
+                //         transition={{ duration: 0.3 }}
+                //         className="absolute top-0 left-0 w-full h-full backdrop-grayscale backdrop-brightness-75 bg-white/10 transition duration-500 z-[2] rounded-[10px]"
+                //       />
+                //       {hoveredImage === item.id && (
+                //         <motion.div
+                //           initial={{ opacity: 0 }}
+                //           animate={{ opacity: 1 }}
+                //           exit={{ opacity: 0 }}
+                //           transition={{ duration: 0.2 }}
+                //           className="absolute top-1/2 left-0 w-full h-full z-[3] pointer-events-none"
+                //         >
+                //           <motion.div
+                //             initial={{ scaleY: 0, opacity: 1 }}
+                //             animate={{ scaleY: 1, opacity: 0 }}
+                //             transition={{
+                //               duration: 0.6,
+                //               ease: "easeInOut",
+                //             }}
+                //             style={{ originY: 0.5 }}
+                //             className="absolute bottom-1/2 left-0 w-full h-full bg-gradient-to-t from-white/30 to-transparent"
+                //           />
+                //         </motion.div>
+                //       )}
+                //     </div>
+                //   </div>
+                // ) : (
                 <div
                   className="w-full aspect-square relative rounded-[10px]"
                   key={item.id}
@@ -229,10 +230,11 @@ export default function AboutUsComp() {
                     </motion.div>
                   )}
                 </div>
-              )
-            )}
+              ))
+              // )
+            }
           </div>
-          <div className="w-[120px] h-[120px] z-[3] bg-white rounded-[15px] flex items-center justify-center absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]">
+          {/* <div className="w-[120px] h-[120px] z-[3] bg-white rounded-[15px] flex items-center justify-center absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]">
             <div className="w-[100px] aspect-square relative">
               <Image
                 src={"/images/logo1.png"}
@@ -241,7 +243,7 @@ export default function AboutUsComp() {
                 objectFit="cover"
               />
             </div>
-          </div>
+          </div> */}
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 100 }}
@@ -257,10 +259,26 @@ export default function AboutUsComp() {
           <h1 className="sm:text-[30px] text-[24px] font-semibold">
             {t("aboutUs1")}
           </h1>
-          <p className="text-[14px] leading-6 text-grey font-light lg1350:w-[480px] w-full mt-2">
-            {t("text")}
-          </p>
-          <div className="mt-4">
+          <div className="w-full flex flex-col gap-[2px]">
+            <div className="w-full">
+              <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                {t("text")}
+              </p>
+              <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                {t("text1")}
+              </p>
+            </div>
+            <div className="w-full">
+              <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                {t("text2")}
+              </p>
+              <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                {t("text3")}
+              </p>
+            </div>
+          </div>
+
+          {/* <div className="mt-4">
             <Button
               title={t("aboutUs")}
               height="h-[54px]"
@@ -269,10 +287,10 @@ export default function AboutUsComp() {
               onClick={() => {}}
               width={"w-[200px]"}
             />
-          </div>
+          </div> */}
         </motion.div>
       </div>
-      <div className="w-full bg-blue">
+      {/* <div className="w-full bg-blue">
         <div
           ref={ref}
           className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[80px] py-[60px] flex flex-col gap-6 items-center"
@@ -283,7 +301,6 @@ export default function AboutUsComp() {
           <div className="w-full grid lg1250:grid-cols-3 md600:grid-cols-2 gap-5">
             {aboutData.map((item, index) => (
               <React.Fragment key={index}>
-                {/* Animated Card */}
                 <motion.div
                   initial={{ opacity: 0, y: 100 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -334,7 +351,6 @@ export default function AboutUsComp() {
                     className="absolute top-0 left-0 w-full h-full backdrop-grayscale backdrop-brightness-75 bg-white/10 transition duration-500 z-[2] rounded-[10px]"
                   />
 
-                  {/* White light wave animation */}
                   {hoveredImage === item.id && (
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -370,7 +386,7 @@ export default function AboutUsComp() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -95,7 +95,7 @@ export default function News({ news }: Props) {
         </div>
       )}
 
-      <div className="absolute top-0 left-[-100px]">
+      {/* <div className="absolute top-0 left-[-100px]">
         <div className="w-[300px] h-[300px] relative">
           <Image
             src={"/images/1w.png"}
@@ -134,7 +134,7 @@ export default function News({ news }: Props) {
             objectFit="cover"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

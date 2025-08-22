@@ -19,7 +19,7 @@ interface Props {
   setIsContactClicked?: (arg1: boolean) => void;
 }
 
-export default function sContact({ isPopUp, setIsContactClicked }: Props) {
+export default function Contact({ isPopUp, setIsContactClicked }: Props) {
   const { setToast } = useApexAdmin();
   const [projects, setProjects] = useState<Building[]>([]);
   const [values, setValues] = useState({
@@ -94,7 +94,7 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
             phone: values.phone,
             mail: values.email,
             project: values.project,
-            // hours: values.hours,
+            time: values.hours,
           }
         );
         setValues({ name: "", phone: "", email: "", project: "", hours: "" });
@@ -102,6 +102,7 @@ export default function sContact({ isPopUp, setIsContactClicked }: Props) {
         setIsContactClicked?.(false);
         setToast(true, t("success"), "success");
       } catch {
+        setToast(true, t("error"), "error");
       } finally {
         setIsLoading(false);
       }

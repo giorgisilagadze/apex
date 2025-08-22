@@ -18,9 +18,10 @@ import Image from "next/legacy/image";
 
 interface Props {
   images: Gallery[];
+  isReplace?: boolean;
 }
 
-export default function GallerySwiper({ images }: Props) {
+export default function GallerySwiper({ images, isReplace }: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [slidesPerView, setSlidesPerView] = useState(4);
 
@@ -58,7 +59,11 @@ export default function GallerySwiper({ images }: Props) {
             {images.map((item: Gallery) => (
               <SwiperSlide key={item.id} className="w-full h-full relative">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.url}`}
+                  src={
+                    isReplace
+                      ? item.url
+                      : `${process.env.NEXT_PUBLIC_API_URL}/${item.url}`
+                  }
                   alt="gallery"
                   layout="fill"
                   objectFit="cover"
@@ -94,16 +99,24 @@ export default function GallerySwiper({ images }: Props) {
             {images.map((item: Gallery) => (
               <SwiperSlide
                 key={item.id}
-                className="w-full md600:!h-[250px] !h-[200px] relative cursor-pointer"
+                className="w-full md600:!h-[220px] md500:!h-[200px] !h-[150px] relative cursor-pointer"
               >
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.url}`}
+                  src={
+                    isReplace
+                      ? item.url
+                      : `${process.env.NEXT_PUBLIC_API_URL}/${item.url}`
+                  }
                   alt="gallery"
                   layout="fill"
                   objectFit="cover"
                   className="rounded-[10px]"
                 />
-                <div className="bg-[rgba(255,255,255,0.4)] w-full h-full absolute top-0 left-0 z-[1]"></div>
+                <div
+                  className={`${
+                    isReplace ? "bg-blueOpacity" : "bg-[rgba(255,255,255,0.4)]"
+                  } w-full h-full absolute top-0 left-0 z-[1] rounded-[10px]`}
+                ></div>
               </SwiperSlide>
             ))}
           </Swiper>

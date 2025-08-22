@@ -311,4 +311,5 @@ interface Apartment1 {
   ptype: string | null;
   type: string | null;
   projectR: ProjectR;
+  buildingR: Building;
 }

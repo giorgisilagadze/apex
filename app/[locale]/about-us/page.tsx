@@ -16,11 +16,17 @@ import ScreenSize from "@/hooks/ScreenSize";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import Contact from "@/components/home/Contact";
+import { motion } from "framer-motion";
+import React from "react";
+import { PiBuildingOfficeFill } from "react-icons/pi";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 export default function AboutUs() {
   const dimension = ScreenSize();
 
   const [hoveredYear, setHoveredYear] = useState<string>();
+  const { ref, inView } = useInView({ triggerOnce: true });
 
   const t = useTranslations("AboutUs");
   const t1 = useTranslations("HomePage.About");
@@ -86,37 +92,37 @@ export default function AboutUs() {
     {
       id: 1,
       year: "2015",
-      projects: ["დადიანის 22"],
+      projects: [t("დადიანის 22")],
     },
     {
       id: 2,
       year: "2016",
-      projects: ["მეცკევიჩის 56", "მეტრეველის 4", "მეტრეველის 6"],
+      projects: [t("მეცკევიჩის 56"), t("მეტრეველის 4"), t("მეტრეველის 6")],
     },
     {
       id: 3,
       year: "2018",
-      projects: ["დადიანის 125", "ცაგარელის 70"],
+      projects: [t("დადიანის 125"), t("ცაგარელის 70")],
     },
     {
       id: 4,
       year: "2019",
-      projects: ["დადიანის 111", "ბერბუკის 1"],
+      projects: [t("დადიანის 111"), t("ბერბუკის 1")],
     },
     {
       id: 5,
       year: "2021",
-      projects: ["დადიანის 90"],
+      projects: [t("დადიანის 90")],
     },
     {
       id: 6,
       year: "2022",
-      projects: ["აპექს ავლაბარი"],
+      projects: [t("აპექს ავლაბარი")],
     },
     {
       id: 7,
       year: "2023",
-      projects: ["აპექს ლისი"],
+      projects: [t("აპექს ლისი")],
     },
   ];
 
@@ -124,7 +130,7 @@ export default function AboutUs() {
     <div className="w-full ">
       <div className="w-full sm:h-[400px] h-[300px] relative">
         <Image
-          src={"/images/aboutus.jpeg"}
+          src={"/images/aboutus1.jpg"}
           alt="project-image"
           layout="fill"
           objectFit="cover"
@@ -137,38 +143,82 @@ export default function AboutUs() {
           <p className="text-[14px] text-white sm:self-center">{t("page")}</p>
         </div>
       </div>
-      <div className="w-full sm:mt-[100px] mt-10">
+      <div className="w-full">
         <AboutUsComp />
-        <div className="w-full xl1600:pl-[330px] xl1600:pr-[100px] lg1250:pl-[200px] lg:pl-[100px] sm:pl-[64px] pl-6 pr-6 sm:pr-[64px] lg:pr-[100px] lg1110:pr-0 sm:py-[60px] py-10 grid lg1110:grid-cols-5">
-          <div className="w-full flex flex-col gap-5 lg1110:col-span-2">
-            <div className="w-full md500:h-[350px] h-[300px] relative">
-              <Image
-                src={"/images/about1.jpg"}
-                alt="about"
-                layout="fill"
-                className="rounded-[20px]"
-              />
+        <div className="w-full  xl1600:pl-[140px] lg1250:pl-[100px] sm:pl-[64px] pl-6 pr-6 sm:pr-[64px] lg:pr-[100px] lg1110:pr-0 sm:py-[60px] py-10 grid lg1110:grid-cols-4 bg-white">
+          <div className="w-full flex flex-col gap-2 lg1110:col-span-2">
+            <div className="flex items-center gap-3">
+              <div className="w-[50px] h-[1px] bg-blue"></div>
+              <p className="text-[14px] text-blue font-light">
+                {t("companyMission")}
+              </p>
             </div>
-            <p className="text-[13px] text-grey">
-              სამშენებლო კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან
-              ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის
-              პროდუქტსა და მომსახურებას და ქმნის თითოეული ინდივიდისთვის
-              სასურველს კომფორტს. ამჟამად, აპექს დეველოპმენტი 10 დასრულებულ და 3
-              მიმდინარე პროექტს ითვლის თბილისის მასშტაბით. სამშენებლო კომპანია
-              აპექს დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია
-              სთავაზობს მომხმარებელს მაღალი ხარისხის პროდუქტსა და მომსახურებას
-              და ქმნის თითოეული ინდივიდისთვის სასურველს კომფორტს. სამშენებლო
-              კომპანია აპექს დეველოპმენტი ბაზარზე 2012 წლიდან ფუნქციონირებს.
-              კომპანია სთავაზობს მომხმარებელს მაღალი ხარისხის პროდუქტსა და
-              მომსახურებას და ქმნის თითოეული ინდივიდისთვის სასურველს კომფორტს.
-              ამჟამად, აპექს დეველოპმენტი 10 დასრულებულ და 3 მიმდინარე პროექტს
-              ითვლის თბილისის მასშტაბით. სამშენებლო კომპანია აპექს დეველოპმენტი
-              ბაზარზე 2012 წლიდან ფუნქციონირებს. კომპანია სთავაზობს მომხმარებელს
-              მაღალი ხარისხის პროდუქტსა და მომსახურებას და ქმნის თითოეული
-              ინდივიდისთვის სასურველს კომფორტს.
-            </p>
+            <h1 className="sm:text-[30px] text-[24px] font-semibold">
+              {t1("historyOfSuccess")}
+            </h1>
+            <div className="w-full flex flex-col gap-[2px]">
+              <div className="w-full">
+                <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                  {t1("text")}
+                </p>
+                <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                  {t1("text1")}
+                </p>
+              </div>
+              <div className="w-full">
+                <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                  {t1("text2")}
+                </p>
+                <p className="text-[12px] leading-5 text-grey font-light lg1350:w-[480px] w-full mt-2">
+                  {t1("text3")}
+                </p>
+              </div>
+            </div>
+            <div
+              className="w-full flex md600:flex-row flex-col items-center gap-5 mt-8"
+              ref={ref}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="w-full px-5  pt-5 pb-5 flex flex-col md600:gap-5 gap-3 bg-white rounded-[20px] justify-between border border-[#eee]"
+              >
+                <div className="w-full flex flex-col gap-2">
+                  <PiBuildingOfficeFill className="text-[40px] text-blue" />
+                  <h1 className="xl:text-[20px] text-[16px] font-semibold text-blue">
+                    {t1("historyOfSuccess")}
+                  </h1>
+                  <p className="text-[11px] text-[rgba(97,94,94,1)]">
+                    {t1("text")}
+                  </p>
+                </div>
+                <div className="w-full flex flex-col">
+                  <h1 className="sm:text-[40px] text-[32px] font-semibold text-blue">
+                    <CountUp start={0} end={inView ? 20 : 0} duration={2} />+
+                  </h1>
+                  <p className="text-[12px]">{t1("done")}</p>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 + 0.1 }}
+                viewport={{ once: true }}
+                className="w-full md600:h-full h-[300px] relative overflow-hidden"
+              >
+                <Image
+                  src={"/images/about1.jpg"}
+                  alt="about"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-[10px] z-[1]"
+                />
+              </motion.div>
+            </div>
           </div>
-          <div className="w-full sm:h-[900px] md500:h-[700px] h-[600px] relative lg1110:col-span-3">
+          <div className="w-full sm:h-[900px] md500:h-[700px] h-[600px] relative lg1110:col-span-2">
             <Image
               src={"/images/tree.png"}
               alt="about"
@@ -215,7 +265,7 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
-        <div className="w-full grid sm:grid-cols-2 lg1110:gap-[100px] sm:gap-10 items-center">
+        {/* <div className="w-full grid sm:grid-cols-2 lg1110:gap-[100px] sm:gap-10 items-center">
           <div className="w-full lg:h-[600px] sm:h-full h-[400px] relative">
             <Image
               src={"/images/mission.jpeg"}
@@ -248,18 +298,20 @@ export default function AboutUs() {
               />
             </div>
           </div>
-        </div>
-        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[60px] py-10 bg-[rgba(250,250,250,1)] flex flex-col gap-6 items-center">
+        </div> */}
+        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 sm:py-[60px] py-10 bg-blue flex flex-col gap-6 items-center">
           <div className="flex flex-col gap-3 items-center">
             <div className="w-[50px] h-[1px] bg-blue"></div>
-            <p className="text-[14px] text-blue font-light">{t("employees")}</p>
-            <h1 className="sm:text-[30px] text-[24px] font-bold mt-[-6px]">
+            {/* <p className="text-[14px] text-white font-light">
+              {t("employees")}
+            </p> */}
+            <h1 className="sm:text-[30px] text-[24px] font-bold mt-[-6px] text-white">
               {t("team")}
             </h1>
           </div>
           <div className="w-full xl1680:h-[470px] xl:h-[420px] lg:h-[470px] h-[420px] relative flex items-center md600:gap-10 gap-6">
-            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300 prevv select-none">
-              <BsArrowDown className="mr-[-20px] text-[26px] rotate-90" />
+            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white cursor-pointer hover:opacity-50 hover:text-blue duration-300 prevv select-none">
+              <BsArrowDown className="mr-[-20px] text-[26px] rotate-90 text-white" />
             </div>
             <Swiper
               loop={true}
@@ -290,8 +342,8 @@ export default function AboutUs() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-black cursor-pointer hover:border-blue hover:text-blue duration-300 nextt select-none">
-              <BsArrowDown className=" ml-[-20px] text-[26px] -rotate-90" />
+            <div className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white cursor-pointer hover:opacity-50 duration-300 nextt select-none">
+              <BsArrowDown className=" ml-[-20px] text-[26px] -rotate-90 text-white" />
             </div>
           </div>
         </div>

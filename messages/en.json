@@ -5,6 +5,8 @@
     "news": "News",
     "gallery": "Gallery",
     "partniors": "Partners",
+    "construction": "Construction",
+    "replace": "Change With New",
     "video": "Video Call",
     "contact": "Contact Us",
     "close": "Close",
@@ -44,11 +46,12 @@
     "About": {
       "aboutUs": "About Us",
       "aboutUs1": "Company Overview",
-      "text": "Since 2012, Apex Development has been creating high-quality residential and multifunctional spaces. With more than 20 completed projects to date, we have thousands of satisfied residents and owners.",
       "done": "Successfully Completed Project",
-      "text1": "Apex Development partners with leading banks and financial institutions to make the apartment purchasing process as simple and accessible as possible for our buyers. Our partners include: Bank of Georgia, TBC Bank, Liberty Bank, BasisBank, and Credo Bank.",
       "partner": "Partner Financial Institution",
-      "text2": "Apex Development has fulfilled the dream of thousands of people seeking a home. Our apartments are more than just walls and ceilings — they are spaces where your comfortable life begins.",
+      "text": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual. At present, Apex Development counts 10 completed and 3 ongoing projects across Tbilisi.",
+      "text1": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual.",
+      "text2": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual. At present, Apex Development counts 10 completed and 3 ongoing projects across Tbilisi.",
+      "text3": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual.",
       "apartment": "Apartments Sold",
       "customer": "Satisfied Customer",
       "year": "Years on the Market",
@@ -83,7 +86,12 @@
     "hours1": "Mon-Fri: 10:00 - 18:00",
     "hours2": "Sat: 11:00 - 16:00",
     "marketing": "Marketing",
-    "sale": "Sales office"
+    "sale": "Sales office",
+    "comment": "Comment",
+    "commentPlaceholder": "Brief description of the proposal",
+    "presentation": "Project presentation",
+    "uploadFile": "Upload file",
+    "error": "An error occurred"
   },
   "subscribtion": {
     "title": "Subscribe to News",
@@ -163,7 +171,19 @@
     "employee6": "Mariam Chaladze",
     "employee7": "Marishka Pantsulaia",
     "employee8": "Nikoloz Forchkidze",
-    "employee9": "Sopho Qurasvili"
+    "employee9": "Sopho Qurasvili",
+    "დადიანის 22": "Dadiani 22",
+    "მეცკევიჩის 56": "Metskevich 56",
+    "მეტრეველის 4": "Metreveli 4",
+    "მეტრეველის 6": "Metreveli 6",
+    "დადიანის 125": "Dadiani 125",
+    "ცაგარელის 70": "Tsagareli 70",
+    "დადიანის 111": "Dadiani 111",
+    "ბერბუკის 1": "Berbuki 1",
+    "დადიანის 90": "Dadiani 90",
+    "აპექს ავლაბარი": "Apex Avlabari",
+    "აპექს ლისი": "Apex Lisi"
+
   },
   "NewsPage": {
     "title": "News",
@@ -238,7 +258,8 @@
     "ნახევარი": "Half",
     "price": "Price per m²",
     "result": "Result",
-    "choose": "Choose"
+    "choose": "Choose",
+    "projectGallery": "Project Gallery"
   },
   "404": {
     "text": "The requested page was not found",
@@ -264,5 +285,20 @@
   },
   "Change": {
     "title": "Replace the old with the new"
+  },
+  "constructionPage": {
+    "title": "Construction",
+    "page": "Home / Construction",
+    "seeTheProcess": "See The Process"
+  },
+  "replacePage": {
+    "title": "Change With New",
+    "page": "Home / Change With New",
+    "subtitle": "Replace the old house with a new one",
+    "text": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual. At present, Apex Development counts 10 completed and 3 ongoing projects across Tbilisi.",
+    "text1": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual.",
+    "text2": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual. At present, Apex Development counts 10 completed and 3 ongoing projects across Tbilisi.",
+    "text3": "The construction company Apex Development has been operating on the market since 2012. The company offers customers high-quality products and services, creating comfort tailored to each individual.",
+    "projectGallery": "Project Gallery"
   }
 }

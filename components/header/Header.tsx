@@ -44,15 +44,25 @@ export default function Header() {
       title: t("news"),
       link: `/${locale}/news`,
     },
-    {
-      id: 4,
-      title: t("gallery"),
-      link: `/${locale}/gallery`,
-    },
+    // {
+    //   id: 4,
+    //   title: t("gallery"),
+    //   link: `/${locale}/gallery`,
+    // },
     {
       id: 5,
       title: t("partniors"),
       link: `/${locale}/partners`,
+    },
+    {
+      id: 6,
+      title: t("construction"),
+      link: `/${locale}/construction`,
+    },
+    {
+      id: 7,
+      title: t("replace"),
+      link: `/${locale}/replace-with-new`,
     },
   ];
 
@@ -92,11 +102,11 @@ export default function Header() {
           <Link href={`/${locale}`} className="cursor-pointer">
             <Image src={"/images/logo.png"} alt="logo" width={70} height={70} />
           </Link>
-          <div className="items-center gap-7 hidden lg1110:flex">
+          <div className="items-center xl:gap-7 lg1250:gap-5 gap-3 hidden lg1110:flex">
             {nav.map((item) => (
               <Link className={`cursor-pointer`} href={item.link} key={item.id}>
                 <p
-                  className="text-white"
+                  className="text-white xl:text-[16px] text-[14px]"
                   onMouseOver={() => {
                     sethoveredPageId(item.id);
                   }}

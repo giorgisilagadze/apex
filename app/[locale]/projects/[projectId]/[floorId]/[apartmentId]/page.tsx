@@ -2,6 +2,7 @@ import SendEmail from "@/components/SendEmail";
 import Info from "@/components/apartment/Info";
 import ROICalculator from "@/components/calculator/ROICalculator";
 import Contact from "@/components/home/Contact";
+import GallerySwiper from "@/components/singleProject/GallerySwiper";
 import { FetchSingleApartment } from "@/serverside/FetchSingleApartment";
 import { getTranslations } from "next-intl/server";
 import Image from "next/legacy/image";
@@ -14,6 +15,8 @@ export default async function Apartment({
   const apartmentId = (await params).apartmentId;
 
   const apartment: Apartment1 = await FetchSingleApartment(apartmentId);
+
+  const t = await getTranslations("SingleApartmnet");
 
   console.log(apartment);
 
@@ -46,6 +49,12 @@ export default async function Apartment({
           <ROICalculator apartment={apartment} />
         </div> */}
       {/* <SendEmail /> */}
+      {apartment.buildingR.galery.length !== 0 && (
+        <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 flex flex-col gap-8 items-center sm:py-[60px] py-10">
+          <h1 className="sm:text-[30px] text-[24px]">{t("projectGallery")}</h1>
+          <GallerySwiper images={apartment.buildingR.galery} />
+        </div>
+      )}
       <Contact />
     </div>
   );

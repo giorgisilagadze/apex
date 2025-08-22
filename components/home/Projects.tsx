@@ -191,7 +191,12 @@ export default function Projects({ projects }: Props) {
                   </div>
 
                   <div className="w-full flex flex-col gap-2">
-                    <p className="lg1250:text-[26px] md600:text-[22px] text-[18px] text-white font-bold md500:whitespace-nowrap">
+                    <p
+                      className="lg1250:text-[26px] md600:text-[22px] text-[18px] text-white font-bold md500:whitespace-nowrap hover:opacity-50 duration-300 cursor-pointer"
+                      onClick={() =>
+                        route.push(`/${locale}/projects/${item.id}`)
+                      }
+                    >
                       {locale == "en"
                         ? item.title_en
                         : locale == "ge"

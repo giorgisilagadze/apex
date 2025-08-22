@@ -12,14 +12,23 @@ import { Project } from "next/dist/build/swc/types";
 
 interface Props {
   apartment: Apartment1;
+  projectName: string;
 }
 
-export default function ROICalculator({ apartment }: Props) {
+export default function ROICalculator({ apartment, projectName }: Props) {
   const [selectedType, setSelectedType] = useState("სრული");
   const [roi, setRoi] = useState<number>();
+  const [data, setData] = useState({
+    area: "",
+    price: "",
+  });
 
   const t = useTranslations("SingleApartmnet");
   const f = useTranslations("Filter");
+
+  const handleOnChange = (key: string, value: string) => {
+    setData({ ...data, [key]: value });
+  };
 
   // const ijara = Number(parseFloat(apartment.projectR.ijara).toFixed(2));
   // const fullSale = Number(parseFloat(apartment.projectR.fullSale).toFixed(2));
@@ -58,7 +67,7 @@ export default function ROICalculator({ apartment }: Props) {
           title={t("project")}
           bgColor="bg-transparent"
           onChange={() => {}}
-          value={apartment.project}
+          value={projectName}
           readonly={true}
           color="text-white"
           isRoi={true}
@@ -68,7 +77,8 @@ export default function ROICalculator({ apartment }: Props) {
           title={t("projectType")}
           bgColor="bg-transparent"
           onChange={() => {}}
-          value={f(apartment.type) as string}
+          // value={f(apartment.type) as string}
+          value={"სტუდიო" as string}
           readonly={true}
           color="text-white"
           isRoi={true}
@@ -82,24 +92,26 @@ export default function ROICalculator({ apartment }: Props) {
           color="text-white"
         />
         <Input
+          inputKey="area"
           placeholder={""}
           title={`${t("area")}²`}
           bgColor="bg-transparent"
-          onChange={() => {}}
-          value={Number(apartment.area).toFixed(0)}
+          onChange={handleOnChange}
+          value={data.area}
           color="text-white"
           isRoi={true}
         />
         <Input
+          inputKey="price"
           placeholder={""}
           title={t("price")}
           bgColor="bg-transparent"
-          onChange={() => {}}
-          value={Number(apartment.price2).toFixed(0) as string}
+          onChange={handleOnChange}
+          value={data.price}
           color="text-white"
           isRoi={true}
         />
-        <Input
+        {/* <Input
           placeholder={"ROI"}
           title={t("result")}
           bgColor="bg-transparent"
@@ -107,7 +119,23 @@ export default function ROICalculator({ apartment }: Props) {
           value={`${roi ? (roi * 100).toFixed(0) : "X"}%`}
           color="text-white"
           isRoi={true}
-        />
+        /> */}
+        <div className="w-full flex flex-col gap-[6px]">
+          <h1
+            className={`text-[14px] font-medium whitespace-nowrap text-white`}
+          >
+            {t("result")}
+          </h1>
+          <div>
+            <p className="text-[14px] text-white">
+              ანაზღაურებადი პერიოდი: 8 წელი
+            </p>
+            <p className="text-[14px] text-white">
+              წმინდა შემოსავალი: $ 14 851
+            </p>
+            <p className="text-[14px] text-white">ROI: 13%</p>
+          </div>
+        </div>
         {/* <div className="w-full lg:h-full sm:h-[50%] h-[300px] relative flex items-center justify-center">
           <VideoItem
             className="w-full h-full"

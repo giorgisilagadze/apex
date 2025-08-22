@@ -107,13 +107,20 @@ export default function ROICalculatorMain({ projects }: Props) {
             inputKey="price"
             type="number"
           />
-          <Input
+          {/* <Input
             placeholder={"ROI"}
             title={t("result")}
             bgColor="bg-[rgba(242,242,242,1)]"
             onChange={() => {}}
             value={`${roi ? (roi * 100).toFixed(0) : "X"}%`}
-          />
+          /> */}
+          <div className="w-full flex flex-col gap-[6px]">
+            <h1
+              className={`text-[14px] font-medium whitespace-nowrap text-white`}
+            >
+              {t("result")}
+            </h1>
+          </div>
         </div>
         <div className="w-full lg:h-full sm:h-[50%] h-[300px] relative flex items-center justify-center">
           <VideoItem
