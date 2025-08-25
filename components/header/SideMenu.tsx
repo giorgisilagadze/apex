@@ -45,20 +45,30 @@ export default function SideMenu({
       title: t("news"),
       link: `/${locale}/news`,
     },
-    {
-      id: 4,
-      title: t("gallery"),
-      link: `/${locale}/gallery`,
-    },
+    // {
+    //   id: 4,
+    //   title: t("gallery"),
+    //   link: `/${locale}/gallery`,
+    // },
     {
       id: 5,
       title: t("partniors"),
       link: `/${locale}/partners`,
     },
+    {
+      id: 6,
+      title: t("construction"),
+      link: `/${locale}/construction`,
+    },
+    {
+      id: 7,
+      title: t("replace"),
+      link: `/${locale}/replace-with-new`,
+    },
   ];
 
   const callPhone = () => {
-    const phoneNumber = "555045555";
+    const phoneNumber = "0322055055";
     // Construct the phone call URL
     const phoneUrl = `tel:${phoneNumber}`;
 
@@ -118,7 +128,7 @@ export default function SideMenu({
         </div>
         <div className="flex items-center gap-1" onClick={callPhone}>
           <IoMdCall className="text-[18px] " />
-          <p className="text-[14px]">+995 555 045 555</p>
+          <p className="text-[14px]">0322 055 055</p>
         </div>
         {/* <div className="flex items-center gap-1">
           <BsCameraVideo className="text-[16px]" />

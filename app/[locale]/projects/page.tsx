@@ -65,7 +65,7 @@ export default function Projects() {
     <div className="w-full ">
       <div className="w-full sm:h-[550px] h-[450px] relative">
         <Image
-          src={"/images/projects.jpeg"}
+          src={"/images/projects1.jpg"}
           alt="project-image"
           layout="fill"
           objectFit="cover"
@@ -130,7 +130,7 @@ export default function Projects() {
                 </motion.div>
               ))
             ) : (
-              <div className="w-full lg1250:col-span-3 md600:cols-span-2 h-[300px] flex items-center gap-2 justify-center">
+              <div className="w-full lg1250:col-span-3 md600:col-span-2 h-[300px] flex items-center gap-2 justify-center">
                 <IoSearchOutline className="text-[16px]" />
                 <p className="text-[14px]">{t("noProject")}</p>
               </div>

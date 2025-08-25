@@ -76,7 +76,7 @@ export default function Header() {
   }, []);
 
   const callPhone = () => {
-    const phoneNumber = "555045555";
+    const phoneNumber = "0322055055";
     // Construct the phone call URL
     const phoneUrl = `tel:${phoneNumber}`;
 
@@ -100,7 +100,12 @@ export default function Header() {
           } duration-300`}
         >
           <Link href={`/${locale}`} className="cursor-pointer">
-            <Image src={"/images/logo.png"} alt="logo" width={70} height={70} />
+            <Image
+              src={"/images/logo2.png"}
+              alt="logo"
+              width={70}
+              height={70}
+            />
           </Link>
           <div className="items-center xl:gap-7 lg1250:gap-5 gap-3 hidden lg1110:flex">
             {nav.map((item) => (
@@ -130,7 +135,7 @@ export default function Header() {
               onClick={callPhone}
             >
               <IoMdCall className="text-[18px] text-white animate-soft-bounce" />
-              <p className="text-[16px] text-white">+995 555 045 555</p>
+              <p className="text-[16px] text-white">0322 055 055</p>
             </div>
             {/* <div className="lg1110:flex items-center gap-1 hidden">
               <BsCameraVideo className="text-[16px] text-white" />

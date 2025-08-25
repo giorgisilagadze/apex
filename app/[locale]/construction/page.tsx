@@ -21,7 +21,7 @@ export default function Construction() {
           <p className="text-[14px] text-white sm:self-center">{t("page")}</p>
         </div>
       </div>
-      <div className="w-full sm:mt-[100px] mt-[40px] xl1600:px-[140px] lg1250:px-[100px] lg:px-[100px] sm:px-[64px] px-6 grid lg1250:grid-cols-3 md600:grid-cols-2 gap-4">
+      <div className="w-full sm:py-[60px] py-10  xl1600:px-[140px] lg1250:px-[100px] lg:px-[100px] sm:px-[64px] px-6 grid lg1250:grid-cols-3 md600:grid-cols-2 gap-4">
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <ConstructionCard key={item} />
         ))}

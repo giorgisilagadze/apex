@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,30 +12,31 @@ export default function MainSwiper() {
   const [shownProject, setShownProject] = useState(1);
 
   const t = useTranslations("HomePage.Slider");
+  const locale = useLocale();
 
   const projects = [
     {
       id: 1,
+      projectId: 445,
       image: "/images/video.mp4",
-      title1: t("text"),
       title2: t("apexNuts"),
     },
     {
       id: 2,
+      projectId: 446,
       image: "/images/banner1.jpeg",
-      title1: t("text"),
       title2: t("apexDig"),
     },
     {
       id: 3,
+      projectId: 444,
       image: "/images/banner2.png",
-      title1: t("text"),
       title2: t("apexNuts2"),
     },
     {
       id: 4,
+      projectId: 503,
       image: "/images/banner1.jpeg",
-      title1: t("text"),
       title2: t("apexHolb"),
     },
   ];
@@ -93,16 +94,20 @@ export default function MainSwiper() {
               {item.title1}
             </p> */}
             {projects.map((each) => (
-              <h1
-                className={`lg1250:text-[48px] sm:text-[38px] md500:text-[30px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 ${
-                  shownProject == each.id
-                    ? "border-white"
-                    : " border-transparent"
-                } duration-300`}
+              <Link
+                href={`/${locale}/projects/${each.projectId}`}
                 key={each.id}
               >
-                {each.title2}
-              </h1>
+                <h1
+                  className={`lg1250:text-[48px] sm:text-[38px] md500:text-[30px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 hover:opacity-50 duration-300 duration-300 ${
+                    shownProject == each.id
+                      ? "border-white"
+                      : " border-transparent"
+                  } duration-300`}
+                >
+                  {each.title2}
+                </h1>
+              </Link>
             ))}
           </div>
           <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-blueOpacity to-transparent"></div>
