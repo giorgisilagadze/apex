@@ -101,7 +101,7 @@ export default function Header() {
         >
           <Link href={`/${locale}`} className="cursor-pointer">
             <Image
-              src={"/images/logo2.png"}
+              src={"/images/logo3.png"}
               alt="logo"
               width={70}
               height={70}
