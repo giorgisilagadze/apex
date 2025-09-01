@@ -31,6 +31,7 @@
       "apexNuts": "Apex Nutsubidze",
       "apexDig": "Apex Didi Dighomi",
       "apexNuts2": "Apex Isani",
+      "apexTau": "Apex Towers",
       "apexHolb": "Apex Holbrooke",
       "text": "0% Internal Installment",
       "scroll": "Scroll"
@@ -281,7 +282,8 @@
     "title": "Do you want your old house to be replaced by a modern building?",
     "subtitle": "Contact us — we are looking for apartment owners for collaboration.",
     "text": "Leave us your information and we will contact you to clarify the details.",
-    "all": "View all"
+    "all": "View all",
+    "more": "View More"
   },
   "Change": {
     "title": "Replace"
