@@ -94,9 +94,11 @@ export default function Header() {
           className={`w-full flex items-center justify-between fixed lg1110:px-[60px] px-6 py-[20px] ${
             isContactClicked ? "z-[1]" : "z-10"
           } z-10 ${
-            scrolled
-              ? "bg-[rgba(1,1,1,0.6)] backdrop-blur-[10px]"
-              : "bg-transparent"
+            !pathname.includes(`/${locale}/projects`)
+              ? scrolled
+                ? "bg-[rgba(1,1,1,0.6)] backdrop-blur-[10px]"
+                : "bg-transparent"
+              : "bg-[rgba(1,1,1,0.6)] backdrop-blur-[10px]"
           } duration-300`}
         >
           <Link href={`/${locale}`} className="cursor-pointer">

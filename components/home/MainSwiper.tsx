@@ -14,12 +14,13 @@ export default function MainSwiper() {
   const t = useTranslations("HomePage.Slider");
   const locale = useLocale();
 
-  const projects = [//0 1 3 // 2 4
+  const projects = [
+    //0 1 3 // 2 4
     {
       id: 1,
       projectId: 503,
       image: "/images/zhoolbroke.mp4",
-      title2: t("apexHolb")
+      title2: t("apexHolb"),
     },
     {
       id: 2,
@@ -30,8 +31,8 @@ export default function MainSwiper() {
     {
       id: 3,
       projectId: 444,
-      image: "/images/xzapexisani.png",
-      title2: t("apexNuts2"),// აპექსი ისანი
+      image: "/images/apexisani.mp4",
+      title2: t("apexNuts2"), // აპექსი ისანი
     },
     {
       id: 4,
@@ -39,11 +40,11 @@ export default function MainSwiper() {
       image: "/images/znutsubidze.mp4",
       title2: t("apexNuts"),
     },
-        {
+    {
       id: 5,
       projectId: 505,
       image: "/images/zapextauers.webp",
-      title2: t("apexTau"),// აპექს თაუერსი
+      title2: t("apexTau"), // აპექს თაუერსი
     },
   ];
 
@@ -59,13 +60,14 @@ export default function MainSwiper() {
     <div className="w-full lg1250:h-[878px] sm:h-[700px] h-[600px] relative">
       {projects.map((item, index) => (
         <div
-          className={`absolute w-full h-full top-0 left-0 transition-opacity ease-in-out transform ${shownProject == item.id
+          className={`absolute w-full h-full top-0 left-0 transition-opacity ease-in-out transform ${
+            shownProject == item.id
               ? "z-[2] opacity-100 duration-[1000ms]"
               : "z-[-1] opacity-0 duration-[2500ms]"
-            }`}
+          }`}
           key={item.id}
         >
-          {index == 2 || index == 4 ? (//////////////////////
+          {index == 4 ? ( //////////////////////
             <Image
               src={item.image}
               alt="banner"
@@ -104,10 +106,11 @@ export default function MainSwiper() {
                 key={each.id}
               >
                 <h1
-                  className={`lg1250:text-[48px] sm:text-[38px] md500:text-[30px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 hover:opacity-50 duration-300 duration-300 ${shownProject == each.id
+                  className={`lg1250:text-[48px] sm:text-[38px] md500:text-[30px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 hover:opacity-50 duration-300 duration-300 ${
+                    shownProject == each.id
                       ? "border-white"
                       : " border-transparent"
-                    } duration-300`}
+                  } duration-300`}
                 >
                   {each.title2}
                 </h1>

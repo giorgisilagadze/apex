@@ -172,7 +172,7 @@ export default function Footer() {
             <div className="flex items-center gap-4">
               {nav.map((item) => (
                 <div className="flex items-center gap-4" key={item.id}>
-                  <div className="w-fit">
+                  <a className="w-fit" href={item.link}>
                     <span className="w-fit flex flex-col cursor-pointer">
                       <p
                         className="text-[14px] text-white font-light"
@@ -188,7 +188,7 @@ export default function Footer() {
                         }}
                       ></div>
                     </span>
-                  </div>
+                  </a>
                   {item.id !== 3 && (
                     <div className="w-[2px] h-[14px] bg-white mt-[-4px]"></div>
                   )}

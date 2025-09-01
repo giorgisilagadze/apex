@@ -276,6 +276,7 @@ interface Apartment1 {
   summer_area: string;
   living_space: string;
   price: string;
+  priceGEL: number;
   status: string;
   sold: string;
   image: string;

@@ -24,10 +24,10 @@ export default function EmployeeCard({ item }: Props) {
       />
       <div className="w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.3)] rounded-[10px]"></div>
       <div className="absolute left-4 bottom-6 flex flex-col gap-1">
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           <FaFacebookF className="text-[14px] text-white hover:opacity-50 duration-300 cursor-pointer" />
           <FaLinkedinIn className="text-[14px] text-white hover:opacity-50 duration-300 cursor-pointer" />
-        </div>
+        </div> */}
         <p className="text-[12px] text-white font-light mt-1">
           {item.position}
         </p>
