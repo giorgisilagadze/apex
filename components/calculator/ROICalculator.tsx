@@ -61,7 +61,7 @@ export default function ROICalculator({ apartment, projectName }: Props) {
       <div className="w-full flex items-center justify-start h-[78px] rounded-tl-[15px] rounded-tr-[15px]">
         <h1 className="text-white text-[22px] ">{t("roi")}</h1>
       </div>
-      <div className="sm:py-10 py-6 grid grid-cols-2 gap-5 w-full">
+      <div className="sm:py-10 py-6 grid md500:grid-cols-2 gap-5 w-full">
         <Input
           placeholder={""}
           title={t("project")}

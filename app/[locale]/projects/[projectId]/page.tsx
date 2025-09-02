@@ -52,8 +52,8 @@ export default async function SingleProject({
           <Filter page="project" />
         </div>
         {project.galery.length !== 0 && (
-          <div className="w-full flex items-center flex-col md500:flex-row">
-            <div className="md500:w-[70%] w-full md600:h-[650px] h-[550px] relative">
+          <div className="w-full flex items-center flex-col lg1110:flex-row">
+            <div className="lg1110:w-[70%] w-full lg1110:h-[650px] md500:h-[550px] h-[680px] relative">
               <Image
                 src={`${process.env.NEXT_PUBLIC_API_URL}/${project.galery[0].url}`}
                 alt="project-image"
@@ -61,8 +61,8 @@ export default async function SingleProject({
                 objectFit="cover"
                 className="md500:rounded-tr-[10px] md500:rounded-br-[10px]"
               />
-              <div className="w-full h-full bg-[rgba(0,0,0,0.4)] backdrop-blur-[10px] z-[1] md500:rounded-tr-[10px] md500:rounded-br-[10px]"></div>
-              <div className="w-[67%] z-[2] absolute top-1/2 -translate-y-1/2 left-[100px]">
+              <div className="w-full h-full bg-[rgba(0,0,0,0.4)] backdrop-blur-[10px] z-[1] lg1110:rounded-tr-[10px] lg1110:rounded-br-[10px]"></div>
+              <div className="sm:w-[67%] w-full z-[2] absolute top-1/2 -translate-y-1/2 lg1110:left-[100px] md500:px-10 px-6 lg1110:px-0">
                 <ROICalculator
                   apartment={{} as Apartment1}
                   projectName={
@@ -75,7 +75,7 @@ export default async function SingleProject({
                 />
               </div>
             </div>
-            <div className="sm:p-[60px] p-10 sm:max-w-[550px] max-w-[450px] flex flex-col gap-4 bg-[rgba(237,240,244,1)] lg:ml-[-100px] md600:ml-[-200px] md500:ml-[-300px] z-[1] md500:rounded-[10px]">
+            <div className="sm:p-[60px] p-10 lg1110:max-w-[550px] w-full flex flex-col gap-4 bg-[rgba(237,240,244,1)] lg1110:ml-[-100px] z-[1] lg1110:rounded-[10px]">
               <div className="flex items-center gap-3">
                 <div className="w-[50px] h-[1px] bg-blue"></div>
                 <p className="text-[14px] text-blue font-light">{t("about")}</p>
