@@ -16,7 +16,7 @@ export default async function OtherProjects({ projectId }: Props) {
       <div className="w-full grid lg1250:grid-cols-3 md600:grid-cols-2 gap-x-5 gap-y-8">
         {projects
           .filter((item: Building) => item.id !== parseInt(projectId))
-          .slice(0.3)
+          .slice(0, 3)
           .map((item) => (
             <ProjectCard1 key={item.id} item={item} />
           ))}

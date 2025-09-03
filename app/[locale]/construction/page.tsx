@@ -1,9 +1,11 @@
 import ConstructionCard from "@/components/construction/ConstructionCard";
-import { useTranslations } from "next-intl";
+import { FetchConstructions } from "@/serverside/FetchConstructions";
+import { getTranslations } from "next-intl/server";
 import Image from "next/legacy/image";
 
-export default function Construction() {
-  const t = useTranslations("constructionPage");
+export default async function Construction() {
+  const constructions: Construction[] = await FetchConstructions();
+  const t = await getTranslations("constructionPage");
   return (
     <div className="w-full">
       <div className="w-full sm:h-[400px] h-[300px] relative">
@@ -21,9 +23,9 @@ export default function Construction() {
           <p className="text-[14px] text-white sm:self-center">{t("page")}</p>
         </div>
       </div>
-      <div className="w-full sm:py-[60px] py-10  xl1600:px-[140px] lg1250:px-[100px] lg:px-[100px] sm:px-[64px] px-6 grid lg1250:grid-cols-3 md600:grid-cols-2 gap-4">
-        {[1, 2, 3, 4, 5, 6].map((item) => (
-          <ConstructionCard key={item} />
+      <div className="w-full sm:py-[90px] py-10  xl1600:px-[140px] lg1250:px-[100px] lg:px-[100px] sm:px-[64px] px-6 grid lg1250:grid-cols-3 md600:grid-cols-2 gap-4">
+        {constructions.map((item) => (
+          <ConstructionCard key={item.id} item={item} />
         ))}
       </div>
     </div>

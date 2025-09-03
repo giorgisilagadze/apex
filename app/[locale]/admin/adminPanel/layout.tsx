@@ -36,6 +36,11 @@ export default function Layout({ children }: any) {
       title: "პროექტები",
       link: `/${locale}/admin/adminPanel/projects`,
     },
+    {
+      id: 5,
+      title: "მშენებლობა",
+      link: `/${locale}/admin/adminPanel/construction`,
+    },
   ];
 
   const route = useRouter();

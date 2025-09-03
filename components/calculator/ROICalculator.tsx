@@ -11,11 +11,11 @@ import { useTranslations } from "next-intl";
 import { Project } from "next/dist/build/swc/types";
 
 interface Props {
-  apartment: Apartment1;
+  project: Building;
   projectName: string;
 }
 
-export default function ROICalculator({ apartment, projectName }: Props) {
+export default function ROICalculator({ project, projectName }: Props) {
   const [selectedType, setSelectedType] = useState("სრული");
   const [roi, setRoi] = useState<number>();
   const [data, setData] = useState({
@@ -30,31 +30,23 @@ export default function ROICalculator({ apartment, projectName }: Props) {
     setData({ ...data, [key]: value });
   };
 
-  // const ijara = Number(parseFloat(apartment.projectR.ijara).toFixed(2));
-  // const fullSale = Number(parseFloat(apartment.projectR.fullSale).toFixed(2));
-  // const halfSale = Number(parseFloat(apartment.projectR.halfSale).toFixed(2));
+  useEffect(() => {
+    if (!data.area || !data.price) return;
 
-  // useEffect(() => {
-  //   if (selectedType) {
-  //     if (selectedType == "სრული") {
-  //       const result =
-  //         (parseInt(Number(apartment.area).toFixed(0)) * ijara * 12) /
-  //         (parseInt(Number(apartment.area).toFixed(0)) *
-  //           (parseInt(Number(apartment.price2).toFixed(0)) - fullSale));
+    const area = Math.round(Number(data.area));
+    const price = Math.round(Number(data.price));
+    const ijara = Number(parseFloat(project.ijara).toFixed(2));
+    const fullSale = Number(parseFloat(project.fullSale).toFixed(2));
+    const halfSale = Number(parseFloat(project.halfSale).toFixed(2));
 
-  //       setRoi(result);
-  //     } else {
-  //       const result =
-  //         (parseInt(Number(apartment.area).toFixed(0)) * ijara * 12) /
-  //         (parseInt(Number(apartment.area).toFixed(0)) *
-  //           (parseInt(Number(apartment.price2).toFixed(0)) - halfSale));
+    const saleValue = selectedType === "სრული" ? fullSale : halfSale;
+    const numerator = area * ijara * 12;
+    const denominator = area * (price - saleValue);
 
-  //       setRoi(result);
-  //     }
-  //   }
-  // }, [selectedType]);
+    const roi1 = numerator / denominator;
 
-  console.log(roi);
+    setRoi(roi1);
+  }, [selectedType, data]);
 
   return (
     <div className="w-full relative">
@@ -78,7 +70,7 @@ export default function ROICalculator({ apartment, projectName }: Props) {
           bgColor="bg-transparent"
           onChange={() => {}}
           // value={f(apartment.type) as string}
-          value={"სტუდიო" as string}
+          value={"ბინა" as string}
           readonly={true}
           color="text-white"
           isRoi={true}
@@ -104,7 +96,7 @@ export default function ROICalculator({ apartment, projectName }: Props) {
         <Input
           inputKey="price"
           placeholder={""}
-          title={t("price")}
+          title={`${t("price")}`}
           bgColor="bg-transparent"
           onChange={handleOnChange}
           value={data.price}
@@ -126,14 +118,10 @@ export default function ROICalculator({ apartment, projectName }: Props) {
           >
             {t("result")}
           </h1>
-          <div>
-            <p className="text-[14px] text-white">
-              ანაზღაურებადი პერიოდი: 8 წელი
-            </p>
-            <p className="text-[14px] text-white">
-              წმინდა შემოსავალი: $ 14 851
-            </p>
-            <p className="text-[14px] text-white">ROI: 13%</p>
+          <div className="w-full h-[44px] flex items-center justify-start">
+            <h1 className="text-[18px] text-white">
+              ROI: {`${roi ? (roi * 100).toFixed(0) : "X"}%`}
+            </h1>
           </div>
         </div>
         {/* <div className="w-full lg:h-full sm:h-[50%] h-[300px] relative flex items-center justify-center">

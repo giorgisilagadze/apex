@@ -22,8 +22,6 @@ export default async function SingleProject({
   const locale = await getLocale();
   const t = await getTranslations("SingleProject");
 
-  console.log(project);
-
   return (
     <div className="w-full">
       <div className="w-full grid lg1110:grid-cols-5">
@@ -64,7 +62,7 @@ export default async function SingleProject({
               <div className="w-full h-full bg-[rgba(0,0,0,0.4)] backdrop-blur-[10px] z-[1] lg1110:rounded-tr-[10px] lg1110:rounded-br-[10px]"></div>
               <div className="sm:w-[67%] w-full z-[2] absolute top-1/2 -translate-y-1/2 lg1110:left-[100px] md500:px-10 px-6 lg1110:px-0">
                 <ROICalculator
-                  apartment={{} as Apartment1}
+                  project={project}
                   projectName={
                     locale == "ge"
                       ? project.title

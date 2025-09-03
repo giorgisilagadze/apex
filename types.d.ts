@@ -314,3 +314,67 @@ interface Apartment1 {
   projectR: ProjectR;
   buildingR: Building;
 }
+
+interface ConstructionNews {
+  id: number;
+  construction_id: number;
+  created_at: string;
+  updated_at: string;
+  img: string;
+  img1: string;
+  img2: string;
+  img3: string;
+  img4: string | null;
+  sort: number | null;
+
+  title: string;
+  title_en: string;
+  title_ru: string;
+
+  text: string;
+  text_en: string;
+  text_ru: string;
+
+  sub_text: string;
+  sub_text_en: string | null;
+  sub_text_ru: string | null;
+
+  sub_text1: string;
+  sub_text1_en: string;
+  sub_text1_ru: string;
+
+  sub_text2: string | null;
+  sub_text2_en: string | null;
+  sub_text2_ru: string | null;
+
+  type: string | null;
+}
+
+interface Construction {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  img: string;
+  img1: string;
+  img2: string;
+  img3: string;
+  img4: string | null;
+  sort: number | null;
+  sub_text: string;
+  sub_text_en: string;
+  sub_text_ru: string;
+  sub_text1: string;
+  sub_text1_en: string;
+  sub_text1_ru: string;
+  sub_text2: string;
+  sub_text2_en: string | null;
+  sub_text2_ru: string | null;
+  text: string;
+  text_en: string;
+  text_ru: string;
+  title: string;
+  title_en: string;
+  title_ru: string;
+  type: string | null;
+  news: ConstructionNews[];
+}
