@@ -58,7 +58,7 @@ export default function SelectComp({
               ? `${bgColor} placeholder:text-black`
               : "border border-blue bg-white"
           } ${isFilter ? "pr-3" : "px-3"} cursor-pointer `}
-          onClick={() => setIsClicked(!isClicked)}
+          onClick={() => data?.length !== 0 && setIsClicked(!isClicked)}
         >
           <h1
             className={`text-[13px] font-light whitespace-nowrap truncate ${

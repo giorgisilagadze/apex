@@ -280,6 +280,8 @@ export default function Filter({ page, isSingleProject }: Props) {
     }
   }, [selectedPrice]);
 
+  console.log(filterValues);
+
   return (
     <div
       className={`w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 relative ${
@@ -475,7 +477,15 @@ export default function Filter({ page, isSingleProject }: Props) {
                 <SelectComp
                   title={t("project")}
                   placeholder={t("choose")}
-                  data={filterValues?.projectBuilding.map((item) => item.name)}
+                  data={
+                    selectedValues.status && selectedValues.status !== "ყველა"
+                      ? filterValues?.projectBuilding
+                          .filter(
+                            (item) => item.status == selectedValues.status
+                          )
+                          .map((item) => item.name)
+                      : filterValues?.projectBuilding.map((item) => item.name)
+                  }
                   onClick={handleSelect}
                   filterKey="building"
                   selectedValues={selectedValues}
