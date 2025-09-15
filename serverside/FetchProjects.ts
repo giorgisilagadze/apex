@@ -1,8 +1,11 @@
 export async function FetchProjects() {
   try {
-    const res = await fetch(`https://apex.artspace.support/building`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `https://apex.artspace.support/building?status=მიმდინარე`,
+      {
+        cache: "no-store",
+      }
+    );
     if (!res.ok) {
       throw new Error("Network response was not ok");
     }

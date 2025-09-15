@@ -288,8 +288,6 @@ export default function Filter({
     }
   }, [selectedPrice]);
 
-  console.log(filterValues);
-
   return (
     <div
       className={`w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 relative ${
