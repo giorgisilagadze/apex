@@ -1,3 +1,4 @@
+import FlashOverlay from "@/components/FlashOverlay";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export default async function RootLayout({
 }>) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        {children} <FlashOverlay />
+      </body>
     </html>
   );
 }

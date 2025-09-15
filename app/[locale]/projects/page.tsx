@@ -79,7 +79,11 @@ export default function Projects() {
         </div>
       </div>
       <div className="sm:mt-[-250px] mt-[-200px] xl1600:px-[100px] lg1350:px-[140px] lg1110:px-[80px] ">
-        <Filter page="allProjects" />
+        <Filter
+          page="allProjects"
+          clickedType={clickedType}
+          setClickedType={setClickedType}
+        />
       </div>
       <div className="w-full flex items-center md500:gap-6 gap-4 sm:mt-[100px] mt-[40px] justify-center">
         {types.map((item) => (

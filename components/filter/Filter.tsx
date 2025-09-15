@@ -21,9 +21,16 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 interface Props {
   page: string;
   isSingleProject?: boolean;
+  clickedType?: string;
+  setClickedType?: (clickedType: string) => void;
 }
 
-export default function Filter({ page, isSingleProject }: Props) {
+export default function Filter({
+  page,
+  isSingleProject,
+  clickedType,
+  setClickedType,
+}: Props) {
   const [selectedCurr, setSelectedCurr] = useState("ლარი");
   const [selectedPrice, setSelectedPrice] = useState("დაბლიდან მაღლა");
   const [selectedProjectId, setSelectedProjectId] = useState<number>();
@@ -200,6 +207,7 @@ export default function Filter({ page, isSingleProject }: Props) {
         filterValues?.projectBuilding.find((item) => item.name == value)?.id
       );
     }
+    setClickedType?.(value);
   };
   const handleClear = () => {
     setSelectedValues({
@@ -336,22 +344,43 @@ export default function Filter({ page, isSingleProject }: Props) {
               //     ></div>
               //   </div>
               // ))
-              status.map((item) => (
-                <div
-                  key={item}
-                  className={`flex flex-col gap-1 cursor-pointer rounded-[30px] py-2 px-3 ${
-                    selectedValues.status == item ? "bg-blue" : ""
-                  }`}
-                  onClick={() => {
-                    handleSelect("status", item);
-                    // handleClear();
-                  }}
-                >
-                  <p className={`font-medium text-[14px] text-white`}>
-                    {t(item)}
-                  </p>
-                </div>
-              ))
+              page == "home" ? (
+                status
+                  .filter((item) => item != "დასრულებული")
+                  .map((item) => (
+                    <div
+                      key={item}
+                      className={`flex flex-col gap-1 cursor-pointer rounded-[30px] py-2 px-3 ${
+                        selectedValues.status == item ? "bg-blue" : ""
+                      }`}
+                      onClick={() => {
+                        handleSelect("status", item);
+                        // handleClear();
+                      }}
+                    >
+                      <p className={`font-medium text-[14px] text-white`}>
+                        {t(item)}
+                      </p>
+                    </div>
+                  ))
+              ) : (
+                status.map((item) => (
+                  <div
+                    key={item}
+                    className={`flex flex-col gap-1 cursor-pointer rounded-[30px] py-2 px-3 ${
+                      selectedValues.status == item ? "bg-blue" : ""
+                    }`}
+                    onClick={() => {
+                      handleSelect("status", item);
+                      // handleClear();
+                    }}
+                  >
+                    <p className={`font-medium text-[14px] text-white`}>
+                      {t(item)}
+                    </p>
+                  </div>
+                ))
+              )
             ) : (
               [1, 2, 3, 4, 5].map((item) => (
                 <Shimmer
