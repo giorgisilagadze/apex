@@ -106,7 +106,7 @@ export default function MainSwiper() {
                 key={each.id}
               >
                 <h1
-                  className={`lg1250:text-[42px] sm:text-[36px] md500:text-[30px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 hover:opacity-50 duration-300 duration-300 ${
+                  className={`lg1250:text-[38px] sm:text-[32px] md500:text-[28px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 hover:opacity-50 duration-300 duration-300 ${
                     shownProject == each.id
                       ? "border-white"
                       : " border-transparent"

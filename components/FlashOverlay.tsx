@@ -6,7 +6,7 @@ export default function FlashOverlay() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 2000); // 2s
+    const timer = setTimeout(() => setVisible(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -15,7 +15,7 @@ export default function FlashOverlay() {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-[9999] bg-white">
       <img
-        src={"./images/logo1.webp"}
+        src={"/images/logo1.webp"}
         className="w-[160px] h-[160px] object-cover animate-scale"
       />
     </div>
