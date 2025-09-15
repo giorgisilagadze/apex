@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/legacy/image";
 import { useEffect, useState } from "react";
 
 export default function FlashOverlay() {
@@ -15,9 +14,10 @@ export default function FlashOverlay() {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-[9999] bg-white">
-      <div className="w-[160px] h-[160px] relative animate-scale">
-        <Image src={"/images/logo1.png"} layout="fill" objectFit="cover" />
-      </div>
+      <img
+        src={"./images/logo1.webp"}
+        className="w-[160px] h-[160px] object-cover animate-scale"
+      />
     </div>
   );
 }
