@@ -21,10 +21,13 @@ export default async function Home() {
     <div className="w-full">
       <Change />
       <MainSwiper />
-      <div className="w-full z-[2] relative lg1250:top-[-160px] top-[-200px] xl1600:px-[100px] lg1350:px-[140px] lg1110:px-[80px]">
-        <Filter page="home" />
+      <div className="w-full h-[126px] relative">
+        <Image src={"/images/banner.jpeg"} layout="fill" />
       </div>
-      <div className="w-full mt-[-196px]">
+      {/* <div className="w-full z-[2] relative lg1250:top-[-160px] top-[-200px] xl1600:px-[100px] lg1350:px-[140px] lg1110:px-[80px]"> */}
+      <Filter page="home" />
+      {/* </div> */}
+      <div className="w-full">
         <Projects
           projects={projects.filter(
             (item: Building) => (item.status = "მიმდინარე")

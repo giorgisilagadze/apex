@@ -290,8 +290,10 @@ export default function Filter({
 
   return (
     <div
-      className={`w-full xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6 relative ${
+      className={`w-full  relative ${
         (page == "project" || page == "floor") && "sm:py-[80px] py-[60px]"
+      } ${
+        page !== "home" && "xl1600:px-[250px] lg:px-[80px] sm:px-[64px] px-6"
       }`}
     >
       {(page == "project" || page == "floor") && (
@@ -304,48 +306,66 @@ export default function Filter({
         />
       )}
       <div className={`w-full rounded-[16px] shadow-dropDown z-[1]`}>
-        <div
-          className={`flex items-center gap-5 shadow-topShadow lg:px-12 px-6 pt-5 pb-3 whitespace-nowrap rounded-tl-[16px] rounded-tr-[16px] ${
-            page !== "project" &&
-            page !== "floor" &&
-            "overflow-x-auto overflow-y-hidden"
-          } ${
-            page === "home" || page === "allProjects"
-              ? "bg-[rgba(255,255,255,0.3)] backdrop-blur-[10px]"
-              : "bg-white"
-          }`}
-        >
-          {page !== "project" && page !== "floor" ? (
-            !isFilerLoading ? (
-              // filterValues?.projectBuilding.map((item) => (
-              //   <div
-              //     key={item.id}
-              //     className="flex flex-col gap-2 cursor-pointer"
-              //     onClick={() => {
-              //       setSelectedProjectId(item.id);
-              //       handleClear();
-              //     }}
-              //   >
-              //     <p
-              //       className={`${
-              //         selectedProjectId == item.id
-              //           ? "text-blue font-medium"
-              //           : "text-black font-light"
-              //       } text-[14px]`}
-              //     >
-              //       {t(item.name)}
-              //     </p>
-              //     <div
-              //       className={`w-full h-[2px] ${
-              //         selectedProjectId == item.id ? "bg-blue" : "bg-trasparent"
-              //       }`}
-              //     ></div>
-              //   </div>
-              // ))
-              page == "home" ? (
-                status
-                  .filter((item) => item != "დასრულებული")
-                  .map((item) => (
+        {page !== "home" && (
+          <div
+            className={`flex items-center gap-5 shadow-topShadow lg:px-12 px-6 pt-5 pb-3 whitespace-nowrap rounded-tl-[16px] rounded-tr-[16px] ${
+              page !== "project" &&
+              page !== "floor" &&
+              "overflow-x-auto overflow-y-hidden"
+            } ${
+              page === "home" || page === "allProjects"
+                ? "bg-[rgba(255,255,255,0.3)] backdrop-blur-[10px]"
+                : "bg-white"
+            }`}
+          >
+            {page !== "project" && page !== "floor" ? (
+              !isFilerLoading ? (
+                // filterValues?.projectBuilding.map((item) => (
+                //   <div
+                //     key={item.id}
+                //     className="flex flex-col gap-2 cursor-pointer"
+                //     onClick={() => {
+                //       setSelectedProjectId(item.id);
+                //       handleClear();
+                //     }}
+                //   >
+                //     <p
+                //       className={`${
+                //         selectedProjectId == item.id
+                //           ? "text-blue font-medium"
+                //           : "text-black font-light"
+                //       } text-[14px]`}
+                //     >
+                //       {t(item.name)}
+                //     </p>
+                //     <div
+                //       className={`w-full h-[2px] ${
+                //         selectedProjectId == item.id ? "bg-blue" : "bg-trasparent"
+                //       }`}
+                //     ></div>
+                //   </div>
+                // ))
+                page == "home" ? (
+                  status
+                    .filter((item) => item != "დასრულებული")
+                    .map((item) => (
+                      <div
+                        key={item}
+                        className={`flex flex-col gap-1 cursor-pointer rounded-[30px] py-2 px-3 ${
+                          selectedValues.status == item ? "bg-blue" : ""
+                        }`}
+                        onClick={() => {
+                          handleSelect("status", item);
+                          // handleClear();
+                        }}
+                      >
+                        <p className={`font-medium text-[14px] text-white`}>
+                          {t(item)}
+                        </p>
+                      </div>
+                    ))
+                ) : (
+                  status.map((item) => (
                     <div
                       key={item}
                       className={`flex flex-col gap-1 cursor-pointer rounded-[30px] py-2 px-3 ${
@@ -361,56 +381,45 @@ export default function Filter({
                       </p>
                     </div>
                   ))
+                )
               ) : (
-                status.map((item) => (
-                  <div
+                [1, 2, 3, 4, 5].map((item) => (
+                  <Shimmer
+                    width="w-[100px]"
+                    height="h-[31px]"
                     key={item}
-                    className={`flex flex-col gap-1 cursor-pointer rounded-[30px] py-2 px-3 ${
-                      selectedValues.status == item ? "bg-blue" : ""
-                    }`}
-                    onClick={() => {
-                      handleSelect("status", item);
-                      // handleClear();
-                    }}
-                  >
-                    <p className={`font-medium text-[14px] text-white`}>
-                      {t(item)}
-                    </p>
-                  </div>
+                    rounded="rounded-[4px]"
+                  />
                 ))
               )
             ) : (
-              [1, 2, 3, 4, 5].map((item) => (
-                <Shimmer
-                  width="w-[100px]"
-                  height="h-[31px]"
-                  key={item}
-                  rounded="rounded-[4px]"
+              <div className="flex sm:items-center gap-5 flex-wrap">
+                <div className="flex items-center gap-1">
+                  <h1 className={`text-[14px] text-blue`}>{t("available")}:</h1>
+                  <p className="text-[14px] text-blue">{aparts?.length}</p>
+                </div>
+                <SortSelect
+                  title={t("price")}
+                  data={price}
+                  selected={selectedPrice}
+                  setSelected={setSelectedPrice}
                 />
-              ))
-            )
-          ) : (
-            <div className="flex sm:items-center gap-5 flex-wrap">
-              <div className="flex items-center gap-1">
-                <h1 className={`text-[14px] text-blue`}>{t("available")}:</h1>
-                <p className="text-[14px] text-blue">{aparts?.length}</p>
               </div>
-              <SortSelect
-                title={t("price")}
-                data={price}
-                selected={selectedPrice}
-                setSelected={setSelectedPrice}
-              />
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
+
         <div className="w-full flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px] ">
           {!isFilerLoading ? (
             <div
-              className={`w-full lg:px-12 px-6 py-7 md500:grid flex flex-col gap-4 ${
+              className={`w-full py-7 md500:grid flex flex-col gap-4 ${
                 page == "project" || page == "floor"
                   ? "lg:grid-cols-6"
                   : "lg:grid-cols-5"
+              } ${
+                page !== "home"
+                  ? "lg:px-12 px-6"
+                  : "lg1110:px-[60px] sm:px-10 px-6"
               } md600:grid-cols-3 md500:grid-cols-2 gap-4 items-end rounded-bl-[16px] rounded-br-[16px] bg-white`}
             >
               {(page == "project" || page == "floor") && (
@@ -479,8 +488,8 @@ export default function Filter({
                 </div>
               )}
               <SelectComp
-                title={t("category")}
-                placeholder={t("choose")}
+                title={page == "home" ? t("homeCategory") : t("category")}
+                placeholder={page == "home" ? t("chooseCategory") : t("choose")}
                 data={filterValues?.type}
                 onClick={handleSelect}
                 filterKey="type"
@@ -502,8 +511,10 @@ export default function Filter({
 
               {page !== "project" && page !== "floor" && (
                 <SelectComp
-                  title={t("project")}
-                  placeholder={t("choose")}
+                  title={page == "home" ? t("homeProject") : t("project")}
+                  placeholder={
+                    page == "home" ? t("chooseProject") : t("choose")
+                  }
                   data={
                     selectedValues.status && selectedValues.status !== "ყველა"
                       ? filterValues?.projectBuilding
@@ -527,39 +538,45 @@ export default function Filter({
                 ref={areaRef}
               >
                 <h1 className="text-[14px] font-medium text-blue">
-                  {t("areaTitle")}
+                  {page == "home" ? t("homeAreaTitle") : t("areaTitle")}
                   <sup>2</sup>
                 </h1>
                 <div
-                  className="w-full flex items-center gap-1 h-[44px] cursor-pointer"
+                  className="w-full flex items-center justify-between h-[44px] cursor-pointer pr-3"
                   onClick={() => setIsAreaVisible(!isAreaVisible)}
                 >
-                  <div>
-                    <h1 className="text-blue text-[14px]">
-                      {selectedValues["areaFrom"] ? (
-                        <>
-                          {selectedValues["areaFrom"]}
-                          {t("area")}
-                          <sup>2</sup>
-                        </>
-                      ) : (
-                        t("from")
-                      )}
-                    </h1>
-                  </div>
-                  <div>-</div>
-                  <div>
-                    <h1 className="text-blue text-[14px]">
-                      {selectedValues["areaTo"] ? (
-                        <>
-                          {selectedValues["areaTo"]}
-                          {t("area")}
-                          <sup>2</sup>
-                        </>
-                      ) : (
-                        t("to")
-                      )}
-                    </h1>
+                  <div className="w-full flex items-center gap-1">
+                    <div>
+                      <h1 className="text-blue text-[13px]">
+                        {selectedValues["areaFrom"] ? (
+                          <>
+                            {selectedValues["areaFrom"]}
+                            {t("area")}
+                            <sup>2</sup>
+                          </>
+                        ) : page == "home" ? (
+                          t("from") + "." + t("area1")
+                        ) : (
+                          t("from")
+                        )}
+                      </h1>
+                    </div>
+                    <div>-</div>
+                    <div>
+                      <h1 className="text-blue text-[13px]">
+                        {selectedValues["areaTo"] ? (
+                          <>
+                            {selectedValues["areaTo"]}
+                            {t("area")}
+                            <sup>2</sup>
+                          </>
+                        ) : page == "home" ? (
+                          t("to") + "." + t("area1")
+                        ) : (
+                          t("to")
+                        )}
+                      </h1>
+                    </div>
                   </div>
                   <MdKeyboardArrowDown
                     className={`text-[18px] ${
@@ -627,30 +644,39 @@ export default function Filter({
                 ref={priceRef}
               >
                 <h1 className="text-[14px] font-medium text-blue">
-                  {t("price")}
+                  {page == "home" ? t("homePrice") : t("price")}
                 </h1>
                 <div
-                  className="w-full flex items-center gap-1 h-[44px] cursor-pointer"
+                  className="w-full flex items-center justify-between h-[44px] cursor-pointer pr-3"
                   onClick={() => setIsPriceVisible(true)}
                 >
-                  <div>
-                    <h1 className="text-blue text-[14px]">
-                      {selectedValues["priceFrom"] ? (
-                        <>${selectedValues["priceFrom"]}</>
-                      ) : (
-                        t("from")
-                      )}
-                    </h1>
-                  </div>
-                  <div>-</div>
-                  <div>
-                    <h1 className="text-blue text-[14px]">
-                      {selectedValues["priceTo"] ? (
-                        <>${selectedValues["priceTo"]}</>
-                      ) : (
-                        t("to")
-                      )}
-                    </h1>
+                  <div
+                    className="w-full flex items-center 
+                  gap-1"
+                  >
+                    <div>
+                      <h1 className="text-blue text-[13px]">
+                        {selectedValues["priceFrom"] ? (
+                          <>${selectedValues["priceFrom"]}</>
+                        ) : page == "home" ? (
+                          t("from") + "." + t("price")
+                        ) : (
+                          t("from")
+                        )}
+                      </h1>
+                    </div>
+                    <div>-</div>
+                    <div>
+                      <h1 className="text-blue text-[13px]">
+                        {selectedValues["priceTo"] ? (
+                          <>${selectedValues["priceTo"]}</>
+                        ) : page == "home" ? (
+                          t("to") + "." + t("price")
+                        ) : (
+                          t("to")
+                        )}
+                      </h1>
+                    </div>
                   </div>
                   <MdKeyboardArrowDown
                     className={`text-[18px] ${
@@ -712,7 +738,9 @@ export default function Filter({
                   page !== "project" && page !== "floor"
                     ? "col-span-2 lg:col-span-1"
                     : "col-span-1"
-                } w-full flex items-end justify-end gap-4 flex-col md500:flex-row z-[1]`}
+                } w-full flex ${
+                  page == "home" ? "justify-center" : "items-end justify-end"
+                } gap-4 flex-col md500:flex-row z-[1]`}
               >
                 {/* {dimension[0] !== 0 && dimension[0] < 500 ? (
                   <div className="w-full rounded-[16px] bg-[#eee] py-[11px] flex items-center justify-center gap-2">
@@ -723,13 +751,15 @@ export default function Filter({
                   <VscSettings className="text-[28px]" />
                 )} */}
                 <Button
-                  title={t("search")}
+                  title={page == "home" ? t("homeSearch") : t("search")}
                   onClick={() =>
                     handleSearch(selectedValues, floor, selectedProjectId)
                   }
                   width={`${
                     page !== "project" && page !== "floor"
-                      ? "md600:w-[110px] w-full"
+                      ? page == "home"
+                        ? "md600:w-[200px] w-full"
+                        : "md600:w-[110px] w-full"
                       : "md500:w-[110px] w-full"
                   }`}
                   height="h-[50px]"

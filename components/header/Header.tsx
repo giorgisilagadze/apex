@@ -31,16 +31,21 @@ export default function Header() {
   const nav = [
     {
       id: 1,
+      title: t("home"),
+      link: `/${locale}/`,
+    },
+    {
+      id: 2,
       title: t("aboutUs"),
       link: `/${locale}/about-us`,
     },
     {
-      id: 2,
+      id: 3,
       title: t("projects"),
       link: `/${locale}/projects`,
     },
     {
-      id: 3,
+      id: 4,
       title: t("news"),
       link: `/${locale}/news`,
     },
@@ -49,11 +54,11 @@ export default function Header() {
     //   title: t("gallery"),
     //   link: `/${locale}/gallery`,
     // },
-    {
-      id: 5,
-      title: t("partniors"),
-      link: `/${locale}/partners`,
-    },
+    // {
+    //   id: 5,
+    //   title: t("partniors"),
+    //   link: `/${locale}/partners`,
+    // },
     {
       id: 6,
       title: t("construction"),
