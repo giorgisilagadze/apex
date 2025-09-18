@@ -61,7 +61,7 @@ export default function SelectComp({
           onClick={() => data?.length !== 0 && setIsClicked(!isClicked)}
         >
           <h1
-            className={`text-[13px] font-light whitespace-nowrap truncate ${
+            className={`text-[14px] font-light whitespace-nowrap truncate ${
               isFilter && "text-blue"
             }`}
           >
@@ -102,7 +102,7 @@ export default function SelectComp({
             <div
               className={`w-full py-3 px-4 hover:px-5 hover:bg-blue ${
                 bgColor ? bgColor : "bg-white"
-              } hover:text-white duration-300 cursor-pointer text-[14px] whitespace-nowrap truncate `}
+              } hover:text-white duration-300 cursor-pointer text-[14px] tracking-normal  whitespace-nowrap truncate `}
               key={item}
               onClick={() => {
                 onClick?.(filterKey, item);

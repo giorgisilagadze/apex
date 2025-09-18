@@ -95,7 +95,7 @@ export default function MainSwiper() {
             objectFit="cover"
           /> */}
           <div
-            className={`md500:flex flex-col lg1250:gap-4 gap-1 z-[3] absolute lg1250:top-[200px] sm:top-[120px] md500:top-[100px] top-[80px] lg:max-w-[600px] md500:max-w-[500px] w-[280px] md500:w-auto md500:translate-y-0 lg1250:left-[250px] sm:left-[175px] md500:left-[120px] left-[100px] hidden`}
+            className={`md500:flex flex-col lg1250:gap-3 gap-1 z-[3] absolute lg1250:top-[350px] sm:top-[120px] md500:top-[100px] top-[80px] lg:max-w-[600px] md500:max-w-[500px] w-[280px] md500:w-auto md500:translate-y-0 lg1250:left-[250px] sm:left-[175px] md500:left-[120px] left-[100px] hidden`}
           >
             {/* <p className="sm:text-[20px] md500:text-[16px] text-[14px] text-white font-light">
               {item.title1}
@@ -106,7 +106,7 @@ export default function MainSwiper() {
                 key={each.id}
               >
                 <h1
-                  className={`lg1250:text-[38px] sm:text-[32px] md500:text-[28px] text-[24px] sm:leading-[70px] leading-[55px] text-white font-bold border-b-2 hover:opacity-50 duration-300 duration-300 ${
+                  className={`lg1250:text-[28px] sm:text-[26px] md500:text-[24px] text-[22px] sm:leading-[50px] leading-[40px] text-white font-bold border-b-2 hover:opacity-50 duration-300 duration-300 ${
                     shownProject == each.id
                       ? "border-white"
                       : " border-transparent"

@@ -32,16 +32,21 @@ export default function SideMenu({
   const nav = [
     {
       id: 1,
+      title: t("home"),
+      link: `/${locale}/`,
+    },
+    {
+      id: 2,
       title: t("aboutUs"),
       link: `/${locale}/about-us`,
     },
     {
-      id: 2,
+      id: 3,
       title: t("projects"),
       link: `/${locale}/projects`,
     },
     {
-      id: 3,
+      id: 4,
       title: t("news"),
       link: `/${locale}/news`,
     },

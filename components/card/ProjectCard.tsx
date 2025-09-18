@@ -59,6 +59,7 @@ export default function ProjectCard({
           className={`${
             isSingle ? "text-[26px]" : "sm:text-[22px] text-[18px]"
           } font-bold ${isWhite ? "text-white" : "text-black"}`}
+          style={{ textShadow: "3px 3px 3px black" }}
         >
           {locale == "ge"
             ? item.title

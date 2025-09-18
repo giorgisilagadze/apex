@@ -17,6 +17,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import useClickOutside from "@/hooks/useClickOutside";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { div } from "framer-motion/client";
 
 interface Props {
   page: string;
@@ -423,7 +424,7 @@ export default function Filter({
               } md600:grid-cols-3 md500:grid-cols-2 gap-4 items-end rounded-bl-[16px] rounded-br-[16px] bg-white`}
             >
               {(page == "project" || page == "floor") && (
-                <div className="w-full flex flex-col gap-[6px]">
+                <div className="w-full flex flex-col gap-[6px] border-b border-[#aeaeae] md500:border-none">
                   <h1 className="text-[14px] font-medium text-blue">
                     {t("project")}
                   </h1>
@@ -471,7 +472,7 @@ export default function Filter({
                 </div>
               )} */}
               {(page == "project" || page == "floor") && (
-                <div className="w-full flex flex-col gap-[6px]">
+                <div className="w-full flex flex-col gap-[6px] border-b border-[#aeaeae] md500:border-none">
                   <h1 className="text-[14px] font-medium text-blue">
                     {t("block")}
                   </h1>
@@ -487,17 +488,22 @@ export default function Filter({
                   />
                 </div>
               )}
-              <SelectComp
-                title={page == "home" ? t("homeCategory") : t("category")}
-                placeholder={page == "home" ? t("chooseCategory") : t("choose")}
-                data={filterValues?.type}
-                onClick={handleSelect}
-                filterKey="type"
-                selectedValues={selectedValues}
-                color="text-blue"
-                bgColor="bg-white"
-                isFilter={true}
-              />
+              <div className="w-full border-b border-[#aeaeae] md500:border-none">
+                <SelectComp
+                  title={page == "home" ? t("homeCategory") : t("category")}
+                  placeholder={
+                    page == "home" ? t("chooseCategory") : t("choose")
+                  }
+                  data={filterValues?.type}
+                  onClick={handleSelect}
+                  filterKey="type"
+                  selectedValues={selectedValues}
+                  color="text-blue"
+                  bgColor="bg-white"
+                  isFilter={true}
+                />
+              </div>
+
               {/* {page !== "project" && page !== "floor" && (
                 <SelectComp
                   title={t("status")}
@@ -510,31 +516,33 @@ export default function Filter({
               )} */}
 
               {page !== "project" && page !== "floor" && (
-                <SelectComp
-                  title={page == "home" ? t("homeProject") : t("project")}
-                  placeholder={
-                    page == "home" ? t("chooseProject") : t("choose")
-                  }
-                  data={
-                    selectedValues.status && selectedValues.status !== "ყველა"
-                      ? filterValues?.projectBuilding
-                          .filter(
-                            (item) => item.status == selectedValues.status
-                          )
-                          .map((item) => item.name)
-                      : filterValues?.projectBuilding.map((item) => item.name)
-                  }
-                  onClick={handleSelect}
-                  filterKey="building"
-                  selectedValues={selectedValues}
-                  color="text-blue"
-                  bgColor="bg-white"
-                  isFilter={true}
-                />
+                <div className="w-full border-b border-[#aeaeae] md500:border-none">
+                  <SelectComp
+                    title={page == "home" ? t("homeProject") : t("project")}
+                    placeholder={
+                      page == "home" ? t("chooseProject") : t("choose")
+                    }
+                    data={
+                      selectedValues.status && selectedValues.status !== "ყველა"
+                        ? filterValues?.projectBuilding
+                            .filter(
+                              (item) => item.status == selectedValues.status
+                            )
+                            .map((item) => item.name)
+                        : filterValues?.projectBuilding.map((item) => item.name)
+                    }
+                    onClick={handleSelect}
+                    filterKey="building"
+                    selectedValues={selectedValues}
+                    color="text-blue"
+                    bgColor="bg-white"
+                    isFilter={true}
+                  />
+                </div>
               )}
 
               <div
-                className="w-full flex flex-col gap-[6px] relative"
+                className="w-full flex flex-col gap-[6px] relative border-b border-[#aeaeae] md500:border-none"
                 ref={areaRef}
               >
                 <h1 className="text-[14px] font-medium text-blue">
@@ -547,7 +555,7 @@ export default function Filter({
                 >
                   <div className="w-full flex items-center gap-1">
                     <div>
-                      <h1 className="text-blue text-[13px]">
+                      <h1 className="text-blue text-[14px]">
                         {selectedValues["areaFrom"] ? (
                           <>
                             {selectedValues["areaFrom"]}
@@ -563,7 +571,7 @@ export default function Filter({
                     </div>
                     <div>-</div>
                     <div>
-                      <h1 className="text-blue text-[13px]">
+                      <h1 className="text-blue text-[14px]">
                         {selectedValues["areaTo"] ? (
                           <>
                             {selectedValues["areaTo"]}
@@ -640,7 +648,7 @@ export default function Filter({
                 </div>
               </div>
               <div
-                className="w-full flex flex-col gap-[6px] relative"
+                className="w-full flex flex-col gap-[6px] relative border-b border-[#aeaeae] md500:border-none"
                 ref={priceRef}
               >
                 <h1 className="text-[14px] font-medium text-blue">
@@ -655,7 +663,7 @@ export default function Filter({
                   gap-1"
                   >
                     <div>
-                      <h1 className="text-blue text-[13px]">
+                      <h1 className="text-blue text-[14px]">
                         {selectedValues["priceFrom"] ? (
                           <>${selectedValues["priceFrom"]}</>
                         ) : page == "home" ? (
@@ -667,7 +675,7 @@ export default function Filter({
                     </div>
                     <div>-</div>
                     <div>
-                      <h1 className="text-blue text-[13px]">
+                      <h1 className="text-blue text-[14px]">
                         {selectedValues["priceTo"] ? (
                           <>${selectedValues["priceTo"]}</>
                         ) : page == "home" ? (

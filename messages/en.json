@@ -130,6 +130,7 @@
     "areaTitle": "Sq. meter m",
     "homeAreaTitle": "Square meter m",
     "area": "m",
+    "area1": "area",
     "from": "Min",
     "to": "Max",
     "price": "Price",

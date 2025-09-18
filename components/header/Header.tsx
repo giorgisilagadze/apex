@@ -2,7 +2,7 @@
 
 import Image from "next/legacy/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { IoMdCall } from "react-icons/io";
 import { BsCameraVideo } from "react-icons/bs";
@@ -16,13 +16,17 @@ import { usePathname } from "next/navigation";
 import PopUpComp from "../popUp/PopUpComp";
 import Contact from "../home/Contact";
 import { RxCross1 } from "react-icons/rx";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import useClickOutside from "@/hooks/useClickOutside";
 
 export default function Header() {
   const [hoveredPageId, sethoveredPageId] = useState(0);
   const [isLangClicked, setIsLangCLicked] = useState(false);
   const [isSideMenuVis, setIsSideMenuVis] = useState(false);
   const [isContactClicked, setIsContactClicked] = useState(false);
+  const [isAboutClicked, setIsAboutClicked] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const partnerRef = useRef(null);
 
   const locale = useLocale();
   const t = useTranslations("Header");
@@ -91,6 +95,8 @@ export default function Header() {
     }
   };
 
+  useClickOutside(partnerRef, () => setIsAboutClicked(false));
+
   return (
     <>
       {" "}
@@ -115,26 +121,78 @@ export default function Header() {
             />
           </Link>
           <div className="items-center xl:gap-7 lg1250:gap-5 gap-3 hidden lg1110:flex">
-            {nav.map((item) => (
-              <Link className={`cursor-pointer`} href={item.link} key={item.id}>
-                <p
-                  className="text-white xl:text-[16px] text-[14px]"
-                  onMouseOver={() => {
-                    sethoveredPageId(item.id);
-                  }}
-                  onMouseLeave={() => {
-                    sethoveredPageId(0);
-                  }}
+            {nav.map((item, index) =>
+              index !== 1 ? (
+                <Link
+                  className={`cursor-pointer`}
+                  href={item.link}
+                  key={item.id}
                 >
-                  {item.title}
-                </p>
-                <div
-                  className={`${hoveredPageId == item.id ? "w-full" : "w-0"} ${
-                    pathname == item.link ? "w-[50%] mx-auto" : "w-0"
-                  } h-[1px] mt-[4px] bg-white duration-500`}
-                ></div>
-              </Link>
-            ))}
+                  <p
+                    className="text-white xl:text-[16px] text-[14px]"
+                    onMouseOver={() => {
+                      sethoveredPageId(item.id);
+                    }}
+                    onMouseLeave={() => {
+                      sethoveredPageId(0);
+                    }}
+                  >
+                    {item.title}
+                  </p>
+                  <div
+                    className={`${
+                      hoveredPageId == item.id ? "w-full" : "w-0"
+                    } ${
+                      pathname == item.link ? "w-[50%] mx-auto" : "w-0"
+                    } h-[1px] mt-[4px] bg-white duration-500`}
+                  ></div>
+                </Link>
+              ) : (
+                <div className="relative" key={item.id}>
+                  <div className="flex items-center gap-1">
+                    <Link className={`cursor-pointer`} href={item.link}>
+                      <p
+                        className="text-white xl:text-[16px] text-[14px]"
+                        onMouseOver={() => {
+                          sethoveredPageId(item.id);
+                        }}
+                        onMouseLeave={() => {
+                          sethoveredPageId(0);
+                        }}
+                      >
+                        {item.title}
+                      </p>
+                      <div
+                        className={`${
+                          hoveredPageId == item.id ? "w-full" : "w-0"
+                        } ${
+                          pathname == item.link ? "w-[50%] mx-auto" : "w-0"
+                        } h-[1px] mt-[4px] bg-white duration-500`}
+                      ></div>
+                    </Link>
+                    <MdKeyboardArrowDown
+                      className={`text-[18px] text-white cursor-pointer mt-[-6px] ${
+                        isAboutClicked && "rotate-180"
+                      } duration-300`}
+                      onClick={() => setIsAboutClicked(!isAboutClicked)}
+                    />
+                  </div>
+                  <Link
+                    ref={partnerRef}
+                    href={`/${locale}/partners`}
+                    className={`px-3 py-[6px] absolute left-0 top-[30px] bg-blueOpacity border border-blue duration-300 rounded-[10px] ${
+                      isAboutClicked
+                        ? "opacity-100 pointer-events-auto scale-100"
+                        : "opacity-0 pointer-events-none scale-95"
+                    }`}
+                  >
+                    <p className="text-white xl:text-[16px] text-[14px] hover:opacity-50 duration-300">
+                      {t("partniors")}
+                    </p>
+                  </Link>
+                </div>
+              )
+            )}
           </div>
           <div className="flex items-center gap-4">
             <div
