@@ -3,9 +3,7 @@
 import Button from "@/components/button/Button";
 import AboutUsComp from "@/components/home/AboutUsComp";
 import Image from "next/legacy/image";
-
 import { SwiperSlide, Swiper } from "swiper/react";
-
 import { Navigation, FreeMode, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -68,12 +66,12 @@ export default function AboutUs() {
       position: t("ბუღალტერი"),
       image: "/images/employees/6.jpg",
     },
-    {
-      id: 7,
-      name: t("employee7"),
-      position: t("გაყიდვების მენეჯერი"),
-      image: "/images/employees/7.jpg",
-    },
+    // {
+    //   id: 7,
+    //   name: t("employee7"),
+    //   position: t("გაყიდვების მენეჯერი"),
+    //   image: "/images/employees/7.jpg",
+    // },
     {
       id: 8,
       name: t("employee8"),
@@ -85,6 +83,36 @@ export default function AboutUs() {
       name: t("employee9"),
       position: t("იურიდიული დეპარტამენტის ხელმძღვანელი"),
       image: "/images/employees/9.jpg",
+    },
+       {
+      id: 10,
+      name: t("employee10"),
+      position: t("გაყიდვების მენეჯერი"),
+      image: "/images/employees/10.jpeg",
+    },
+       {
+      id: 11,
+      name: t("employee11"),
+      position: t("გაყიდვების მენეჯერი"),
+      image: "/images/employees/11.jpeg",
+    },
+       {
+      id: 12,
+      name: t("employee12"),
+      position: t("გაყიდვების მენეჯერი"),
+      image: "/images/employees/12.jpeg",
+    },
+       {
+      id: 13,
+      name: t("employee13"),
+      position: t("გაყიდვების მენეჯერი"),
+      image: "/images/employees/13.jpeg",
+    },
+       {
+      id: 14,
+      name: t("employee14"),
+      position: t("გაყიდვების მენეჯერი"),
+      image: "/images/employees/14.jpeg",
     },
   ];
 
