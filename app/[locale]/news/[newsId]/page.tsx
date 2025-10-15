@@ -13,7 +13,10 @@ export default async function SingleNews({
   params: Promise<{ newsId: string }>;
 }) {
   const newsId = (await params).newsId;
-  const singleNews: NewsItem = await FetchSingleNews(newsId);
+  const realNewsId = newsId.split("_")[1];
+  console.log(realNewsId);
+
+  const singleNews: NewsItem = await FetchSingleNews(realNewsId);
   const news: { data: NewsItem[]; total: number } = await FetchNews();
 
   const locale = await getLocale();
@@ -95,7 +98,7 @@ export default async function SingleNews({
                 {singleNews.created_at.slice(0, 10).replaceAll("-", ".")}
               </p>
               <p className="text-[22px] font-bold">
-                {locale == "ge"
+                {locale == "ka"
                   ? singleNews.title
                   : locale == "en"
                   ? singleNews.title_en
@@ -104,7 +107,7 @@ export default async function SingleNews({
               <div
                 dangerouslySetInnerHTML={{
                   __html:
-                    locale == "ge"
+                    locale == "ka"
                       ? singleNews.text
                       : locale == "en"
                       ? singleNews.text_en
@@ -114,7 +117,7 @@ export default async function SingleNews({
               />
             </div>
           </div>
-          <div className="w-full flex flex-col gap-4">
+          {/* <div className="w-full flex flex-col gap-4">
             <div className="flex items-center gap-3 mt-4">
               <p className="text-[12px] font-bold">{t("share")}</p>
               {socIcons.map((item) => (
@@ -126,7 +129,7 @@ export default async function SingleNews({
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="lg:w-full md600:w-[50%] w-full flex flex-col gap-6 lg:col-span-2">
           <h1 className="font-bold text-[18px]">{t("categories")}</h1>
@@ -148,7 +151,7 @@ export default async function SingleNews({
           <div className="flex flex-col w-full gap-4">
             <h1 className="font-bold text-[18px]">{t("other")}</h1>
             {news.data
-              .filter((item) => item.id !== parseInt(newsId))
+              .filter((item) => item.id !== parseInt(realNewsId))
               .map((item) => (
                 <OtherNewsCard key={item.id} item={item} />
               ))}

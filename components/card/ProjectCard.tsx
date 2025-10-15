@@ -17,9 +17,20 @@ export default function ProjectCard({
 }: Props) {
   const locale = useLocale();
   const t = useTranslations("HomePage.News");
+  const slugify = (text: string): string => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
   return (
     <div className={`w-full ${height} flex flex-col gap-4 relative`}>
-      <Link href={`/${locale}/news/${item.id}`} className="w-full">
+      <Link
+        href={`/${locale}/news/${slugify(item.title_en)}_${item.id}`}
+        className="w-full"
+      >
         <div className={`w-full ${height} relative`}>
           <Image
             src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
@@ -59,9 +70,9 @@ export default function ProjectCard({
           className={`${
             isSingle ? "text-[26px]" : "sm:text-[22px] text-[18px]"
           } font-bold ${isWhite ? "text-white" : "text-black"}`}
-          style={{ textShadow: "3px 3px 3px black" }}
+          style={{ textShadow: "4px 4px 4px black" }}
         >
-          {locale == "ge"
+          {locale == "ka"
             ? item.title
             : locale == "en"
             ? item.title_en

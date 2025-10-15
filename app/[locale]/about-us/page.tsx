@@ -12,16 +12,19 @@ import { BsArrowDown } from "react-icons/bs";
 import SendEmail from "@/components/SendEmail";
 import ScreenSize from "@/hooks/ScreenSize";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Contact from "@/components/home/Contact";
 import { motion } from "framer-motion";
 import React from "react";
 import { PiBuildingOfficeFill } from "react-icons/pi";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import axios from "axios";
 
 export default function AboutUs() {
   const dimension = ScreenSize();
+
+  const [employees, setEmployees] = useState<EmployeeProfile[]>([]);
 
   const [hoveredYear, setHoveredYear] = useState<string>();
   const { ref, inView } = useInView({ triggerOnce: true });
@@ -29,92 +32,104 @@ export default function AboutUs() {
   const t = useTranslations("AboutUs");
   const t1 = useTranslations("HomePage.About");
 
-  const employees = [
-    {
-      id: 1,
-      name: t("employee1"),
-      position: t("გაყიდვების მენეჯერი"),
-      image: "/images/employees/1.jpg",
-    },
-    {
-      id: 2,
-      name: t("employee2"),
-      position: t("ბუღალტერი"),
-      image: "/images/employees/2.jpg",
-    },
-    {
-      id: 3,
-      name: t("employee3"),
-      position: t("გაყიდვების ხელმძღვანელი"),
-      image: "/images/employees/3.jpg",
-    },
-    {
-      id: 4,
-      name: t("employee4"),
-      position: t("ბუღალტერი"),
-      image: "/images/employees/4.jpg",
-    },
-    {
-      id: 5,
-      name: t("employee5"),
-      position: t("მარკეტინგის ხელმძღვანელი"),
-      image: "/images/employees/5.jpg",
-    },
-    {
-      id: 6,
-      name: t("employee6"),
-      position: t("ბუღალტერი"),
-      image: "/images/employees/6.jpg",
-    },
-    // {
-    //   id: 7,
-    //   name: t("employee7"),
-    //   position: t("გაყიდვების მენეჯერი"),
-    //   image: "/images/employees/7.jpg",
-    // },
-    {
-      id: 8,
-      name: t("employee8"),
-      position: t("ოპერაციების დირექტორი"),
-      image: "/images/employees/8.jpg",
-    },
-    {
-      id: 9,
-      name: t("employee9"),
-      position: t("იურიდიული დეპარტამენტის ხელმძღვანელი"),
-      image: "/images/employees/9.jpg",
-    },
-       {
-      id: 10,
-      name: t("employee10"),
-      position: t("გაყიდვების მენეჯერი"),
-      image: "/images/employees/10.jpeg",
-    },
-       {
-      id: 11,
-      name: t("employee11"),
-      position: t("გაყიდვების მენეჯერი"),
-      image: "/images/employees/11.jpeg",
-    },
-       {
-      id: 12,
-      name: t("employee12"),
-      position: t("გაყიდვების მენეჯერი"),
-      image: "/images/employees/12.jpeg",
-    },
-       {
-      id: 13,
-      name: t("employee13"),
-      position: t("გაყიდვების მენეჯერი"),
-      image: "/images/employees/13.jpeg",
-    },
-       {
-      id: 14,
-      name: t("employee14"),
-      position: t("გაყიდვების მენეჯერი"),
-      image: "/images/employees/14.jpeg",
-    },
-  ];
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/employ`
+        );
+        const data = response.data;
+        setEmployees(data);
+      } catch (err) {}
+    })();
+  }, []);
+
+  // const employees = [
+  //   {
+  //     id: 1,
+  //     name: t("employee1"),
+  //     position: t("გაყიდვების მენეჯერი"),
+  //     image: "/images/employees/1.jpg",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: t("employee2"),
+  //     position: t("ბუღალტერი"),
+  //     image: "/images/employees/2.jpg",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: t("employee3"),
+  //     position: t("გაყიდვების ხელმძღვანელი"),
+  //     image: "/images/employees/3.jpg",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: t("employee4"),
+  //     position: t("ბუღალტერი"),
+  //     image: "/images/employees/4.jpg",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: t("employee5"),
+  //     position: t("მარკეტინგის ხელმძღვანელი"),
+  //     image: "/images/employees/5.jpg",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: t("employee6"),
+  //     position: t("ბუღალტერი"),
+  //     image: "/images/employees/6.jpg",
+  //   },
+  //   // {
+  //   //   id: 7,
+  //   //   name: t("employee7"),
+  //   //   position: t("გაყიდვების მენეჯერი"),
+  //   //   image: "/images/employees/7.jpg",
+  //   // },
+  //   {
+  //     id: 8,
+  //     name: t("employee8"),
+  //     position: t("ოპერაციების დირექტორი"),
+  //     image: "/images/employees/8.jpg",
+  //   },
+  //   {
+  //     id: 9,
+  //     name: t("employee9"),
+  //     position: t("იურიდიული დეპარტამენტის ხელმძღვანელი"),
+  //     image: "/images/employees/9.jpg",
+  //   },
+  //      {
+  //     id: 10,
+  //     name: t("employee10"),
+  //     position: t("გაყიდვების მენეჯერი"),
+  //     image: "/images/employees/10.jpeg",
+  //   },
+  //      {
+  //     id: 11,
+  //     name: t("employee11"),
+  //     position: t("გაყიდვების მენეჯერი"),
+  //     image: "/images/employees/11.jpeg",
+  //   },
+  //      {
+  //     id: 12,
+  //     name: t("employee12"),
+  //     position: t("გაყიდვების მენეჯერი"),
+  //     image: "/images/employees/12.jpeg",
+  //   },
+  //      {
+  //     id: 13,
+  //     name: t("employee13"),
+  //     position: t("გაყიდვების მენეჯერი"),
+  //     image: "/images/employees/13.jpeg",
+  //   },
+  //      {
+  //     id: 14,
+  //     name: t("employee14"),
+  //     position: t("გაყიდვების მენეჯერი"),
+  //     image: "/images/employees/14.jpeg",
+  //   },
+  // ];
 
   const tree = [
     {

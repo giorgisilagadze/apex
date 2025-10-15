@@ -34,7 +34,7 @@ export default function ProjectCard1({ item }: Props) {
       <div className="w-full h-full absolute top-0 left-0 md500:p-7 p-6 flex flex-col justify-between">
         <div className="flex flex-col gap-[2px]">
           <p className="sm:text-[26px] text-[22px] text-white font-semibold text-ellipsis truncate">
-            {locale == "ge"
+            {locale == "ka"
               ? item.title
               : locale == "en"
               ? item.title_en
@@ -43,7 +43,7 @@ export default function ProjectCard1({ item }: Props) {
           <div className="flex items-center gap-1">
             <IoLocationSharp className="text-[16px] text-white mt-[-4px]" />
             <p className="text-[14px] text-white font-light">
-              {locale == "ge" ? item.address : item.address_en}
+              {locale == "ka" ? item.address : item.address_en}
             </p>
           </div>
         </div>

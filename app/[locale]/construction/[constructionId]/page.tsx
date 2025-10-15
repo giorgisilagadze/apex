@@ -27,7 +27,7 @@ export default async function SingleConstruction({
         <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6 absolute top-[50%] translate-y-[-50%] left-0 flex sm:items-center justify-between sm:flex-row flex-col sm:gap-4">
           <div>
             <p className="text-[15px] text-white">
-              {locale == "ge"
+              {locale == "ka"
                 ? singleConstruction.title
                 : locale == "en"
                 ? singleConstruction.title_en
@@ -48,7 +48,7 @@ export default async function SingleConstruction({
               {item.created_at.slice(0, 10).replaceAll("-", ".")}
             </h1>
             <h1 className="sm:text-[24px] text-[20px]">
-              {locale == "ge"
+              {locale == "ka"
                 ? item.text
                 : locale == "en"
                 ? item.text_en
@@ -66,7 +66,7 @@ export default async function SingleConstruction({
             <div
               dangerouslySetInnerHTML={{
                 __html:
-                  locale == "ge"
+                  locale == "ka"
                     ? (item.sub_text as string)
                     : locale == "en"
                     ? (item.sub_text_en as string)
@@ -98,7 +98,7 @@ export default async function SingleConstruction({
               <div
                 dangerouslySetInnerHTML={{
                   __html:
-                    locale == "ge"
+                    locale == "ka"
                       ? (item.sub_text1 as string)
                       : locale == "en"
                       ? (item.sub_text1_en as string)

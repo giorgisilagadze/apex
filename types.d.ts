@@ -63,6 +63,12 @@ interface Building {
   ijara: string;
   fullSale: string;
   halfSale: string;
+  arcikadi: null | string;
+  arcikadi_en: null | string;
+  arcikadi_ru: null | string;
+  presentation: null | string;
+  presentation_en: null | string;
+  presentation_ru: null | string;
 }
 
 interface ProjectBuilding {
@@ -377,4 +383,16 @@ interface Construction {
   title_ru: string;
   type: string | null;
   news: ConstructionNews[];
+}
+
+interface EmployeeProfile {
+  id: number;
+  img: string;
+  name: string;
+  name_en: string;
+  name_ru: string;
+  position: string;
+  position_en: string;
+  position_ru: string;
+  sort: number | null;
 }

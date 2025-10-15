@@ -110,17 +110,15 @@ export default function Contact({ isPopUp, setIsContactClicked }: Props) {
   };
 
   return (
-    <div className={`w-full ${!isPopUp ? "" : ""} grid lg:grid-cols-2`}>
+    <div className={`w-full ${!isPopUp ? "" : ""} grid`}>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className={`w-full bg-white relative ${
-          !isPopUp
-            ? "lg:h-[700px] md500:h-[670px] h-[994px]"
-            : "lg:h-[623px] h-[593px] overflow-y-scroll md500:overflow-y-hidden lg:rounded-tl-[10px] lg:rounded-bl-[10px] lg:rounded-tr-[0px] lg:rounded-br-[10px] rounded-[10px]"
-        }`}
+        className={`w-full bg-white relative lg:h-[700px] md500:h-[670px] rounded-[10px] ${
+          isPopUp ? "h-[550px] overflow-y-scroll" : "h-[994px]"
+        } `}
       >
         <div className="w-[70%] h-full relative mx-auto">
           <Image
@@ -266,29 +264,27 @@ export default function Contact({ isPopUp, setIsContactClicked }: Props) {
         </div>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className={`w-full ${
-          !isPopUp
-            ? "lg:h-[700px] md500:h-[400px] h-[350px]"
-            : "lg:h-[623px] hidden lg:block"
-        } relative`}
-      >
-        <Image
-          src={"/images/contact.png"}
-          alt="project-image"
-          layout="fill"
-          objectFit="cover"
-          className={`${
-            !isPopUp
-              ? ""
-              : "rounded-tl-[0px] lg:rounded-br-[10px] rounded-tr-[0px] lg:rounded-tr-[10px]"
-          }`}
-        />
-      </motion.div>
+      {!isPopUp && (
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className={`w-full lg:h-[700px] md500:h-[400px] h-[350px] relative`}
+        >
+          <Image
+            src={"/images/contact.png"}
+            alt="project-image"
+            layout="fill"
+            objectFit="cover"
+            className={`${
+              !isPopUp
+                ? ""
+                : "rounded-tl-[0px] lg:rounded-br-[10px] rounded-tr-[0px] lg:rounded-tr-[10px]"
+            }`}
+          />
+        </motion.div>
+      )}
     </div>
   );
 }

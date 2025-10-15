@@ -124,7 +124,7 @@ export default function Info({ apartment }: Props) {
               </div>
             ))}
         </div>
-        <div className="w-full flex items-center gap-3 mt-8 flex-col md600:flex-row">
+        {/* <div className="w-full flex items-center gap-3 mt-8 flex-col md600:flex-row">
           <Button
             title={t("download")}
             onClick={() => {}}
@@ -144,7 +144,7 @@ export default function Info({ apartment }: Props) {
             icon={SiArchicad}
             border={true}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

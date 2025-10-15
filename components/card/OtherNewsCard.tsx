@@ -9,9 +9,18 @@ interface Props {
 export default function OtherNewsCard({ item }: Props) {
   const locale = useLocale();
 
+  const slugify = (text: string): string => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  };
+
   return (
     <Link
-      href={`/${locale}/news/${item.id}`}
+      href={`/${locale}/news/${slugify(item.title_en)}_${item.id}`}
       className="w-full flex item gap-3 hover:opacity-50 duration-300"
     >
       <div className="w-[90px] h-[80px] relative">
@@ -25,7 +34,7 @@ export default function OtherNewsCard({ item }: Props) {
       </div>
       <div className="flex flex-col gap-1 sm:max-w-[180px] max-w-[70%]">
         <p className="text-[14px] font-light line-clamp-3">
-          {locale == "ge"
+          {locale == "ka"
             ? item.title
             : locale == "en"
             ? item.title_en

@@ -2,6 +2,7 @@
 
 import PhotoUpload from "@/components/admin/PhotoUpload";
 import TextEditor from "@/components/admin/TextEditor";
+import PdfFileUpload from "@/components/admin/pdfFileUpload";
 import Button from "@/components/button/Button";
 import Input from "@/components/input/Input";
 import SelectComp from "@/components/input/SelectComp";
@@ -51,6 +52,16 @@ export default function SingleAdminProject() {
   const [isUploadLoading, setIsUploadLoading] = useState(false);
   const [hasUploaded, setHasUploaded] = useState(false);
   const [forRender, setForRender] = useState(1);
+  const [presentationFileGeo, setPresentationFileGeo] = useState<any>(null);
+  const [presentationFileEng, setPresentationFileEng] = useState<any>(null);
+  const [arcikadFilGeo, setArcikadFileGeo] = useState<any>(null);
+  const [arcikadFilEng, setArcikadFileEng] = useState<any>(null);
+  const [backFiles, setBackFiles] = useState({
+    presentationFileGeoBack: "",
+    presentationFileEngBack: "",
+    arcikadFilGeoBack: "",
+    arcikadFilEngBack: "",
+  });
 
   useEffect(() => {
     setIsLoading(true);
@@ -92,6 +103,13 @@ export default function SingleAdminProject() {
         });
         setBackImage(data.img);
         setBackGalleryImages(data.galery);
+        setBackFiles({
+          ...backFiles,
+          presentationFileGeoBack: data.presentation,
+          presentationFileEngBack: data.presentation_en,
+          arcikadFilGeoBack: data.arcikadi,
+          arcikadFilEngBack: data.arcikadi_en,
+        });
       } catch (err) {
       } finally {
         setIsLoading(false);
@@ -113,7 +131,11 @@ export default function SingleAdminProject() {
     if (
       isinputValuesChange ||
       projectImage.length !== 0 ||
-      galleryImages.length !== 0
+      galleryImages.length !== 0 ||
+      presentationFileGeo.length !== 0 ||
+      presentationFileEng.length !== 0 ||
+      arcikadFilGeo.length !== 0 ||
+      arcikadFilEng.length !== 0
     ) {
       const hasEmptyField = Object.values(projectUpdate).some(
         (value) => value.trim() === ""
@@ -165,6 +187,8 @@ export default function SingleAdminProject() {
       setHasUploaded(false);
     }
   }, [projectUpdate, projectImage]);
+
+  console.log(presentationFileGeo);
 
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6 ">
@@ -287,6 +311,42 @@ export default function SingleAdminProject() {
               setImage={setGalleryImages}
               backImages={backGalleryImages}
               isMultiply={true}
+            />
+          </div>
+          <div className="md500:w-[50%] w-full">
+            <PdfFileUpload
+              name="presentation"
+              title="პრეზენტაციის ატვირთვა (ქართული)"
+              file={presentationFileGeo}
+              setFile={setPresentationFileGeo}
+              backFile={backFiles.presentationFileGeoBack}
+            />
+          </div>
+          <div className="md500:w-[50%] w-full mt-[60px]">
+            <PdfFileUpload
+              name="presentation_en"
+              title="პრეზენტაციის ატვირთვა (ინგლისური)"
+              file={presentationFileEng}
+              setFile={setPresentationFileEng}
+              backFile={backFiles.presentationFileEngBack}
+            />
+          </div>
+          <div className="md500:w-[50%] w-full mt-[60px]">
+            <PdfFileUpload
+              name="arcikadi"
+              title="არქიკადის ატვირთვა (ქართული)"
+              file={arcikadFilGeo}
+              setFile={setArcikadFileGeo}
+              backFile={backFiles.arcikadFilGeoBack}
+            />
+          </div>
+          <div className="md500:w-[50%] w-full mt-[60px]">
+            <PdfFileUpload
+              name="arcikadi_en"
+              title="არქიკადის ატვირთვა (ინგლისური)"
+              file={arcikadFilEng}
+              setFile={setArcikadFileEng}
+              backFile={backFiles.arcikadFilEngBack}
             />
           </div>
           <div className="w-full flex justify-end">

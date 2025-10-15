@@ -63,7 +63,7 @@ export default function ROICalculatorMain({ projects }: Props) {
             title={t("project")}
             placeholder={t("choose")}
             data={projects.map((item) =>
-              locale == "ge"
+              locale == "ka"
                 ? item.title
                 : locale == "en"
                 ? item.title_en

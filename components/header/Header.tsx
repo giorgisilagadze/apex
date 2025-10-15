@@ -18,6 +18,7 @@ import Contact from "../home/Contact";
 import { RxCross1 } from "react-icons/rx";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import useClickOutside from "@/hooks/useClickOutside";
+import ScreenSize from "@/hooks/ScreenSize";
 
 export default function Header() {
   const [hoveredPageId, sethoveredPageId] = useState(0);
@@ -31,6 +32,8 @@ export default function Header() {
   const locale = useLocale();
   const t = useTranslations("Header");
   const pathname = usePathname();
+
+  const dimension = ScreenSize();
 
   const nav = [
     {
@@ -97,12 +100,26 @@ export default function Header() {
 
   useClickOutside(partnerRef, () => setIsAboutClicked(false));
 
+  const handleContactClick = () => {
+    const homePath = `/${locale}`;
+
+    if (pathname === homePath || pathname === `/${locale}/`) {
+      // Try to find the contact section and scroll to it
+      const section = document.getElementById("contact-section");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      setIsContactClicked(true);
+    }
+  };
+
   return (
     <>
       {" "}
       {!pathname.includes(`/${locale}/admin`) && (
         <header
-          className={`w-full flex items-center justify-between fixed lg1110:px-[60px] px-6 py-[20px] ${
+          className={`w-full flex items-center justify-between fixed lg1110:px-[60px] px-6 sm:py-[20px] py-[5px] ${
             isContactClicked ? "z-[1]" : "z-10"
           } z-10 ${
             !pathname.includes(`/${locale}/projects`)
@@ -116,8 +133,8 @@ export default function Header() {
             <Image
               src={"/images/logo3.png"}
               alt="logo"
-              width={70}
-              height={70}
+              width={dimension[0] > 768 ? 70 : 60}
+              height={dimension[0] > 768 ? 70 : 60}
             />
           </Link>
           <div className="items-center xl:gap-7 lg1250:gap-5 gap-3 hidden lg1110:flex">
@@ -216,7 +233,7 @@ export default function Header() {
             <div className="lg1110:block hidden">
               <Button
                 title={t("contact")}
-                onClick={() => setIsContactClicked(true)}
+                onClick={handleContactClick}
                 width={"w-[200px]"}
                 bgColor="bg-white"
                 color="text-blue"
@@ -239,18 +256,17 @@ export default function Header() {
         setIsSideMenuVis={setIsSideMenuVis}
         isLangClicked={isLangClicked}
         setIsLangCLicked={setIsLangCLicked}
-        isContactClicked={isContactClicked}
-        setIsContactClicked={setIsContactClicked}
+        handleContactClick={handleContactClick}
       />
       <PopUpComp
         isPopUpVisible={isContactClicked}
         setIsPopUpVisible={setIsContactClicked}
-        width={"lg1350:w-[80%] sm:w-[80%] w-[90%]"}
+        width={"lg1350:w-[50%] sm:w-[80%] w-[90%]"}
         bg="bg-trasparent"
       >
-        <div className="w-full flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2 relative">
           <RxCross1
-            className="text-white text-[20px] self-end cursor-pointer hover:opacity-50 duration-300"
+            className="text-blue text-[20px] self-end cursor-pointer hover:opacity-50 duration-300 absolute top-5 right-5 z-[5]"
             onClick={() => setIsContactClicked(false)}
           />
           <Contact isPopUp={true} setIsContactClicked={setIsContactClicked} />

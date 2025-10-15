@@ -4,7 +4,7 @@ import { BsArrowDown } from "react-icons/bs";
 import Button from "../button/Button";
 import { HiDocumentText } from "react-icons/hi2";
 import { SiArchicad } from "react-icons/si";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Props {
   title: string;
@@ -12,6 +12,10 @@ interface Props {
   isfloor?: boolean;
   soldPerc: string;
   donePerc: string;
+  presentationGeo?: string | null;
+  presenatationEng?: string | null;
+  arcikadGeo?: string | null;
+  arcikadEng?: string | null;
 }
 
 export default function SaleInfo({
@@ -20,8 +24,28 @@ export default function SaleInfo({
   isfloor,
   soldPerc,
   donePerc,
+  presentationGeo,
+  presenatationEng,
+  arcikadGeo,
+  arcikadEng,
 }: Props) {
   const t = useTranslations("SingleProject");
+  const locale = useLocale();
+
+  const handleDownload = (item: string) => {
+    if (item) {
+      const link = document.createElement("a");
+      link.href = `${process.env.NEXT_PUBLIC_API_URL}/${item}`;
+      const fileName =
+        item.substring(item.lastIndexOf("/") + 1) || "presentation.pdf";
+      link.setAttribute("download", fileName);
+      link.setAttribute("target", "_blank");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <div
       className={`w-full h-full bg-blue flex lg1110:items-center items-start relative ${
@@ -70,27 +94,41 @@ export default function SaleInfo({
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-between mt-8 flex-col xl1680:flex-row gap-5">
-          <Button
-            title={t("download")}
-            onClick={() => {}}
-            width={"xl1680:w-[240px] w-full"}
-            bgColor="bg-white"
-            color="text-blue"
-            height="h-[45px]"
-            icon={HiDocumentText}
-          />
-          <Button
-            title={"archicad view"}
-            onClick={() => {}}
-            width={"xl1680:w-[200px] w-full"}
-            bgColor="bg-transparent"
-            color="text-white"
-            height="h-[45px]"
-            icon={SiArchicad}
-            border={true}
-          />
-        </div>
+        {!isfloor && (
+          <div className="w-full flex items-center justify-between mt-8 flex-col xl1680:flex-row gap-5">
+            <Button
+              title={t("download")}
+              onClick={() =>
+                handleDownload(
+                  locale == "ka"
+                    ? (presentationGeo as string)
+                    : (presenatationEng as string)
+                )
+              }
+              width={"xl1680:w-[240px] w-full"}
+              bgColor="bg-white"
+              color="text-blue"
+              height="h-[45px]"
+              icon={HiDocumentText}
+            />
+            <Button
+              title={"archicad view"}
+              onClick={() =>
+                handleDownload(
+                  locale == "ka"
+                    ? (arcikadGeo as string)
+                    : (arcikadEng as string)
+                )
+              }
+              width={"xl1680:w-[200px] w-full"}
+              bgColor="bg-transparent"
+              color="text-white"
+              height="h-[45px]"
+              icon={SiArchicad}
+              border={true}
+            />
+          </div>
+        )}
       </div>
       {!isfloor && (
         <div className="absolute left-[50%] translate-x-[-50%] xl:bottom-[40px] bottom-6 z-[3] flex flex-col items-center gap-4 bounce">

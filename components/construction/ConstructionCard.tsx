@@ -21,7 +21,7 @@ export default function ConstructionCard({ item }: Props) {
       />
       <div className="w-full h-full flex flex-col items-center justify-between py-8">
         <h1 className="sm:text-[26px] text-[20px] text-white z-[1]">
-          {locale == "ge"
+          {locale == "ka"
             ? item.title
             : locale == "en"
             ? item.title_en

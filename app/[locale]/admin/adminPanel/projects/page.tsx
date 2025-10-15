@@ -2,6 +2,7 @@
 
 import PhotoUpload from "@/components/admin/PhotoUpload";
 import TextEditor from "@/components/admin/TextEditor";
+import PdfFileUpload from "@/components/admin/pdfFileUpload";
 import ProjectCard from "@/components/admin/projects/ProjectCard";
 import Button from "@/components/button/Button";
 import Input from "@/components/input/Input";
@@ -11,8 +12,9 @@ import useApexAdmin from "@/utils/ApexAdmin";
 import { axiosAdmin } from "@/utils/AxiosToken";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import { FiUpload } from "react-icons/fi";
 
 export default function Projects() {
   const { setToast } = useApexAdmin();
@@ -36,9 +38,12 @@ export default function Projects() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [isUploadLoading, setIsUploadLoading] = useState(false);
   const [hasUploaded, setHasUploaded] = useState(false);
+  const [presentationFileGeo, setPresentationFileGeo] = useState<any>(null);
+  const [presentationFileEng, setPresentationFileEng] = useState<any>(null);
+  const [arcikadFilGeo, setArcikadFileGeo] = useState<any>(null);
+  const [arcikadFilEng, setArcikadFileEng] = useState<any>(null);
 
-  const route = useRouter();
-  const locale = useLocale();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     (async () => {
@@ -64,7 +69,11 @@ export default function Projects() {
     if (
       hasEmptyField ||
       projectImage.length == 0 ||
-      galleryImages.length == 0
+      galleryImages.length == 0 ||
+      presentationFileGeo.lenght == 0 ||
+      presentationFileEng.length == 0 ||
+      arcikadFilGeo.length == 0 ||
+      arcikadFilEng.length == 0
     ) {
       return setToast(true, "შეავსეთ ყველა ველი", "error");
     }
@@ -125,7 +134,7 @@ export default function Projects() {
     }
   }, [project, projectImage]);
 
-  console.log(project);
+  console.log(presentationFileGeo);
 
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6">
@@ -249,14 +258,48 @@ export default function Projects() {
             isMultiply={true}
           />
         </div>
-        <Button
-          title={"დამატება"}
-          onClick={() => {}}
-          width={"w-[200px]"}
-          type="submit"
-          bgColor="bg-blue"
-          isLoading={isUploadLoading}
-        />
+        <div className="md500:w-[50%] w-full">
+          <PdfFileUpload
+            name="presentation"
+            title="პრეზენტაციის ატვირთვა (ქართული)"
+            file={presentationFileGeo}
+            setFile={setPresentationFileGeo}
+          />
+        </div>
+        <div className="md500:w-[50%] w-full mt-[60px]">
+          <PdfFileUpload
+            name="presentation_en"
+            title="პრეზენტაციის ატვირთვა (ინგლისური)"
+            file={presentationFileEng}
+            setFile={setPresentationFileEng}
+          />
+        </div>
+        <div className="md500:w-[50%] w-full mt-[60px]">
+          <PdfFileUpload
+            name="arcikadi"
+            title="არქიკადის ატვირთვა (ქართული)"
+            file={arcikadFilGeo}
+            setFile={setArcikadFileGeo}
+          />
+        </div>
+        <div className="md500:w-[50%] w-full mt-[60px]">
+          <PdfFileUpload
+            name="arcikadi"
+            title="არქიკადის ატვირთვა (ინგლისური)"
+            file={arcikadFilEng}
+            setFile={setArcikadFileEng}
+          />
+        </div>
+        <div className="w-full mt-[60px]">
+          <Button
+            title={"დამატება"}
+            onClick={() => {}}
+            width={"w-[200px]"}
+            type="submit"
+            bgColor="bg-blue"
+            isLoading={isUploadLoading}
+          />
+        </div>
       </form>
       <hr className="w-full h-[1px] bg-[#eee] border-none" />
       <div className="w-full flex flex-col md600:flex-row items-end md600:items-center gap-4 justify-between">

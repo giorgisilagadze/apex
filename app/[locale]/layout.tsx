@@ -8,7 +8,29 @@ import { routing } from "@/i18n/routing";
 import { NextIntlClientProvider } from "next-intl";
 import CustomToast from "@/components/CustomToast";
 import Call from "@/components/Call";
-import Change from "@/components/Change";
+
+export async function generateMetadata({
+  params,
+}: Readonly<{
+  params: Promise<{ locale: string }>;
+}>) {
+  const locale = (await params).locale;
+
+  const isGeorgian = locale === "ka";
+
+  const title = isGeorgian
+    ? "APEX Development - სამშენებლო კომპანია"
+    : "APEX Development - Real Estate Company";
+
+  const description = isGeorgian
+    ? "სამშენებლო კომპანია"
+    : "Real Estate Company";
+
+  return {
+    title: title,
+    description: description,
+  };
+}
 
 export default async function RootLayout({
   children,

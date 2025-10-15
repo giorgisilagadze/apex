@@ -1,22 +1,17 @@
+import { useLocale } from "next-intl";
 import Image from "next/legacy/image";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
-interface Employee {
-  id: number;
-  name: string;
-  position: string;
-  image: string;
-}
-
 interface Props {
-  item: Employee;
+  item: EmployeeProfile;
 }
 
 export default function EmployeeCard({ item }: Props) {
+  const locale = useLocale();
   return (
     <div className="w-full xl1680:h-[400px] xl:h-[350px] lg:h-[400px] h-[350px] relative">
       <Image
-        src={item.image}
+        src={`${process.env.NEXT_PUBLIC_API_URL}/${item.img}`}
         alt="employee"
         layout="fill"
         objectFit="cover"
@@ -29,9 +24,11 @@ export default function EmployeeCard({ item }: Props) {
           <FaLinkedinIn className="text-[14px] text-white hover:opacity-50 duration-300 cursor-pointer" />
         </div> */}
         <p className="text-[12px] text-white font-light mt-1">
-          {item.position}
+          {locale == "ka" ? item.position : item.position_en}
         </p>
-        <p className="text-[14px] text-white font-bold">{item.name}</p>
+        <p className="text-[14px] text-white font-bold">
+          {locale == "ka" ? item.name : item.name_en}
+        </p>
       </div>
     </div>
   );

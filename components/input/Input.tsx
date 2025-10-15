@@ -54,11 +54,13 @@ export default function Input({
             height ? height : "h-[44px]"
           }  rounded-[10px] outline-none font-light text-[14px]  ${
             bgColor
-              ? `${bgColor} placeholder:text-black`
+              ? `${bgColor} placeholder:text-[rgba(1,1,1,0.6)]`
               : "border border-blue bg-white"
           } ${
             isFilter
-              ? "text-blue placeholder:text-blue selectInput"
+              ? color
+                ? `${color} selectInput`
+                : "text-blue placeholder:text-blue selectInput"
               : "text-black px-4"
           } ${isRoi && "border border-white text-white"}`}
           value={value}

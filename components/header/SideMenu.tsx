@@ -14,8 +14,7 @@ interface Props {
   setIsSideMenuVis: (isSideMenuVis: boolean) => void;
   isLangClicked: boolean;
   setIsLangCLicked: (isLangClicked: boolean) => void;
-  isContactClicked: boolean;
-  setIsContactClicked: (isContactClicked: boolean) => void;
+  handleContactClick: () => void;
 }
 
 export default function SideMenu({
@@ -23,8 +22,7 @@ export default function SideMenu({
   setIsSideMenuVis,
   isLangClicked,
   setIsLangCLicked,
-  isContactClicked,
-  setIsContactClicked,
+  handleContactClick,
 }: Props) {
   const locale = useLocale();
   const t = useTranslations("Header");
@@ -143,7 +141,7 @@ export default function SideMenu({
           title={t("contact")}
           onClick={() => {
             setIsSideMenuVis(false);
-            setIsContactClicked(true);
+            handleContactClick();
           }}
           width={"w-full"}
           bgColor="bg-white"

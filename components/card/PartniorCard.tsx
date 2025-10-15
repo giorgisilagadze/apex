@@ -29,7 +29,7 @@ export default async function PartniorCard({ isreverse, item }: Props) {
         <div className="absolute left-8 bottom-6 flex flex-col gap-2">
           <div className="w-full h-[1px] bg-white"></div>
           <p className="text-[22px] text-white font-bold">
-            {locale == "ge"
+            {locale == "ka"
               ? item.title
               : locale == "en"
               ? item.title_en
@@ -48,7 +48,7 @@ export default async function PartniorCard({ isreverse, item }: Props) {
         <div
           dangerouslySetInnerHTML={{
             __html:
-              locale == "ge"
+              locale == "ka"
                 ? item.text
                 : locale == "en"
                 ? item.text_en

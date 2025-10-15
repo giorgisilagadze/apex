@@ -62,7 +62,7 @@ export default function SelectComp({
         >
           <h1
             className={`text-[14px] font-light whitespace-nowrap truncate ${
-              isFilter && "text-blue"
+              isFilter && "text-[rgb(110,110,110)]"
             }`}
           >
             {filterKey

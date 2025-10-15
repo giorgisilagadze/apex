@@ -36,7 +36,9 @@ export default async function Home() {
       {/* <AboutUsComp /> */}
       <Italy />
       <News news={news.data.slice(0, 5)} />
-      <Contact />
+      <div className="w-full" id="contact-section">
+        <Contact />
+      </div>
       {/* <Partners /> */}
       {/* <div className="w-full xl1600:px-[330px] lg1250:px-[200px] lg:px-[100px] sm:px-[64px] px-6">
           <ROICalculatorMain projects={projects} />

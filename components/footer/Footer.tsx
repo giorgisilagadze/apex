@@ -6,7 +6,7 @@ import Image from "next/legacy/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BsArrowDown } from "react-icons/bs";
-import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaTiktok } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 
 export default function Footer() {
@@ -76,6 +76,11 @@ export default function Footer() {
       id: 3,
       icon: <FaLinkedinIn className="text-[14px] text-white" />,
       link: "https://www.linkedin.com/company/apex-development-%E1%83%90%E1%83%9E%E1%83%94%E1%83%A5%E1%83%A1-%E1%83%93%E1%83%94%E1%83%95%E1%83%94%E1%83%9A%E1%83%9D%E1%83%9E%E1%83%9B%E1%83%94%E1%83%9C%E1%83%A2%E1%83%98/",
+    },
+    {
+      id: 4,
+      icon: <FaTiktok className="text-[14px] text-white" />,
+      link: "https://www.tiktok.com/@apexd.ge",
     },
   ];
 

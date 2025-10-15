@@ -108,7 +108,7 @@ export default function Projects({ projects }: Props) {
                   <p className="lg1250:text-[26px] md600:text-[22px] text-[18px] text-white font-bold md500:whitespace-nowrap">
                     {locale == "en"
                       ? item.title_en
-                      : locale == "ge"
+                      : locale == "ka"
                       ? item.title
                       : item.title_ru}
                   </p>
@@ -123,7 +123,7 @@ export default function Projects({ projects }: Props) {
                       __html:
                         locale == "en"
                           ? item.text_en
-                          : locale == "ge"
+                          : locale == "ka"
                           ? item.text
                           : item.text_ru,
                     }}
@@ -199,7 +199,7 @@ export default function Projects({ projects }: Props) {
                     >
                       {locale == "en"
                         ? item.title_en
-                        : locale == "ge"
+                        : locale == "ka"
                         ? item.title
                         : item.title_ru}
                     </p>

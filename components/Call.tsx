@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaFacebookMessenger } from "react-icons/fa";
 import { IoMdCall } from "react-icons/io";
 import { RiInstagramFill } from "react-icons/ri";
 import Input from "./input/Input";
@@ -76,6 +76,14 @@ export default function Call() {
       >
         <RiInstagramFill className="text-[18px] ml-[2px]" />
       </a>
+      <a
+        className="w-[50px] h-[50px] hover:w-[60px] rounded-tl-[10px] rounded-bl-[10px] bg-black flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black hover:shadow-dropDown duration-300"
+        href={"http://m.me/apexd.ge"}
+        target="_blank"
+        aria-label="social icons"
+      >
+        <FaFacebookMessenger className="text-[18px] ml-[2px]" />
+      </a>
       <div
         className={`w-[50px] h-[180px] bg-black rounded-tl-[10px] rounded-bl-[10px] py-3 flex items-center justify-center cursor-pointer duration-300 relative ${
           isHovered
@@ -93,7 +101,7 @@ export default function Call() {
         </div>
       </div>
       <div
-        className={`w-[280px] h-[300px] rounded-tl-[10px] rounded-bl-[10px] bg-white shadow-dropDown absolute duration-300 top-[104px] py-8 px-5 flex flex-col gap-6 items-center ${
+        className={`w-[280px] h-[300px] rounded-tl-[10px] rounded-bl-[10px] bg-white shadow-dropDown absolute duration-300 top-[154px] py-8 px-5 flex flex-col gap-6 items-center ${
           isHovered ? "right-0" : "right-[-280px]"
         }`}
         onMouseLeave={() => setIsHovered(false)}

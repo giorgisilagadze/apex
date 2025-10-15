@@ -29,7 +29,7 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
       id: 1,
       value: "GE",
       text: "Georgian",
-      switch: "ge",
+      switch: "ka",
     },
     {
       id: 2,
@@ -47,7 +47,7 @@ export default function Language({ isLangClicked, setIsLangCLicked }: Props) {
 
   useEffect(() => {
     const splited = pathName.split("/");
-    if (splited[1] == "ge") setLanguage("GE");
+    if (splited[1] == "ka") setLanguage("GE");
     else if (splited[1] == "en") setLanguage("EN");
     else setLanguage("RU");
   }, []);

@@ -75,8 +75,6 @@ export default function MapImage({ image, id, map, isFloor }: Props) {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  console.log(map);
-
   return (
     <div className="w-full relative">
       <div className={`w-full ${isFloor ? "" : "aspect-[40/41]"}`}>

@@ -444,7 +444,7 @@ export default function Filter({
                         : ""
                     }
                     readonly={true}
-                    color="text-blue"
+                    color="text-[rgb(110,110,110)]"
                     bgColor="bg-white"
                     isFilter={true}
                   />
@@ -482,7 +482,7 @@ export default function Filter({
                     onChange={() => {}}
                     value={selectedValues.building}
                     readonly={true}
-                    color="text-blue"
+                    color="text-[rgb(110,110,110)]"
                     bgColor="bg-white"
                     isFilter={true}
                   />
@@ -555,7 +555,7 @@ export default function Filter({
                 >
                   <div className="w-full flex items-center gap-1">
                     <div>
-                      <h1 className="text-blue text-[14px]">
+                      <h1 className="text-[rgb(110,110,110)] text-[14px]">
                         {selectedValues["areaFrom"] ? (
                           <>
                             {selectedValues["areaFrom"]}
@@ -571,7 +571,7 @@ export default function Filter({
                     </div>
                     <div>-</div>
                     <div>
-                      <h1 className="text-blue text-[14px]">
+                      <h1 className="text-[rgb(110,110,110)] text-[14px]">
                         {selectedValues["areaTo"] ? (
                           <>
                             {selectedValues["areaTo"]}
@@ -663,7 +663,7 @@ export default function Filter({
                   gap-1"
                   >
                     <div>
-                      <h1 className="text-blue text-[14px]">
+                      <h1 className="text-[rgb(110,110,110)] text-[14px]">
                         {selectedValues["priceFrom"] ? (
                           <>${selectedValues["priceFrom"]}</>
                         ) : page == "home" ? (
@@ -675,7 +675,7 @@ export default function Filter({
                     </div>
                     <div>-</div>
                     <div>
-                      <h1 className="text-blue text-[14px]">
+                      <h1 className="text-[rgb(110,110,110)] text-[14px]">
                         {selectedValues["priceTo"] ? (
                           <>${selectedValues["priceTo"]}</>
                         ) : page == "home" ? (

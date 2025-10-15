@@ -27,7 +27,7 @@ export default async function SingleProject({
       <div className="w-full grid lg1110:grid-cols-5">
         <SaleInfo
           title={
-            locale == "ge"
+            locale == "ka"
               ? project.title
               : locale == "en"
               ? project.title_en
@@ -36,6 +36,10 @@ export default async function SingleProject({
           subtitle={t(project.status)}
           soldPerc={project.sold_percent}
           donePerc={project.finish_percent}
+          presentationGeo={project.presentation}
+          presenatationEng={project.presentation_en}
+          arcikadGeo={project.arcikadi}
+          arcikadEng={project.arcikadi_en}
         />
         <div className="w-full lg1110:col-span-3">
           <MapImage
@@ -64,7 +68,7 @@ export default async function SingleProject({
                 <ROICalculator
                   project={project}
                   projectName={
-                    locale == "ge"
+                    locale == "ka"
                       ? project.title
                       : locale == "en"
                       ? project.title_en
@@ -81,7 +85,7 @@ export default async function SingleProject({
               <div
                 dangerouslySetInnerHTML={{
                   __html:
-                    locale == "ge"
+                    locale == "ka"
                       ? project.text
                       : locale == "en"
                       ? project.text_en
