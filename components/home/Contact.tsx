@@ -110,7 +110,7 @@ export default function Contact({ isPopUp, setIsContactClicked }: Props) {
   };
 
   return (
-    <div className={`w-full ${!isPopUp ? "" : ""} grid`}>
+    <div className={`w-full ${!isPopUp ? "lg1110:grid-cols-2" : ""} grid`}>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -133,7 +133,7 @@ export default function Contact({ isPopUp, setIsContactClicked }: Props) {
           className={`w-full flex justify-start flex-col gap-5 ${
             isPopUp
               ? "lg1250:px-10  px-6"
-              : "xl1600:px-[140px] lg1250:px-[100px] sm:px-[64px] px-6"
+              : "xl1600:px-[140px] lg1250:px-[40px] sm:px-[64px] px-6"
           } py-10 absolute top-0 left-0 z-[1]`}
         >
           <div className="w-full flex items-center xl1600:gap-8 gap-4">

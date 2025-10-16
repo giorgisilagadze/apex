@@ -52,6 +52,7 @@ export default function ProjectCard({
               {t(item.type)}
             </p>
           </div> */}
+          <div className="absolute bottom-0 left-0 w-full h-[80%] rounded-b-[10px] bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         </div>
       </Link>
       <div
@@ -70,7 +71,7 @@ export default function ProjectCard({
           className={`${
             isSingle ? "text-[26px]" : "sm:text-[22px] text-[18px]"
           } font-bold ${isWhite ? "text-white" : "text-black"}`}
-          style={{ textShadow: "4px 4px 4px black" }}
+          // style={{ textShadow: "4px 4px 4px black" }}
         >
           {locale == "ka"
             ? item.title

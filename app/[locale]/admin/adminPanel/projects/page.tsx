@@ -43,17 +43,36 @@ export default function Projects() {
   const [arcikadFilGeo, setArcikadFileGeo] = useState<any>(null);
   const [arcikadFilEng, setArcikadFileEng] = useState<any>(null);
 
+  const [clickedType, setClickedType] = useState("ყველა");
+
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const types = [
+    {
+      id: 1,
+      title: "ყველა",
+    },
+    {
+      id: 2,
+      title: "მიმდინარე",
+    },
+    {
+      id: 3,
+      title: "დასრულებული",
+    },
+  ];
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosAdmin.get("/building");
+        const response = await axiosAdmin.get(
+          `/building${clickedType !== "ყველა" ? `?status=${clickedType}` : ""} `
+        );
         const data = response.data;
         setProjects(data);
       } catch (err) {}
     })();
-  }, [forRender]);
+  }, [forRender, clickedType]);
 
   const handleOnChange = (key: string, value: string) => {
     setProject({ ...project, [key]: value });
@@ -133,8 +152,6 @@ export default function Projects() {
       setHasUploaded(false);
     }
   }, [project, projectImage]);
-
-  console.log(presentationFileGeo);
 
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6">
@@ -312,6 +329,31 @@ export default function Projects() {
           width={"w-[200px]"}
           bgColor="bg-blue"
         /> */}
+      </div>
+
+      <div className="w-full flex items-center md500:gap-6 gap-4 justify-center">
+        {types.map((item) => (
+          <div
+            className="flex flex-col items-center gap-[2px]"
+            key={item.id}
+            onClick={() => {
+              setClickedType(item.title);
+            }}
+          >
+            <p
+              className={`text-[16px] font-light hover:opacity-50 duration-300 cursor-pointer ${
+                item.title == clickedType ? "text-blue" : "text-black"
+              }`}
+            >
+              {item.title}
+            </p>
+            <div
+              className={`w-[40px] h-[1px] ${
+                item.title == clickedType ? "bg-blue" : "bg-transparent"
+              }`}
+            ></div>
+          </div>
+        ))}
       </div>
 
       <div className="w-full overflow-x-auto topFilter">
