@@ -23,6 +23,7 @@ export default function SingleAdminNews() {
     descriptionGeo: "",
     descriptionEng: "",
     descriptionRus: "",
+    sort: "",
   });
   const [newsUpdate, setNewsUpdate] = useState({
     type: "",
@@ -32,6 +33,7 @@ export default function SingleAdminNews() {
     descriptionGeo: "",
     descriptionEng: "",
     descriptionRus: "",
+    sort: "",
   });
   const [newsImage, setNewsImage] = useState([]);
   const [backImage, setBackImage] = useState("");
@@ -55,6 +57,7 @@ export default function SingleAdminNews() {
           descriptionGeo: data.text,
           descriptionEng: data.text_en,
           descriptionRus: data.text_ru,
+          sort: data.sort,
         });
         setNewsUpdate({
           ...newsUpdate,
@@ -65,6 +68,7 @@ export default function SingleAdminNews() {
           descriptionGeo: data.text,
           descriptionEng: data.text_en,
           descriptionRus: data.text_ru,
+          sort: data.sort,
         });
         setBackImage(data.img);
       } catch (err) {
@@ -105,6 +109,7 @@ export default function SingleAdminNews() {
         formData.append("text", newsUpdate.descriptionGeo);
         formData.append("text_en", newsUpdate.descriptionEng);
         formData.append("text_ru", newsUpdate.descriptionRus);
+        formData.append("sort", newsUpdate.sort);
         formData.append("id", params.adminNewsId as string);
         try {
           const response = await axiosAdmin.put(
@@ -172,6 +177,13 @@ export default function SingleAdminNews() {
             value={newsUpdate.titleRus}
             title="სათაური რუსულად"
             inputKey="titleRus"
+          />
+          <Input
+            placeholder={"სორტი"}
+            onChange={handleOnChange}
+            value={newsUpdate.sort || ""}
+            title="სორტი"
+            inputKey="sort"
           />
           <div className="flex flex-col gap-[6px]">
             <p className="text-[14px]">აღწერა ქართულად</p>

@@ -65,9 +65,7 @@ export default function Projects() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosAdmin.get(
-          `/building${clickedType !== "ყველა" ? `?status=${clickedType}` : ""} `
-        );
+        const response = await axiosAdmin.get(`/building`);
         const data = response.data;
         setProjects(data);
       } catch (err) {}
