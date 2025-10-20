@@ -330,7 +330,7 @@ export default function Projects() {
           bgColor="bg-blue"
         /> */}
       </div>
-
+      {/* 
       <div className="w-full flex items-center md500:gap-6 gap-4 justify-center">
         {types.map((item) => (
           <div
@@ -354,7 +354,7 @@ export default function Projects() {
             ></div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="w-full overflow-x-auto topFilter">
         <div className="xl:w-full w-[1190px] flex flex-col">

@@ -25,6 +25,7 @@ export default function SingleAdminProject() {
     ijara: "",
     fullSale: "",
     halfSale: "",
+    sort: "",
     map: "",
     descriptionGeo: "",
     descriptionEng: "",
@@ -39,6 +40,7 @@ export default function SingleAdminProject() {
     ijara: "",
     fullSale: "",
     halfSale: "",
+    sort: "",
     map: "",
     descriptionGeo: "",
     descriptionEng: "",
@@ -81,6 +83,7 @@ export default function SingleAdminProject() {
           ijara: parseInt(data.ijara).toFixed(2),
           fullSale: parseInt(data.fullSale).toFixed(2),
           halfSale: parseInt(data.halfSale).toFixed(2),
+          sort: data.sort,
           map: data.maping !== null ? data.maping : "",
           descriptionGeo: data.text !== null ? data.text : "",
           descriptionEng: data.text_en !== null ? data.text_en : "",
@@ -96,6 +99,7 @@ export default function SingleAdminProject() {
           ijara: parseInt(data.ijara).toFixed(2),
           fullSale: parseInt(data.fullSale).toFixed(2),
           halfSale: parseInt(data.halfSale).toFixed(2),
+          sort: data.sort,
           map: data.maping !== null ? data.maping : "",
           descriptionGeo: data.text !== null ? data.text : "",
           descriptionEng: data.text_en !== null ? data.text_en : "",
@@ -158,6 +162,10 @@ export default function SingleAdminProject() {
         formData.append("text", projectUpdate.descriptionGeo);
         formData.append("text_en", projectUpdate.descriptionEng);
         formData.append("text_ru", projectUpdate.descriptionRus);
+        formData.append("ijara", projectUpdate.ijara);
+        formData.append("fullSale", projectUpdate.fullSale);
+        formData.append("halfSale", projectUpdate.halfSale);
+        formData.append("sort", projectUpdate.sort);
         formData.append("id", params.adminProjectId as string);
         try {
           const response = await axiosAdmin.put(
@@ -256,6 +264,14 @@ export default function SingleAdminProject() {
             value={projectUpdate.halfSale}
             title="ნახევარი შენატანი"
             inputKey="halfSale"
+            type="number"
+          />
+          <Input
+            placeholder={"სორტი"}
+            onChange={handleOnChange}
+            value={projectUpdate.sort || ""}
+            title="სორტი"
+            inputKey="sort"
             type="number"
           />
           <div className="flex flex-col gap-[6px]">
