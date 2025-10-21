@@ -36,12 +36,19 @@ const TextEditor = ({ onChange, inputKey, value, hasUploaded }: Props) => {
     },
   });
 
+  // useEffect(() => {
+  //   if (editor) {
+  //     // Update the editor content when the editorContent state changes
+  //     editor.commands.setContent(editorContent);
+  //   }
+  // }, [editorContent, editor]);
+
   useEffect(() => {
-    if (editor) {
-      // Update the editor content when the editorContent state changes
-      editor.commands.setContent(editorContent);
+    // Only update if external `value` changes and differs from editor
+    if (editor && value !== editor.getHTML()) {
+      editor.commands.setContent(value || "");
     }
-  }, [editorContent, editor]);
+  }, [value, editor]);
 
   useEffect(() => {
     if (hasUploaded) setEditorContent("");
