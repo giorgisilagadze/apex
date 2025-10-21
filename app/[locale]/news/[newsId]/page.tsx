@@ -159,7 +159,7 @@ export default async function SingleNews({
         </div>
       </div>
       <div className="w-full  mt-[100px]">
-        <SendEmail />
+        {/* <SendEmail /> */}
       </div>
     </div>
   );

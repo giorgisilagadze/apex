@@ -215,7 +215,7 @@ export default function Footer() {
             </div>
           </div>
           <div
-            className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white absolute right-10 bottom-[100px] cursor-pointer bounce"
+            className="flex items-center justify-center w-[32px] h-[32px] rounded-[50%] border border-white absolute right-10 bottom-[33px] cursor-pointer bounce"
             onClick={handleScroll}
           >
             <BsArrowDown className="text-white mt-[20px] text-[26px] rotate-180" />

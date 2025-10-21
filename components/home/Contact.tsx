@@ -116,7 +116,7 @@ export default function Contact({ isPopUp, setIsContactClicked }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className={`w-full bg-white relative lg:h-[700px] md500:h-[670px] rounded-[10px] ${
+        className={`w-full bg-white relative lg:h-[600px] md500:h-[670px] rounded-[10px] ${
           isPopUp ? "h-[550px] overflow-y-scroll" : "h-[994px]"
         } `}
       >
@@ -137,11 +137,11 @@ export default function Contact({ isPopUp, setIsContactClicked }: Props) {
           } py-10 absolute top-0 left-0 z-[1]`}
         >
           <div className="w-full flex items-center xl1600:gap-8 gap-4">
-            {!isPopUp && (
+            {/* {!isPopUp && (
               <div className="relative md500:!w-[100px] md500:!h-[100px] w-[50px] h-[50px]">
                 <Image src={"/images/logo1.png"} alt="about" layout="fill" />
               </div>
-            )}
+            )} */}
 
             <h1 className="xl:text-[30px] lg1110:text-[26px] md500:text-[20px] text-[18px] font-bold text-purple whitespace-nowrap">
               {t("title")}
@@ -270,7 +270,7 @@ export default function Contact({ isPopUp, setIsContactClicked }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className={`w-full lg:h-[700px] md500:h-[400px] h-[350px] relative`}
+          className={`w-full lg:h-[600px] md500:h-[400px] h-[350px] relative`}
         >
           <Image
             src={"/images/contact.png"}
