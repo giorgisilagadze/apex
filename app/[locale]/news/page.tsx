@@ -272,7 +272,7 @@ export default function News() {
           </div>
         </PagePagination>
         <div className="mt-[60px] w-full">
-          <SendEmail />
+          {/* <SendEmail /> */}
         </div>
       </div>
     </div>
