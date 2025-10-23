@@ -60,22 +60,7 @@ export default function Call() {
 
   return (
     <div className="fixed top-1/2 -translate-y-1/2 right-0 z-[5] flex-col gap-[2px] w-[60px] items-end sm:flex hidden">
-      <a
-        className="w-[50px] h-[50px] hover:w-[60px] rounded-tl-[10px] rounded-bl-[10px] bg-black flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black hover:shadow-dropDown duration-300"
-        href={"https://www.facebook.com/apexd.ge"}
-        target="_blank"
-        aria-label="social icons"
-      >
-        <FaFacebookF className="text-[18px] ml-[2px]" />
-      </a>
-      <a
-        className="w-[50px] h-[50px] hover:w-[60px] rounded-tl-[10px] rounded-bl-[10px] bg-black flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black hover:shadow-dropDown duration-300"
-        href={"https://www.instagram.com/apexd.ge/"}
-        target="_blank"
-        aria-label="social icons"
-      >
-        <RiInstagramFill className="text-[18px] ml-[2px]" />
-      </a>
+    
       <a
         className="w-[50px] h-[50px] hover:w-[60px] rounded-tl-[10px] rounded-bl-[10px] bg-black flex items-center justify-center cursor-pointer text-white hover:bg-white hover:text-black hover:shadow-dropDown duration-300"
         href={"http://m.me/apexd.ge"}
@@ -101,7 +86,7 @@ export default function Call() {
         </div>
       </div>
       <div
-        className={`w-[280px] h-[300px] rounded-tl-[10px] rounded-bl-[10px] bg-white shadow-dropDown absolute duration-300 top-[154px] py-8 px-5 flex flex-col gap-6 items-center ${
+        className={`w-[280px] h-[300px] rounded-tl-[10px] rounded-bl-[10px] bg-white shadow-dropDown absolute duration-300 top-[54px] py-8 px-5 flex flex-col gap-6 items-center ${
           isHovered ? "right-0" : "right-[-280px]"
         }`}
         onMouseLeave={() => setIsHovered(false)}

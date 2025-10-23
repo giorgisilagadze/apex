@@ -56,7 +56,7 @@ export default async function Partniors() {
           {/* </PagePagination> */}
         </div>
         <div className="mt-[100px] w-full">
-          <SendEmail />
+          {/* <SendEmail /> */}
         </div>
       </div>
     </div>
