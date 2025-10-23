@@ -38,10 +38,10 @@ export default function Projects() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [isUploadLoading, setIsUploadLoading] = useState(false);
   const [hasUploaded, setHasUploaded] = useState(false);
-  const [presentationFileGeo, setPresentationFileGeo] = useState<any>(null);
-  const [presentationFileEng, setPresentationFileEng] = useState<any>(null);
-  const [arcikadFilGeo, setArcikadFileGeo] = useState<any>(null);
-  const [arcikadFilEng, setArcikadFileEng] = useState<any>(null);
+  const [presentationFileGeo, setPresentationFileGeo] = useState<any>([]);
+  const [presentationFileEng, setPresentationFileEng] = useState<any>([]);
+  const [arcikadFilGeo, setArcikadFileGeo] = useState<any>([]);
+  const [arcikadFilEng, setArcikadFileEng] = useState<any>([]);
 
   const [clickedType, setClickedType] = useState("ყველა");
 
@@ -79,15 +79,15 @@ export default function Projects() {
   const handleUpdate = async (e: any) => {
     e.preventDefault();
 
-    const hasEmptyField = Object.values(project).some(
-      (value) => value.trim() === ""
+    const hasEmptyField = Object.values(project).some((value) =>
+      typeof value == "string" ? value.trim() === "" : !value
     );
 
     if (
       hasEmptyField ||
       projectImage.length == 0 ||
       galleryImages.length == 0 ||
-      presentationFileGeo.lenght == 0 ||
+      presentationFileGeo.length == 0 ||
       presentationFileEng.length == 0 ||
       arcikadFilGeo.length == 0 ||
       arcikadFilEng.length == 0
