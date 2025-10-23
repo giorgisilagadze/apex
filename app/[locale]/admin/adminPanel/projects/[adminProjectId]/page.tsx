@@ -127,6 +127,13 @@ export default function SingleAdminProject() {
 
   const handleUpdate = async (e: any) => {
     e.preventDefault();
+    const hasEmptyField = Object.values(projectUpdate).some(
+      (value) => value.trim() === ""
+    );
+
+    if (hasEmptyField) {
+      return setToast(true, "შეავსეთ ყველა ველი", "error");
+    }
     const isinputValuesChange = Object.keys(project).some(
       (key) =>
         projectUpdate[key as keyof typeof projectUpdate] !==
@@ -141,13 +148,6 @@ export default function SingleAdminProject() {
       arcikadFilGeo.length !== 0 ||
       arcikadFilEng.length !== 0
     ) {
-      const hasEmptyField = Object.values(projectUpdate).some(
-        (value) => value.trim() === ""
-      );
-
-      if (hasEmptyField) {
-        return setToast(true, "შეავსეთ ყველა ველი", "error");
-      }
       if (!isUploadLoading) {
         setIsUploadLoading(true);
         const form = e.target;
