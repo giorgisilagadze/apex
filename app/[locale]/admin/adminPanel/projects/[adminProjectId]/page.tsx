@@ -10,6 +10,7 @@ import Shimmer from "@/components/shimmer/Shimmer";
 import useApexAdmin from "@/utils/ApexAdmin";
 import { axiosAdmin } from "@/utils/AxiosToken";
 import { useParams } from "next/navigation";
+import { type } from "os";
 import { useEffect, useState } from "react";
 
 export default function SingleAdminProject() {
@@ -54,10 +55,10 @@ export default function SingleAdminProject() {
   const [isUploadLoading, setIsUploadLoading] = useState(false);
   const [hasUploaded, setHasUploaded] = useState(false);
   const [forRender, setForRender] = useState(1);
-  const [presentationFileGeo, setPresentationFileGeo] = useState<any>(null);
-  const [presentationFileEng, setPresentationFileEng] = useState<any>(null);
-  const [arcikadFilGeo, setArcikadFileGeo] = useState<any>(null);
-  const [arcikadFilEng, setArcikadFileEng] = useState<any>(null);
+  const [presentationFileGeo, setPresentationFileGeo] = useState<any>([]);
+  const [presentationFileEng, setPresentationFileEng] = useState<any>([]);
+  const [arcikadFilGeo, setArcikadFileGeo] = useState<any>([]);
+  const [arcikadFilEng, setArcikadFileEng] = useState<any>([]);
   const [backFiles, setBackFiles] = useState({
     presentationFileGeoBack: "",
     presentationFileEngBack: "",
@@ -141,8 +142,8 @@ export default function SingleAdminProject() {
       arcikadFilGeo.length !== 0 ||
       arcikadFilEng.length !== 0
     ) {
-      const hasEmptyField = Object.values(projectUpdate).some(
-        (value) => value.trim() === ""
+      const hasEmptyField = Object.values(projectUpdate).some((value) =>
+        typeof value == "string" ? value.trim() === "" : !value
       );
 
       if (hasEmptyField) {
@@ -196,7 +197,7 @@ export default function SingleAdminProject() {
     }
   }, [projectUpdate, projectImage]);
 
-  console.log(presentationFileGeo);
+  console.log(projectUpdate);
 
   return (
     <div className="sm:px-10 px-6 lg:py-[50px] pb-[50px] py-6 w-full flex flex-col sm:gap-10 gap-6 ">
